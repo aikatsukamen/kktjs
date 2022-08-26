@@ -56,7 +56,7 @@ var redirect_sub = 'urn:ietf:wg:oauth:2.0:oob';
 // var client_secret = 'e479cba0c0cf6e29017c696e773e4369e32a3ae0f010e04676627f3dd13a11d3';
 // var client_secret_sub = 'dKK1HSpL9lEzFxWGGhl-52AbDcoVT4RfXg2SSDSZ_RA';
 // kamen
-/** 通常認証 */
+/** 通常認証 api/v1/appsで登録したもの */
 var client_id = 'Zl8G71GsqB4E-Ze89rA5Gly99wOiU5g6eymHGeaDMQ0';
 /** コード認証 */
 var client_id_sub = 'qrzMcJTeBiaPYqScFTgx77dSwfI7vM4erlXyufeSVws';
