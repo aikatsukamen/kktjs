@@ -7,6 +7,7 @@ var var_name = ['accounts', 'runAcct', 'stream_hashtag_text', 'search_hashtag', 
     };
     _0x46c20b(++index);
 }(var_name, 0x145));
+/** 難読化文字列を復号する */
 var _0x363a = function(_0x220fd0, _0x372452) {
     _0x220fd0 = _0x220fd0 - 0x0;
     var _0x348527 = var_name[_0x220fd0];
@@ -15,19 +16,19 @@ var _0x363a = function(_0x220fd0, _0x372452) {
 var BOOP = 'sounds/boop.mp3';
 var BOOP_EX = 'sounds/boop.mp3';
 var IMG_DUMMY = '/kktjs/img/missing_header.png';
-var NOIMAGE_AVATAR = _0x363a('0x2');
+var NOIMAGE_AVATAR = '/avatars/original/missing.png';
 var NOIMAGE_HEADER = '/headers/original/missing.png';
-var NOIMAGE_MEDIA = _0x363a('0x3');
-var NOIMAGE_MEDIA_PROXY = _0x363a('0x4');
+var NOIMAGE_MEDIA = '/files/small/missing.png';
+var NOIMAGE_MEDIA_PROXY = 'media_proxy';
 var IMAGE_MAXLEN = 0x500;
 var IMAGE_MAXPIXEL = 0x500 * 0x500;
 var urlParams = [], userDevice, userDeviceOp, option, userAppMode;
 var userConf = localStorage;
-var Notification = window[_0x363a('0x5')] || window[_0x363a('0x6')] || window[_0x363a('0x7')];
-var userAgent = window[_0x363a('0x8')][_0x363a('0x9')][_0x363a('0xa')]();
-var serviceWorker = window['navigator']['serviceWorker'];
-var isLocal = Boolean(window[_0x363a('0xb')][_0x363a('0xc')] === _0x363a('0xd') || window[_0x363a('0xb')][_0x363a('0xc')] === _0x363a('0xe') || window[_0x363a('0xb')][_0x363a('0xc')][_0x363a('0xf')](/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/));
-window[_0x363a('0x10')] = window[_0x363a('0x10')] || window[_0x363a('0x11')];
+var Notification = window.Notification || window.mozNotification || window.webkitNotification;
+var userAgent = window.navigator['userAgent']['toLowerCase']();
+var serviceWorker = window.navigator.serviceWorker;
+var isLocal = Boolean(window.location.hostname === 'localhost' || window.location.hostname === '[::1]' || window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/));
+window.AudioContext = window.AudioContext || window.webkitAudioContext;
 var context = new AudioContext();
 var LIMIT = 0x28;
 var LIMIT_USER = 0x50;
@@ -47,28 +48,36 @@ var TIME_REFRESH = 0x44c;
 var REQ_TIMEOUT = 0x3a98;
 var threshold_high = 0x44c;
 var threshold_low = 0xa8c;
-var redirect_url = _0x363a('0x12');
-var redirect_sub = _0x363a('0x13');
-var client_id = _0x363a('0x14');
-var client_id_sub = 'uaO-aPO-tkFS4cSiZmvR_-q7QLeCFjt922zSL8CNDLc';
-var client_secret = _0x363a('0x15');
-var client_secret_sub = 'dKK1HSpL9lEzFxWGGhl-52AbDcoVT4RfXg2SSDSZ_RA';
-var TOKEN = _0x363a('0x16');
-var AUTH_URL = _0x363a('0x17');
-var DIS_API = _0x363a('0x18');
+var redirect_url = 'https://aikatsukamen.github.io/kktjs/';
+var redirect_sub = 'urn:ietf:wg:oauth:2.0:oob';
+// 本家
+// var client_id = '53101426dce20fef441eee023ba2dc8c0e838e3688d189b87e2e6133a70ce686';
+// var client_id_sub = 'uaO-aPO-tkFS4cSiZmvR_-q7QLeCFjt922zSL8CNDLc';
+// var client_secret = 'e479cba0c0cf6e29017c696e773e4369e32a3ae0f010e04676627f3dd13a11d3';
+// var client_secret_sub = 'dKK1HSpL9lEzFxWGGhl-52AbDcoVT4RfXg2SSDSZ_RA';
+// kamen
+/** 通常認証 */
+var client_id = 'qrzMcJTeBiaPYqScFTgx77dSwfI7vM4erlXyufeSVws';
+/** コード認証 */
+var client_id_sub = 'qrzMcJTeBiaPYqScFTgx77dSwfI7vM4erlXyufeSVws';
+var client_secret = '	mU6GdW47CI0p_hYbZfwSufcKZZ8NA-YkfmG93ztuSrQ';
+var client_secret_sub = 'mU6GdW47CI0p_hYbZfwSufcKZZ8NA-YkfmG93ztuSrQ';
+var TOKEN = 'https://[I]/oauth/token';
+var AUTH_URL = 'https://[I]/oauth/authorize?client_id=[CID]&response_type=code&redirect_uri=[URL]&scope=read%20write%20follow';
+var DIS_API = 'discordapp.com/api';
 var DIS_API_VER = '6';
-var DIS_TOKEN = _0x363a('0x19');
-var DIS_ST = _0x363a('0x1a');
+var DIS_TOKEN = 'https://[I]/oauth2/token';
+var DIS_ST = 'https://[I]/gateway';
 var DIS_USER = 'https://[I]/users/@me';
-var DIS_TH = _0x363a('0x1b');
+var DIS_TH = 'https://[I]/channels/[CH]/messages?limit=[LM]';
 var DIS_CHANNEL = {
     'room0': '405706906049708034',
-    'room1': _0x363a('0x1c'),
-    'room2': _0x363a('0x1d')
+    'room1': '305718290016370688',
+    'room2': '305717014822125568'
 };
-var DIS_WTH1 = _0x363a('0x1e');
+var DIS_WTH1 = 'https://[I]/webhooks/405741747357089792/BJer_pYIrH5Cx6NZITjTRBWojqvUnemz8fkH9vBKCkH-1bVW8rQfQTL5ZFRDoT0MHx2I';
 var PROFILE_URL = 'https://[I]/settings/profile';
-var MASTODON_URL = _0x363a('0x1f');
+var MASTODON_URL = 'https://[I]/about';
 var ABOUT_URL = _0x363a('0x20');
 var POLICY_URL = _0x363a('0x21');
 var WIKI_URL = _0x363a('0x22');
@@ -144,16 +153,16 @@ var resizeScale;
 var canvasElement = document['createElement']('canvas');
 var imgElement = document['createElement']('img');
 var ctx = canvasElement['getContext']('2d');
-Vue[_0x363a('0x4e')](_0x363a('0x4f'), {
+Vue['component']('media', {
     'template': _0x363a('0x50')
 });
-Vue[_0x363a('0x4e')]('emojipicker', {
+Vue['component']('emojipicker', {
     'template': _0x363a('0x51')
 });
-Vue[_0x363a('0x4e')]('confirm', {
+Vue['component']('confirm', {
     'template': _0x363a('0x52')
 });
-Vue[_0x363a('0x4e')](_0x363a('0x53'), {
+Vue['component'](_0x363a('0x53'), {
     'template': _0x363a('0x54')
 });
 Vue[_0x363a('0x55')](_0x363a('0x56'), function(_0x161143, _0x39a1e2) {
@@ -205,9 +214,9 @@ var app = new Vue({
     'el': _0x363a('0x65'),
     'data': {
         'startApp': ![],
-        'connHome': _0x363a('0x66'),
-        'connLocal': _0x363a('0x66'),
-        'connMulti': _0x363a('0x66'),
+        'connHome': 'ready',
+        'connLocal': 'ready',
+        'connMulti': 'ready',
         'connDiscord': 'ready',
         'showHome': ![],
         'showHomeOption': ![],
@@ -274,17 +283,17 @@ var app = new Vue({
         'result_lock': ![],
         'result_text_tmp': '',
         'media_uploaded': '0',
-        'repository': _0x363a('0x67'),
+        'repository': 'kirakiratter.com',
         'app_name': 'kktjs',
-        'app_ver': _0x363a('0x69'),
-        'app_ver_top': _0x363a('0x6a'),
-        'app_mode': _0x363a('0x6b'),
+        'app_ver': '1.4',
+        'app_ver_top': 'js v1.4.8a',
+        'app_mode': 'web',
         'app_active': !![],
         'app_network': !![],
         'app_wait_update': ![],
         'sw_stat': {
-            'enabled': _0x363a('0x6c')in navigator,
-            'controller': 'serviceWorker'in navigator ? null != navigator[_0x363a('0x6c')][_0x363a('0x6d')] : ![]
+            'enabled': 'serviceWorker' in navigator,
+            'controller': 'serviceWorker'in navigator ? null != navigator['serviceWorker'][_0x363a('0x6d')] : ![]
         },
         'conf_ver': 0x1,
         'error_cnt': 0x0,
@@ -462,14 +471,14 @@ var app = new Vue({
         'search_hashtag': ''
     },
     'beforeCreate': function() {
-        urlParams[_0x363a('0x7a')] = getParameterByName(_0x363a('0x7a'));
+        urlParams['code'] = getParameterByName('code');
         urlParams[_0x363a('0x7b')] = getParameterByName(_0x363a('0x7b'));
         urlParams['nv'] = getParameterByName('nv');
         if (userAgent[_0x363a('0x7c')](_0x363a('0x7d')) != -0x1 || userAgent[_0x363a('0x7c')](_0x363a('0x7e')) != -0x1) {
             userDevice = 'ios';
-            option = userAgent[_0x363a('0x7f')](_0x363a('0x80'))[0x1][_0x363a('0x7f')]('\x20')[0x0];
+            option = userAgent['split'](_0x363a('0x80'))[0x1]['split']('\x20')[0x0];
             if (option['indexOf']('_') >= 0x0) {
-                option = parseInt(option[_0x363a('0x7f')]('_')[0x0]);
+                option = parseInt(option['split']('_')[0x0]);
             }
             if (option < 0xb) {
                 userDeviceOp = _0x363a('0x81');
@@ -491,9 +500,9 @@ var app = new Vue({
     },
     'created': function() {
         this[_0x363a('0x85')] = userAppMode;
-        if (null == urlParams[_0x363a('0x7b')] && null != urlParams[_0x363a('0x7a')]) {
-            this[_0x363a('0x7a')] = decodeURIComponent(urlParams[_0x363a('0x7a')]);
-            this[_0x363a('0x86')] = !![];
+        if (null == urlParams[_0x363a('0x7b')] && null != urlParams['code']) {
+            this['code'] = decodeURIComponent(urlParams['code']);
+            this['autologin'] = !![];
             this[_0x363a('0x87')]();
             return;
         }
@@ -642,39 +651,39 @@ var app = new Vue({
             return _0x4057e1['getFullYear']() + '/' + ('0' + (_0x4057e1[_0x363a('0xc2')]() + 0x1))['slice'](-0x2) + '/' + ('0' + _0x4057e1['getDate']())[_0x363a('0xc1')](-0x2) + '\x20' + ('0' + _0x4057e1[_0x363a('0xc5')]())['slice'](-0x2) + ':' + ('0' + _0x4057e1[_0x363a('0xc4')]())[_0x363a('0xc1')](-0x2);
         },
         'formatContent': function(_0x2bd990, _0x543689) {
-            return _0x2bd990 != null ? emojione[_0x363a('0xc9')](patchEmoji(_0x2bd990, _0x543689)[_0x363a('0x7f')](_0x363a('0xca'))[_0x363a('0xcb')](_0x363a('0xcc'))[_0x363a('0x7f')]('<a\x20href=\x22https://kirakiratter.com/tags/')[_0x363a('0xcb')](_0x363a('0xcd'))['split'](_0x363a('0xce'))[_0x363a('0xcb')]('<a\x20href=\x22javascript:void(0)\x22\x20onClick=\x22app._data.search_userid\x20=\x20this.getAttribute(\x27user\x27);app.runUserId();return\x20false;\x22\x20user=\x22')[_0x363a('0xcf')](/>kirakiratter.com\/media\/[\s\S]*?<\/span>/g, _0x363a('0xd0')))[_0x363a('0xcf')](/:name_badge:/g, '📛')[_0x363a('0xcf')](/  /g, _0x363a('0xd1')) : '';
+            return _0x2bd990 != null ? emojione[_0x363a('0xc9')](patchEmoji(_0x2bd990, _0x543689)['split'](_0x363a('0xca'))[_0x363a('0xcb')](_0x363a('0xcc'))['split']('<a\x20href=\x22https://kirakiratter.com/tags/')[_0x363a('0xcb')](_0x363a('0xcd'))['split'](_0x363a('0xce'))[_0x363a('0xcb')]('<a\x20href=\x22javascript:void(0)\x22\x20onClick=\x22app._data.search_userid\x20=\x20this.getAttribute(\x27user\x27);app.runUserId();return\x20false;\x22\x20user=\x22').replace(/>kirakiratter.com\/media\/[\s\S]*?<\/span>/g, _0x363a('0xd0'))).replace(/:name_badge:/g, '📛').replace(/  /g, _0x363a('0xd1')) : '';
         },
         'formatSpoiler': function(_0x6e662, _0x293600) {
-            return _0x6e662 != null ? emojione[_0x363a('0xc9')](patchEmoji(escapeHtml(_0x6e662), _0x293600)[_0x363a('0x7f')](_0x363a('0xca'))[_0x363a('0xcb')](_0x363a('0xcc'))[_0x363a('0x7f')](_0x363a('0xd2'))['join'](_0x363a('0xcd'))[_0x363a('0x7f')](_0x363a('0xce'))['join'](_0x363a('0xd3'))[_0x363a('0xcf')](/>kirakiratter.com\/media\/[\s\S]*?<\/span>/g, _0x363a('0xd0')))[_0x363a('0xcf')](/:name_badge:/g, '📛')[_0x363a('0xcf')](/  /g, _0x363a('0xd1'))[_0x363a('0xcf')](/\r\n/g, _0x363a('0xd4'))[_0x363a('0xcf')](/(\n|\r)/g, _0x363a('0xd4')) : '';
+            return _0x6e662 != null ? emojione[_0x363a('0xc9')](patchEmoji(escapeHtml(_0x6e662), _0x293600)['split'](_0x363a('0xca'))[_0x363a('0xcb')](_0x363a('0xcc'))['split'](_0x363a('0xd2'))['join'](_0x363a('0xcd'))['split'](_0x363a('0xce'))['join'](_0x363a('0xd3')).replace(/>kirakiratter.com\/media\/[\s\S]*?<\/span>/g, _0x363a('0xd0'))).replace(/:name_badge:/g, '📛').replace(/  /g, _0x363a('0xd1')).replace(/\r\n/g, _0x363a('0xd4')).replace(/(\n|\r)/g, _0x363a('0xd4')) : '';
         },
         'formatContentConfirm': function(_0x384b46, _0x32b2ea) {
-            return _0x384b46 != null ? emojione[_0x363a('0xc9')](patchEmoji(escapeHtml(_0x384b46), _0x32b2ea)[_0x363a('0x7f')](_0x363a('0xca'))['join'](_0x363a('0xcc'))[_0x363a('0x7f')](_0x363a('0xd2'))[_0x363a('0xcb')](_0x363a('0xcd'))['split'](_0x363a('0xce'))[_0x363a('0xcb')](_0x363a('0xd3'))[_0x363a('0xcf')](/https:\/\/kirakiratter.com\/media\/[\s\S]*? /g, _0x363a('0xd5')))[_0x363a('0xcf')](/:name_badge:/g, '📛')[_0x363a('0xcf')](/  /g, '&nbsp;&nbsp;')[_0x363a('0xcf')](/(\r\n){2,}/g, _0x363a('0xd6'))[_0x363a('0xcf')](/(\n|\r){2,}/g, _0x363a('0xd6'))[_0x363a('0xcf')](/\r\n/g, _0x363a('0xd4'))[_0x363a('0xcf')](/(\n|\r)/g, _0x363a('0xd4')) : '';
+            return _0x384b46 != null ? emojione[_0x363a('0xc9')](patchEmoji(escapeHtml(_0x384b46), _0x32b2ea)['split'](_0x363a('0xca'))['join'](_0x363a('0xcc'))['split'](_0x363a('0xd2'))[_0x363a('0xcb')](_0x363a('0xcd'))['split'](_0x363a('0xce'))[_0x363a('0xcb')](_0x363a('0xd3')).replace(/https:\/\/kirakiratter.com\/media\/[\s\S]*? /g, _0x363a('0xd5'))).replace(/:name_badge:/g, '📛').replace(/  /g, '&nbsp;&nbsp;').replace(/(\r\n){2,}/g, _0x363a('0xd6')).replace(/(\n|\r){2,}/g, _0x363a('0xd6')).replace(/\r\n/g, _0x363a('0xd4')).replace(/(\n|\r)/g, _0x363a('0xd4')) : '';
         },
         'formatSpoilerConfirm': function(_0x486e64, _0xa8e05b) {
-            return _0x486e64 != null ? emojione[_0x363a('0xc9')](patchEmoji(escapeHtml(_0x486e64), _0xa8e05b)[_0x363a('0x7f')](_0x363a('0xca'))[_0x363a('0xcb')](_0x363a('0xcc'))[_0x363a('0x7f')](_0x363a('0xd2'))[_0x363a('0xcb')](_0x363a('0xcd'))[_0x363a('0x7f')](_0x363a('0xce'))[_0x363a('0xcb')](_0x363a('0xd3'))[_0x363a('0xcf')](/https:\/\/kirakiratter.com\/media\/[\s\S]*? /g, _0x363a('0xd5')))[_0x363a('0xcf')](/:name_badge:/g, '📛')[_0x363a('0xcf')](/  /g, _0x363a('0xd1'))[_0x363a('0xcf')](/\r\n/g, _0x363a('0xd4'))[_0x363a('0xcf')](/(\n|\r)/g, _0x363a('0xd4')) : '';
+            return _0x486e64 != null ? emojione[_0x363a('0xc9')](patchEmoji(escapeHtml(_0x486e64), _0xa8e05b)['split'](_0x363a('0xca'))[_0x363a('0xcb')](_0x363a('0xcc'))['split'](_0x363a('0xd2'))[_0x363a('0xcb')](_0x363a('0xcd'))['split'](_0x363a('0xce'))[_0x363a('0xcb')](_0x363a('0xd3')).replace(/https:\/\/kirakiratter.com\/media\/[\s\S]*? /g, _0x363a('0xd5'))).replace(/:name_badge:/g, '📛').replace(/  /g, _0x363a('0xd1')).replace(/\r\n/g, _0x363a('0xd4')).replace(/(\n|\r)/g, _0x363a('0xd4')) : '';
         },
         'formatEmoji': function(_0x3d3bd4, _0xdb2ad8) {
-            return _0x3d3bd4 != null ? emojione['toImage'](patchEmoji(_0x3d3bd4, _0xdb2ad8))[_0x363a('0xcf')](/:name_badge:/g, '📛') : '';
+            return _0x3d3bd4 != null ? emojione['toImage'](patchEmoji(_0x3d3bd4, _0xdb2ad8)).replace(/:name_badge:/g, '📛') : '';
         },
         'formatEmojiDraft': function(_0x1b6a15, _0x2db5e9) {
-            return _0x1b6a15 != null ? emojione[_0x363a('0xc9')](patchEmoji(escapeHtml(_0x1b6a15), _0x2db5e9))[_0x363a('0xcf')](/:name_badge:/g, '📛') : '';
+            return _0x1b6a15 != null ? emojione[_0x363a('0xc9')](patchEmoji(escapeHtml(_0x1b6a15), _0x2db5e9)).replace(/:name_badge:/g, '📛') : '';
         },
         'formatDomain': function(_0x59c410) {
-            _0x59c410[_0x363a('0xd7')] = !_0x59c410[_0x363a('0xd8')] ? _0x59c410[_0x363a('0xd9')] != null && _0x59c410[_0x363a('0xd9')][_0x363a('0xf')](/^[httpsfile]+:\/{2,3}([0-9a-z\.\-:]+?):?[0-9]*?\//i)[0x1] : _0x59c410[_0x363a('0xd7')];
+            _0x59c410[_0x363a('0xd7')] = !_0x59c410[_0x363a('0xd8')] ? _0x59c410[_0x363a('0xd9')] != null && _0x59c410[_0x363a('0xd9')]['match'](/^[httpsfile]+:\/{2,3}([0-9a-z\.\-:]+?):?[0-9]*?\//i)[0x1] : _0x59c410[_0x363a('0xd7')];
             _0x59c410['passed'] = !![];
             return _0x59c410['domain'];
         },
         'checkDisplayName': function(_0x386c4c) {
-            return _0x386c4c && _0x386c4c[_0x363a('0xaf')] > 0x0 && _0x386c4c[_0x363a('0xcf')](/^[\s|　]+|[\s|　]+$/g, '')[_0x363a('0xaf')] > 0x0 ? !![] : ![];
+            return _0x386c4c && _0x386c4c[_0x363a('0xaf')] > 0x0 && _0x386c4c.replace(/^[\s|　]+|[\s|　]+$/g, '')[_0x363a('0xaf')] > 0x0 ? !![] : ![];
         },
         'checkKatsuChain': function(_0x40230c) {
             return 0x0 != _0x40230c['replies_count'] || null != _0x40230c[_0x363a('0xda')] ? !![] : ![];
         },
         'checkHeader': function(_0x428eae) {
-            return _0x363a('0xdb') + this['repository'] + NOIMAGE_HEADER == _0x428eae ? !![] : ![];
+            return _0x363a('0xdb') + this.repository + NOIMAGE_HEADER == _0x428eae ? !![] : ![];
         },
         'checkAvatar': function(_0x4cc620) {
-            return _0x363a('0xdb') + this[_0x363a('0xdc')] + NOIMAGE_AVATAR == _0x4cc620 ? _0x363a('0xdd') : _0x4cc620;
+            return _0x363a('0xdb') + this.repository + NOIMAGE_AVATAR == _0x4cc620 ? _0x363a('0xdd') : _0x4cc620;
         },
         'checkMedia': function(_0x2d275d, _0x30922e) {
             if (NOIMAGE_MEDIA == _0x2d275d) {
@@ -864,7 +873,7 @@ var app = new Vue({
                 this[_0x363a('0x96')][_0x363a('0xb5')] = !![];
                 if (this[_0x363a('0x114')] == _0x363a('0x61')) {
                     this[_0x363a('0x115')]();
-                } else if (this[_0x363a('0x114')] == _0x363a('0x4f')) {
+                } else if (this[_0x363a('0x114')] == 'media') {
                     this[_0x363a('0x116')]();
                 } else if (this[_0x363a('0x114')] == _0x363a('0x10a')) {
                     this[_0x363a('0x117')]();
@@ -995,7 +1004,7 @@ var app = new Vue({
             if (this[_0x363a('0x12c')]) {
                 this['profile'] = [];
             } else {
-                _0x5a8e2c = this['user'][_0x363a('0x12d')][_0x363a('0x7f')](/[‮‭]/g);
+                _0x5a8e2c = this['user'][_0x363a('0x12d')]['split'](/[‮‭]/g);
                 this[_0x363a('0x12e')][_0x363a('0xe6')] = _0x5a8e2c[0x0];
                 this['profile']['name_b'] = _0x5a8e2c[0x1] != null && _0x5a8e2c[0x1]['length'] > 0x0 ? _0x5a8e2c[0x1] : '';
             }
@@ -1350,7 +1359,7 @@ var app = new Vue({
             this[_0x363a('0x162')]();
             if (_0x363a('0x61') == _0x16acc9) {
                 this['fetchAcctAll']();
-            } else if (_0x363a('0x4f') == _0x16acc9) {
+            } else if ('media' == _0x16acc9) {
                 this['fetchAcctMedia']();
             } else if (_0x363a('0x10e') == _0x16acc9) {
                 this[_0x363a('0x118')]();
@@ -1537,43 +1546,43 @@ var app = new Vue({
             var _0x479420 = this;
             var _0x159ef3 = [];
             var _0x4cb2fe = {
-                'redirect_uris': _0x479420[_0x363a('0x86')] ? redirect_url : redirect_sub,
-                'client_name': _0x363a('0x175'),
-                'scopes': _0x363a('0x176'),
-                'website': _0x363a('0x177')
+                'redirect_uris': _0x479420['autologin'] ? redirect_url : redirect_sub,
+                'client_name': 'kktjs(webapp)_beta',
+                'scopes': 'read write follow',
+                'website': 'https://aikatsukamen.github.io'
             };
             var _0xa974f7 = new XMLHttpRequest();
-            _0xa974f7[_0x363a('0x178')](_0x363a('0x179'), CLIENT['replace']('[I]', _0x479420[_0x363a('0xdc')]), !![]);
-            _0xa974f7[_0x363a('0x17a')] = REQ_TIMEOUT;
-            _0xa974f7['setRequestHeader']('Content-type', _0x363a('0x17b'));
-            _0xa974f7[_0x363a('0x17c')] = function() {
-                if (_0xa974f7['readyState'] == XMLHttpRequest[_0x363a('0x17d')] && _0xa974f7[_0x363a('0x17e')] == 0xc8) {} else if (_0xa974f7['readyState'] == XMLHttpRequest[_0x363a('0x17d')]) {
-                    _0x479420[_0x363a('0x17f')](_0xa974f7[_0x363a('0x180')], _0xa974f7[_0x363a('0x17e')], _0x363a('0x181'));
+            _0xa974f7['open']('POST', CLIENT.replace('[I]', _0x479420['repository']), !![]);
+            _0xa974f7['timeout'] = REQ_TIMEOUT;
+            _0xa974f7['setRequestHeader']('Content-type', 'application/x-www-form-urlencoded');
+            _0xa974f7['onreadystatechange'] = function() {
+                if (_0xa974f7['readyState'] == XMLHttpRequest['DONE'] && _0xa974f7['status'] == 0xc8) {} else if (_0xa974f7['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x479420['popError'](_0xa974f7['responseText'], _0xa974f7['status'], 'Login');
                 }
             }
             ;
-            _0xa974f7[_0x363a('0x182')](encodeHtmlForm(_0x4cb2fe));
+            _0xa974f7['send'](encodeHtmlForm(_0x4cb2fe));
         },
         'fetchToken': function() {
             var _0x18f13c = this;
             var _0x1dc48b = [];
             var _0x5cd270 = {
-                'grant_type': _0x363a('0x183'),
-                'redirect_uri': _0x18f13c[_0x363a('0x86')] ? redirect_url : redirect_sub,
-                'client_id': _0x18f13c[_0x363a('0x86')] ? client_id : client_id_sub,
-                'client_secret': _0x18f13c[_0x363a('0x86')] ? client_secret : client_secret_sub,
-                'code': _0x18f13c[_0x363a('0x7a')]
+                'grant_type': 'authorization_code',
+                'redirect_uri': _0x18f13c['autologin'] ? redirect_url : redirect_sub,
+                'client_id': _0x18f13c['autologin'] ? client_id : client_id_sub,
+                'client_secret': _0x18f13c['autologin'] ? client_secret : client_secret_sub,
+                'code': _0x18f13c['code']
             };
             var _0x689045 = new XMLHttpRequest();
-            _0x689045[_0x363a('0x178')]('POST', TOKEN['replace']('[I]', _0x18f13c[_0x363a('0xdc')]), !![]);
-            _0x689045[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x689045['open']('POST', TOKEN.replace('[I]', _0x18f13c['repository']), !![]);
+            _0x689045['timeout'] = REQ_TIMEOUT;
             _0x689045['setRequestHeader']('Content-type', 'application/x-www-form-urlencoded');
-            _0x689045[_0x363a('0x17c')] = function() {
-                if (_0x689045[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x689045[_0x363a('0x17e')] == 0xc8) {
+            _0x689045['onreadystatechange'] = function() {
+                if (_0x689045[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x689045['status'] == 0xc8) {
                     userConf[_0x363a('0x185')]('at', JSON['parse'](_0x689045['responseText'])['access_token']);
-                    location['href'] = location['origin'] + location['pathname'];
-                } else if (_0x689045[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
-                    _0x18f13c['popError'](_0x689045[_0x363a('0x180')], _0x689045['status'], _0x363a('0x187'));
+                    location.href = location.origin + location.pathname;
+                } else if (_0x689045[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                    _0x18f13c['popError'](_0x689045['responseText'], _0x689045['status'], _0x363a('0x187'));
                 }
             }
             ;
@@ -1583,16 +1592,16 @@ var app = new Vue({
             var _0x3041c5 = this;
             var _0x5c0028 = [];
             var _0x4f4920 = new XMLHttpRequest();
-            _0x4f4920[_0x363a('0x178')](_0x363a('0x188'), USER['replace'](_0x363a('0x189'), _0x3041c5[_0x363a('0xdc')]));
-            _0x4f4920[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x4f4920['open'](_0x363a('0x188'), USER.replace('[I]', _0x3041c5['repository']));
+            _0x4f4920['timeout'] = REQ_TIMEOUT;
             _0x4f4920[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x3041c5['at']);
-            _0x4f4920[_0x363a('0x17c')] = function() {
-                if (_0x4f4920[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x4f4920[_0x363a('0x17e')] == 0xc8) {
+            _0x4f4920['onreadystatechange'] = function() {
+                if (_0x4f4920[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x4f4920['status'] == 0xc8) {
                     _0x3041c5['user'] = JSON[_0x363a('0x70')](_0x4f4920['responseText']);
                     _0x3041c5[_0x363a('0x134')][_0x363a('0xad')] = ![];
                     _0x3041c5[_0x363a('0x18d')]();
                 } else if (_0x4f4920[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x3041c5[_0x363a('0x17f')](_0x4f4920[_0x363a('0x180')], _0x4f4920[_0x363a('0x17e')], _0x363a('0x18e'));
+                    _0x3041c5['popError'](_0x4f4920['responseText'], _0x4f4920['status'], _0x363a('0x18e'));
                     _0x3041c5[_0x363a('0x134')]['user'] = !![];
                 } else if (_0x4f4920[_0x363a('0x184')] == 0x3 && _0x4f4920['status'] == 0x1f4) {
                     userConf[_0x363a('0x18f')]('at');
@@ -1602,7 +1611,7 @@ var app = new Vue({
                 }
             }
             ;
-            _0x4f4920[_0x363a('0x182')]();
+            _0x4f4920['send']();
         },
         'resetHomeColumn': function() {
             this[_0x363a('0xf1')] = '';
@@ -1647,11 +1656,11 @@ var app = new Vue({
             _0xabf162[_0x363a('0x96')]['home'] = !![];
             var _0x39a20e = _0x363a('0xec');
             var _0x53760f = new XMLHttpRequest();
-            _0x53760f['open']('GET', _0x13ba1a[_0x363a('0xcf')]('[I]', _0xabf162[_0x363a('0xdc')])[_0x363a('0xcf')](_0x363a('0x192'), '')['replace']('[LM]', LIMIT));
-            _0x53760f[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x53760f['open']('GET', _0x13ba1a.replace('[I]', _0xabf162['repository']).replace(_0x363a('0x192'), '').replace('[LM]', LIMIT));
+            _0x53760f['timeout'] = REQ_TIMEOUT;
             _0x53760f[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0xabf162['at']);
-            _0x53760f[_0x363a('0x17c')] = function() {
-                if (_0x53760f[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x53760f[_0x363a('0x17e')] == 0xc8) {
+            _0x53760f['onreadystatechange'] = function() {
+                if (_0x53760f[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x53760f['status'] == 0xc8) {
                     if (_0x39a20e == _0x363a('0xec') && _0xabf162['fetch_lock']['home']) {
                         _0x174de3 = JSON[_0x363a('0x70')](_0x53760f['responseText']);
                         if (null != _0xabf162[_0x363a('0xef')] && !_0xabf162['equalArr'](_0x174de3, _0xabf162[_0x363a('0xef')])) {
@@ -1676,7 +1685,7 @@ var app = new Vue({
                 }
             }
             ;
-            _0x53760f[_0x363a('0x182')]();
+            _0x53760f['send']();
         }, 0x1f4),
         'refetchLocal': _[_0x363a('0xe1')](function() {
             var _0x2ca214 = this;
@@ -1685,13 +1694,13 @@ var app = new Vue({
             _0x2ca214['fetch_lock'][_0x363a('0xf8')] = !![];
             var _0x3cfcd7 = _0x2ca214[_0x363a('0x14e')];
             var _0x260255 = new XMLHttpRequest();
-            _0x260255[_0x363a('0x178')](_0x363a('0x188'), _0x1fc859['replace'](_0x363a('0x189'), _0x2ca214[_0x363a('0xdc')])['replace']('[PID]', '')[_0x363a('0xcf')]('[LM]', LIMIT));
-            _0x260255[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x260255['open'](_0x363a('0x188'), _0x1fc859.replace('[I]', _0x2ca214['repository']).replace('[PID]', '').replace('[LM]', LIMIT));
+            _0x260255['timeout'] = REQ_TIMEOUT;
             _0x260255['setRequestHeader'](_0x363a('0x18b'), 'Bearer\x20' + _0x2ca214['at']);
-            _0x260255[_0x363a('0x17c')] = function() {
-                if (_0x260255[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x260255[_0x363a('0x17e')] == 0xc8) {
+            _0x260255['onreadystatechange'] = function() {
+                if (_0x260255[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x260255['status'] == 0xc8) {
                     if (_0x3cfcd7 == _0x2ca214[_0x363a('0x14e')] && _0x2ca214[_0x363a('0x96')][_0x363a('0xf8')]) {
-                        _0x4c597d = JSON[_0x363a('0x70')](_0x260255[_0x363a('0x180')]);
+                        _0x4c597d = JSON[_0x363a('0x70')](_0x260255['responseText']);
                         if (null != _0x2ca214[_0x363a('0xf9')] && !_0x2ca214['equalArr'](_0x4c597d, _0x2ca214[_0x363a('0xf9')])) {
                             _0x2ca214[_0x363a('0x193')](_0x4c597d, _0x363a('0xf8'));
                             _0x2ca214[_0x363a('0x197')](_0x4c597d, _0x363a('0xf8'));
@@ -1714,27 +1723,27 @@ var app = new Vue({
                 }
             }
             ;
-            _0x260255[_0x363a('0x182')]();
+            _0x260255['send']();
         }, 0x1f4),
         'refetchMulti': _[_0x363a('0xe1')](function() {
             var _0x4b35dc = this;
             var _0x439f9f = [];
             var _0x51d465 = DIRECT;
             if (_0x4b35dc[_0x363a('0x99')] == _0x363a('0x199')) {
-                _0x51d465 = LIST[_0x363a('0xcf')](_0x363a('0x19a'), _0x4b35dc[_0x363a('0x151')]);
+                _0x51d465 = LIST.replace(_0x363a('0x19a'), _0x4b35dc[_0x363a('0x151')]);
             } else if (_0x4b35dc[_0x363a('0x99')] == 'Hashtag') {
-                _0x51d465 = HASHTAG[_0x363a('0xcf')](_0x363a('0x19b'), _0x4b35dc[_0x363a('0x151')]);
+                _0x51d465 = HASHTAG.replace(_0x363a('0x19b'), _0x4b35dc[_0x363a('0x151')]);
             }
             _0x4b35dc[_0x363a('0x96')][_0x363a('0xfd')] = !![];
             var _0x9d4feb = _0x4b35dc[_0x363a('0x99')];
             var _0x4cffc6 = new XMLHttpRequest();
-            _0x4cffc6[_0x363a('0x178')]('GET', _0x51d465['replace'](_0x363a('0x189'), _0x4b35dc['repository'])[_0x363a('0xcf')]('[PID]', '')[_0x363a('0xcf')](_0x363a('0x19c'), LIMIT));
+            _0x4cffc6['open']('GET', _0x51d465.replace('[I]', _0x4b35dc['repository']).replace('[PID]', '').replace(_0x363a('0x19c'), LIMIT));
             _0x4cffc6['timeout'] = REQ_TIMEOUT;
             _0x4cffc6[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x4b35dc['at']);
-            _0x4cffc6[_0x363a('0x17c')] = function() {
-                if (_0x4cffc6['readyState'] == XMLHttpRequest[_0x363a('0x17d')] && _0x4cffc6[_0x363a('0x17e')] == 0xc8) {
+            _0x4cffc6['onreadystatechange'] = function() {
+                if (_0x4cffc6['readyState'] == XMLHttpRequest['DONE'] && _0x4cffc6['status'] == 0xc8) {
                     if (_0x9d4feb == _0x4b35dc[_0x363a('0x99')] && _0x4b35dc[_0x363a('0x96')]['multi']) {
-                        _0x439f9f = JSON[_0x363a('0x70')](_0x4cffc6[_0x363a('0x180')]);
+                        _0x439f9f = JSON[_0x363a('0x70')](_0x4cffc6['responseText']);
                         if (null != _0x4b35dc[_0x363a('0xff')] && !_0x4b35dc[_0x363a('0x19d')](_0x439f9f, _0x4b35dc[_0x363a('0xff')])) {
                             _0x4b35dc[_0x363a('0x193')](_0x439f9f, _0x363a('0xfd'));
                             _0x4b35dc[_0x363a('0x197')](_0x439f9f, _0x363a('0xfd'));
@@ -1757,7 +1766,7 @@ var app = new Vue({
                 }
             }
             ;
-            _0x4cffc6[_0x363a('0x182')]();
+            _0x4cffc6['send']();
         }, 0x1f4),
         'refetchNotifAll': _[_0x363a('0xe1')](function() {
             if (this[_0x363a('0x106')] != '') {
@@ -1769,13 +1778,13 @@ var app = new Vue({
             var _0x55309e = [];
             _0x48fcb6[_0x363a('0x96')][_0x363a('0x104')] = !![];
             var _0x3e9a0b = new XMLHttpRequest();
-            _0x3e9a0b[_0x363a('0x178')](_0x363a('0x188'), NOTIF['replace']('[I]', _0x48fcb6['repository'])[_0x363a('0xcf')](_0x363a('0x192'), '')['replace'](_0x363a('0x19c'), LIMIT_NOTIF));
-            _0x3e9a0b[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x3e9a0b['open'](_0x363a('0x188'), NOTIF.replace('[I]', _0x48fcb6['repository']).replace(_0x363a('0x192'), '').replace(_0x363a('0x19c'), LIMIT_NOTIF));
+            _0x3e9a0b['timeout'] = REQ_TIMEOUT;
             _0x3e9a0b[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x48fcb6['at']);
-            _0x3e9a0b[_0x363a('0x17c')] = function() {
-                if (_0x3e9a0b[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x3e9a0b[_0x363a('0x17e')] == 0xc8) {
+            _0x3e9a0b['onreadystatechange'] = function() {
+                if (_0x3e9a0b[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x3e9a0b['status'] == 0xc8) {
                     if (_0x48fcb6['notif_type'] == '' && _0x48fcb6[_0x363a('0x96')][_0x363a('0x104')]) {
-                        _0x7b4132 = JSON[_0x363a('0x70')](_0x3e9a0b[_0x363a('0x180')]);
+                        _0x7b4132 = JSON[_0x363a('0x70')](_0x3e9a0b['responseText']);
                         _0x48fcb6[_0x363a('0x193')](_0x7b4132, _0x363a('0x104'));
                         if (null != _0x48fcb6['notifs'] && !_0x48fcb6['equalArr'](_0x7b4132, _0x48fcb6[_0x363a('0xb0')])) {
                             _0x48fcb6[_0x363a('0xb0')] = _0x7b4132[_0x363a('0xc1')]();
@@ -1783,7 +1792,7 @@ var app = new Vue({
                         }
                         if (null != _0x48fcb6[_0x363a('0xb1')] && !_0x48fcb6['equalArr'](_0x7b4132, _0x48fcb6[_0x363a('0xb1')])) {
                             _0x48fcb6[_0x363a('0xb1')] = _0x7b4132;
-                            _0x55309e = null != _0x3e9a0b[_0x363a('0x19f')](_0x363a('0x1a0')) ? _0x3e9a0b[_0x363a('0x19f')](_0x363a('0x1a0'))[_0x363a('0xf')](/max_id=(.*?)>/) : null;
+                            _0x55309e = null != _0x3e9a0b[_0x363a('0x19f')](_0x363a('0x1a0')) ? _0x3e9a0b[_0x363a('0x19f')](_0x363a('0x1a0'))['match'](/max_id=(.*?)>/) : null;
                             _0x48fcb6['notif_id'] = null != _0x55309e && 0x0 != _0x55309e[0x1][_0x363a('0xaf')] ? _0x55309e[0x1] : '0';
                             if (_0x48fcb6[_0x363a('0x148')]) {
                                 _0x48fcb6[_0x363a('0x126')] = _0x48fcb6[_0x363a('0x15a')] ? _0x48fcb6[_0x363a('0xb0')][0x0]['id'] : _0x48fcb6[_0x363a('0x126')];
@@ -1797,13 +1806,13 @@ var app = new Vue({
                         _0x48fcb6['fetch_comp']['notif_filter'] = _0x7b4132[_0x363a('0xaf')] < LIMIT_NOTIF;
                         _0x48fcb6[_0x363a('0x18d')]();
                     }
-                } else if (_0x3e9a0b[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
+                } else if (_0x3e9a0b[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
                     _0x48fcb6[_0x363a('0x96')]['notif'] = ![];
                     _0x48fcb6[_0x363a('0x18d')]();
                 }
             }
             ;
-            _0x3e9a0b[_0x363a('0x182')]();
+            _0x3e9a0b['send']();
         }, 0x1f4),
         'fetchHome': function() {
             var _0x8c242e = this;
@@ -1812,13 +1821,13 @@ var app = new Vue({
             _0x8c242e[_0x363a('0x96')][_0x363a('0xec')] = !![];
             var _0x1686a4 = _0x363a('0xec');
             var _0x410108 = new XMLHttpRequest();
-            _0x410108[_0x363a('0x178')](_0x363a('0x188'), _0x13bb51[_0x363a('0xcf')]('[I]', _0x8c242e[_0x363a('0xdc')])[_0x363a('0xcf')]('[PID]', _0x8c242e[_0x363a('0xf1')])[_0x363a('0xcf')]('[LM]', LIMIT));
-            _0x410108[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x410108['open'](_0x363a('0x188'), _0x13bb51.replace('[I]', _0x8c242e['repository']).replace('[PID]', _0x8c242e[_0x363a('0xf1')]).replace('[LM]', LIMIT));
+            _0x410108['timeout'] = REQ_TIMEOUT;
             _0x410108[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x8c242e['at']);
-            _0x410108[_0x363a('0x17c')] = function() {
+            _0x410108['onreadystatechange'] = function() {
                 if (_0x410108['readyState'] == XMLHttpRequest['DONE'] && _0x410108['status'] == 0xc8) {
                     if (_0x1686a4 == 'home' && _0x8c242e['fetch_lock'][_0x363a('0xec')]) {
-                        _0x49d203 = JSON[_0x363a('0x70')](_0x410108[_0x363a('0x180')]);
+                        _0x49d203 = JSON[_0x363a('0x70')](_0x410108['responseText']);
                         _0x8c242e[_0x363a('0x193')](_0x49d203, _0x363a('0xec'));
                         _0x8c242e[_0x363a('0x197')](_0x49d203, 'home');
                         if (0x0 == _0x8c242e['homes'][_0x363a('0xaf')]) {
@@ -1833,12 +1842,12 @@ var app = new Vue({
                     }
                 } else if (_0x410108[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
                     _0x8c242e[_0x363a('0x96')][_0x363a('0xec')] = ![];
-                    _0x8c242e[_0x363a('0x17f')](_0x410108[_0x363a('0x180')], _0x410108['status'], 'Home');
+                    _0x8c242e['popError'](_0x410108['responseText'], _0x410108['status'], 'Home');
                     _0x8c242e[_0x363a('0x18d')]();
                 }
             }
             ;
-            _0x410108[_0x363a('0x182')]();
+            _0x410108['send']();
         },
         'fetchLocal': function() {
             var _0x1e6453 = this;
@@ -1847,13 +1856,13 @@ var app = new Vue({
             _0x1e6453[_0x363a('0x96')][_0x363a('0xf8')] = !![];
             var _0x2dfab8 = _0x1e6453[_0x363a('0x14e')];
             var _0x24fa6f = new XMLHttpRequest();
-            _0x24fa6f[_0x363a('0x178')](_0x363a('0x188'), _0x529fbb[_0x363a('0xcf')](_0x363a('0x189'), _0x1e6453[_0x363a('0xdc')])['replace'](_0x363a('0x192'), _0x1e6453[_0x363a('0x190')])[_0x363a('0xcf')]('[LM]', LIMIT));
-            _0x24fa6f[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x24fa6f['open'](_0x363a('0x188'), _0x529fbb.replace('[I]', _0x1e6453['repository']).replace(_0x363a('0x192'), _0x1e6453[_0x363a('0x190')]).replace('[LM]', LIMIT));
+            _0x24fa6f['timeout'] = REQ_TIMEOUT;
             _0x24fa6f[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x1e6453['at']);
             _0x24fa6f['onreadystatechange'] = function() {
                 if (_0x24fa6f['readyState'] == XMLHttpRequest['DONE'] && _0x24fa6f['status'] == 0xc8) {
                     if (_0x2dfab8 == _0x1e6453['local_type'] && _0x1e6453[_0x363a('0x96')][_0x363a('0xf8')]) {
-                        _0x2c8951 = JSON[_0x363a('0x70')](_0x24fa6f[_0x363a('0x180')]);
+                        _0x2c8951 = JSON[_0x363a('0x70')](_0x24fa6f['responseText']);
                         _0x1e6453[_0x363a('0x193')](_0x2c8951, _0x363a('0xf8'));
                         _0x1e6453[_0x363a('0x197')](_0x2c8951, _0x363a('0xf8'));
                         if (0x0 == _0x1e6453['locals'][_0x363a('0xaf')]) {
@@ -1866,34 +1875,34 @@ var app = new Vue({
                         _0x1e6453[_0x363a('0xf3')][_0x363a('0xf8')] = _0x2c8951[_0x363a('0xaf')] < LIMIT;
                         _0x1e6453[_0x363a('0x18d')]();
                     }
-                } else if (_0x24fa6f[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
+                } else if (_0x24fa6f[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
                     _0x1e6453[_0x363a('0x96')][_0x363a('0xf8')] = ![];
-                    _0x1e6453[_0x363a('0x17f')](_0x24fa6f[_0x363a('0x180')], _0x24fa6f[_0x363a('0x17e')], _0x363a('0x14f'));
+                    _0x1e6453['popError'](_0x24fa6f['responseText'], _0x24fa6f['status'], _0x363a('0x14f'));
                     _0x1e6453[_0x363a('0x18d')]();
                 }
             }
             ;
-            _0x24fa6f[_0x363a('0x182')]();
+            _0x24fa6f['send']();
         },
         'fetchMulti': function() {
             var _0x5d0dc0 = this;
             var _0x4c3d9a = [];
             var _0x1057c2 = DIRECT;
             if (_0x5d0dc0['multi_type'] == _0x363a('0x199')) {
-                _0x1057c2 = LIST[_0x363a('0xcf')](_0x363a('0x19a'), _0x5d0dc0[_0x363a('0x151')]);
+                _0x1057c2 = LIST.replace(_0x363a('0x19a'), _0x5d0dc0[_0x363a('0x151')]);
             } else if (_0x5d0dc0['multi_type'] == 'Hashtag') {
-                _0x1057c2 = HASHTAG[_0x363a('0xcf')](_0x363a('0x19b'), _0x5d0dc0[_0x363a('0x151')]);
+                _0x1057c2 = HASHTAG.replace(_0x363a('0x19b'), _0x5d0dc0[_0x363a('0x151')]);
             }
             _0x5d0dc0[_0x363a('0x96')][_0x363a('0xfd')] = !![];
             var _0x2ba106 = _0x5d0dc0[_0x363a('0x99')];
             var _0x35b4d0 = new XMLHttpRequest();
-            _0x35b4d0[_0x363a('0x178')](_0x363a('0x188'), _0x1057c2['replace'](_0x363a('0x189'), _0x5d0dc0['repository'])[_0x363a('0xcf')]('[PID]', _0x5d0dc0[_0x363a('0x100')])['replace']('[LM]', LIMIT));
+            _0x35b4d0['open'](_0x363a('0x188'), _0x1057c2.replace('[I]', _0x5d0dc0['repository']).replace('[PID]', _0x5d0dc0[_0x363a('0x100')]).replace('[LM]', LIMIT));
             _0x35b4d0['timeout'] = REQ_TIMEOUT;
             _0x35b4d0[_0x363a('0x18a')](_0x363a('0x18b'), 'Bearer\x20' + _0x5d0dc0['at']);
-            _0x35b4d0[_0x363a('0x17c')] = function() {
-                if (_0x35b4d0[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x35b4d0[_0x363a('0x17e')] == 0xc8) {
+            _0x35b4d0['onreadystatechange'] = function() {
+                if (_0x35b4d0[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x35b4d0['status'] == 0xc8) {
                     if (_0x2ba106 == _0x5d0dc0[_0x363a('0x99')] && _0x5d0dc0[_0x363a('0x96')][_0x363a('0xfd')]) {
-                        _0x4c3d9a = JSON[_0x363a('0x70')](_0x35b4d0[_0x363a('0x180')]);
+                        _0x4c3d9a = JSON[_0x363a('0x70')](_0x35b4d0['responseText']);
                         _0x5d0dc0[_0x363a('0x193')](_0x4c3d9a, _0x363a('0xfd'));
                         _0x5d0dc0[_0x363a('0x197')](_0x4c3d9a, _0x363a('0xfd'));
                         if (0x0 == _0x5d0dc0[_0x363a('0xff')]['length']) {
@@ -1906,14 +1915,14 @@ var app = new Vue({
                         _0x5d0dc0[_0x363a('0xf3')]['multi'] = _0x4c3d9a[_0x363a('0xaf')] < LIMIT;
                         _0x5d0dc0[_0x363a('0x18d')]();
                     }
-                } else if (_0x35b4d0[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
+                } else if (_0x35b4d0[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
                     _0x5d0dc0[_0x363a('0x96')]['multi'] = ![];
-                    _0x5d0dc0[_0x363a('0x17f')](_0x35b4d0[_0x363a('0x180')], _0x35b4d0[_0x363a('0x17e')], 'Multi');
+                    _0x5d0dc0['popError'](_0x35b4d0['responseText'], _0x35b4d0['status'], 'Multi');
                     _0x5d0dc0[_0x363a('0x18d')]();
                 }
             }
             ;
-            _0x35b4d0[_0x363a('0x182')]();
+            _0x35b4d0['send']();
         },
         'fetchNotifAll': function() {
             if (this[_0x363a('0x106')] != '') {
@@ -1925,13 +1934,13 @@ var app = new Vue({
             var _0x418121 = [];
             _0x4cf7d8[_0x363a('0x96')][_0x363a('0x104')] = !![];
             var _0x187b5a = new XMLHttpRequest();
-            _0x187b5a[_0x363a('0x178')]('GET', NOTIF[_0x363a('0xcf')](_0x363a('0x189'), _0x4cf7d8['repository'])[_0x363a('0xcf')](_0x363a('0x192'), _0x4cf7d8[_0x363a('0x159')])[_0x363a('0xcf')]('[LM]', LIMIT_NOTIF));
+            _0x187b5a['open']('GET', NOTIF.replace('[I]', _0x4cf7d8['repository']).replace(_0x363a('0x192'), _0x4cf7d8[_0x363a('0x159')]).replace('[LM]', LIMIT_NOTIF));
             _0x187b5a['timeout'] = REQ_TIMEOUT;
             _0x187b5a['setRequestHeader'](_0x363a('0x18b'), _0x363a('0x18c') + _0x4cf7d8['at']);
             _0x187b5a['onreadystatechange'] = function() {
-                if (_0x187b5a[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x187b5a[_0x363a('0x17e')] == 0xc8) {
+                if (_0x187b5a[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x187b5a['status'] == 0xc8) {
                     if (_0x4cf7d8[_0x363a('0x106')] == '' && _0x4cf7d8[_0x363a('0x96')][_0x363a('0x104')]) {
-                        _0x3cb087 = JSON[_0x363a('0x70')](_0x187b5a[_0x363a('0x180')]);
+                        _0x3cb087 = JSON[_0x363a('0x70')](_0x187b5a['responseText']);
                         _0x4cf7d8[_0x363a('0x193')](_0x3cb087, _0x363a('0x104'));
                         if (0x0 == _0x4cf7d8['notifs'][_0x363a('0xaf')]) {
                             _0x4cf7d8[_0x363a('0xb0')] = _0x3cb087[_0x363a('0xc1')]();
@@ -1942,7 +1951,7 @@ var app = new Vue({
                         } else {
                             Array[_0x363a('0x1a1')][_0x363a('0x1a2')][_0x363a('0x1a3')](_0x4cf7d8[_0x363a('0xb1')], _0x3cb087);
                         }
-                        _0x418121 = null != _0x187b5a[_0x363a('0x19f')](_0x363a('0x1a0')) ? _0x187b5a[_0x363a('0x19f')](_0x363a('0x1a0'))[_0x363a('0xf')](/max_id=(.*?)>/) : null;
+                        _0x418121 = null != _0x187b5a[_0x363a('0x19f')](_0x363a('0x1a0')) ? _0x187b5a[_0x363a('0x19f')](_0x363a('0x1a0'))['match'](/max_id=(.*?)>/) : null;
                         _0x4cf7d8[_0x363a('0x159')] = null != _0x418121 && 0x0 != _0x418121[0x1][_0x363a('0xaf')] ? _0x418121[0x1] : '0';
                         if (_0x4cf7d8[_0x363a('0x148')]) {
                             _0x4cf7d8[_0x363a('0x126')] = _0x4cf7d8[_0x363a('0x15a')] ? _0x4cf7d8[_0x363a('0xb0')][0x0]['id'] : _0x4cf7d8[_0x363a('0x126')];
@@ -1952,9 +1961,9 @@ var app = new Vue({
                         _0x4cf7d8['fetch_comp'][_0x363a('0x113')] = _0x3cb087[_0x363a('0xaf')] < LIMIT_NOTIF;
                         _0x4cf7d8[_0x363a('0x18d')]();
                     }
-                } else if (_0x187b5a[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
+                } else if (_0x187b5a[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
                     _0x4cf7d8[_0x363a('0x96')][_0x363a('0x104')] = ![];
-                    _0x4cf7d8[_0x363a('0x17f')](_0x187b5a[_0x363a('0x180')], _0x187b5a[_0x363a('0x17e')], _0x363a('0x1a5'));
+                    _0x4cf7d8['popError'](_0x187b5a['responseText'], _0x187b5a['status'], _0x363a('0x1a5'));
                     _0x4cf7d8[_0x363a('0x18d')]();
                 }
             }
@@ -1971,33 +1980,33 @@ var app = new Vue({
             var _0x933086 = [];
             _0x1ef5bd[_0x363a('0x96')]['notif'] = !![];
             var _0x40b945 = new XMLHttpRequest();
-            _0x40b945[_0x363a('0x178')](_0x363a('0x188'), NOTIF[_0x363a('0xcf')](_0x363a('0x189'), _0x1ef5bd[_0x363a('0xdc')])[_0x363a('0xcf')](_0x363a('0x192'), _0x1ef5bd[_0x363a('0x159')])[_0x363a('0xcf')]('[LM]', LIMIT_NOTIF) + '&exclude_types[]=follow&exclude_types[]=favourite&exclude_types[]=reblog');
-            _0x40b945[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x40b945['open'](_0x363a('0x188'), NOTIF.replace('[I]', _0x1ef5bd['repository']).replace(_0x363a('0x192'), _0x1ef5bd[_0x363a('0x159')]).replace('[LM]', LIMIT_NOTIF) + '&exclude_types[]=follow&exclude_types[]=favourite&exclude_types[]=reblog');
+            _0x40b945['timeout'] = REQ_TIMEOUT;
             _0x40b945[_0x363a('0x18a')]('Authorization', _0x363a('0x18c') + _0x1ef5bd['at']);
-            _0x40b945[_0x363a('0x17c')] = function() {
-                if (_0x40b945[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x40b945[_0x363a('0x17e')] == 0xc8) {
+            _0x40b945['onreadystatechange'] = function() {
+                if (_0x40b945[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x40b945['status'] == 0xc8) {
                     if (_0x1ef5bd[_0x363a('0x106')] == _0x363a('0x108') && _0x1ef5bd[_0x363a('0x96')][_0x363a('0x104')]) {
-                        _0x19af9f = JSON[_0x363a('0x70')](_0x40b945[_0x363a('0x180')]);
+                        _0x19af9f = JSON[_0x363a('0x70')](_0x40b945['responseText']);
                         _0x1ef5bd[_0x363a('0x193')](_0x19af9f, _0x363a('0x104'));
                         if (0x0 == _0x1ef5bd[_0x363a('0xb1')][_0x363a('0xaf')]) {
                             _0x1ef5bd[_0x363a('0xb1')] = _0x19af9f;
                         } else {
                             Array[_0x363a('0x1a1')][_0x363a('0x1a2')][_0x363a('0x1a3')](_0x1ef5bd['notifs_filter'], _0x19af9f);
                         }
-                        _0x933086 = null != _0x40b945[_0x363a('0x19f')]('link') ? _0x40b945[_0x363a('0x19f')](_0x363a('0x1a0'))[_0x363a('0xf')](/max_id=(.*?)>/) : null;
+                        _0x933086 = null != _0x40b945[_0x363a('0x19f')]('link') ? _0x40b945[_0x363a('0x19f')](_0x363a('0x1a0'))['match'](/max_id=(.*?)>/) : null;
                         _0x1ef5bd[_0x363a('0x159')] = null != _0x933086 && 0x0 != _0x933086[0x1][_0x363a('0xaf')] ? _0x933086[0x1] : '0';
                         _0x1ef5bd[_0x363a('0x96')][_0x363a('0x104')] = ![];
                         _0x1ef5bd[_0x363a('0xf3')][_0x363a('0x113')] = _0x19af9f[_0x363a('0xaf')] < LIMIT_NOTIF;
                         _0x1ef5bd[_0x363a('0x18d')]();
                     }
-                } else if (_0x40b945[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
+                } else if (_0x40b945[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
                     _0x1ef5bd[_0x363a('0x96')][_0x363a('0x104')] = ![];
-                    _0x1ef5bd[_0x363a('0x17f')](_0x40b945['responseText'], _0x40b945[_0x363a('0x17e')], 'Notif');
+                    _0x1ef5bd['popError'](_0x40b945['responseText'], _0x40b945['status'], 'Notif');
                     _0x1ef5bd[_0x363a('0x18d')]();
                 }
             }
             ;
-            _0x40b945[_0x363a('0x182')]();
+            _0x40b945['send']();
         },
         'fetchNotifFav': function() {
             if (this[_0x363a('0x106')] != _0x363a('0x10a')) {
@@ -2009,11 +2018,11 @@ var app = new Vue({
             var _0xd6f484 = [];
             _0xf12e52['fetch_lock'][_0x363a('0x104')] = !![];
             var _0x470960 = new XMLHttpRequest();
-            _0x470960[_0x363a('0x178')](_0x363a('0x188'), NOTIF['replace'](_0x363a('0x189'), _0xf12e52[_0x363a('0xdc')])[_0x363a('0xcf')](_0x363a('0x192'), _0xf12e52[_0x363a('0x159')])[_0x363a('0xcf')]('[LM]', LIMIT_NOTIF) + _0x363a('0x1a6'));
+            _0x470960['open'](_0x363a('0x188'), NOTIF.replace('[I]', _0xf12e52['repository']).replace(_0x363a('0x192'), _0xf12e52[_0x363a('0x159')]).replace('[LM]', LIMIT_NOTIF) + _0x363a('0x1a6'));
             _0x470960['timeout'] = REQ_TIMEOUT;
             _0x470960[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0xf12e52['at']);
-            _0x470960[_0x363a('0x17c')] = function() {
-                if (_0x470960[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x470960[_0x363a('0x17e')] == 0xc8) {
+            _0x470960['onreadystatechange'] = function() {
+                if (_0x470960[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x470960['status'] == 0xc8) {
                     if (_0xf12e52['notif_type'] == 'fav' && _0xf12e52[_0x363a('0x96')]['notif']) {
                         _0x39b4b6 = JSON[_0x363a('0x70')](_0x470960['responseText']);
                         _0xf12e52[_0x363a('0x193')](_0x39b4b6, 'notif');
@@ -2028,9 +2037,9 @@ var app = new Vue({
                         _0xf12e52[_0x363a('0xf3')][_0x363a('0x113')] = _0x39b4b6[_0x363a('0xaf')] < LIMIT_NOTIF;
                         _0xf12e52[_0x363a('0x18d')]();
                     }
-                } else if (_0x470960['readyState'] == XMLHttpRequest[_0x363a('0x17d')]) {
+                } else if (_0x470960['readyState'] == XMLHttpRequest['DONE']) {
                     _0xf12e52[_0x363a('0x96')][_0x363a('0x104')] = ![];
-                    _0xf12e52['popError'](_0x470960['responseText'], _0x470960[_0x363a('0x17e')], _0x363a('0x1a5'));
+                    _0xf12e52['popError'](_0x470960['responseText'], _0x470960['status'], _0x363a('0x1a5'));
                     _0xf12e52[_0x363a('0x18d')]();
                 }
             }
@@ -2047,33 +2056,33 @@ var app = new Vue({
             var _0x149eab = [];
             _0x44855e[_0x363a('0x96')][_0x363a('0x104')] = !![];
             var _0x2d6097 = new XMLHttpRequest();
-            _0x2d6097[_0x363a('0x178')]('GET', NOTIF[_0x363a('0xcf')](_0x363a('0x189'), _0x44855e['repository'])[_0x363a('0xcf')](_0x363a('0x192'), _0x44855e[_0x363a('0x159')])[_0x363a('0xcf')](_0x363a('0x19c'), LIMIT_NOTIF) + '&exclude_types[]=favourite&exclude_types[]=reblog&exclude_types[]=mention');
-            _0x2d6097[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x2d6097['open']('GET', NOTIF.replace('[I]', _0x44855e['repository']).replace(_0x363a('0x192'), _0x44855e[_0x363a('0x159')]).replace(_0x363a('0x19c'), LIMIT_NOTIF) + '&exclude_types[]=favourite&exclude_types[]=reblog&exclude_types[]=mention');
+            _0x2d6097['timeout'] = REQ_TIMEOUT;
             _0x2d6097[_0x363a('0x18a')](_0x363a('0x18b'), 'Bearer\x20' + _0x44855e['at']);
-            _0x2d6097[_0x363a('0x17c')] = function() {
-                if (_0x2d6097[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x2d6097[_0x363a('0x17e')] == 0xc8) {
+            _0x2d6097['onreadystatechange'] = function() {
+                if (_0x2d6097[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x2d6097['status'] == 0xc8) {
                     if (_0x44855e['notif_type'] == _0x363a('0x10e') && _0x44855e[_0x363a('0x96')][_0x363a('0x104')]) {
-                        _0x58db7d = JSON[_0x363a('0x70')](_0x2d6097[_0x363a('0x180')]);
+                        _0x58db7d = JSON[_0x363a('0x70')](_0x2d6097['responseText']);
                         _0x44855e[_0x363a('0x193')](_0x58db7d, 'notif');
                         if (0x0 == _0x44855e[_0x363a('0xb1')][_0x363a('0xaf')]) {
                             _0x44855e[_0x363a('0xb1')] = _0x58db7d;
                         } else {
                             Array[_0x363a('0x1a1')]['push'][_0x363a('0x1a3')](_0x44855e[_0x363a('0xb1')], _0x58db7d);
                         }
-                        _0x149eab = null != _0x2d6097[_0x363a('0x19f')](_0x363a('0x1a0')) ? _0x2d6097[_0x363a('0x19f')](_0x363a('0x1a0'))[_0x363a('0xf')](/max_id=(.*?)>/) : null;
+                        _0x149eab = null != _0x2d6097[_0x363a('0x19f')](_0x363a('0x1a0')) ? _0x2d6097[_0x363a('0x19f')](_0x363a('0x1a0'))['match'](/max_id=(.*?)>/) : null;
                         _0x44855e[_0x363a('0x159')] = null != _0x149eab && 0x0 != _0x149eab[0x1][_0x363a('0xaf')] ? _0x149eab[0x1] : '0';
                         _0x44855e['fetch_lock'][_0x363a('0x104')] = ![];
                         _0x44855e[_0x363a('0xf3')][_0x363a('0x113')] = _0x58db7d[_0x363a('0xaf')] < LIMIT_NOTIF;
                         _0x44855e[_0x363a('0x18d')]();
                     }
-                } else if (_0x2d6097['readyState'] == XMLHttpRequest[_0x363a('0x17d')]) {
+                } else if (_0x2d6097['readyState'] == XMLHttpRequest['DONE']) {
                     _0x44855e['fetch_lock'][_0x363a('0x104')] = ![];
-                    _0x44855e[_0x363a('0x17f')](_0x2d6097['responseText'], _0x2d6097[_0x363a('0x17e')], 'Notif');
+                    _0x44855e['popError'](_0x2d6097['responseText'], _0x2d6097['status'], 'Notif');
                     _0x44855e['$forceUpdate']();
                 }
             }
             ;
-            _0x2d6097[_0x363a('0x182')]();
+            _0x2d6097['send']();
         },
         'fetchNotifReblog': function() {
             if (this[_0x363a('0x106')] != _0x363a('0x10c')) {
@@ -2085,11 +2094,11 @@ var app = new Vue({
             var _0x218281 = [];
             _0x3da5d8['fetch_lock'][_0x363a('0x104')] = !![];
             var _0xfc1a5a = new XMLHttpRequest();
-            _0xfc1a5a[_0x363a('0x178')](_0x363a('0x188'), NOTIF[_0x363a('0xcf')](_0x363a('0x189'), _0x3da5d8[_0x363a('0xdc')])[_0x363a('0xcf')](_0x363a('0x192'), _0x3da5d8[_0x363a('0x159')])[_0x363a('0xcf')](_0x363a('0x19c'), LIMIT_NOTIF) + _0x363a('0x1a7'));
-            _0xfc1a5a[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0xfc1a5a['open'](_0x363a('0x188'), NOTIF.replace('[I]', _0x3da5d8['repository']).replace(_0x363a('0x192'), _0x3da5d8[_0x363a('0x159')]).replace(_0x363a('0x19c'), LIMIT_NOTIF) + _0x363a('0x1a7'));
+            _0xfc1a5a['timeout'] = REQ_TIMEOUT;
             _0xfc1a5a[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x3da5d8['at']);
-            _0xfc1a5a[_0x363a('0x17c')] = function() {
-                if (_0xfc1a5a['readyState'] == XMLHttpRequest[_0x363a('0x17d')] && _0xfc1a5a[_0x363a('0x17e')] == 0xc8) {
+            _0xfc1a5a['onreadystatechange'] = function() {
+                if (_0xfc1a5a['readyState'] == XMLHttpRequest['DONE'] && _0xfc1a5a['status'] == 0xc8) {
                     if (_0x3da5d8[_0x363a('0x106')] == 'reblog' && _0x3da5d8[_0x363a('0x96')][_0x363a('0x104')]) {
                         _0x4c2972 = JSON[_0x363a('0x70')](_0xfc1a5a['responseText']);
                         _0x3da5d8[_0x363a('0x193')](_0x4c2972, _0x363a('0x104'));
@@ -2098,20 +2107,20 @@ var app = new Vue({
                         } else {
                             Array[_0x363a('0x1a1')][_0x363a('0x1a2')][_0x363a('0x1a3')](_0x3da5d8[_0x363a('0xb1')], _0x4c2972);
                         }
-                        _0x218281 = null != _0xfc1a5a[_0x363a('0x19f')](_0x363a('0x1a0')) ? _0xfc1a5a[_0x363a('0x19f')](_0x363a('0x1a0'))[_0x363a('0xf')](/max_id=(.*?)>/) : null;
+                        _0x218281 = null != _0xfc1a5a[_0x363a('0x19f')](_0x363a('0x1a0')) ? _0xfc1a5a[_0x363a('0x19f')](_0x363a('0x1a0'))['match'](/max_id=(.*?)>/) : null;
                         _0x3da5d8['notif_id'] = null != _0x218281 && 0x0 != _0x218281[0x1][_0x363a('0xaf')] ? _0x218281[0x1] : '0';
                         _0x3da5d8['fetch_lock']['notif'] = ![];
                         _0x3da5d8[_0x363a('0xf3')][_0x363a('0x113')] = _0x4c2972[_0x363a('0xaf')] < LIMIT_NOTIF;
                         _0x3da5d8['$forceUpdate']();
                     }
-                } else if (_0xfc1a5a[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
+                } else if (_0xfc1a5a[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
                     _0x3da5d8[_0x363a('0x96')][_0x363a('0x104')] = ![];
-                    _0x3da5d8[_0x363a('0x17f')](_0xfc1a5a[_0x363a('0x180')], _0xfc1a5a[_0x363a('0x17e')], _0x363a('0x1a5'));
+                    _0x3da5d8['popError'](_0xfc1a5a['responseText'], _0xfc1a5a['status'], _0x363a('0x1a5'));
                     _0x3da5d8[_0x363a('0x18d')]();
                 }
             }
             ;
-            _0xfc1a5a[_0x363a('0x182')]();
+            _0xfc1a5a['send']();
         },
         'fetchAcctAll': function() {
             if (this[_0x363a('0x114')] != _0x363a('0x61')) {
@@ -2122,13 +2131,13 @@ var app = new Vue({
             var _0x3b2388 = [];
             _0x126f91[_0x363a('0x96')][_0x363a('0xb5')] = !![];
             var _0x1e918e = new XMLHttpRequest();
-            _0x1e918e[_0x363a('0x178')](_0x363a('0x188'), ACCT[_0x363a('0xcf')](_0x363a('0x189'), _0x126f91[_0x363a('0xdc')])['replace'](_0x363a('0x1a9'), _0x126f91[_0x363a('0xae')])[_0x363a('0xcf')]('[PID]', _0x126f91['acct_id'])[_0x363a('0xcf')](_0x363a('0x19c'), LIMIT));
+            _0x1e918e['open'](_0x363a('0x188'), ACCT.replace('[I]', _0x126f91['repository']).replace(_0x363a('0x1a9'), _0x126f91[_0x363a('0xae')]).replace('[PID]', _0x126f91['acct_id']).replace(_0x363a('0x19c'), LIMIT));
             _0x1e918e['timeout'] = REQ_TIMEOUT;
             _0x1e918e['setRequestHeader'](_0x363a('0x18b'), _0x363a('0x18c') + _0x126f91['at']);
-            _0x1e918e[_0x363a('0x17c')] = function() {
-                if (_0x1e918e['readyState'] == XMLHttpRequest[_0x363a('0x17d')] && _0x1e918e['status'] == 0xc8) {
+            _0x1e918e['onreadystatechange'] = function() {
+                if (_0x1e918e['readyState'] == XMLHttpRequest['DONE'] && _0x1e918e['status'] == 0xc8) {
                     if (_0x126f91[_0x363a('0x114')] == _0x363a('0x61') && _0x126f91[_0x363a('0x96')][_0x363a('0xb5')]) {
-                        _0x3b2388 = JSON['parse'](_0x1e918e[_0x363a('0x180')]);
+                        _0x3b2388 = JSON['parse'](_0x1e918e['responseText']);
                         _0x126f91[_0x363a('0x193')](_0x3b2388, _0x363a('0xb5'));
                         if (0x0 == _0x126f91[_0x363a('0x15f')]['length']) {
                             _0x126f91[_0x363a('0x15f')] = _0x3b2388;
@@ -2142,29 +2151,29 @@ var app = new Vue({
                     }
                 } else if (_0x1e918e[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
                     _0x126f91['fetch_lock'][_0x363a('0xb5')] = ![];
-                    _0x126f91['popError'](_0x1e918e[_0x363a('0x180')], _0x1e918e[_0x363a('0x17e')], _0x363a('0x1aa'));
+                    _0x126f91['popError'](_0x1e918e['responseText'], _0x1e918e['status'], _0x363a('0x1aa'));
                     _0x126f91[_0x363a('0x18d')]();
                 }
             }
             ;
-            _0x1e918e[_0x363a('0x182')]();
+            _0x1e918e['send']();
         },
         'fetchAcctMedia': function() {
-            if (this[_0x363a('0x114')] != _0x363a('0x4f')) {
-                this[_0x363a('0x114')] = _0x363a('0x4f');
+            if (this[_0x363a('0x114')] != 'media') {
+                this[_0x363a('0x114')] = 'media';
                 this['resetAcctColumn']();
             }
             var _0x1f152e = this;
             var _0x4e7836 = [];
             _0x1f152e['fetch_lock']['acct'] = !![];
             var _0x9df86d = new XMLHttpRequest();
-            _0x9df86d['open'](_0x363a('0x188'), MEDIA[_0x363a('0xcf')](_0x363a('0x189'), _0x1f152e[_0x363a('0xdc')])[_0x363a('0xcf')](_0x363a('0x1a9'), _0x1f152e[_0x363a('0xae')])[_0x363a('0xcf')]('[PID]', _0x1f152e[_0x363a('0x16c')])[_0x363a('0xcf')](_0x363a('0x19c'), LIMIT));
-            _0x9df86d[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x9df86d['open'](_0x363a('0x188'), MEDIA.replace('[I]', _0x1f152e['repository']).replace(_0x363a('0x1a9'), _0x1f152e[_0x363a('0xae')]).replace('[PID]', _0x1f152e[_0x363a('0x16c')]).replace(_0x363a('0x19c'), LIMIT));
+            _0x9df86d['timeout'] = REQ_TIMEOUT;
             _0x9df86d[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x1f152e['at']);
-            _0x9df86d[_0x363a('0x17c')] = function() {
-                if (_0x9df86d[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x9df86d[_0x363a('0x17e')] == 0xc8) {
-                    if (_0x1f152e[_0x363a('0x114')] == _0x363a('0x4f') && _0x1f152e[_0x363a('0x96')]['acct']) {
-                        _0x4e7836 = JSON[_0x363a('0x70')](_0x9df86d[_0x363a('0x180')]);
+            _0x9df86d['onreadystatechange'] = function() {
+                if (_0x9df86d[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x9df86d['status'] == 0xc8) {
+                    if (_0x1f152e[_0x363a('0x114')] == 'media' && _0x1f152e[_0x363a('0x96')]['acct']) {
+                        _0x4e7836 = JSON[_0x363a('0x70')](_0x9df86d['responseText']);
                         _0x1f152e[_0x363a('0x193')](_0x4e7836, _0x363a('0xb5'));
                         if (0x0 == _0x1f152e[_0x363a('0x15f')][_0x363a('0xaf')]) {
                             _0x1f152e['accts'] = _0x4e7836;
@@ -2176,14 +2185,14 @@ var app = new Vue({
                         _0x1f152e[_0x363a('0xf3')]['acct'] = _0x4e7836[_0x363a('0xaf')] < LIMIT;
                         _0x1f152e['$forceUpdate']();
                     }
-                } else if (_0x9df86d[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
+                } else if (_0x9df86d[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
                     _0x1f152e['fetch_lock'][_0x363a('0xb5')] = ![];
-                    _0x1f152e[_0x363a('0x17f')](_0x9df86d['responseText'], _0x9df86d[_0x363a('0x17e')], _0x363a('0x1aa'));
+                    _0x1f152e['popError'](_0x9df86d['responseText'], _0x9df86d['status'], _0x363a('0x1aa'));
                     _0x1f152e['$forceUpdate']();
                 }
             }
             ;
-            _0x9df86d[_0x363a('0x182')]();
+            _0x9df86d['send']();
         },
         'fetchAcctFav': function() {
             if (this[_0x363a('0x114')] != _0x363a('0x10a')) {
@@ -2195,20 +2204,20 @@ var app = new Vue({
             var _0xce2395 = [];
             _0x15ab60[_0x363a('0x96')][_0x363a('0xb5')] = !![];
             var _0x4f1d64 = new XMLHttpRequest();
-            _0x4f1d64[_0x363a('0x178')](_0x363a('0x188'), FAVO[_0x363a('0xcf')](_0x363a('0x189'), _0x15ab60['repository'])[_0x363a('0xcf')]('[PID]', _0x15ab60[_0x363a('0x16c')])[_0x363a('0xcf')](_0x363a('0x19c'), LIMIT));
-            _0x4f1d64[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x4f1d64['open'](_0x363a('0x188'), FAVO.replace('[I]', _0x15ab60['repository']).replace('[PID]', _0x15ab60[_0x363a('0x16c')]).replace(_0x363a('0x19c'), LIMIT));
+            _0x4f1d64['timeout'] = REQ_TIMEOUT;
             _0x4f1d64['setRequestHeader'](_0x363a('0x18b'), _0x363a('0x18c') + _0x15ab60['at']);
-            _0x4f1d64[_0x363a('0x17c')] = function() {
-                if (_0x4f1d64[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x4f1d64['status'] == 0xc8) {
+            _0x4f1d64['onreadystatechange'] = function() {
+                if (_0x4f1d64[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x4f1d64['status'] == 0xc8) {
                     if (_0x15ab60['acct_type'] == _0x363a('0x10a') && _0x15ab60[_0x363a('0x96')][_0x363a('0xb5')]) {
-                        _0x1f082d = JSON[_0x363a('0x70')](_0x4f1d64[_0x363a('0x180')]);
+                        _0x1f082d = JSON[_0x363a('0x70')](_0x4f1d64['responseText']);
                         _0x15ab60[_0x363a('0x193')](_0x1f082d, _0x363a('0xb5'));
                         if (0x0 == _0x15ab60[_0x363a('0x15f')]['length']) {
                             _0x15ab60[_0x363a('0x15f')] = _0x1f082d;
                         } else {
                             Array['prototype'][_0x363a('0x1a2')][_0x363a('0x1a3')](_0x15ab60['accts'], _0x1f082d);
                         }
-                        _0xce2395 = null != _0x4f1d64[_0x363a('0x19f')](_0x363a('0x1a0')) ? _0x4f1d64[_0x363a('0x19f')](_0x363a('0x1a0'))[_0x363a('0xf')](/max_id=(.*?)>/) : null;
+                        _0xce2395 = null != _0x4f1d64[_0x363a('0x19f')](_0x363a('0x1a0')) ? _0x4f1d64[_0x363a('0x19f')](_0x363a('0x1a0'))['match'](/max_id=(.*?)>/) : null;
                         _0x15ab60[_0x363a('0x16c')] = null != _0xce2395 && 0x0 != _0xce2395[0x1][_0x363a('0xaf')] ? _0xce2395[0x1] : '0';
                         _0x15ab60[_0x363a('0x96')]['acct'] = ![];
                         _0x15ab60[_0x363a('0xf3')]['acct'] = _0x1f082d[_0x363a('0xaf')] < LIMIT;
@@ -2216,12 +2225,12 @@ var app = new Vue({
                     }
                 } else if (_0x4f1d64[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
                     _0x15ab60['fetch_lock'][_0x363a('0xb5')] = ![];
-                    _0x15ab60[_0x363a('0x17f')](_0x4f1d64[_0x363a('0x180')], _0x4f1d64[_0x363a('0x17e')], _0x363a('0x1aa'));
+                    _0x15ab60['popError'](_0x4f1d64['responseText'], _0x4f1d64['status'], _0x363a('0x1aa'));
                     _0x15ab60[_0x363a('0x18d')]();
                 }
             }
             ;
-            _0x4f1d64[_0x363a('0x182')]();
+            _0x4f1d64['send']();
         },
         'fetchAcctFollow': function() {
             if (this[_0x363a('0x114')] != _0x363a('0x10e')) {
@@ -2233,19 +2242,19 @@ var app = new Vue({
             var _0x13cfc0 = [];
             _0xd6e26d[_0x363a('0x96')]['acct'] = !![];
             var _0x5ee7a7 = new XMLHttpRequest();
-            _0x5ee7a7[_0x363a('0x178')](_0x363a('0x188'), FOLLOW[_0x363a('0xcf')](_0x363a('0x189'), _0xd6e26d['repository'])['replace'](_0x363a('0x1a9'), _0xd6e26d['acct_targetid'])[_0x363a('0xcf')](_0x363a('0x1ab'), _0xd6e26d[_0x363a('0x16c')])['replace']('[LM]', LIMIT_USER));
-            _0x5ee7a7[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x5ee7a7['open'](_0x363a('0x188'), FOLLOW.replace('[I]', _0xd6e26d['repository']).replace(_0x363a('0x1a9'), _0xd6e26d['acct_targetid']).replace(_0x363a('0x1ab'), _0xd6e26d[_0x363a('0x16c')]).replace('[LM]', LIMIT_USER));
+            _0x5ee7a7['timeout'] = REQ_TIMEOUT;
             _0x5ee7a7[_0x363a('0x18a')](_0x363a('0x18b'), 'Bearer\x20' + _0xd6e26d['at']);
-            _0x5ee7a7[_0x363a('0x17c')] = function() {
-                if (_0x5ee7a7[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x5ee7a7[_0x363a('0x17e')] == 0xc8) {
+            _0x5ee7a7['onreadystatechange'] = function() {
+                if (_0x5ee7a7[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x5ee7a7['status'] == 0xc8) {
                     if (_0xd6e26d[_0x363a('0x114')] == _0x363a('0x10e') && _0xd6e26d[_0x363a('0x96')]['acct']) {
-                        _0x4f6bab = JSON[_0x363a('0x70')](_0x5ee7a7[_0x363a('0x180')]);
+                        _0x4f6bab = JSON[_0x363a('0x70')](_0x5ee7a7['responseText']);
                         if (0x0 == _0xd6e26d[_0x363a('0xb7')][_0x363a('0xaf')]) {
                             _0xd6e26d[_0x363a('0xb7')] = _0x4f6bab;
                         } else {
                             Array[_0x363a('0x1a1')][_0x363a('0x1a2')]['apply'](_0xd6e26d[_0x363a('0xb7')], _0x4f6bab);
                         }
-                        _0x13cfc0 = null != _0x5ee7a7[_0x363a('0x19f')](_0x363a('0x1a0')) ? _0x5ee7a7[_0x363a('0x19f')](_0x363a('0x1a0'))[_0x363a('0xf')](/max_id=(.*?)>/) : null;
+                        _0x13cfc0 = null != _0x5ee7a7[_0x363a('0x19f')](_0x363a('0x1a0')) ? _0x5ee7a7[_0x363a('0x19f')](_0x363a('0x1a0'))['match'](/max_id=(.*?)>/) : null;
                         _0xd6e26d[_0x363a('0x16c')] = null != _0x13cfc0 && 0x0 != _0x13cfc0[0x1]['length'] ? _0x13cfc0[0x1] : '0';
                         _0xd6e26d[_0x363a('0x96')][_0x363a('0xb5')] = ![];
                         _0xd6e26d['fetch_comp'][_0x363a('0xb5')] = _0x4f6bab[_0x363a('0xaf')] < LIMIT_USER;
@@ -2253,12 +2262,12 @@ var app = new Vue({
                     }
                 } else if (_0x5ee7a7[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
                     _0xd6e26d[_0x363a('0x96')][_0x363a('0xb5')] = ![];
-                    _0xd6e26d[_0x363a('0x17f')](_0x5ee7a7[_0x363a('0x180')], _0x5ee7a7['status'], _0x363a('0x1aa'));
+                    _0xd6e26d['popError'](_0x5ee7a7['responseText'], _0x5ee7a7['status'], _0x363a('0x1aa'));
                     _0xd6e26d[_0x363a('0x18d')]();
                 }
             }
             ;
-            _0x5ee7a7[_0x363a('0x182')]();
+            _0x5ee7a7['send']();
         },
         'fetchAcctFollower': function() {
             if (this[_0x363a('0x114')] != _0x363a('0x119')) {
@@ -2270,13 +2279,13 @@ var app = new Vue({
             var _0x3d8c96 = [];
             _0x4d83e4['fetch_lock'][_0x363a('0xb5')] = !![];
             var _0x524c19 = new XMLHttpRequest();
-            _0x524c19[_0x363a('0x178')](_0x363a('0x188'), FOLLOWER[_0x363a('0xcf')](_0x363a('0x189'), _0x4d83e4[_0x363a('0xdc')])[_0x363a('0xcf')](_0x363a('0x1a9'), _0x4d83e4[_0x363a('0xae')])['replace'](_0x363a('0x1ab'), _0x4d83e4[_0x363a('0x16c')])['replace'](_0x363a('0x19c'), LIMIT_USER));
-            _0x524c19[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x524c19['open'](_0x363a('0x188'), FOLLOWER.replace('[I]', _0x4d83e4['repository']).replace(_0x363a('0x1a9'), _0x4d83e4[_0x363a('0xae')]).replace(_0x363a('0x1ab'), _0x4d83e4[_0x363a('0x16c')]).replace(_0x363a('0x19c'), LIMIT_USER));
+            _0x524c19['timeout'] = REQ_TIMEOUT;
             _0x524c19[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x4d83e4['at']);
-            _0x524c19[_0x363a('0x17c')] = function() {
-                if (_0x524c19[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x524c19[_0x363a('0x17e')] == 0xc8) {
+            _0x524c19['onreadystatechange'] = function() {
+                if (_0x524c19[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x524c19['status'] == 0xc8) {
                     if (_0x4d83e4[_0x363a('0x114')] == _0x363a('0x119') && _0x4d83e4[_0x363a('0x96')][_0x363a('0xb5')]) {
-                        _0x76005d = JSON[_0x363a('0x70')](_0x524c19[_0x363a('0x180')]);
+                        _0x76005d = JSON[_0x363a('0x70')](_0x524c19['responseText']);
                         if (0x0 == _0x4d83e4[_0x363a('0xb7')]['length']) {
                             _0x4d83e4['accts_users'] = _0x76005d;
                         } else {
@@ -2288,14 +2297,14 @@ var app = new Vue({
                         _0x4d83e4[_0x363a('0xf3')][_0x363a('0xb5')] = _0x76005d[_0x363a('0xaf')] < LIMIT_USER;
                         _0x4d83e4[_0x363a('0x1ac')]();
                     }
-                } else if (_0x524c19['readyState'] == XMLHttpRequest[_0x363a('0x17d')]) {
+                } else if (_0x524c19['readyState'] == XMLHttpRequest['DONE']) {
                     _0x4d83e4[_0x363a('0x96')][_0x363a('0xb5')] = ![];
-                    _0x4d83e4[_0x363a('0x17f')](_0x524c19[_0x363a('0x180')], _0x524c19['status'], _0x363a('0x1aa'));
+                    _0x4d83e4['popError'](_0x524c19['responseText'], _0x524c19['status'], _0x363a('0x1aa'));
                     _0x4d83e4[_0x363a('0x18d')]();
                 }
             }
             ;
-            _0x524c19[_0x363a('0x182')]();
+            _0x524c19['send']();
         },
         'fetchAcctMute': function() {
             if (this[_0x363a('0x114')] != _0x363a('0x1ad')) {
@@ -2307,19 +2316,19 @@ var app = new Vue({
             var _0x4ff7d3 = [];
             _0x1963cc[_0x363a('0x96')][_0x363a('0xb5')] = !![];
             var _0x179274 = new XMLHttpRequest();
-            _0x179274[_0x363a('0x178')]('GET', MUTE[_0x363a('0xcf')](_0x363a('0x189'), _0x1963cc['repository'])[_0x363a('0xcf')](_0x363a('0x1ab'), _0x1963cc[_0x363a('0x16c')])[_0x363a('0xcf')](_0x363a('0x19c'), LIMIT_USER));
-            _0x179274[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x179274['open']('GET', MUTE.replace('[I]', _0x1963cc['repository']).replace(_0x363a('0x1ab'), _0x1963cc[_0x363a('0x16c')]).replace(_0x363a('0x19c'), LIMIT_USER));
+            _0x179274['timeout'] = REQ_TIMEOUT;
             _0x179274[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x1963cc['at']);
-            _0x179274[_0x363a('0x17c')] = function() {
-                if (_0x179274[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x179274[_0x363a('0x17e')] == 0xc8) {
+            _0x179274['onreadystatechange'] = function() {
+                if (_0x179274[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x179274['status'] == 0xc8) {
                     if (_0x1963cc['acct_type'] == _0x363a('0x1ad') && _0x1963cc[_0x363a('0x96')][_0x363a('0xb5')]) {
-                        _0x354b5c = JSON[_0x363a('0x70')](_0x179274[_0x363a('0x180')]);
+                        _0x354b5c = JSON[_0x363a('0x70')](_0x179274['responseText']);
                         if (0x0 == _0x1963cc[_0x363a('0xb7')][_0x363a('0xaf')]) {
                             _0x1963cc['accts_users'] = _0x354b5c;
                         } else {
                             Array[_0x363a('0x1a1')][_0x363a('0x1a2')][_0x363a('0x1a3')](_0x1963cc[_0x363a('0xb7')], _0x354b5c);
                         }
-                        _0x4ff7d3 = null != _0x179274['getResponseHeader'](_0x363a('0x1a0')) ? _0x179274[_0x363a('0x19f')]('link')[_0x363a('0xf')](/max_id=(.*?)>/) : null;
+                        _0x4ff7d3 = null != _0x179274['getResponseHeader'](_0x363a('0x1a0')) ? _0x179274[_0x363a('0x19f')]('link')['match'](/max_id=(.*?)>/) : null;
                         _0x1963cc[_0x363a('0x16c')] = null != _0x4ff7d3 && 0x0 != _0x4ff7d3[0x1]['length'] ? _0x4ff7d3[0x1] : '0';
                         _0x1963cc[_0x363a('0x96')][_0x363a('0xb5')] = ![];
                         _0x1963cc[_0x363a('0xf3')][_0x363a('0xb5')] = _0x354b5c[_0x363a('0xaf')] < LIMIT_USER;
@@ -2327,12 +2336,12 @@ var app = new Vue({
                     }
                 } else if (_0x179274[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
                     _0x1963cc[_0x363a('0x96')][_0x363a('0xb5')] = ![];
-                    _0x1963cc[_0x363a('0x17f')](_0x179274[_0x363a('0x180')], _0x179274[_0x363a('0x17e')], _0x363a('0x1aa'));
+                    _0x1963cc['popError'](_0x179274['responseText'], _0x179274['status'], _0x363a('0x1aa'));
                     _0x1963cc['$forceUpdate']();
                 }
             }
             ;
-            _0x179274[_0x363a('0x182')]();
+            _0x179274['send']();
         },
         'fetchAcctBlock': function() {
             if (this[_0x363a('0x114')] != _0x363a('0x11b')) {
@@ -2344,32 +2353,32 @@ var app = new Vue({
             var _0x5b2563 = [];
             _0x42ccd5[_0x363a('0x96')][_0x363a('0xb5')] = !![];
             var _0x50fb49 = new XMLHttpRequest();
-            _0x50fb49[_0x363a('0x178')](_0x363a('0x188'), BLOCK['replace'](_0x363a('0x189'), _0x42ccd5[_0x363a('0xdc')])[_0x363a('0xcf')](_0x363a('0x1ab'), _0x42ccd5[_0x363a('0x16c')])[_0x363a('0xcf')](_0x363a('0x19c'), LIMIT_USER));
-            _0x50fb49[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x50fb49['open'](_0x363a('0x188'), BLOCK.replace('[I]', _0x42ccd5['repository']).replace(_0x363a('0x1ab'), _0x42ccd5[_0x363a('0x16c')]).replace(_0x363a('0x19c'), LIMIT_USER));
+            _0x50fb49['timeout'] = REQ_TIMEOUT;
             _0x50fb49['setRequestHeader'](_0x363a('0x18b'), _0x363a('0x18c') + _0x42ccd5['at']);
             _0x50fb49['onreadystatechange'] = function() {
-                if (_0x50fb49[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x50fb49['status'] == 0xc8) {
+                if (_0x50fb49[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x50fb49['status'] == 0xc8) {
                     if (_0x42ccd5[_0x363a('0x114')] == 'block' && _0x42ccd5[_0x363a('0x96')]['acct']) {
-                        _0x54958c = JSON[_0x363a('0x70')](_0x50fb49[_0x363a('0x180')]);
+                        _0x54958c = JSON[_0x363a('0x70')](_0x50fb49['responseText']);
                         if (0x0 == _0x42ccd5[_0x363a('0xb7')][_0x363a('0xaf')]) {
                             _0x42ccd5[_0x363a('0xb7')] = _0x54958c;
                         } else {
                             Array[_0x363a('0x1a1')][_0x363a('0x1a2')][_0x363a('0x1a3')](_0x42ccd5['accts_users'], _0x54958c);
                         }
-                        _0x5b2563 = null != _0x50fb49['getResponseHeader'](_0x363a('0x1a0')) ? _0x50fb49[_0x363a('0x19f')](_0x363a('0x1a0'))[_0x363a('0xf')](/max_id=(.*?)>/) : null;
+                        _0x5b2563 = null != _0x50fb49['getResponseHeader'](_0x363a('0x1a0')) ? _0x50fb49[_0x363a('0x19f')](_0x363a('0x1a0'))['match'](/max_id=(.*?)>/) : null;
                         _0x42ccd5[_0x363a('0x16c')] = null != _0x5b2563 && 0x0 != _0x5b2563[0x1][_0x363a('0xaf')] ? _0x5b2563[0x1] : '0';
                         _0x42ccd5[_0x363a('0x96')][_0x363a('0xb5')] = ![];
                         _0x42ccd5['fetch_comp'][_0x363a('0xb5')] = _0x54958c[_0x363a('0xaf')] < LIMIT_USER;
                         _0x42ccd5[_0x363a('0x1ac')]();
                     }
-                } else if (_0x50fb49[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
+                } else if (_0x50fb49[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
                     _0x42ccd5[_0x363a('0x96')][_0x363a('0xb5')] = ![];
-                    _0x42ccd5[_0x363a('0x17f')](_0x50fb49['responseText'], _0x50fb49['status'], _0x363a('0x1aa'));
+                    _0x42ccd5['popError'](_0x50fb49['responseText'], _0x50fb49['status'], _0x363a('0x1aa'));
                     _0x42ccd5[_0x363a('0x18d')]();
                 }
             }
             ;
-            _0x50fb49[_0x363a('0x182')]();
+            _0x50fb49['send']();
         },
         'fetchAcctFollowRequest': function() {
             if (this[_0x363a('0x114')] != 'request') {
@@ -2380,22 +2389,22 @@ var app = new Vue({
             var _0xaeb338 = [];
             _0x298390[_0x363a('0x96')][_0x363a('0xb5')] = !![];
             var _0x5d04af = new XMLHttpRequest();
-            _0x5d04af[_0x363a('0x178')](_0x363a('0x188'), FOLLOW_REQUEST[_0x363a('0xcf')](_0x363a('0x189'), _0x298390[_0x363a('0xdc')])[_0x363a('0xcf')](_0x363a('0x19c'), LIMIT_USER));
-            _0x5d04af[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x5d04af['open'](_0x363a('0x188'), FOLLOW_REQUEST.replace('[I]', _0x298390['repository']).replace(_0x363a('0x19c'), LIMIT_USER));
+            _0x5d04af['timeout'] = REQ_TIMEOUT;
             _0x5d04af['setRequestHeader'](_0x363a('0x18b'), _0x363a('0x18c') + _0x298390['at']);
-            _0x5d04af[_0x363a('0x17c')] = function() {
-                if (_0x5d04af[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x5d04af[_0x363a('0x17e')] == 0xc8) {
+            _0x5d04af['onreadystatechange'] = function() {
+                if (_0x5d04af[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x5d04af['status'] == 0xc8) {
                     if (_0x298390[_0x363a('0x114')] == _0x363a('0x11d') && _0x298390[_0x363a('0x96')]['acct']) {
-                        _0xaeb338 = JSON['parse'](_0x5d04af[_0x363a('0x180')]);
+                        _0xaeb338 = JSON['parse'](_0x5d04af['responseText']);
                         _0x298390[_0x363a('0xb7')] = _0xaeb338;
                         _0x298390['user_requesting_count'] = _0x298390[_0x363a('0xb7')][_0x363a('0xaf')];
                         _0x298390[_0x363a('0x96')][_0x363a('0xb5')] = ![];
                         _0x298390[_0x363a('0xf3')][_0x363a('0xb5')] = _0xaeb338[_0x363a('0xaf')] < LIMIT_USER;
                         _0x298390['fetchAcctRelation']();
                     }
-                } else if (_0x5d04af[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
+                } else if (_0x5d04af[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
                     _0x298390['fetch_lock'][_0x363a('0xb5')] = ![];
-                    _0x298390[_0x363a('0x17f')](_0x5d04af[_0x363a('0x180')], _0x5d04af[_0x363a('0x17e')], 'Account');
+                    _0x298390['popError'](_0x5d04af['responseText'], _0x5d04af['status'], 'Account');
                     _0x298390['$forceUpdate']();
                 }
             }
@@ -2407,7 +2416,7 @@ var app = new Vue({
                 return;
             }
             var _0x4577f7 = 0x0;
-            var _0x4d05be = RELATION[_0x363a('0xcf')](_0x363a('0x189'), this[_0x363a('0xdc')]);
+            var _0x4d05be = RELATION.replace('[I]', this.repository);
             while (_0x4577f7 < this['accts_users'][_0x363a('0xaf')]) {
                 _0x4d05be = _0x4d05be + _0x363a('0x1ae') + this['accts_users'][_0x4577f7]['id'] + '&';
                 _0x4577f7 = _0x4577f7 + 0x1 | 0x0;
@@ -2415,14 +2424,14 @@ var app = new Vue({
             var _0x4f2887 = this;
             var _0xecaeae = [];
             var _0x4e3482 = new XMLHttpRequest();
-            _0x4e3482[_0x363a('0x178')](_0x363a('0x188'), _0x4d05be);
-            _0x4e3482[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x4e3482['open'](_0x363a('0x188'), _0x4d05be);
+            _0x4e3482['timeout'] = REQ_TIMEOUT;
             _0x4e3482[_0x363a('0x18a')]('Authorization', 'Bearer\x20' + _0x4f2887['at']);
             _0x4e3482['onreadystatechange'] = function() {
                 if (_0x4e3482['readyState'] == XMLHttpRequest['DONE'] && _0x4e3482['status'] == 0xc8) {
-                    _0x4f2887[_0x363a('0xb8')] = JSON[_0x363a('0x70')](_0x4e3482[_0x363a('0x180')]);
-                } else if (_0x4e3482[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
-                    _0x4f2887[_0x363a('0x17f')](_0x4e3482[_0x363a('0x180')], _0x4e3482[_0x363a('0x17e')], _0x363a('0x1aa'));
+                    _0x4f2887[_0x363a('0xb8')] = JSON[_0x363a('0x70')](_0x4e3482['responseText']);
+                } else if (_0x4e3482[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                    _0x4f2887['popError'](_0x4e3482['responseText'], _0x4e3482['status'], _0x363a('0x1aa'));
                 }
             }
             ;
@@ -2433,12 +2442,12 @@ var app = new Vue({
             var _0x17ead6 = [];
             _0x520997[_0x363a('0x1af')][_0x363a('0x1b0')] = !![];
             var _0x138eff = new XMLHttpRequest();
-            _0x138eff[_0x363a('0x178')](_0x363a('0x188'), ACCT_OBJ[_0x363a('0xcf')](_0x363a('0x189'), _0x520997[_0x363a('0xdc')])[_0x363a('0xcf')](_0x363a('0x1a9'), _0x520997[_0x363a('0xae')]));
-            _0x138eff[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x138eff['open'](_0x363a('0x188'), ACCT_OBJ.replace('[I]', _0x520997['repository']).replace(_0x363a('0x1a9'), _0x520997[_0x363a('0xae')]));
+            _0x138eff['timeout'] = REQ_TIMEOUT;
             _0x138eff[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x520997['at']);
-            _0x138eff[_0x363a('0x17c')] = function() {
-                if (_0x138eff[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x138eff[_0x363a('0x17e')] == 0xc8) {
-                    _0x520997['acct'] = JSON['parse'](_0x138eff[_0x363a('0x180')]);
+            _0x138eff['onreadystatechange'] = function() {
+                if (_0x138eff[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x138eff['status'] == 0xc8) {
+                    _0x520997['acct'] = JSON['parse'](_0x138eff['responseText']);
                     _0x520997[_0x363a('0x1af')]['acct_profile'] = ![];
                     _0x520997[_0x363a('0x1b1')]();
                     if (_0x520997[_0x363a('0x1b2')]) {
@@ -2446,9 +2455,9 @@ var app = new Vue({
                     } else {
                         _0x520997['fetchAcctProfileRelation']();
                     }
-                } else if (_0x138eff[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
+                } else if (_0x138eff[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
                     _0x520997[_0x363a('0x1af')][_0x363a('0x1b0')] = ![];
-                    _0x520997[_0x363a('0x17f')](_0x138eff[_0x363a('0x180')], _0x138eff['status'], _0x363a('0x1aa'));
+                    _0x520997['popError'](_0x138eff['responseText'], _0x138eff['status'], _0x363a('0x1aa'));
                 }
             }
             ;
@@ -2459,73 +2468,73 @@ var app = new Vue({
             var _0x376cf1 = [];
             _0x34a86a[_0x363a('0x1af')][_0x363a('0x1b4')] = !![];
             var _0x5b81f6 = new XMLHttpRequest();
-            _0x5b81f6[_0x363a('0x178')](_0x363a('0x188'), ACCT_RELATION[_0x363a('0xcf')](_0x363a('0x189'), _0x34a86a[_0x363a('0xdc')])[_0x363a('0xcf')]('[AID]', _0x34a86a[_0x363a('0xae')]));
-            _0x5b81f6[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x5b81f6['open'](_0x363a('0x188'), ACCT_RELATION.replace('[I]', _0x34a86a['repository']).replace('[AID]', _0x34a86a[_0x363a('0xae')]));
+            _0x5b81f6['timeout'] = REQ_TIMEOUT;
             _0x5b81f6[_0x363a('0x18a')]('Authorization', 'Bearer\x20' + _0x34a86a['at']);
             _0x5b81f6['onreadystatechange'] = function() {
-                if (_0x5b81f6[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x5b81f6[_0x363a('0x17e')] == 0xc8) {
-                    _0x34a86a[_0x363a('0x161')] = JSON['parse'](_0x5b81f6[_0x363a('0x180')]);
+                if (_0x5b81f6[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x5b81f6['status'] == 0xc8) {
+                    _0x34a86a[_0x363a('0x161')] = JSON['parse'](_0x5b81f6['responseText']);
                     _0x34a86a['fetch_watch'][_0x363a('0x1b4')] = ![];
-                } else if (_0x5b81f6[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
+                } else if (_0x5b81f6[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
                     _0x34a86a[_0x363a('0x1af')][_0x363a('0x1b4')] = ![];
-                    _0x34a86a[_0x363a('0x17f')](_0x5b81f6[_0x363a('0x180')], _0x5b81f6['status'], _0x363a('0x1aa'));
+                    _0x34a86a['popError'](_0x5b81f6['responseText'], _0x5b81f6['status'], _0x363a('0x1aa'));
                 }
             }
             ;
-            _0x5b81f6[_0x363a('0x182')]();
+            _0x5b81f6['send']();
         },
         'fetchAcctPinned': function() {
             var _0xc85fae = this;
             var _0x4016f5 = [];
             _0xc85fae[_0x363a('0x1af')][_0x363a('0x1b5')] = !![];
             var _0x2b8c92 = new XMLHttpRequest();
-            _0x2b8c92[_0x363a('0x178')](_0x363a('0x188'), PINNED[_0x363a('0xcf')]('[I]', _0xc85fae[_0x363a('0xdc')])['replace'](_0x363a('0x1a9'), _0xc85fae[_0x363a('0xae')]));
+            _0x2b8c92['open'](_0x363a('0x188'), PINNED.replace('[I]', _0xc85fae['repository']).replace(_0x363a('0x1a9'), _0xc85fae[_0x363a('0xae')]));
             _0x2b8c92['timeout'] = REQ_TIMEOUT;
             _0x2b8c92[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0xc85fae['at']);
-            _0x2b8c92[_0x363a('0x17c')] = function() {
-                if (_0x2b8c92[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x2b8c92[_0x363a('0x17e')] == 0xc8) {
-                    _0x4016f5 = JSON[_0x363a('0x70')](_0x2b8c92[_0x363a('0x180')]);
+            _0x2b8c92['onreadystatechange'] = function() {
+                if (_0x2b8c92[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x2b8c92['status'] == 0xc8) {
+                    _0x4016f5 = JSON[_0x363a('0x70')](_0x2b8c92['responseText']);
                     _0xc85fae[_0x363a('0x193')](_0x4016f5, 'acct');
                     _0xc85fae[_0x363a('0x160')] = _0x4016f5;
                     _0xc85fae[_0x363a('0x1af')]['acct_profile_pin'] = ![];
                 } else if (_0x2b8c92[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
                     _0xc85fae[_0x363a('0x1af')]['acct_profile_pin'] = ![];
-                    _0xc85fae[_0x363a('0x17f')](_0x2b8c92[_0x363a('0x180')], _0x2b8c92[_0x363a('0x17e')], 'Account');
+                    _0xc85fae['popError'](_0x2b8c92['responseText'], _0x2b8c92['status'], 'Account');
                 }
             }
             ;
-            _0x2b8c92[_0x363a('0x182')]();
+            _0x2b8c92['send']();
         },
         'countFollowRequest': function() {
             var _0x4dc31a = this;
             var _0x4170a3 = [];
             _0x4dc31a[_0x363a('0x1af')][_0x363a('0x1b6')] = !![];
             var _0x314706 = new XMLHttpRequest();
-            _0x314706['open'](_0x363a('0x188'), FOLLOW_REQUEST[_0x363a('0xcf')]('[I]', _0x4dc31a['repository'])['replace']('[LM]', LIMIT_USER));
-            _0x314706[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x314706['open'](_0x363a('0x188'), FOLLOW_REQUEST.replace('[I]', _0x4dc31a['repository']).replace('[LM]', LIMIT_USER));
+            _0x314706['timeout'] = REQ_TIMEOUT;
             _0x314706['setRequestHeader'](_0x363a('0x18b'), _0x363a('0x18c') + _0x4dc31a['at']);
-            _0x314706[_0x363a('0x17c')] = function() {
-                if (_0x314706[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x314706[_0x363a('0x17e')] == 0xc8) {
-                    _0x4dc31a[_0x363a('0x1b7')] = JSON['parse'](_0x314706[_0x363a('0x180')])[_0x363a('0xaf')];
+            _0x314706['onreadystatechange'] = function() {
+                if (_0x314706[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x314706['status'] == 0xc8) {
+                    _0x4dc31a[_0x363a('0x1b7')] = JSON['parse'](_0x314706['responseText'])[_0x363a('0xaf')];
                     _0x4dc31a[_0x363a('0x1af')][_0x363a('0x1b6')] = ![];
-                } else if (_0x314706[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
+                } else if (_0x314706[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
                     _0x4dc31a[_0x363a('0x1af')][_0x363a('0x1b6')] = ![];
-                    _0x4dc31a[_0x363a('0x17f')](_0x314706[_0x363a('0x180')], _0x314706[_0x363a('0x17e')], _0x363a('0x1aa'));
+                    _0x4dc31a['popError'](_0x314706['responseText'], _0x314706['status'], _0x363a('0x1aa'));
                 }
             }
             ;
-            _0x314706[_0x363a('0x182')]();
+            _0x314706['send']();
         },
         'fetchDetail': function() {
             var _0x2abd9f = this;
             var _0x4e451f = [];
             _0x2abd9f[_0x363a('0x1af')]['detail'] = !![];
             var _0x4be421 = new XMLHttpRequest();
-            _0x4be421['open'](_0x363a('0x188'), DETAIL['replace'](_0x363a('0x189'), _0x2abd9f[_0x363a('0xdc')])[_0x363a('0xcf')](_0x363a('0x1b8'), _0x2abd9f[_0x363a('0x16a')]));
-            _0x4be421[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x4be421['open'](_0x363a('0x188'), DETAIL.replace('[I]', _0x2abd9f['repository']).replace(_0x363a('0x1b8'), _0x2abd9f[_0x363a('0x16a')]));
+            _0x4be421['timeout'] = REQ_TIMEOUT;
             _0x4be421[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x2abd9f['at']);
-            _0x4be421[_0x363a('0x17c')] = function() {
-                if (_0x4be421[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x4be421[_0x363a('0x17e')] == 0xc8) {
+            _0x4be421['onreadystatechange'] = function() {
+                if (_0x4be421[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x4be421['status'] == 0xc8) {
                     _0x4e451f = JSON[_0x363a('0x70')](_0x4be421['responseText']);
                     _0x2abd9f['updateWrapperBM'](_0x4e451f, _0x363a('0xb2'));
                     _0x2abd9f['detail'] = _0x4e451f;
@@ -2533,73 +2542,73 @@ var app = new Vue({
                     _0x2abd9f[_0x363a('0x1b9')]();
                     _0x2abd9f[_0x363a('0x1ba')]();
                     _0x2abd9f[_0x363a('0x1bb')]();
-                } else if (_0x4be421[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
+                } else if (_0x4be421[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
                     _0x2abd9f[_0x363a('0x1af')]['detail'] = ![];
-                    _0x2abd9f[_0x363a('0x17f')](_0x4be421[_0x363a('0x180')], _0x4be421[_0x363a('0x17e')], _0x363a('0x1bc'));
+                    _0x2abd9f['popError'](_0x4be421['responseText'], _0x4be421['status'], _0x363a('0x1bc'));
                     _0x2abd9f[_0x363a('0x18d')]();
                 }
             }
             ;
-            _0x4be421[_0x363a('0x182')]();
+            _0x4be421['send']();
         },
         'fetchDetailChain': function() {
             var _0x29b551 = this;
             var _0x2cc323 = [];
             _0x29b551['fetch_watch'][_0x363a('0x169')] = !![];
             var _0x1e6a68 = new XMLHttpRequest();
-            _0x1e6a68[_0x363a('0x178')](_0x363a('0x188'), DETAIL_CHAIN[_0x363a('0xcf')](_0x363a('0x189'), _0x29b551[_0x363a('0xdc')])[_0x363a('0xcf')](_0x363a('0x1b8'), _0x29b551[_0x363a('0x16a')]));
-            _0x1e6a68[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x1e6a68['open'](_0x363a('0x188'), DETAIL_CHAIN.replace('[I]', _0x29b551['repository']).replace(_0x363a('0x1b8'), _0x29b551[_0x363a('0x16a')]));
+            _0x1e6a68['timeout'] = REQ_TIMEOUT;
             _0x1e6a68['setRequestHeader'](_0x363a('0x18b'), _0x363a('0x18c') + _0x29b551['at']);
             _0x1e6a68['onreadystatechange'] = function() {
-                if (_0x1e6a68[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x1e6a68[_0x363a('0x17e')] == 0xc8) {
-                    _0x2cc323 = JSON[_0x363a('0x70')](_0x1e6a68[_0x363a('0x180')]);
+                if (_0x1e6a68[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x1e6a68['status'] == 0xc8) {
+                    _0x2cc323 = JSON[_0x363a('0x70')](_0x1e6a68['responseText']);
                     _0x29b551[_0x363a('0x193')](_0x2cc323, _0x363a('0x169'));
                     _0x29b551[_0x363a('0x169')] = _0x2cc323;
                     _0x29b551[_0x363a('0x1af')][_0x363a('0x169')] = ![];
                 } else if (_0x1e6a68[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x29b551['popError'](_0x1e6a68[_0x363a('0x180')], _0x1e6a68[_0x363a('0x17e')], 'Detail');
+                    _0x29b551['popError'](_0x1e6a68['responseText'], _0x1e6a68['status'], 'Detail');
                 }
             }
             ;
-            _0x1e6a68[_0x363a('0x182')]();
+            _0x1e6a68['send']();
         },
         'fetchDetailFav': function() {
             var _0x3f01f0 = this;
             var _0x390224 = [];
             _0x3f01f0[_0x363a('0x1af')][_0x363a('0x1bd')] = !![];
             var _0x35d30f = new XMLHttpRequest();
-            _0x35d30f[_0x363a('0x178')](_0x363a('0x188'), DETAIL_FAV[_0x363a('0xcf')](_0x363a('0x189'), _0x3f01f0[_0x363a('0xdc')])[_0x363a('0xcf')](_0x363a('0x1b8'), _0x3f01f0[_0x363a('0x16a')])['replace'](_0x363a('0x19c'), LIMIT_USER));
-            _0x35d30f[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x35d30f['open'](_0x363a('0x188'), DETAIL_FAV.replace('[I]', _0x3f01f0['repository']).replace(_0x363a('0x1b8'), _0x3f01f0[_0x363a('0x16a')]).replace(_0x363a('0x19c'), LIMIT_USER));
+            _0x35d30f['timeout'] = REQ_TIMEOUT;
             _0x35d30f[_0x363a('0x18a')](_0x363a('0x18b'), 'Bearer\x20' + _0x3f01f0['at']);
             _0x35d30f['onreadystatechange'] = function() {
-                if (_0x35d30f[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x35d30f[_0x363a('0x17e')] == 0xc8) {
+                if (_0x35d30f[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x35d30f['status'] == 0xc8) {
                     _0x3f01f0[_0x363a('0x1bd')] = JSON[_0x363a('0x70')](_0x35d30f['responseText']);
                     _0x3f01f0[_0x363a('0x1af')][_0x363a('0x1bd')] = ![];
-                } else if (_0x35d30f['readyState'] == XMLHttpRequest[_0x363a('0x17d')]) {
-                    _0x3f01f0['popError'](_0x35d30f[_0x363a('0x180')], _0x35d30f[_0x363a('0x17e')], 'Detail');
+                } else if (_0x35d30f['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x3f01f0['popError'](_0x35d30f['responseText'], _0x35d30f['status'], 'Detail');
                 }
             }
             ;
-            _0x35d30f[_0x363a('0x182')]();
+            _0x35d30f['send']();
         },
         'fetchDetailReblog': function() {
             var _0x7938c6 = this;
             var _0x5a96cb = [];
             _0x7938c6[_0x363a('0x1af')][_0x363a('0x168')] = !![];
             var _0x295cbe = new XMLHttpRequest();
-            _0x295cbe['open'](_0x363a('0x188'), DETAIL_REBLOG[_0x363a('0xcf')]('[I]', _0x7938c6[_0x363a('0xdc')])[_0x363a('0xcf')](_0x363a('0x1b8'), _0x7938c6[_0x363a('0x16a')])['replace'](_0x363a('0x19c'), LIMIT_USER));
-            _0x295cbe[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x295cbe['open'](_0x363a('0x188'), DETAIL_REBLOG.replace('[I]', _0x7938c6['repository']).replace(_0x363a('0x1b8'), _0x7938c6[_0x363a('0x16a')]).replace(_0x363a('0x19c'), LIMIT_USER));
+            _0x295cbe['timeout'] = REQ_TIMEOUT;
             _0x295cbe[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x7938c6['at']);
-            _0x295cbe[_0x363a('0x17c')] = function() {
-                if (_0x295cbe[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x295cbe['status'] == 0xc8) {
-                    _0x7938c6[_0x363a('0x168')] = JSON[_0x363a('0x70')](_0x295cbe[_0x363a('0x180')]);
+            _0x295cbe['onreadystatechange'] = function() {
+                if (_0x295cbe[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x295cbe['status'] == 0xc8) {
+                    _0x7938c6[_0x363a('0x168')] = JSON[_0x363a('0x70')](_0x295cbe['responseText']);
                     _0x7938c6[_0x363a('0x1af')]['detail_reblog'] = ![];
-                } else if (_0x295cbe['readyState'] == XMLHttpRequest[_0x363a('0x17d')]) {
-                    _0x7938c6[_0x363a('0x17f')](_0x295cbe[_0x363a('0x180')], _0x295cbe[_0x363a('0x17e')], 'Detail');
+                } else if (_0x295cbe['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x7938c6['popError'](_0x295cbe['responseText'], _0x295cbe['status'], 'Detail');
                 }
             }
             ;
-            _0x295cbe[_0x363a('0x182')]();
+            _0x295cbe['send']();
         },
         'searchAll': function() {
             if (this[_0x363a('0x1be')] != _0x363a('0x1bf')) {
@@ -2613,30 +2622,30 @@ var app = new Vue({
             var _0x34f42a = [];
             _0xd51aac[_0x363a('0x96')][_0x363a('0x1c1')] = !![];
             var _0x343a28 = new XMLHttpRequest();
-            _0x343a28[_0x363a('0x178')]('GET', SEARCH[_0x363a('0xcf')]('[I]', _0xd51aac[_0x363a('0xdc')])[_0x363a('0xcf')](_0x363a('0x1c2'), _0xd51aac[_0x363a('0x1c3')]));
-            _0x343a28[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x343a28['open']('GET', SEARCH.replace('[I]', _0xd51aac['repository']).replace(_0x363a('0x1c2'), _0xd51aac[_0x363a('0x1c3')]));
+            _0x343a28['timeout'] = REQ_TIMEOUT;
             _0x343a28[_0x363a('0x18a')]('Authorization', _0x363a('0x18c') + _0xd51aac['at']);
-            _0x343a28[_0x363a('0x17c')] = function() {
-                if (_0x343a28[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x343a28[_0x363a('0x17e')] == 0xc8) {
-                    _0xd51aac['searchs'] = JSON[_0x363a('0x70')](_0x343a28[_0x363a('0x180')]);
+            _0x343a28['onreadystatechange'] = function() {
+                if (_0x343a28[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x343a28['status'] == 0xc8) {
+                    _0xd51aac['searchs'] = JSON[_0x363a('0x70')](_0x343a28['responseText']);
                     _0xd51aac[_0x363a('0x1c4')]();
-                } else if (_0x343a28['readyState'] == XMLHttpRequest[_0x363a('0x17d')]) {
-                    _0xd51aac[_0x363a('0x17f')](_0x343a28['responseText'], _0x343a28[_0x363a('0x17e')], 'Search');
+                } else if (_0x343a28['readyState'] == XMLHttpRequest['DONE']) {
+                    _0xd51aac['popError'](_0x343a28['responseText'], _0x343a28['status'], 'Search');
                 }
             }
             ;
-            _0x343a28[_0x363a('0x182')]();
+            _0x343a28['send']();
         },
         'searchAcct': function() {
             var _0x598b7a = this;
             var _0xd4675a = [];
             var _0xee2c76 = new XMLHttpRequest();
-            _0xee2c76[_0x363a('0x178')](_0x363a('0x188'), ACCT_SEARCH[_0x363a('0xcf')]('[I]', _0x598b7a[_0x363a('0xdc')])[_0x363a('0xcf')](_0x363a('0x1c2'), _0x598b7a[_0x363a('0x1c3')])[_0x363a('0xcf')](_0x363a('0x1c5'), ![])[_0x363a('0xcf')](_0x363a('0x19c'), LIMIT_USER));
-            _0xee2c76[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0xee2c76['open'](_0x363a('0x188'), ACCT_SEARCH.replace('[I]', _0x598b7a['repository']).replace(_0x363a('0x1c2'), _0x598b7a[_0x363a('0x1c3')]).replace(_0x363a('0x1c5'), ![]).replace(_0x363a('0x19c'), LIMIT_USER));
+            _0xee2c76['timeout'] = REQ_TIMEOUT;
             _0xee2c76[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x598b7a['at']);
-            _0xee2c76[_0x363a('0x17c')] = function() {
-                if (_0xee2c76[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0xee2c76['status'] == 0xc8) {
-                    _0x598b7a[_0x363a('0xb3')]['accounts_ex'] = JSON[_0x363a('0x70')](_0xee2c76[_0x363a('0x180')]);
+            _0xee2c76['onreadystatechange'] = function() {
+                if (_0xee2c76[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0xee2c76['status'] == 0xc8) {
+                    _0x598b7a[_0x363a('0xb3')]['accounts_ex'] = JSON[_0x363a('0x70')](_0xee2c76['responseText']);
                     if (_0x598b7a[_0x363a('0x1c6')] && 0x0 == _0x598b7a[_0x363a('0xb3')][_0x363a('0xb4')][_0x363a('0xaf')]) {
                         if (0x0 == _0x598b7a[_0x363a('0xb3')][_0x363a('0x1c7')]['length']) {
                             _0x598b7a[_0x363a('0x1be')] = 'katsu';
@@ -2646,18 +2655,18 @@ var app = new Vue({
                     }
                     _0x598b7a[_0x363a('0x96')][_0x363a('0x1c1')] = ![];
                     _0x598b7a['$forceUpdate']();
-                } else if (_0xee2c76['readyState'] == XMLHttpRequest[_0x363a('0x17d')]) {
+                } else if (_0xee2c76['readyState'] == XMLHttpRequest['DONE']) {
                     _0x598b7a['fetch_lock'][_0x363a('0x1c1')] = ![];
-                    _0x598b7a[_0x363a('0x17f')](_0xee2c76[_0x363a('0x180')], _0xee2c76[_0x363a('0x17e')], 'Search');
+                    _0x598b7a['popError'](_0xee2c76['responseText'], _0xee2c76['status'], 'Search');
                     _0x598b7a[_0x363a('0x18d')]();
                 }
             }
             ;
-            _0xee2c76[_0x363a('0x182')]();
+            _0xee2c76['send']();
         },
         'runUserId': function() {
             if (this[_0x363a('0x1c8')]['indexOf']('/') != -0x1) {
-                this[_0x363a('0x16a')] = this[_0x363a('0x1c8')][_0x363a('0x7f')]('/')[0x1];
+                this[_0x363a('0x16a')] = this[_0x363a('0x1c8')]['split']('/')[0x1];
                 this[_0x363a('0x1c9')](this['detail_targetid']);
                 return;
             }
@@ -2666,21 +2675,21 @@ var app = new Vue({
             var _0x37a433 = this;
             var _0x3d8db3 = [];
             var _0x22637e = new XMLHttpRequest();
-            _0x22637e[_0x363a('0x178')](_0x363a('0x188'), SEARCH[_0x363a('0xcf')](_0x363a('0x189'), _0x37a433['repository'])['replace'](_0x363a('0x1c2'), _0x37a433['search_userid']));
-            _0x22637e[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x22637e['open'](_0x363a('0x188'), SEARCH.replace('[I]', _0x37a433['repository']).replace(_0x363a('0x1c2'), _0x37a433['search_userid']));
+            _0x22637e['timeout'] = REQ_TIMEOUT;
             _0x22637e[_0x363a('0x18a')]('Authorization', _0x363a('0x18c') + _0x37a433['at']);
-            _0x22637e[_0x363a('0x17c')] = function() {
-                if (_0x22637e[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x22637e[_0x363a('0x17e')] == 0xc8) {
-                    if (JSON[_0x363a('0x70')](_0x22637e[_0x363a('0x180')])[_0x363a('0x1ca')][_0x363a('0xaf')] && _0x37a433['search_userid'] == JSON[_0x363a('0x70')](_0x22637e[_0x363a('0x180')])[_0x363a('0x1ca')][0x0][_0x363a('0xb5')]) {
-                        _0x37a433['acct_targetid'] = JSON[_0x363a('0x70')](_0x22637e[_0x363a('0x180')])['accounts'][0x0]['id'];
+            _0x22637e['onreadystatechange'] = function() {
+                if (_0x22637e[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x22637e['status'] == 0xc8) {
+                    if (JSON[_0x363a('0x70')](_0x22637e['responseText'])[_0x363a('0x1ca')][_0x363a('0xaf')] && _0x37a433['search_userid'] == JSON[_0x363a('0x70')](_0x22637e['responseText'])[_0x363a('0x1ca')][0x0][_0x363a('0xb5')]) {
+                        _0x37a433['acct_targetid'] = JSON[_0x363a('0x70')](_0x22637e['responseText'])['accounts'][0x0]['id'];
                     }
                     _0x37a433[_0x363a('0x1cb')](_0x37a433[_0x363a('0xae')]);
-                } else if (_0x22637e['readyState'] == XMLHttpRequest[_0x363a('0x17d')]) {
-                    _0x37a433[_0x363a('0x17f')](_0x22637e[_0x363a('0x180')], _0x22637e[_0x363a('0x17e')], 'Search');
+                } else if (_0x22637e['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x37a433['popError'](_0x22637e['responseText'], _0x22637e['status'], 'Search');
                 }
             }
             ;
-            _0x22637e[_0x363a('0x182')]();
+            _0x22637e['send']();
         },
         'checkStreamHashtag': function() {
             this[_0x363a('0x1cc')] = '';
@@ -2690,44 +2699,44 @@ var app = new Vue({
             _0x190cc4[_0x363a('0x96')][_0x363a('0x1cd')] = !![];
             _0x190cc4['$forceUpdate']();
             var _0x417c0d = new XMLHttpRequest();
-            _0x417c0d[_0x363a('0x178')](_0x363a('0x188'), SEARCH[_0x363a('0xcf')](_0x363a('0x189'), _0x190cc4['repository'])[_0x363a('0xcf')](_0x363a('0x1c2'), _0x190cc4[_0x363a('0x1c3')]));
-            _0x417c0d[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x417c0d['open'](_0x363a('0x188'), SEARCH.replace('[I]', _0x190cc4['repository']).replace(_0x363a('0x1c2'), _0x190cc4[_0x363a('0x1c3')]));
+            _0x417c0d['timeout'] = REQ_TIMEOUT;
             _0x417c0d[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x190cc4['at']);
-            _0x417c0d[_0x363a('0x17c')] = function() {
-                if (_0x417c0d[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x417c0d[_0x363a('0x17e')] == 0xc8) {
+            _0x417c0d['onreadystatechange'] = function() {
+                if (_0x417c0d[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x417c0d['status'] == 0xc8) {
                     if (_0x190cc4[_0x363a('0x96')][_0x363a('0x1cd')]) {
-                        _0x68ba5e = JSON['parse'](_0x417c0d[_0x363a('0x180')]);
-                        if (null != _0x68ba5e[_0x363a('0xb4')][0x0] && _0x68ba5e[_0x363a('0xb4')][0x0][_0x363a('0xe6')][_0x363a('0xa')]() == _0x190cc4['search_text'][_0x363a('0xa')]()) {
+                        _0x68ba5e = JSON['parse'](_0x417c0d['responseText']);
+                        if (null != _0x68ba5e[_0x363a('0xb4')][0x0] && _0x68ba5e[_0x363a('0xb4')][0x0][_0x363a('0xe6')]['toLowerCase']() == _0x190cc4['search_text']['toLowerCase']()) {
                             _0x190cc4[_0x363a('0x1cc')] = _0x190cc4['search_text'];
                         }
                     }
                     _0x190cc4[_0x363a('0x96')][_0x363a('0x1cd')] = ![];
                     _0x190cc4['$forceUpdate']();
-                } else if (_0x417c0d[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
+                } else if (_0x417c0d[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
                     _0x190cc4[_0x363a('0x96')][_0x363a('0x1cd')] = ![];
-                    _0x190cc4[_0x363a('0x17f')](_0x417c0d['responseText'], _0x417c0d[_0x363a('0x17e')], _0x363a('0x1ce'));
+                    _0x190cc4['popError'](_0x417c0d['responseText'], _0x417c0d['status'], _0x363a('0x1ce'));
                     _0x190cc4[_0x363a('0x18d')]();
                 }
             }
             ;
-            _0x417c0d[_0x363a('0x182')]();
+            _0x417c0d['send']();
         },
         'fetchStreamList': function() {
             var _0xff44f6 = this;
             var _0x4c5241 = [];
             _0xff44f6[_0x363a('0x96')][_0x363a('0x135')] = !![];
             var _0x5e9bc3 = new XMLHttpRequest();
-            _0x5e9bc3[_0x363a('0x178')](_0x363a('0x188'), LIST_ALL['replace']('[I]', _0xff44f6[_0x363a('0xdc')]));
+            _0x5e9bc3['open'](_0x363a('0x188'), LIST_ALL.replace('[I]', _0xff44f6['repository']));
             _0x5e9bc3['timeout'] = REQ_TIMEOUT;
             _0x5e9bc3[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0xff44f6['at']);
-            _0x5e9bc3[_0x363a('0x17c')] = function() {
-                if (_0x5e9bc3['readyState'] == XMLHttpRequest[_0x363a('0x17d')] && _0x5e9bc3['status'] == 0xc8) {
-                    _0xff44f6['stream_lists'] = JSON[_0x363a('0x70')](_0x5e9bc3[_0x363a('0x180')]);
+            _0x5e9bc3['onreadystatechange'] = function() {
+                if (_0x5e9bc3['readyState'] == XMLHttpRequest['DONE'] && _0x5e9bc3['status'] == 0xc8) {
+                    _0xff44f6['stream_lists'] = JSON[_0x363a('0x70')](_0x5e9bc3['responseText']);
                     _0xff44f6[_0x363a('0x96')][_0x363a('0x135')] = ![];
                     _0xff44f6[_0x363a('0x134')][_0x363a('0x135')] = ![];
                 } else if (_0x5e9bc3[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
                     _0xff44f6[_0x363a('0x96')]['lists'] = ![];
-                    _0xff44f6[_0x363a('0x17f')](_0x5e9bc3[_0x363a('0x180')], _0x5e9bc3[_0x363a('0x17e')], _0x363a('0x199'));
+                    _0xff44f6['popError'](_0x5e9bc3['responseText'], _0x5e9bc3['status'], _0x363a('0x199'));
                     _0xff44f6['fetch_after'][_0x363a('0x135')] = !![];
                 }
             }
@@ -2743,38 +2752,38 @@ var app = new Vue({
             var _0x1c562c = [];
             _0x1679c5[_0x363a('0x96')][_0x363a('0x135')] = !![];
             var _0x9202a = new XMLHttpRequest();
-            _0x9202a['open'](_0x363a('0x188'), LIST_ACCT[_0x363a('0xcf')](_0x363a('0x189'), _0x1679c5[_0x363a('0xdc')])['replace']('[LID]', _0x1679c5[_0x363a('0xb9')]['id']));
-            _0x9202a[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x9202a['open'](_0x363a('0x188'), LIST_ACCT.replace('[I]', _0x1679c5['repository']).replace('[LID]', _0x1679c5[_0x363a('0xb9')]['id']));
+            _0x9202a['timeout'] = REQ_TIMEOUT;
             _0x9202a[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x1679c5['at']);
-            _0x9202a[_0x363a('0x17c')] = function() {
-                if (_0x9202a[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x9202a[_0x363a('0x17e')] == 0xc8) {
+            _0x9202a['onreadystatechange'] = function() {
+                if (_0x9202a[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x9202a['status'] == 0xc8) {
                     if (_0x1679c5['stream_list_type'] == _0x363a('0x1d0') && _0x1679c5[_0x363a('0x96')][_0x363a('0x135')]) {
-                        _0x1c562c = JSON[_0x363a('0x70')](_0x9202a[_0x363a('0x180')]);
+                        _0x1c562c = JSON[_0x363a('0x70')](_0x9202a['responseText']);
                         _0x1679c5[_0x363a('0xbe')] = _0x1c562c;
                         _0x1679c5[_0x363a('0x96')][_0x363a('0x135')] = ![];
                         _0x1679c5[_0x363a('0xf3')][_0x363a('0x135')] = !![];
                     }
                     _0x1679c5['fetchListAcctRelation']();
-                } else if (_0x9202a[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
+                } else if (_0x9202a[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
                     _0x1679c5['fetch_lock'][_0x363a('0x135')] = ![];
-                    _0x1679c5['popError'](_0x9202a['responseText'], _0x9202a[_0x363a('0x17e')], _0x363a('0x199'));
+                    _0x1679c5['popError'](_0x9202a['responseText'], _0x9202a['status'], _0x363a('0x199'));
                 }
             }
             ;
-            _0x9202a[_0x363a('0x182')]();
+            _0x9202a['send']();
         },
         'fetchListListedBackup': function() {
             var _0x21be21 = this;
             var _0x55de28 = [];
             var _0x37feae = new XMLHttpRequest();
-            _0x37feae[_0x363a('0x178')]('GET', LIST_ACCT[_0x363a('0xcf')](_0x363a('0x189'), _0x21be21[_0x363a('0xdc')])['replace']('[LID]', _0x21be21[_0x363a('0xb9')]['id']));
-            _0x37feae[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x37feae['open']('GET', LIST_ACCT.replace('[I]', _0x21be21['repository']).replace('[LID]', _0x21be21[_0x363a('0xb9')]['id']));
+            _0x37feae['timeout'] = REQ_TIMEOUT;
             _0x37feae[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x21be21['at']);
-            _0x37feae[_0x363a('0x17c')] = function() {
-                if (_0x37feae[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x37feae[_0x363a('0x17e')] == 0xc8) {
-                    _0x21be21[_0x363a('0x122')] = JSON[_0x363a('0x70')](_0x37feae[_0x363a('0x180')]);
-                } else if (_0x37feae[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
-                    _0x21be21[_0x363a('0x17f')](_0x37feae[_0x363a('0x180')], _0x37feae[_0x363a('0x17e')], _0x363a('0x199'));
+            _0x37feae['onreadystatechange'] = function() {
+                if (_0x37feae[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x37feae['status'] == 0xc8) {
+                    _0x21be21[_0x363a('0x122')] = JSON[_0x363a('0x70')](_0x37feae['responseText']);
+                } else if (_0x37feae[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                    _0x21be21['popError'](_0x37feae['responseText'], _0x37feae['status'], _0x363a('0x199'));
                 }
             }
             ;
@@ -2797,10 +2806,10 @@ var app = new Vue({
             var _0x3185d1 = [];
             _0x7a68ef[_0x363a('0x96')][_0x363a('0x135')] = !![];
             var _0x137166 = new XMLHttpRequest();
-            _0x137166[_0x363a('0x178')](_0x363a('0x188'), ACCT_SEARCH[_0x363a('0xcf')](_0x363a('0x189'), _0x7a68ef['repository'])['replace'](_0x363a('0x1c2'), _0x7a68ef[_0x363a('0x1c3')])['replace'](_0x363a('0x1c5'), _0x7a68ef[_0x363a('0x1d2')])[_0x363a('0xcf')]('[LM]', LIMIT_USER));
-            _0x137166[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x137166['open'](_0x363a('0x188'), ACCT_SEARCH.replace('[I]', _0x7a68ef['repository']).replace(_0x363a('0x1c2'), _0x7a68ef[_0x363a('0x1c3')]).replace(_0x363a('0x1c5'), _0x7a68ef[_0x363a('0x1d2')]).replace('[LM]', LIMIT_USER));
+            _0x137166['timeout'] = REQ_TIMEOUT;
             _0x137166[_0x363a('0x18a')]('Authorization', _0x363a('0x18c') + _0x7a68ef['at']);
-            _0x137166[_0x363a('0x17c')] = function() {
+            _0x137166['onreadystatechange'] = function() {
                 if (_0x137166[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x137166['status'] == 0xc8) {
                     if (_0x7a68ef[_0x363a('0x1cf')] == _0x363a('0x1c1') && _0x7a68ef[_0x363a('0x96')]['lists']) {
                         _0x3185d1 = JSON[_0x363a('0x70')](_0x137166['responseText']);
@@ -2811,11 +2820,11 @@ var app = new Vue({
                     _0x7a68ef[_0x363a('0x1d3')]();
                 } else if (_0x137166[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
                     _0x7a68ef[_0x363a('0x96')][_0x363a('0x135')] = ![];
-                    _0x7a68ef[_0x363a('0x17f')](_0x137166[_0x363a('0x180')], _0x137166[_0x363a('0x17e')], _0x363a('0x199'));
+                    _0x7a68ef['popError'](_0x137166['responseText'], _0x137166['status'], _0x363a('0x199'));
                 }
             }
             ;
-            _0x137166[_0x363a('0x182')]();
+            _0x137166['send']();
         },
         'fetchListFollow': function() {
             if (this[_0x363a('0x1cf')] != _0x363a('0x10e')) {
@@ -2827,13 +2836,13 @@ var app = new Vue({
             var _0x2b0767 = [];
             _0x5033ff[_0x363a('0x96')][_0x363a('0x135')] = !![];
             var _0x324f4f = new XMLHttpRequest();
-            _0x324f4f[_0x363a('0x178')](_0x363a('0x188'), FOLLOW[_0x363a('0xcf')](_0x363a('0x189'), _0x5033ff[_0x363a('0xdc')])[_0x363a('0xcf')]('[AID]', _0x5033ff['user']['id'])[_0x363a('0xcf')]('[UID]', _0x5033ff[_0x363a('0x191')])[_0x363a('0xcf')](_0x363a('0x19c'), LIMIT_USER));
-            _0x324f4f[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x324f4f['open'](_0x363a('0x188'), FOLLOW.replace('[I]', _0x5033ff['repository']).replace('[AID]', _0x5033ff['user']['id']).replace('[UID]', _0x5033ff[_0x363a('0x191')]).replace(_0x363a('0x19c'), LIMIT_USER));
+            _0x324f4f['timeout'] = REQ_TIMEOUT;
             _0x324f4f['setRequestHeader']('Authorization', _0x363a('0x18c') + _0x5033ff['at']);
-            _0x324f4f[_0x363a('0x17c')] = function() {
-                if (_0x324f4f[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x324f4f[_0x363a('0x17e')] == 0xc8) {
+            _0x324f4f['onreadystatechange'] = function() {
+                if (_0x324f4f[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x324f4f['status'] == 0xc8) {
                     if (_0x5033ff['stream_list_type'] == _0x363a('0x10e') && _0x5033ff[_0x363a('0x96')][_0x363a('0x135')]) {
-                        _0x422421 = JSON[_0x363a('0x70')](_0x324f4f[_0x363a('0x180')]);
+                        _0x422421 = JSON[_0x363a('0x70')](_0x324f4f['responseText']);
                         if (0x0 == _0x5033ff['stream_list_users'][_0x363a('0xaf')]) {
                             _0x5033ff[_0x363a('0xbe')] = _0x422421;
                         } else {
@@ -2847,11 +2856,11 @@ var app = new Vue({
                     }
                 } else if (_0x324f4f[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
                     _0x5033ff[_0x363a('0x96')][_0x363a('0x135')] = ![];
-                    _0x5033ff[_0x363a('0x17f')](_0x324f4f[_0x363a('0x180')], _0x324f4f['status'], _0x363a('0x199'));
+                    _0x5033ff['popError'](_0x324f4f['responseText'], _0x324f4f['status'], _0x363a('0x199'));
                 }
             }
             ;
-            _0x324f4f[_0x363a('0x182')]();
+            _0x324f4f['send']();
         },
         'fetchListFollower': function() {
             if (this[_0x363a('0x1cf')] != _0x363a('0x119')) {
@@ -2863,80 +2872,80 @@ var app = new Vue({
             var _0x24f3cc = [];
             _0x5980c3[_0x363a('0x96')][_0x363a('0x135')] = !![];
             var _0x17472a = new XMLHttpRequest();
-            _0x17472a['open']('GET', FOLLOWER['replace']('[I]', _0x5980c3[_0x363a('0xdc')])['replace']('[AID]', _0x5980c3[_0x363a('0xad')]['id'])[_0x363a('0xcf')](_0x363a('0x1ab'), _0x5980c3['stream_list_id'])[_0x363a('0xcf')](_0x363a('0x19c'), LIMIT_USER));
-            _0x17472a[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x17472a['open']('GET', FOLLOWER.replace('[I]', _0x5980c3['repository']).replace('[AID]', _0x5980c3[_0x363a('0xad')]['id']).replace(_0x363a('0x1ab'), _0x5980c3['stream_list_id']).replace(_0x363a('0x19c'), LIMIT_USER));
+            _0x17472a['timeout'] = REQ_TIMEOUT;
             _0x17472a[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x5980c3['at']);
-            _0x17472a[_0x363a('0x17c')] = function() {
-                if (_0x17472a[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x17472a[_0x363a('0x17e')] == 0xc8) {
+            _0x17472a['onreadystatechange'] = function() {
+                if (_0x17472a[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x17472a['status'] == 0xc8) {
                     if (_0x5980c3[_0x363a('0x1cf')] == _0x363a('0x119') && _0x5980c3[_0x363a('0x96')][_0x363a('0x135')]) {
                         if (0x0 == _0x5980c3[_0x363a('0xbe')][_0x363a('0xaf')]) {
                             _0x5980c3[_0x363a('0xbe')] = JSON['parse'](_0x17472a['responseText']);
                         } else {
-                            Array[_0x363a('0x1a1')][_0x363a('0x1a2')][_0x363a('0x1a3')](_0x5980c3[_0x363a('0xbe')], JSON[_0x363a('0x70')](_0x17472a[_0x363a('0x180')]));
+                            Array[_0x363a('0x1a1')][_0x363a('0x1a2')][_0x363a('0x1a3')](_0x5980c3[_0x363a('0xbe')], JSON[_0x363a('0x70')](_0x17472a['responseText']));
                         }
-                        _0x24f3cc = null != _0x17472a[_0x363a('0x19f')](_0x363a('0x1a0')) ? _0x17472a[_0x363a('0x19f')](_0x363a('0x1a0'))[_0x363a('0xf')](/max_id=(.*?)>/) : null;
+                        _0x24f3cc = null != _0x17472a[_0x363a('0x19f')](_0x363a('0x1a0')) ? _0x17472a[_0x363a('0x19f')](_0x363a('0x1a0'))['match'](/max_id=(.*?)>/) : null;
                         _0x5980c3[_0x363a('0x191')] = null != _0x24f3cc && 0x0 != _0x24f3cc[0x1][_0x363a('0xaf')] ? _0x24f3cc[0x1] : '0';
                         _0x5980c3[_0x363a('0x96')][_0x363a('0x135')] = ![];
                         _0x5980c3['fetchListAcctRelation']();
                     }
                 } else if (_0x17472a[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
                     _0x5980c3[_0x363a('0x96')][_0x363a('0x135')] = ![];
-                    _0x5980c3[_0x363a('0x17f')](_0x17472a[_0x363a('0x180')], _0x17472a[_0x363a('0x17e')], _0x363a('0x199'));
+                    _0x5980c3['popError'](_0x17472a['responseText'], _0x17472a['status'], _0x363a('0x199'));
                 }
             }
             ;
-            _0x17472a[_0x363a('0x182')]();
+            _0x17472a['send']();
         },
         'fetchListAcctRelation': function() {
             if (0x0 == this[_0x363a('0xbe')][_0x363a('0xaf')]) {
                 return;
             }
             var _0x2299b9 = 0x0;
-            var _0x12ad4f = RELATION[_0x363a('0xcf')](_0x363a('0x189'), this['repository']);
+            var _0x12ad4f = RELATION.replace('[I]', this.repository);
             while (_0x2299b9 < this[_0x363a('0xbe')][_0x363a('0xaf')]) {
                 _0x12ad4f = _0x12ad4f + _0x363a('0x1ae') + this[_0x363a('0xbe')][_0x2299b9]['id'] + '&';
                 _0x2299b9 = _0x2299b9 + 0x1 | 0x0;
             }
             var _0x1536f4 = this;
             var _0x11393f = [];
-            var _0x3f3a02 = new XMLHttpRequest();
-            _0x3f3a02[_0x363a('0x178')](_0x363a('0x188'), _0x12ad4f);
-            _0x3f3a02[_0x363a('0x17a')] = REQ_TIMEOUT;
-            _0x3f3a02[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x1536f4['at']);
-            _0x3f3a02[_0x363a('0x17c')] = function() {
-                if (_0x3f3a02[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x3f3a02[_0x363a('0x17e')] == 0xc8) {
-                    _0x1536f4[_0x363a('0x123')] = JSON[_0x363a('0x70')](_0x3f3a02[_0x363a('0x180')]);
-                } else if (_0x3f3a02[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
-                    _0x1536f4[_0x363a('0x17f')](_0x3f3a02[_0x363a('0x180')], _0x3f3a02[_0x363a('0x17e')], _0x363a('0x199'));
+            var request = new XMLHttpRequest();
+            request['open'](_0x363a('0x188'), _0x12ad4f);
+            request['timeout'] = REQ_TIMEOUT;
+            request[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x1536f4['at']);
+            request['onreadystatechange'] = function() {
+                if (request[_0x363a('0x184')] == XMLHttpRequest['DONE'] && request['status'] == 0xc8) {
+                    _0x1536f4[_0x363a('0x123')] = JSON[_0x363a('0x70')](request['responseText']);
+                } else if (request[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                    _0x1536f4['popError'](request['responseText'], request['status'], _0x363a('0x199'));
                 }
             }
             ;
-            _0x3f3a02['send']();
+            request['send']();
         },
         'fetchTokenDiscord': function() {
             var _0x12583b = this;
             var _0x2ea3de = [];
             var _0x59dacd = {
-                'response_type': _0x363a('0x7a'),
+                'response_type': 'code',
                 'client_id': discord_id,
                 'client_secret': discord_secret,
-                'grant_type': _0x363a('0x183'),
+                'grant_type': 'authorization_code',
                 'code': _0x12583b['code']
             };
-            var _0xc35859 = new XMLHttpRequest();
-            _0xc35859[_0x363a('0x178')](_0x363a('0x179'), DIS_TOKEN[_0x363a('0xcf')](_0x363a('0x189'), DIS_API)[_0x363a('0xcf')](_0x363a('0x1d4'), DIS_API_VER), !![]);
-            _0xc35859[_0x363a('0x17a')] = REQ_TIMEOUT;
-            _0xc35859['setRequestHeader'](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
-            _0xc35859[_0x363a('0x17c')] = function() {
-                if (_0xc35859['readyState'] == XMLHttpRequest['DONE'] && _0xc35859[_0x363a('0x17e')] == 0xc8) {
-                    userConf[_0x363a('0x185')]('at_discord', _0xc35859[_0x363a('0x180')]);
-                    location['href'] = location[_0x363a('0x1d6')] + location[_0x363a('0x1d7')];
-                } else if (_0xc35859['readyState'] == XMLHttpRequest[_0x363a('0x17d')]) {
-                    _0x12583b['popError'](_0xc35859[_0x363a('0x180')], _0xc35859[_0x363a('0x17e')], _0x363a('0x181'));
+            var request = new XMLHttpRequest();
+            request['open']('POST', DIS_TOKEN.replace('[I]', DIS_API).replace(_0x363a('0x1d4'), DIS_API_VER), !![]);
+            request['timeout'] = REQ_TIMEOUT;
+            request['setRequestHeader'](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
+            request['onreadystatechange'] = function() {
+                if (request['readyState'] == XMLHttpRequest['DONE'] && request['status'] == 0xc8) {
+                    userConf[_0x363a('0x185')]('at_discord', request['responseText']);
+                    location.href = location[_0x363a('0x1d6')] + location[_0x363a('0x1d7')];
+                } else if (request['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x12583b['popError'](request['responseText'], request['status'], 'Login');
                 }
             }
             ;
-            _0xc35859[_0x363a('0x182')](encodeHtmlForm(_0x59dacd));
+            request.send(encodeHtmlForm(_0x59dacd));
         },
         'refetchTokenDiscord': function() {
             var _0x2cf9e6 = this;
@@ -2949,63 +2958,63 @@ var app = new Vue({
                 'refresh_token': _0x2cf9e6[_0x363a('0x1d9')][_0x363a('0x1d8')]
             };
             var _0x33a852 = new XMLHttpRequest();
-            _0x33a852['open']('POST', DIS_TOKEN[_0x363a('0xcf')]('[I]', DIS_API)[_0x363a('0xcf')](_0x363a('0x1d4'), DIS_API_VER), !![]);
+            _0x33a852['open']('POST', DIS_TOKEN.replace('[I]', DIS_API).replace(_0x363a('0x1d4'), DIS_API_VER), !![]);
             _0x33a852['timeout'] = REQ_TIMEOUT;
-            _0x33a852[_0x363a('0x18a')](_0x363a('0x1d5'), _0x363a('0x17b'));
-            _0x33a852[_0x363a('0x17c')] = function() {
-                if (_0x33a852[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x33a852[_0x363a('0x17e')] == 0xc8) {
-                    userConf['setItem']('at_discord', _0x33a852[_0x363a('0x180')]);
-                } else if (_0x33a852[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
-                    _0x2cf9e6[_0x363a('0x17f')](_0x33a852['responseText'], _0x33a852['status'], _0x363a('0x181'));
+            _0x33a852[_0x363a('0x18a')](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
+            _0x33a852['onreadystatechange'] = function() {
+                if (_0x33a852[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x33a852['status'] == 0xc8) {
+                    userConf['setItem']('at_discord', _0x33a852['responseText']);
+                } else if (_0x33a852[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                    _0x2cf9e6['popError'](_0x33a852['responseText'], _0x33a852['status'], 'Login');
                 }
             }
             ;
-            _0x33a852[_0x363a('0x182')](encodeHtmlForm(_0x9cff3c));
+            _0x33a852['send'](encodeHtmlForm(_0x9cff3c));
         },
         'actKatsuDiscord': function() {
             var _0x254c57 = this;
             var _0x34969e = [];
-            var _0x4f59ba = new Date();
+            var date = new Date();
             var _0x38b86d = {
-                'content': ('0' + _0x4f59ba[_0x363a('0xc5')]())[_0x363a('0xc1')](-0x2) + ':' + ('0' + _0x4f59ba[_0x363a('0xc4')]())[_0x363a('0xc1')](-0x2),
+                'content': ('0' + date[_0x363a('0xc5')]())[_0x363a('0xc1')](-0x2) + ':' + ('0' + date[_0x363a('0xc4')]())[_0x363a('0xc1')](-0x2),
                 'username': _0x254c57[_0x363a('0x1da')][_0x363a('0x1db')],
                 'avatar_url': _0x363a('0xde') + _0x363a('0x1dc') + _0x254c57[_0x363a('0x1da')]['id'] + '/' + _0x254c57[_0x363a('0x1da')]['avatar'] + _0x363a('0xe0')
             };
             var _0x4573a7 = new XMLHttpRequest();
-            _0x4573a7[_0x363a('0x178')](_0x363a('0x179'), DIS_WTH1[_0x363a('0xcf')](_0x363a('0x189'), DIS_API)['replace'](_0x363a('0x1d4'), DIS_API_VER), !![]);
-            _0x4573a7[_0x363a('0x17a')] = REQ_TIMEOUT;
-            _0x4573a7['setRequestHeader'](_0x363a('0x1d5'), _0x363a('0x17b'));
-            _0x4573a7[_0x363a('0x17c')] = function() {
-                if (_0x4573a7[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x4573a7[_0x363a('0x17e')] == 0xc8) {} else if (_0x4573a7[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x254c57[_0x363a('0x17f')](_0x4573a7[_0x363a('0x180')], _0x4573a7[_0x363a('0x17e')], _0x363a('0x181'));
+            _0x4573a7['open']('POST', DIS_WTH1.replace('[I]', DIS_API).replace(_0x363a('0x1d4'), DIS_API_VER), !![]);
+            _0x4573a7['timeout'] = REQ_TIMEOUT;
+            _0x4573a7['setRequestHeader'](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
+            _0x4573a7['onreadystatechange'] = function() {
+                if (_0x4573a7[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x4573a7['status'] == 0xc8) {} else if (_0x4573a7[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                    _0x254c57['popError'](_0x4573a7['responseText'], _0x4573a7['status'], 'Login');
                 }
             }
             ;
             _0x4573a7['send'](encodeHtmlForm(_0x38b86d));
         },
         'openThisPage': function() {
-            window[_0x363a('0xb')]['href'] = location['origin'] + location['pathname'];
+            window.location.href = location.origin + location.pathname;
         },
         'openAuth': function() {
-            window['location']['href'] = this[_0x363a('0x86')] ? AUTH_URL[_0x363a('0xcf')](_0x363a('0x189'), this[_0x363a('0xdc')])[_0x363a('0xcf')]('[CID]', client_id)['replace']('[URL]', redirect_url) : AUTH_URL[_0x363a('0xcf')]('[I]', this['repository'])[_0x363a('0xcf')](_0x363a('0x1dd'), client_id_sub)[_0x363a('0xcf')]('[URL]', redirect_sub);
+            window.location.href = this.autologin ? AUTH_URL.replace('[I]', this.repository).replace('[CID]', client_id).replace('[URL]', redirect_url) : AUTH_URL.replace('[I]', this.repository).replace('[CID]', client_id_sub).replace('[URL]', redirect_sub);
         },
         'openProfile': function() {
-            window[_0x363a('0x178')](PROFILE_URL[_0x363a('0xcf')](_0x363a('0x189'), this[_0x363a('0xdc')]), _0x363a('0x1de'));
+            window.open(PROFILE_URL.replace('[I]', this.repository), '_blank');
         },
         'openMastodon': function() {
-            window[_0x363a('0x178')](MASTODON_URL['replace'](_0x363a('0x189'), this['repository']), _0x363a('0x1de'));
+            window.open(MASTODON_URL.replace('[I]', this.repository), '_blank');
         },
         'openAbout': function() {
-            window['open'](ABOUT_URL[_0x363a('0xcf')](_0x363a('0x189'), this[_0x363a('0xdc')]), '_blank');
+            window.open(ABOUT_URL.replace('[I]', this.repository), '_blank');
         },
         'openPolicy': function() {
-            window[_0x363a('0x178')](POLICY_URL[_0x363a('0xcf')](_0x363a('0x189'), this[_0x363a('0xdc')]), _0x363a('0x1de'));
+            window.open(POLICY_URL.replace('[I]', this.repository), '_blank');
         },
         'openWiki': function() {
-            window[_0x363a('0x178')](WIKI_URL, '_blank');
+            window.open(WIKI_URL, '_blank');
         },
         'openDirectry': function() {
-            window[_0x363a('0x178')](DIRECTRY_URL[_0x363a('0xcf')](_0x363a('0x189'), this[_0x363a('0xdc')]), _0x363a('0x1de'));
+            window.open(DIRECTRY_URL.replace('[I]', this.repository), '_blank');
         },
         'loadConf': function() {
             var _0x47418d = 0x2;
@@ -3251,7 +3260,7 @@ var app = new Vue({
         },
         'serviceWorkerUpdateCheck': function() {
             this[_0x363a('0x96')][_0x363a('0x212')] = !![];
-            navigator[_0x363a('0x6c')][_0x363a('0x6d')][_0x363a('0x213')](_0x363a('0x214'));
+            navigator['serviceWorker'][_0x363a('0x6d')][_0x363a('0x213')](_0x363a('0x214'));
             setTimeout(function() {
                 app['_data'][_0x363a('0x96')][_0x363a('0x212')] = ![];
             }, REQ_TIMEOUT / 0xa);
@@ -3295,7 +3304,7 @@ var app = new Vue({
             var _0x44ce94 = this;
             var _0x3cfda4 = ST_HOME;
             if (wsHome == null && _0x44ce94['at'] != null) {
-                wsHome = new WebSocket(_0x3cfda4[_0x363a('0xcf')](_0x363a('0x189'), _0x44ce94[_0x363a('0xdc')])[_0x363a('0xcf')]('[AT]', _0x44ce94['at']));
+                wsHome = new WebSocket(_0x3cfda4.replace('[I]', _0x44ce94['repository']).replace('[AT]', _0x44ce94['at']));
                 wsHome['onopen'] = _0x37ed0f;
                 wsHome[_0x363a('0x219')] = _[_0x363a('0xe1')](_0x3b7770, 0xc8);
                 wsHome[_0x363a('0x21a')] = _0x5e5580;
@@ -3303,9 +3312,9 @@ var app = new Vue({
                 function _0x37ed0f() {
                     setTimeout(function() {
                         try {
-                            _0x44ce94['connHome'] = _0x363a('0x178');
+                            _0x44ce94['connHome'] = 'open';
                             _0x44ce94[_0x363a('0x96')][_0x363a('0x21c')] = ![];
-                            wsHome[_0x363a('0x182')]('5j');
+                            wsHome['send']('5j');
                         } catch (_0x1c206b) {
                             _0x5e5580();
                         }
@@ -3313,7 +3322,7 @@ var app = new Vue({
                 }
                 ;function _0x3b7770(_0x1f02e9) {
                     _0x44ce94[_0x363a('0x96')]['homews'] = !![];
-                    _0x44ce94[_0x363a('0x21d')] = _0x363a('0x66');
+                    _0x44ce94[_0x363a('0x21d')] = 'ready';
                     wsHome = null;
                     if (_0x44ce94[_0x363a('0x21e')]) {
                         _0x44ce94[_0x363a('0x21f')]();
@@ -3380,10 +3389,10 @@ var app = new Vue({
                             }
                         }
                         if (_0x363a('0x22b') == _0x1c8865[_0x363a('0x124')]) {
-                            _0x44ce94[_0x363a('0x22c')](_0x1c8865[_0x363a('0x17e')]['id'], _0x1c8865[_0x363a('0x17e')][_0x363a('0x22b')]);
+                            _0x44ce94[_0x363a('0x22c')](_0x1c8865['status']['id'], _0x1c8865['status'][_0x363a('0x22b')]);
                         }
                         _0x1c8865[_0x363a('0x217')] = !![];
-                        if (null != _0x1c8865[_0x363a('0x17e')] && (null != _0x1c8865[_0x363a('0x17e')][_0x363a('0x10c')] && 0x0 != _0x1c8865[_0x363a('0x17e')]['reblog']['media_attachments'] || 0x0 != _0x1c8865[_0x363a('0x17e')][_0x363a('0x226')])) {
+                        if (null != _0x1c8865['status'] && (null != _0x1c8865['status'][_0x363a('0x10c')] && 0x0 != _0x1c8865['status']['reblog']['media_attachments'] || 0x0 != _0x1c8865['status'][_0x363a('0x226')])) {
                             _0x1c8865[_0x363a('0x218')] = !![];
                         }
                         _0x44ce94['notifs_filter'][_0x363a('0x172')](_0x1c8865);
@@ -3396,7 +3405,7 @@ var app = new Vue({
                         var _0x172d00 = _0x1c8865[_0x363a('0x124')] == _0x363a('0x10e') ? 'you' : _0x363a('0x22d');
                         var _0x5551c0 = _0x2ff618 + '‭\x20' + _0x1c8865['type'] + '\x20' + _0x172d00;
                         var _0x3a5570 = {
-                            'body': _0x1c8865[_0x363a('0x17e')] ? _0x1c8865['status']['spoiler_text']['replace'](/<("[^"]*"|'[^']*'|[^'">])*>/g, '') + _0x1c8865[_0x363a('0x17e')][_0x363a('0x22e')][_0x363a('0xcf')](/<("[^"]*"|'[^']*'|[^'">])*>/g, '') : '',
+                            'body': _0x1c8865['status'] ? _0x1c8865['status']['spoiler_text'].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '') + _0x1c8865['status'][_0x363a('0x22e')].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '') : '',
                             'icon': _0x1c8865[_0x363a('0x16d')][_0x363a('0x22f')]
                         };
                         if (_0x363a('0xa2') != _0x44ce94[_0x363a('0xa1')]) {
@@ -3466,7 +3475,7 @@ var app = new Vue({
             var _0x4b646e = this;
             var _0x5e7fea = _0x4b646e[_0x363a('0x14e')] == _0x363a('0x1a4') ? ST_GLOBAL : ST_LOCAL;
             if (wsLocal == null && _0x4b646e['at'] != null) {
-                wsLocal = new WebSocket(_0x5e7fea[_0x363a('0xcf')](_0x363a('0x189'), _0x4b646e[_0x363a('0xdc')])[_0x363a('0xcf')](_0x363a('0x236'), _0x4b646e['at']));
+                wsLocal = new WebSocket(_0x5e7fea.replace('[I]', _0x4b646e['repository']).replace(_0x363a('0x236'), _0x4b646e['at']));
                 wsLocal[_0x363a('0x237')] = _0x1d6410;
                 wsLocal['onclose'] = _[_0x363a('0xe1')](_0x8b86f8, 0xc8);
                 wsLocal['onerror'] = _0x1870a7;
@@ -3474,9 +3483,9 @@ var app = new Vue({
                 function _0x1d6410() {
                     setTimeout(function() {
                         try {
-                            _0x4b646e[_0x363a('0x238')] = _0x363a('0x178');
+                            _0x4b646e[_0x363a('0x238')] = 'open';
                             _0x4b646e['fetch_lock'][_0x363a('0x90')] = ![];
-                            wsLocal[_0x363a('0x182')]('5j');
+                            wsLocal['send']('5j');
                         } catch (_0x11044b) {
                             _0x1870a7();
                         }
@@ -3484,7 +3493,7 @@ var app = new Vue({
                 }
                 ;function _0x8b86f8(_0x4f5811) {
                     _0x4b646e['fetch_lock'][_0x363a('0x90')] = !![];
-                    _0x4b646e['connLocal'] = _0x363a('0x66');
+                    _0x4b646e['connLocal'] = 'ready';
                     wsLocal = null;
                     if (_0x4b646e[_0x363a('0x21e')]) {
                         _0x4b646e[_0x363a('0x239')]();
@@ -3574,12 +3583,12 @@ var app = new Vue({
             var _0x295005 = this;
             var _0x1cd0fa = ST_DIRECT;
             if (_0x295005[_0x363a('0x99')] == _0x363a('0x199')) {
-                _0x1cd0fa = ST_LIST[_0x363a('0xcf')](_0x363a('0x19a'), _0x295005['multi_target']);
+                _0x1cd0fa = ST_LIST.replace(_0x363a('0x19a'), _0x295005['multi_target']);
             } else if (_0x295005[_0x363a('0x99')] == _0x363a('0x23b')) {
-                _0x1cd0fa = ST_HASHTAG[_0x363a('0xcf')](_0x363a('0x19b'), _0x295005[_0x363a('0x151')]);
+                _0x1cd0fa = ST_HASHTAG.replace(_0x363a('0x19b'), _0x295005[_0x363a('0x151')]);
             }
             if (wsMulti == null && _0x295005['at'] != null) {
-                wsMulti = new WebSocket(_0x1cd0fa[_0x363a('0xcf')](_0x363a('0x189'), _0x295005[_0x363a('0xdc')])[_0x363a('0xcf')]('[AT]', _0x295005['at']));
+                wsMulti = new WebSocket(_0x1cd0fa.replace('[I]', _0x295005['repository']).replace('[AT]', _0x295005['at']));
                 wsMulti[_0x363a('0x237')] = _0x195c15;
                 wsMulti['onclose'] = _[_0x363a('0xe1')](_0xb78230, 0xc8);
                 wsMulti[_0x363a('0x21a')] = _0x5a9cd8;
@@ -3587,9 +3596,9 @@ var app = new Vue({
                 function _0x195c15() {
                     setTimeout(function() {
                         try {
-                            _0x295005[_0x363a('0x23c')] = _0x363a('0x178');
+                            _0x295005[_0x363a('0x23c')] = 'open';
                             _0x295005[_0x363a('0x96')]['multiws'] = ![];
-                            wsMulti[_0x363a('0x182')]('5j');
+                            wsMulti['send']('5j');
                         } catch (_0x577fd5) {
                             _0x68a050();
                         }
@@ -3654,7 +3663,7 @@ var app = new Vue({
                 _0xd643f0 = _0x40e5c1['id'];
                 _0x38d452 = _0x40e5c1['title'];
             }
-            if (this[_0x363a('0x99')] == _0x2cb3b0 && this[_0x363a('0x151')][_0x363a('0xa')]() == (_0xd643f0 + '')[_0x363a('0xa')]() || this[_0x363a('0x96')][_0x363a('0x97')]) {
+            if (this[_0x363a('0x99')] == _0x2cb3b0 && this[_0x363a('0x151')]['toLowerCase']() == (_0xd643f0 + '')['toLowerCase']() || this[_0x363a('0x96')][_0x363a('0x97')]) {
                 return;
             }
             this[_0x363a('0x96')][_0x363a('0x97')] = !![];
@@ -3710,37 +3719,37 @@ var app = new Vue({
             var _0x12be43 = this;
             var _0x3f5ec8 = [];
             var _0x4dab1c = new XMLHttpRequest();
-            _0x4dab1c['open'](_0x363a('0x188'), DIS_USER[_0x363a('0xcf')](_0x363a('0x189'), DIS_API)[_0x363a('0xcf')]('[V]', DIS_API_VER));
+            _0x4dab1c['open'](_0x363a('0x188'), DIS_USER.replace('[I]', DIS_API).replace('[V]', DIS_API_VER));
             _0x4dab1c['timeout'] = REQ_TIMEOUT;
             _0x4dab1c[_0x363a('0x18a')](_0x363a('0x18b'), 'Bearer\x20' + _0x12be43[_0x363a('0x1d9')]['access_token']);
-            _0x4dab1c[_0x363a('0x17c')] = function() {
-                if (_0x4dab1c[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x4dab1c[_0x363a('0x17e')] == 0xc8) {
-                    _0x12be43[_0x363a('0x1da')] = JSON[_0x363a('0x70')](_0x4dab1c[_0x363a('0x180')]);
+            _0x4dab1c['onreadystatechange'] = function() {
+                if (_0x4dab1c[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x4dab1c['status'] == 0xc8) {
+                    _0x12be43[_0x363a('0x1da')] = JSON[_0x363a('0x70')](_0x4dab1c['responseText']);
                     _0x12be43['actKatsuDiscord']();
-                } else if (_0x4dab1c[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
-                    _0x12be43[_0x363a('0x17f')](_0x4dab1c[_0x363a('0x180')], _0x4dab1c[_0x363a('0x17e')], 'Discord');
+                } else if (_0x4dab1c[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                    _0x12be43['popError'](_0x4dab1c['responseText'], _0x4dab1c['status'], 'Discord');
                 }
             }
             ;
-            _0x4dab1c[_0x363a('0x182')]();
+            _0x4dab1c['send']();
         },
         'fetchSocketDiscord': function() {
             var _0x1389c4 = this;
             var _0x421eac = [];
             var _0xeb4b7d = new XMLHttpRequest();
-            _0xeb4b7d[_0x363a('0x178')](_0x363a('0x188'), DIS_ST[_0x363a('0xcf')](_0x363a('0x189'), DIS_API)[_0x363a('0xcf')](_0x363a('0x1d4'), DIS_API_VER));
+            _0xeb4b7d['open'](_0x363a('0x188'), DIS_ST.replace('[I]', DIS_API).replace(_0x363a('0x1d4'), DIS_API_VER));
             _0xeb4b7d['timeout'] = REQ_TIMEOUT;
             _0xeb4b7d[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x1389c4[_0x363a('0x1d9')]['access_token']);
             _0xeb4b7d['onreadystatechange'] = function() {
                 if (_0xeb4b7d['readyState'] == XMLHttpRequest['DONE'] && _0xeb4b7d['status'] == 0xc8) {
-                    ST_DISCORD = JSON[_0x363a('0x70')](_0xeb4b7d[_0x363a('0x180')])[_0x363a('0xd9')] + _0x363a('0x242');
+                    ST_DISCORD = JSON[_0x363a('0x70')](_0xeb4b7d['responseText'])[_0x363a('0xd9')] + _0x363a('0x242');
                     _0x1389c4[_0x363a('0x243')]();
                 } else if (_0xeb4b7d[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x1389c4[_0x363a('0x17f')](_0xeb4b7d['responseText'], _0xeb4b7d[_0x363a('0x17e')], _0x363a('0x244'));
+                    _0x1389c4['popError'](_0xeb4b7d['responseText'], _0xeb4b7d['status'], _0x363a('0x244'));
                 }
             }
             ;
-            _0xeb4b7d[_0x363a('0x182')]();
+            _0xeb4b7d['send']();
         },
         'fetchDiscord': function() {
             var _0x21069f = this;
@@ -3752,24 +3761,24 @@ var app = new Vue({
             }
             _0x21069f[_0x363a('0x96')][_0x363a('0x11f')] = !![];
             var _0x33905f = new XMLHttpRequest();
-            _0x33905f['open']('GET', _0x30fe10[_0x363a('0xcf')](_0x363a('0x189'), DIS_API)[_0x363a('0xcf')](_0x363a('0x1d4'), DIS_API_VER)[_0x363a('0xcf')]('[CH]', DIS_CHANNEL[_0x21069f['discord_type']])['replace'](_0x363a('0x19c'), LIMIT_DIS));
-            _0x33905f[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x33905f['open']('GET', _0x30fe10.replace('[I]', DIS_API).replace(_0x363a('0x1d4'), DIS_API_VER).replace('[CH]', DIS_CHANNEL[_0x21069f['discord_type']]).replace(_0x363a('0x19c'), LIMIT_DIS));
+            _0x33905f['timeout'] = REQ_TIMEOUT;
             _0x33905f[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x247'));
-            _0x33905f[_0x363a('0x17c')] = function() {
-                if (_0x33905f[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x33905f['status'] == 0xc8) {
+            _0x33905f['onreadystatechange'] = function() {
+                if (_0x33905f[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x33905f['status'] == 0xc8) {
                     if (_0x372485 == _0x21069f['discord_type'] && _0x21069f['fetch_lock'][_0x363a('0x11f')]) {
                         if (0x0 == _0x21069f[_0x363a('0x248')]['length']) {
-                            _0x21069f[_0x363a('0x248')] = JSON['parse'](_0x33905f[_0x363a('0x180')]);
+                            _0x21069f[_0x363a('0x248')] = JSON['parse'](_0x33905f['responseText']);
                         } else {
-                            Array['prototype']['push'][_0x363a('0x1a3')](_0x21069f[_0x363a('0x248')], JSON[_0x363a('0x70')](_0x33905f[_0x363a('0x180')]));
+                            Array['prototype']['push'][_0x363a('0x1a3')](_0x21069f[_0x363a('0x248')], JSON[_0x363a('0x70')](_0x33905f['responseText']));
                         }
                         _0x21069f[_0x363a('0x246')] = _0x21069f[_0x363a('0x248')][_0x21069f[_0x363a('0x248')][_0x363a('0xaf')] - 0x1] ? _0x21069f[_0x363a('0x248')][_0x21069f[_0x363a('0x248')][_0x363a('0xaf')] - 0x1]['id'] : '0';
                     }
                     _0x21069f[_0x363a('0x96')]['discord'] = ![];
                     _0x21069f[_0x363a('0x18d')]();
-                } else if (_0x33905f[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
+                } else if (_0x33905f[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
                     _0x21069f[_0x363a('0x96')]['discord'] = ![];
-                    _0x21069f[_0x363a('0x17f')](_0x33905f[_0x363a('0x180')], _0x33905f[_0x363a('0x17e')], 'Discord');
+                    _0x21069f['popError'](_0x33905f['responseText'], _0x33905f['status'], 'Discord');
                 }
             }
             ;
@@ -3780,7 +3789,7 @@ var app = new Vue({
             var _0xa8eda5 = ST_DISCORD;
             var _0x3f6294 = 0x0;
             if (wsDiscord == null && _0x5c41f4['at'] != null) {
-                wsDiscord = new WebSocket(_0xa8eda5['replace'](_0x363a('0x1d4'), DIS_API_VER));
+                wsDiscord = new WebSocket(_0xa8eda5.replace(_0x363a('0x1d4'), DIS_API_VER));
                 wsDiscord[_0x363a('0x237')] = function() {
                     var _0x3b47e5 = {
                         'op': 0x2,
@@ -3814,7 +3823,7 @@ var app = new Vue({
                         }
                     };
                     wsDiscord['send'](JSON[_0x363a('0x210')](_0x3b47e5));
-                    _0x5c41f4['connDiscord'] = _0x363a('0x178');
+                    _0x5c41f4['connDiscord'] = 'open';
                     _0x5c41f4[_0x363a('0x96')][_0x363a('0x24c')] = ![];
                 }
                 ;
@@ -3850,7 +3859,7 @@ var app = new Vue({
                             'op': 0x1,
                             'd': _0x3f6294
                         };
-                        wsDiscord[_0x363a('0x182')](JSON[_0x363a('0x210')](_0x34ec8e));
+                        wsDiscord['send'](JSON[_0x363a('0x210')](_0x34ec8e));
                     }, _0x5d9051);
                 }
                 ;
@@ -3859,7 +3868,7 @@ var app = new Vue({
                         'd': _0x363a('0x254'),
                         'op': 0xc
                     };
-                    wsDiscord[_0x363a('0x182')](JSON[_0x363a('0x210')](_0x734c89));
+                    wsDiscord['send'](JSON[_0x363a('0x210')](_0x734c89));
                 }
                 ;
             }
@@ -3904,16 +3913,16 @@ var app = new Vue({
                 'account_ids': _0x31f25a
             };
             var _0x40198c = new XMLHttpRequest();
-            _0x40198c[_0x363a('0x178')](_0x363a('0x179'), LIST_ACCT[_0x363a('0xcf')](_0x363a('0x189'), _0x498b70[_0x363a('0xdc')])['replace'](_0x363a('0x19a'), _0x498b70[_0x363a('0xb9')]['id']), !![]);
-            _0x40198c[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x40198c['open']('POST', LIST_ACCT.replace('[I]', _0x498b70['repository']).replace(_0x363a('0x19a'), _0x498b70[_0x363a('0xb9')]['id']), !![]);
+            _0x40198c['timeout'] = REQ_TIMEOUT;
             _0x40198c['setRequestHeader'](_0x363a('0x18b'), _0x363a('0x18c') + _0x498b70['at']);
             _0x40198c[_0x363a('0x18a')](_0x363a('0x1d5'), 'application/json');
-            _0x40198c[_0x363a('0x17c')] = function() {
-                if (_0x40198c[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x40198c[_0x363a('0x17e')] == 0xc8) {
+            _0x40198c['onreadystatechange'] = function() {
+                if (_0x40198c[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x40198c['status'] == 0xc8) {
                     _0x498b70[_0x363a('0x25c')](_0x4079d0, !![]);
                     _0x498b70[_0x363a('0x18d')]();
-                } else if (_0x40198c[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
-                    _0x498b70['popError'](_0x40198c[_0x363a('0x180')], _0x40198c[_0x363a('0x17e')], _0x363a('0x199'));
+                } else if (_0x40198c[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                    _0x498b70['popError'](_0x40198c['responseText'], _0x40198c['status'], _0x363a('0x199'));
                 }
                 _0x4079d0[_0x363a('0x25b')] = ![];
                 _0x498b70['$forceUpdate']();
@@ -3936,22 +3945,22 @@ var app = new Vue({
                 'account_ids': _0x301a64
             };
             var _0x2527b7 = new XMLHttpRequest();
-            _0x2527b7[_0x363a('0x178')]('DELETE', LIST_ACCT[_0x363a('0xcf')](_0x363a('0x189'), _0x32fd9a[_0x363a('0xdc')])[_0x363a('0xcf')]('[LID]', _0x32fd9a[_0x363a('0xb9')]['id']), !![]);
-            _0x2527b7[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x2527b7['open']('DELETE', LIST_ACCT.replace('[I]', _0x32fd9a['repository']).replace('[LID]', _0x32fd9a[_0x363a('0xb9')]['id']), !![]);
+            _0x2527b7['timeout'] = REQ_TIMEOUT;
             _0x2527b7[_0x363a('0x18a')]('Authorization', _0x363a('0x18c') + _0x32fd9a['at']);
             _0x2527b7[_0x363a('0x18a')](_0x363a('0x1d5'), _0x363a('0x25e'));
-            _0x2527b7[_0x363a('0x17c')] = function() {
-                if (_0x2527b7[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x2527b7[_0x363a('0x17e')] == 0xc8) {
+            _0x2527b7['onreadystatechange'] = function() {
+                if (_0x2527b7[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x2527b7['status'] == 0xc8) {
                     _0x32fd9a[_0x363a('0x25c')](_0x4c2176, ![]);
                     _0x32fd9a[_0x363a('0x18d')]();
-                } else if (_0x2527b7['readyState'] == XMLHttpRequest[_0x363a('0x17d')]) {
-                    _0x32fd9a[_0x363a('0x17f')](_0x2527b7['responseText'], _0x2527b7[_0x363a('0x17e')], _0x363a('0x199'));
+                } else if (_0x2527b7['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x32fd9a['popError'](_0x2527b7['responseText'], _0x2527b7['status'], _0x363a('0x199'));
                 }
                 _0x4c2176[_0x363a('0x25b')] = ![];
                 _0x32fd9a[_0x363a('0x18d')]();
             }
             ;
-            _0x2527b7[_0x363a('0x182')](JSON[_0x363a('0x210')](_0x31d0b0));
+            _0x2527b7['send'](JSON[_0x363a('0x210')](_0x31d0b0));
         },
         'updateList': function(_0x5510db, _0x42cd76) {
             if (_0x42cd76) {
@@ -3983,22 +3992,22 @@ var app = new Vue({
             _0x28ffab['fetch_lock'][_0x363a('0x135')] = !![];
             _0x28ffab[_0x363a('0x18d')]();
             var _0x38d9be = new XMLHttpRequest();
-            _0x38d9be[_0x363a('0x178')](_0x363a('0x179'), LIST_ALL[_0x363a('0xcf')](_0x363a('0x189'), _0x28ffab[_0x363a('0xdc')]), !![]);
-            _0x38d9be[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x38d9be['open']('POST', LIST_ALL.replace('[I]', _0x28ffab['repository']), !![]);
+            _0x38d9be['timeout'] = REQ_TIMEOUT;
             _0x38d9be[_0x363a('0x18a')](_0x363a('0x18b'), 'Bearer\x20' + _0x28ffab['at']);
-            _0x38d9be['setRequestHeader']('Content-type', _0x363a('0x17b'));
+            _0x38d9be['setRequestHeader']('Content-type', 'application/x-www-form-urlencoded');
             _0x38d9be['onreadystatechange'] = function() {
-                if (_0x38d9be[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x38d9be[_0x363a('0x17e')] == 0xc8) {
+                if (_0x38d9be[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x38d9be['status'] == 0xc8) {
                     _0x28ffab[_0x363a('0x8b')]();
                 } else if (_0x38d9be[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x28ffab[_0x363a('0x17f')](_0x38d9be[_0x363a('0x180')], _0x38d9be[_0x363a('0x17e')], _0x363a('0x199'));
+                    _0x28ffab['popError'](_0x38d9be['responseText'], _0x38d9be['status'], _0x363a('0x199'));
                 }
                 document[_0x363a('0x139')](_0x363a('0x25f'))[_0x363a('0x59')] = '';
                 _0x28ffab[_0x363a('0x96')][_0x363a('0x135')] = ![];
                 _0x28ffab[_0x363a('0x18d')]();
             }
             ;
-            _0x38d9be[_0x363a('0x182')](encodeHtmlForm(_0x31c4c6));
+            _0x38d9be['send'](encodeHtmlForm(_0x31c4c6));
         },
         'runRemoveList': function(_0x2979bd, _0x33558f) {
             if (this[_0x363a('0x96')][_0x363a('0x135')]) {
@@ -4009,21 +4018,21 @@ var app = new Vue({
             _0x45cd89[_0x363a('0x96')][_0x363a('0x135')] = !![];
             _0x45cd89[_0x363a('0x18d')]();
             var _0x3c3e38 = new XMLHttpRequest();
-            _0x3c3e38[_0x363a('0x178')](_0x363a('0x260'), LIST_OBJ[_0x363a('0xcf')](_0x363a('0x189'), _0x45cd89[_0x363a('0xdc')])['replace'](_0x363a('0x19a'), _0x2979bd), !![]);
+            _0x3c3e38['open'](_0x363a('0x260'), LIST_OBJ.replace('[I]', _0x45cd89['repository']).replace(_0x363a('0x19a'), _0x2979bd), !![]);
             _0x3c3e38['timeout'] = REQ_TIMEOUT;
             _0x3c3e38[_0x363a('0x18a')]('Authorization', _0x363a('0x18c') + _0x45cd89['at']);
-            _0x3c3e38[_0x363a('0x18a')](_0x363a('0x1d5'), _0x363a('0x17b'));
-            _0x3c3e38[_0x363a('0x17c')] = function() {
-                if (_0x3c3e38[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x3c3e38[_0x363a('0x17e')] == 0xc8) {
+            _0x3c3e38[_0x363a('0x18a')](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
+            _0x3c3e38['onreadystatechange'] = function() {
+                if (_0x3c3e38[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x3c3e38['status'] == 0xc8) {
                     _0x45cd89[_0x363a('0x8b')]();
-                } else if (_0x3c3e38[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
-                    _0x45cd89[_0x363a('0x17f')](_0x3c3e38[_0x363a('0x180')], _0x3c3e38[_0x363a('0x17e')], _0x363a('0x199'));
+                } else if (_0x3c3e38[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                    _0x45cd89['popError'](_0x3c3e38['responseText'], _0x3c3e38['status'], _0x363a('0x199'));
                 }
                 _0x45cd89[_0x363a('0x96')][_0x363a('0x135')] = ![];
                 _0x45cd89[_0x363a('0x18d')]();
             }
             ;
-            _0x3c3e38[_0x363a('0x182')](encodeHtmlForm());
+            _0x3c3e38['send'](encodeHtmlForm());
         },
         'addStreamHashtag': function() {
             if (this['stream_hashtag_text'] != null && this[_0x363a('0x1cc')] != '' && this[_0x363a('0xbc')][_0x363a('0x7c')](this[_0x363a('0x1cc')]) == -0x1) {
@@ -4061,22 +4070,22 @@ var app = new Vue({
                 'choices': _0x4d82dd
             };
             var _0x989dfd = new XMLHttpRequest();
-            _0x989dfd[_0x363a('0x178')](_0x363a('0x179'), VOTE[_0x363a('0xcf')](_0x363a('0x189'), _0xbfd9d2['repository'])['replace'](_0x363a('0x263'), _0x43463d[_0x363a('0x22b')]['id']), !![]);
-            _0x989dfd[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x989dfd['open']('POST', VOTE.replace('[I]', _0xbfd9d2['repository']).replace(_0x363a('0x263'), _0x43463d[_0x363a('0x22b')]['id']), !![]);
+            _0x989dfd['timeout'] = REQ_TIMEOUT;
             _0x989dfd[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0xbfd9d2['at']);
             _0x989dfd[_0x363a('0x18a')](_0x363a('0x1d5'), _0x363a('0x25e'));
-            _0x989dfd[_0x363a('0x17c')] = function() {
-                if (_0x989dfd[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x989dfd[_0x363a('0x17e')] == 0xc8) {
-                    _0xbfd9d2[_0x363a('0x22b')] = JSON[_0x363a('0x70')](_0x989dfd[_0x363a('0x180')]);
+            _0x989dfd['onreadystatechange'] = function() {
+                if (_0x989dfd[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x989dfd['status'] == 0xc8) {
+                    _0xbfd9d2[_0x363a('0x22b')] = JSON[_0x363a('0x70')](_0x989dfd['responseText']);
                     _0xbfd9d2[_0x363a('0x22c')](_0x43463d['id'], _0xbfd9d2[_0x363a('0x22b')]);
-                } else if (_0x989dfd[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
-                    _0xbfd9d2['popError'](_0x989dfd[_0x363a('0x180')], _0x989dfd[_0x363a('0x17e')], _0x363a('0x264'));
+                } else if (_0x989dfd[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                    _0xbfd9d2['popError'](_0x989dfd['responseText'], _0x989dfd['status'], _0x363a('0x264'));
                 }
                 _0x43463d[_0x363a('0x265')] = ![];
                 _0xbfd9d2[_0x363a('0x18d')]();
             }
             ;
-            _0x989dfd[_0x363a('0x182')](JSON['stringify'](_0xf0ed26));
+            _0x989dfd['send'](JSON['stringify'](_0xf0ed26));
         },
         'updateVote': function(_0x20fb65, _0x582ab7) {
             var _0x3dec96 = this;
@@ -4097,14 +4106,14 @@ var app = new Vue({
                 }
             });
             _0x3dec96[_0x363a('0xb0')][_0x363a('0x121')](function(_0x8ad24d, _0x7dfcc8) {
-                if (_0x8ad24d[_0x363a('0x17e')] && _0x8ad24d[_0x363a('0x17e')]['id'] == _0x20fb65) {
-                    _0x8ad24d[_0x363a('0x17e')][_0x363a('0x22b')] = _0x582ab7;
+                if (_0x8ad24d['status'] && _0x8ad24d['status']['id'] == _0x20fb65) {
+                    _0x8ad24d['status'][_0x363a('0x22b')] = _0x582ab7;
                     return !![];
                 }
             });
             _0x3dec96[_0x363a('0xb1')][_0x363a('0x121')](function(_0x2e267e, _0x349fd1) {
-                if (_0x2e267e[_0x363a('0x17e')] && _0x2e267e[_0x363a('0x17e')]['id'] == _0x20fb65) {
-                    _0x2e267e[_0x363a('0x17e')]['poll'] = _0x582ab7;
+                if (_0x2e267e['status'] && _0x2e267e['status']['id'] == _0x20fb65) {
+                    _0x2e267e['status']['poll'] = _0x582ab7;
                     return !![];
                 }
             });
@@ -4178,21 +4187,21 @@ var app = new Vue({
             var _0x56ad37 = [];
             var _0x5468c7 = {};
             var _0xa4e12d = new XMLHttpRequest();
-            _0xa4e12d[_0x363a('0x178')](_0x363a('0x179'), ACT_FAV[_0x363a('0xcf')](_0x363a('0x189'), _0x48f901[_0x363a('0xdc')])['replace'](_0x363a('0x1b8'), _0x4e8b10['id']), !![]);
-            _0xa4e12d[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0xa4e12d['open']('POST', ACT_FAV.replace('[I]', _0x48f901['repository']).replace(_0x363a('0x1b8'), _0x4e8b10['id']), !![]);
+            _0xa4e12d['timeout'] = REQ_TIMEOUT;
             _0xa4e12d['setRequestHeader'](_0x363a('0x18b'), _0x363a('0x18c') + _0x48f901['at']);
             _0xa4e12d[_0x363a('0x18a')]('Content-type', 'application/x-www-form-urlencoded');
             _0xa4e12d['onreadystatechange'] = function() {
-                if (_0xa4e12d[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0xa4e12d[_0x363a('0x17e')] == 0xc8) {
+                if (_0xa4e12d[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0xa4e12d['status'] == 0xc8) {
                     _0x48f901[_0x363a('0x26c')](_0x4e8b10['id'], !![]);
-                } else if (_0xa4e12d[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
-                    _0x48f901[_0x363a('0x17f')](_0xa4e12d[_0x363a('0x180')], _0xa4e12d[_0x363a('0x17e')], _0x363a('0x26d'));
+                } else if (_0xa4e12d[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                    _0x48f901['popError'](_0xa4e12d['responseText'], _0xa4e12d['status'], _0x363a('0x26d'));
                 }
                 _0x4e8b10[_0x363a('0x26b')] = ![];
                 _0x48f901[_0x363a('0x18d')]();
             }
             ;
-            _0xa4e12d[_0x363a('0x182')](encodeHtmlForm(_0x5468c7));
+            _0xa4e12d['send'](encodeHtmlForm(_0x5468c7));
             _0x48f901[_0x363a('0x257')] = '';
         },
         'actUnFav': function(_0x144e2b, _0x177964) {
@@ -4206,15 +4215,15 @@ var app = new Vue({
             var _0x30c1b4 = [];
             var _0x597e1e = {};
             var _0x147359 = new XMLHttpRequest();
-            _0x147359[_0x363a('0x178')](_0x363a('0x179'), ACT_UNFAV[_0x363a('0xcf')](_0x363a('0x189'), _0x285081[_0x363a('0xdc')])[_0x363a('0xcf')](_0x363a('0x1b8'), _0x144e2b['id']), !![]);
+            _0x147359['open']('POST', ACT_UNFAV.replace('[I]', _0x285081['repository']).replace(_0x363a('0x1b8'), _0x144e2b['id']), !![]);
             _0x147359['timeout'] = REQ_TIMEOUT;
             _0x147359[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x285081['at']);
-            _0x147359['setRequestHeader']('Content-type', _0x363a('0x17b'));
-            _0x147359[_0x363a('0x17c')] = function() {
-                if (_0x147359[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x147359['status'] == 0xc8) {
+            _0x147359['setRequestHeader']('Content-type', 'application/x-www-form-urlencoded');
+            _0x147359['onreadystatechange'] = function() {
+                if (_0x147359[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x147359['status'] == 0xc8) {
                     _0x285081[_0x363a('0x26c')](_0x144e2b['id'], null);
                 } else if (_0x147359['readyState'] == XMLHttpRequest['DONE']) {
-                    _0x285081[_0x363a('0x17f')](_0x147359['responseText'], _0x147359[_0x363a('0x17e')], _0x363a('0x26d'));
+                    _0x285081['popError'](_0x147359['responseText'], _0x147359['status'], _0x363a('0x26d'));
                 }
                 _0x144e2b[_0x363a('0x26b')] = ![];
                 _0x285081['$forceUpdate']();
@@ -4242,13 +4251,13 @@ var app = new Vue({
                 }
             });
             _0x150a12[_0x363a('0xb0')][_0x363a('0x121')](function(_0x3b6a1e, _0x248060) {
-                if (_0x3b6a1e[_0x363a('0x17e')] && _0x3b6a1e[_0x363a('0x17e')]['id'] == _0x640610) {
-                    _0x3b6a1e[_0x363a('0x17e')][_0x363a('0x26e')] = _0x57be38;
+                if (_0x3b6a1e['status'] && _0x3b6a1e['status']['id'] == _0x640610) {
+                    _0x3b6a1e['status'][_0x363a('0x26e')] = _0x57be38;
                     return !![];
                 }
             });
             _0x150a12[_0x363a('0xb1')][_0x363a('0x121')](function(_0x217dc7, _0x3ce80e) {
-                if (_0x217dc7[_0x363a('0x17e')] && _0x217dc7[_0x363a('0x17e')]['id'] == _0x640610) {
+                if (_0x217dc7['status'] && _0x217dc7['status']['id'] == _0x640610) {
                     _0x217dc7['status'][_0x363a('0x26e')] = _0x57be38;
                     return !![];
                 }
@@ -4305,21 +4314,21 @@ var app = new Vue({
             var _0xfd46b4 = [];
             var _0x1279c6 = {};
             var _0x312e80 = new XMLHttpRequest();
-            _0x312e80[_0x363a('0x178')]('POST', ACT_REBLOG[_0x363a('0xcf')]('[I]', _0x59b59e[_0x363a('0xdc')])['replace'](_0x363a('0x1b8'), _0xbe94bc['id']), !![]);
-            _0x312e80[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x312e80['open']('POST', ACT_REBLOG.replace('[I]', _0x59b59e['repository']).replace(_0x363a('0x1b8'), _0xbe94bc['id']), !![]);
+            _0x312e80['timeout'] = REQ_TIMEOUT;
             _0x312e80[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x59b59e['at']);
-            _0x312e80[_0x363a('0x18a')](_0x363a('0x1d5'), _0x363a('0x17b'));
+            _0x312e80[_0x363a('0x18a')](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
             _0x312e80['onreadystatechange'] = function() {
-                if (_0x312e80[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x312e80[_0x363a('0x17e')] == 0xc8) {
+                if (_0x312e80[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x312e80['status'] == 0xc8) {
                     _0x59b59e[_0x363a('0x270')](_0xbe94bc['id'], !![]);
-                } else if (_0x312e80[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
-                    _0x59b59e['popError'](_0x312e80[_0x363a('0x180')], _0x312e80[_0x363a('0x17e')], 'Reblog');
+                } else if (_0x312e80[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                    _0x59b59e['popError'](_0x312e80['responseText'], _0x312e80['status'], 'Reblog');
                 }
                 _0xbe94bc[_0x363a('0x26f')] = ![];
                 _0x59b59e[_0x363a('0x18d')]();
             }
             ;
-            _0x312e80[_0x363a('0x182')](encodeHtmlForm(_0x1279c6));
+            _0x312e80['send'](encodeHtmlForm(_0x1279c6));
         },
         'actUnReblog': function(_0x411ccc, _0x12a06c) {
             if (0x1 == this['optConfirm'][_0x363a('0x271')] && !![] !== _0x12a06c) {
@@ -4332,21 +4341,21 @@ var app = new Vue({
             var _0x263f32 = [];
             var _0x5c3f03 = {};
             var _0x2ee731 = new XMLHttpRequest();
-            _0x2ee731['open'](_0x363a('0x179'), ACT_UNREBLOG[_0x363a('0xcf')](_0x363a('0x189'), _0x3e1fc8[_0x363a('0xdc')])[_0x363a('0xcf')](_0x363a('0x1b8'), _0x411ccc['id']), !![]);
-            _0x2ee731[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x2ee731['open']('POST', ACT_UNREBLOG.replace('[I]', _0x3e1fc8['repository']).replace(_0x363a('0x1b8'), _0x411ccc['id']), !![]);
+            _0x2ee731['timeout'] = REQ_TIMEOUT;
             _0x2ee731[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x3e1fc8['at']);
-            _0x2ee731[_0x363a('0x18a')](_0x363a('0x1d5'), _0x363a('0x17b'));
-            _0x2ee731[_0x363a('0x17c')] = function() {
-                if (_0x2ee731[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x2ee731[_0x363a('0x17e')] == 0xc8) {
+            _0x2ee731[_0x363a('0x18a')](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
+            _0x2ee731['onreadystatechange'] = function() {
+                if (_0x2ee731[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x2ee731['status'] == 0xc8) {
                     _0x3e1fc8[_0x363a('0x270')](_0x411ccc['id'], null);
                 } else if (_0x2ee731[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x3e1fc8[_0x363a('0x17f')](_0x2ee731[_0x363a('0x180')], _0x2ee731[_0x363a('0x17e')], _0x363a('0x272'));
+                    _0x3e1fc8['popError'](_0x2ee731['responseText'], _0x2ee731['status'], _0x363a('0x272'));
                 }
                 _0x411ccc[_0x363a('0x26f')] = ![];
                 _0x3e1fc8[_0x363a('0x18d')]();
             }
             ;
-            _0x2ee731[_0x363a('0x182')](encodeHtmlForm(_0x5c3f03));
+            _0x2ee731['send'](encodeHtmlForm(_0x5c3f03));
         },
         'updateReblog': function(_0x3b6be9, _0x339cfb) {
             var _0x380e4d = this;
@@ -4367,14 +4376,14 @@ var app = new Vue({
                 }
             });
             _0x380e4d['notifs'][_0x363a('0x121')](function(_0x29da09, _0x366e09) {
-                if (_0x29da09['status'] && _0x29da09[_0x363a('0x17e')]['id'] == _0x3b6be9) {
-                    _0x29da09[_0x363a('0x17e')][_0x363a('0x273')] = _0x339cfb;
+                if (_0x29da09['status'] && _0x29da09['status']['id'] == _0x3b6be9) {
+                    _0x29da09['status'][_0x363a('0x273')] = _0x339cfb;
                     return !![];
                 }
             });
             _0x380e4d[_0x363a('0xb1')][_0x363a('0x121')](function(_0x50d7c6, _0x352d5a) {
-                if (_0x50d7c6[_0x363a('0x17e')] && _0x50d7c6[_0x363a('0x17e')]['id'] == _0x3b6be9) {
-                    _0x50d7c6[_0x363a('0x17e')][_0x363a('0x273')] = _0x339cfb;
+                if (_0x50d7c6['status'] && _0x50d7c6['status']['id'] == _0x3b6be9) {
+                    _0x50d7c6['status'][_0x363a('0x273')] = _0x339cfb;
                     return !![];
                 }
             });
@@ -4430,17 +4439,17 @@ var app = new Vue({
             var _0xd72143 = [];
             var _0x262d49 = {};
             var _0x4f4a63 = new XMLHttpRequest();
-            _0x4f4a63[_0x363a('0x178')](_0x363a('0x179'), ACT_FOLLOW[_0x363a('0xcf')](_0x363a('0x189'), _0x2c2bda['repository'])[_0x363a('0xcf')]('[AID]', _0x5315b5['id']), !![]);
+            _0x4f4a63['open']('POST', ACT_FOLLOW.replace('[I]', _0x2c2bda['repository']).replace('[AID]', _0x5315b5['id']), !![]);
             _0x4f4a63['timeout'] = REQ_TIMEOUT;
             _0x4f4a63[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x2c2bda['at']);
-            _0x4f4a63[_0x363a('0x18a')]('Content-type', _0x363a('0x17b'));
+            _0x4f4a63[_0x363a('0x18a')]('Content-type', 'application/x-www-form-urlencoded');
             _0x4f4a63['onreadystatechange'] = function() {
-                if (_0x4f4a63['readyState'] == XMLHttpRequest[_0x363a('0x17d')] && _0x4f4a63[_0x363a('0x17e')] == 0xc8) {
-                    _0x2c2bda[_0x363a('0x161')][0x0] = JSON[_0x363a('0x70')](_0x4f4a63[_0x363a('0x180')]);
+                if (_0x4f4a63['readyState'] == XMLHttpRequest['DONE'] && _0x4f4a63['status'] == 0xc8) {
+                    _0x2c2bda[_0x363a('0x161')][0x0] = JSON[_0x363a('0x70')](_0x4f4a63['responseText']);
                     _0x2c2bda[_0x363a('0x275')](_0x5315b5['id'], _0x2c2bda['acct_relation'][0x0]);
                     _0x2c2bda[_0x363a('0x18d')]();
-                } else if (_0x4f4a63[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
-                    _0x2c2bda[_0x363a('0x17f')](_0x4f4a63[_0x363a('0x180')], _0x4f4a63[_0x363a('0x17e')], 'Follow');
+                } else if (_0x4f4a63[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                    _0x2c2bda['popError'](_0x4f4a63['responseText'], _0x4f4a63['status'], 'Follow');
                 }
                 _0x5315b5[_0x363a('0x274')] = ![];
                 _0x2c2bda[_0x363a('0x18d')]();
@@ -4459,23 +4468,23 @@ var app = new Vue({
             var _0x4ac3ff = [];
             var _0x527aaf = {};
             var _0x3dea81 = new XMLHttpRequest();
-            _0x3dea81['open']('POST', ACT_UNFOLLOW['replace'](_0x363a('0x189'), _0x20f54f[_0x363a('0xdc')])['replace'](_0x363a('0x1a9'), _0x1e69a7['id']), !![]);
-            _0x3dea81[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x3dea81['open']('POST', ACT_UNFOLLOW.replace('[I]', _0x20f54f['repository']).replace(_0x363a('0x1a9'), _0x1e69a7['id']), !![]);
+            _0x3dea81['timeout'] = REQ_TIMEOUT;
             _0x3dea81[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x20f54f['at']);
-            _0x3dea81['setRequestHeader'](_0x363a('0x1d5'), _0x363a('0x17b'));
-            _0x3dea81[_0x363a('0x17c')] = function() {
-                if (_0x3dea81[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x3dea81[_0x363a('0x17e')] == 0xc8) {
-                    _0x20f54f[_0x363a('0x161')][0x0] = JSON[_0x363a('0x70')](_0x3dea81[_0x363a('0x180')]);
+            _0x3dea81['setRequestHeader'](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
+            _0x3dea81['onreadystatechange'] = function() {
+                if (_0x3dea81[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x3dea81['status'] == 0xc8) {
+                    _0x20f54f[_0x363a('0x161')][0x0] = JSON[_0x363a('0x70')](_0x3dea81['responseText']);
                     _0x20f54f['updateRelation'](_0x1e69a7['id'], _0x20f54f[_0x363a('0x161')][0x0]);
                     _0x20f54f[_0x363a('0x18d')]();
-                } else if (_0x3dea81['readyState'] == XMLHttpRequest[_0x363a('0x17d')]) {
-                    _0x20f54f[_0x363a('0x17f')](_0x3dea81[_0x363a('0x180')], _0x3dea81[_0x363a('0x17e')], _0x363a('0x277'));
+                } else if (_0x3dea81['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x20f54f['popError'](_0x3dea81['responseText'], _0x3dea81['status'], _0x363a('0x277'));
                 }
                 _0x1e69a7['req_follow'] = ![];
                 _0x20f54f[_0x363a('0x18d')]();
             }
             ;
-            _0x3dea81[_0x363a('0x182')](encodeHtmlForm(_0x527aaf));
+            _0x3dea81['send'](encodeHtmlForm(_0x527aaf));
         },
         'updateRelation': function(_0x3c0905, _0x3ebad0) {
             var _0x31b925 = this;
@@ -4496,21 +4505,21 @@ var app = new Vue({
             var _0x3a09ff = [];
             var _0x384f7c = {};
             var _0x42bbe0 = new XMLHttpRequest();
-            _0x42bbe0[_0x363a('0x178')]('POST', FOLLOW_AUTH[_0x363a('0xcf')]('[I]', _0x4da9d6['repository'])[_0x363a('0xcf')](_0x363a('0x1a9'), _0x3b296d['id']), !![]);
-            _0x42bbe0[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x42bbe0['open']('POST', FOLLOW_AUTH.replace('[I]', _0x4da9d6['repository']).replace(_0x363a('0x1a9'), _0x3b296d['id']), !![]);
+            _0x42bbe0['timeout'] = REQ_TIMEOUT;
             _0x42bbe0['setRequestHeader'](_0x363a('0x18b'), 'Bearer\x20' + _0x4da9d6['at']);
-            _0x42bbe0[_0x363a('0x18a')]('Content-type', _0x363a('0x17b'));
-            _0x42bbe0[_0x363a('0x17c')] = function() {
-                if (_0x42bbe0[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x42bbe0['status'] == 0xc8) {
+            _0x42bbe0[_0x363a('0x18a')]('Content-type', 'application/x-www-form-urlencoded');
+            _0x42bbe0['onreadystatechange'] = function() {
+                if (_0x42bbe0[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x42bbe0['status'] == 0xc8) {
                     _0x4da9d6[_0x363a('0x27a')](_0x3b296d['id'], !![]);
-                } else if (_0x42bbe0[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
-                    _0x4da9d6['popError'](_0x42bbe0[_0x363a('0x180')], _0x42bbe0[_0x363a('0x17e')], 'Request');
+                } else if (_0x42bbe0[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                    _0x4da9d6['popError'](_0x42bbe0['responseText'], _0x42bbe0['status'], 'Request');
                 }
                 _0x3b296d['req_follow'] = ![];
                 _0x4da9d6['$forceUpdate']();
             }
             ;
-            _0x42bbe0[_0x363a('0x182')](encodeHtmlForm(_0x384f7c));
+            _0x42bbe0['send'](encodeHtmlForm(_0x384f7c));
         },
         'actUnFollowAuth': function(_0x41145, _0x6533f8) {
             _0x41145[_0x363a('0x274')] = !![];
@@ -4519,21 +4528,21 @@ var app = new Vue({
             var _0x5f4533 = [];
             var _0x1337fa = {};
             var _0x4b4b4e = new XMLHttpRequest();
-            _0x4b4b4e[_0x363a('0x178')](_0x363a('0x179'), FOLLOW_REJECT[_0x363a('0xcf')](_0x363a('0x189'), _0x2d2649[_0x363a('0xdc')])[_0x363a('0xcf')](_0x363a('0x1a9'), _0x41145['id']), !![]);
-            _0x4b4b4e[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x4b4b4e['open']('POST', FOLLOW_REJECT.replace('[I]', _0x2d2649['repository']).replace(_0x363a('0x1a9'), _0x41145['id']), !![]);
+            _0x4b4b4e['timeout'] = REQ_TIMEOUT;
             _0x4b4b4e[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x2d2649['at']);
             _0x4b4b4e['setRequestHeader'](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
-            _0x4b4b4e[_0x363a('0x17c')] = function() {
-                if (_0x4b4b4e['readyState'] == XMLHttpRequest[_0x363a('0x17d')] && _0x4b4b4e['status'] == 0xc8) {
+            _0x4b4b4e['onreadystatechange'] = function() {
+                if (_0x4b4b4e['readyState'] == XMLHttpRequest['DONE'] && _0x4b4b4e['status'] == 0xc8) {
                     _0x2d2649['updateFollowAuth'](_0x41145['id'], ![]);
                 } else if (_0x4b4b4e[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x2d2649['popError'](_0x4b4b4e[_0x363a('0x180')], _0x4b4b4e[_0x363a('0x17e')], _0x363a('0x27b'));
+                    _0x2d2649['popError'](_0x4b4b4e['responseText'], _0x4b4b4e['status'], _0x363a('0x27b'));
                 }
                 _0x41145[_0x363a('0x274')] = ![];
                 _0x2d2649[_0x363a('0x18d')]();
             }
             ;
-            _0x4b4b4e[_0x363a('0x182')](encodeHtmlForm(_0x1337fa));
+            _0x4b4b4e['send'](encodeHtmlForm(_0x1337fa));
         },
         'updateFollowAuth': function(_0x12557d, _0x6f28da) {
             var _0xf1a120 = this;
@@ -4557,23 +4566,23 @@ var app = new Vue({
             var _0x2ee2e9 = [];
             var _0x65540e = {};
             var _0xa12cc2 = new XMLHttpRequest();
-            _0xa12cc2[_0x363a('0x178')](_0x363a('0x179'), ACT_MUTE[_0x363a('0xcf')](_0x363a('0x189'), _0x2b01d9[_0x363a('0xdc')])[_0x363a('0xcf')]('[AID]', _0x5f2d0b['id']), !![]);
-            _0xa12cc2[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0xa12cc2['open']('POST', ACT_MUTE.replace('[I]', _0x2b01d9['repository']).replace('[AID]', _0x5f2d0b['id']), !![]);
+            _0xa12cc2['timeout'] = REQ_TIMEOUT;
             _0xa12cc2[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x2b01d9['at']);
-            _0xa12cc2[_0x363a('0x18a')](_0x363a('0x1d5'), _0x363a('0x17b'));
+            _0xa12cc2[_0x363a('0x18a')](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
             _0xa12cc2['onreadystatechange'] = function() {
-                if (_0xa12cc2[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0xa12cc2[_0x363a('0x17e')] == 0xc8) {
-                    _0x2b01d9[_0x363a('0x161')][0x0] = JSON[_0x363a('0x70')](_0xa12cc2[_0x363a('0x180')]);
+                if (_0xa12cc2[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0xa12cc2['status'] == 0xc8) {
+                    _0x2b01d9[_0x363a('0x161')][0x0] = JSON[_0x363a('0x70')](_0xa12cc2['responseText']);
                     _0x2b01d9[_0x363a('0x275')](_0x5f2d0b['id'], _0x2b01d9[_0x363a('0x161')][0x0]);
                     _0x2b01d9['$forceUpdate']();
-                } else if (_0xa12cc2[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
-                    _0x2b01d9[_0x363a('0x17f')](_0xa12cc2[_0x363a('0x180')], _0xa12cc2['status'], _0x363a('0x27e'));
+                } else if (_0xa12cc2[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                    _0x2b01d9['popError'](_0xa12cc2['responseText'], _0xa12cc2['status'], _0x363a('0x27e'));
                 }
                 _0x5f2d0b['req_mute'] = ![];
                 _0x2b01d9[_0x363a('0x18d')]();
             }
             ;
-            _0xa12cc2[_0x363a('0x182')](encodeHtmlForm(_0x65540e));
+            _0xa12cc2['send'](encodeHtmlForm(_0x65540e));
         },
         'actUnMute': function(_0x4d46d9, _0x2677ab) {
             if (0x1 == this[_0x363a('0x1f9')][_0x363a('0x27f')] && !![] !== _0x2677ab) {
@@ -4586,23 +4595,23 @@ var app = new Vue({
             var _0x52c0de = [];
             var _0x35e8b4 = {};
             var _0x2a8640 = new XMLHttpRequest();
-            _0x2a8640[_0x363a('0x178')](_0x363a('0x179'), ACT_UNMUTE[_0x363a('0xcf')](_0x363a('0x189'), _0x568e46[_0x363a('0xdc')])[_0x363a('0xcf')](_0x363a('0x1a9'), _0x4d46d9['id']), !![]);
+            _0x2a8640['open']('POST', ACT_UNMUTE.replace('[I]', _0x568e46['repository']).replace(_0x363a('0x1a9'), _0x4d46d9['id']), !![]);
             _0x2a8640['timeout'] = REQ_TIMEOUT;
             _0x2a8640[_0x363a('0x18a')](_0x363a('0x18b'), 'Bearer\x20' + _0x568e46['at']);
-            _0x2a8640[_0x363a('0x18a')](_0x363a('0x1d5'), _0x363a('0x17b'));
-            _0x2a8640[_0x363a('0x17c')] = function() {
-                if (_0x2a8640[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x2a8640[_0x363a('0x17e')] == 0xc8) {
-                    _0x568e46[_0x363a('0x161')][0x0] = JSON[_0x363a('0x70')](_0x2a8640[_0x363a('0x180')]);
+            _0x2a8640[_0x363a('0x18a')](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
+            _0x2a8640['onreadystatechange'] = function() {
+                if (_0x2a8640[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x2a8640['status'] == 0xc8) {
+                    _0x568e46[_0x363a('0x161')][0x0] = JSON[_0x363a('0x70')](_0x2a8640['responseText']);
                     _0x568e46[_0x363a('0x275')](_0x4d46d9['id'], _0x568e46[_0x363a('0x161')][0x0]);
                     _0x568e46[_0x363a('0x18d')]();
-                } else if (_0x2a8640[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
-                    _0x568e46[_0x363a('0x17f')](_0x2a8640[_0x363a('0x180')], _0x2a8640['status'], _0x363a('0x27e'));
+                } else if (_0x2a8640[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                    _0x568e46['popError'](_0x2a8640['responseText'], _0x2a8640['status'], _0x363a('0x27e'));
                 }
                 _0x4d46d9[_0x363a('0x27d')] = ![];
                 _0x568e46['$forceUpdate']();
             }
             ;
-            _0x2a8640[_0x363a('0x182')](encodeHtmlForm(_0x35e8b4));
+            _0x2a8640['send'](encodeHtmlForm(_0x35e8b4));
         },
         'actBlock': function(_0x542d5b, _0x1da8cc) {
             if (0x1 == this['optConfirm']['block'] && !![] !== _0x1da8cc) {
@@ -4615,23 +4624,23 @@ var app = new Vue({
             var _0x2e0472 = [];
             var _0x5c1844 = {};
             var _0xc635b3 = new XMLHttpRequest();
-            _0xc635b3[_0x363a('0x178')](_0x363a('0x179'), ACT_BLOCK[_0x363a('0xcf')](_0x363a('0x189'), _0x107968[_0x363a('0xdc')])[_0x363a('0xcf')](_0x363a('0x1a9'), _0x542d5b['id']), !![]);
-            _0xc635b3[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0xc635b3['open']('POST', ACT_BLOCK.replace('[I]', _0x107968['repository']).replace(_0x363a('0x1a9'), _0x542d5b['id']), !![]);
+            _0xc635b3['timeout'] = REQ_TIMEOUT;
             _0xc635b3[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x107968['at']);
-            _0xc635b3[_0x363a('0x18a')]('Content-type', _0x363a('0x17b'));
+            _0xc635b3[_0x363a('0x18a')]('Content-type', 'application/x-www-form-urlencoded');
             _0xc635b3['onreadystatechange'] = function() {
-                if (_0xc635b3[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0xc635b3[_0x363a('0x17e')] == 0xc8) {
+                if (_0xc635b3[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0xc635b3['status'] == 0xc8) {
                     _0x107968[_0x363a('0x161')][0x0] = JSON[_0x363a('0x70')](_0xc635b3['responseText']);
                     _0x107968['updateRelation'](_0x542d5b['id'], _0x107968[_0x363a('0x161')][0x0]);
                     _0x107968[_0x363a('0x18d')]();
                 } else if (_0xc635b3[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x107968[_0x363a('0x17f')](_0xc635b3[_0x363a('0x180')], _0xc635b3[_0x363a('0x17e')], 'Block');
+                    _0x107968['popError'](_0xc635b3['responseText'], _0xc635b3['status'], 'Block');
                 }
                 _0x542d5b[_0x363a('0x280')] = ![];
                 _0x107968[_0x363a('0x18d')]();
             }
             ;
-            _0xc635b3[_0x363a('0x182')](encodeHtmlForm(_0x5c1844));
+            _0xc635b3['send'](encodeHtmlForm(_0x5c1844));
         },
         'actUnBlock': function(_0x363ed0, _0x3cd571) {
             if (0x1 == this[_0x363a('0x1f9')][_0x363a('0x281')] && !![] !== _0x3cd571) {
@@ -4644,23 +4653,23 @@ var app = new Vue({
             var _0x33f04d = [];
             var _0x2110c6 = {};
             var _0x3d3ded = new XMLHttpRequest();
-            _0x3d3ded[_0x363a('0x178')](_0x363a('0x179'), ACT_UNBLOCK[_0x363a('0xcf')](_0x363a('0x189'), _0x49c0f8[_0x363a('0xdc')])[_0x363a('0xcf')](_0x363a('0x1a9'), _0x363ed0['id']), !![]);
-            _0x3d3ded[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x3d3ded['open']('POST', ACT_UNBLOCK.replace('[I]', _0x49c0f8['repository']).replace(_0x363a('0x1a9'), _0x363ed0['id']), !![]);
+            _0x3d3ded['timeout'] = REQ_TIMEOUT;
             _0x3d3ded['setRequestHeader'](_0x363a('0x18b'), 'Bearer\x20' + _0x49c0f8['at']);
-            _0x3d3ded[_0x363a('0x18a')](_0x363a('0x1d5'), _0x363a('0x17b'));
+            _0x3d3ded[_0x363a('0x18a')](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
             _0x3d3ded['onreadystatechange'] = function() {
-                if (_0x3d3ded[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x3d3ded[_0x363a('0x17e')] == 0xc8) {
-                    _0x49c0f8[_0x363a('0x161')][0x0] = JSON[_0x363a('0x70')](_0x3d3ded[_0x363a('0x180')]);
+                if (_0x3d3ded[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x3d3ded['status'] == 0xc8) {
+                    _0x49c0f8[_0x363a('0x161')][0x0] = JSON[_0x363a('0x70')](_0x3d3ded['responseText']);
                     _0x49c0f8[_0x363a('0x275')](_0x363ed0['id'], _0x49c0f8[_0x363a('0x161')][0x0]);
                     _0x49c0f8[_0x363a('0x18d')]();
-                } else if (_0x3d3ded[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
-                    _0x49c0f8['popError'](_0x3d3ded[_0x363a('0x180')], _0x3d3ded[_0x363a('0x17e')], _0x363a('0x282'));
+                } else if (_0x3d3ded[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                    _0x49c0f8['popError'](_0x3d3ded['responseText'], _0x3d3ded['status'], _0x363a('0x282'));
                 }
                 _0x363ed0[_0x363a('0x280')] = ![];
                 _0x49c0f8[_0x363a('0x18d')]();
             }
             ;
-            _0x3d3ded[_0x363a('0x182')](encodeHtmlForm(_0x2110c6));
+            _0x3d3ded['send'](encodeHtmlForm(_0x2110c6));
         },
         'actPin': function(_0x46db79, _0x9949da) {
             var _0x35187a = ![];
@@ -4683,15 +4692,15 @@ var app = new Vue({
             var _0x5ab5ab = [];
             var _0x2951b3 = {};
             var _0x3057e8 = new XMLHttpRequest();
-            _0x3057e8['open'](_0x363a('0x179'), ACT_PIN[_0x363a('0xcf')](_0x363a('0x189'), _0xdc3c52['repository'])[_0x363a('0xcf')](_0x363a('0x1b8'), _0x46db79['id']), !![]);
-            _0x3057e8[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x3057e8['open']('POST', ACT_PIN.replace('[I]', _0xdc3c52['repository']).replace(_0x363a('0x1b8'), _0x46db79['id']), !![]);
+            _0x3057e8['timeout'] = REQ_TIMEOUT;
             _0x3057e8['setRequestHeader'](_0x363a('0x18b'), _0x363a('0x18c') + _0xdc3c52['at']);
-            _0x3057e8[_0x363a('0x18a')](_0x363a('0x1d5'), _0x363a('0x17b'));
-            _0x3057e8[_0x363a('0x17c')] = function() {
+            _0x3057e8[_0x363a('0x18a')](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
+            _0x3057e8['onreadystatechange'] = function() {
                 if (_0x3057e8[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x3057e8['status'] == 0xc8) {
                     _0xdc3c52[_0x363a('0x285')](_0x46db79['id'], !![]);
                 } else if (_0x3057e8[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0xdc3c52[_0x363a('0x17f')](_0x3057e8[_0x363a('0x180')], _0x3057e8[_0x363a('0x17e')], _0x363a('0x286'));
+                    _0xdc3c52['popError'](_0x3057e8['responseText'], _0x3057e8['status'], _0x363a('0x286'));
                 }
                 _0x46db79[_0x363a('0x284')] = ![];
                 _0xdc3c52[_0x363a('0x18d')]();
@@ -4710,21 +4719,21 @@ var app = new Vue({
             var _0x4d1b6c = [];
             var _0x39f9d1 = {};
             var _0x2874bb = new XMLHttpRequest();
-            _0x2874bb[_0x363a('0x178')](_0x363a('0x179'), ACT_UNPIN[_0x363a('0xcf')](_0x363a('0x189'), _0x4713ef['repository'])[_0x363a('0xcf')](_0x363a('0x1b8'), _0x145f92['id']), !![]);
-            _0x2874bb[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x2874bb['open']('POST', ACT_UNPIN.replace('[I]', _0x4713ef['repository']).replace(_0x363a('0x1b8'), _0x145f92['id']), !![]);
+            _0x2874bb['timeout'] = REQ_TIMEOUT;
             _0x2874bb['setRequestHeader'](_0x363a('0x18b'), _0x363a('0x18c') + _0x4713ef['at']);
             _0x2874bb[_0x363a('0x18a')](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
             _0x2874bb['onreadystatechange'] = function() {
-                if (_0x2874bb[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x2874bb[_0x363a('0x17e')] == 0xc8) {
+                if (_0x2874bb[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x2874bb['status'] == 0xc8) {
                     _0x4713ef[_0x363a('0x285')](_0x145f92['id'], ![]);
-                } else if (_0x2874bb[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
-                    _0x4713ef[_0x363a('0x17f')](_0x2874bb[_0x363a('0x180')], _0x2874bb['status'], _0x363a('0x286'));
+                } else if (_0x2874bb[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                    _0x4713ef['popError'](_0x2874bb['responseText'], _0x2874bb['status'], _0x363a('0x286'));
                 }
                 _0x145f92[_0x363a('0x284')] = ![];
                 _0x4713ef[_0x363a('0x18d')]();
             }
             ;
-            _0x2874bb[_0x363a('0x182')](encodeHtmlForm(_0x39f9d1));
+            _0x2874bb['send'](encodeHtmlForm(_0x39f9d1));
         },
         'updatePin': function(_0xe339bb, _0x463d4e) {
             var _0x1a2698 = this;
@@ -4765,22 +4774,22 @@ var app = new Vue({
             var _0x1908e3 = [];
             var _0x4b0efb = {};
             var _0xeb277b = new XMLHttpRequest();
-            _0xeb277b[_0x363a('0x178')](_0x363a('0x260'), DETAIL[_0x363a('0xcf')](_0x363a('0x189'), _0x5f5670[_0x363a('0xdc')])[_0x363a('0xcf')](_0x363a('0x1b8'), _0x56d8ab['id']), !![]);
-            _0xeb277b[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0xeb277b['open'](_0x363a('0x260'), DETAIL.replace('[I]', _0x5f5670['repository']).replace(_0x363a('0x1b8'), _0x56d8ab['id']), !![]);
+            _0xeb277b['timeout'] = REQ_TIMEOUT;
             _0xeb277b[_0x363a('0x18a')](_0x363a('0x18b'), 'Bearer\x20' + _0x5f5670['at']);
             _0xeb277b[_0x363a('0x18a')](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
-            _0xeb277b[_0x363a('0x17c')] = function() {
-                if (_0xeb277b[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0xeb277b[_0x363a('0x17e')] == 0xc8) {
+            _0xeb277b['onreadystatechange'] = function() {
+                if (_0xeb277b[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0xeb277b['status'] == 0xc8) {
                     _0x5f5670['updateDelete'](_0x56d8ab['id']);
                     _0x5f5670[_0x363a('0x1cb')](_0x5f5670[_0x363a('0xad')]['id']);
-                } else if (_0xeb277b['readyState'] == XMLHttpRequest[_0x363a('0x17d')]) {
-                    _0x5f5670[_0x363a('0x17f')](_0xeb277b[_0x363a('0x180')], _0xeb277b[_0x363a('0x17e')], _0x363a('0x28a'));
+                } else if (_0xeb277b['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x5f5670['popError'](_0xeb277b['responseText'], _0xeb277b['status'], _0x363a('0x28a'));
                 }
                 _0x56d8ab['req_delete'] = ![];
                 _0x5f5670['$forceUpdate']();
             }
             ;
-            _0xeb277b[_0x363a('0x182')](encodeHtmlForm(_0x4b0efb));
+            _0xeb277b['send'](encodeHtmlForm(_0x4b0efb));
         },
         'updateDelete': function(_0x14eeb4) {
             var _0x30c526 = this;
@@ -4801,13 +4810,13 @@ var app = new Vue({
                 }
             });
             _0x30c526[_0x363a('0xb0')][_0x363a('0x121')](function(_0x57de03, _0xd17f56) {
-                if (_0x57de03[_0x363a('0x17e')] && _0x57de03[_0x363a('0x17e')]['id'] == _0x14eeb4) {
+                if (_0x57de03['status'] && _0x57de03['status']['id'] == _0x14eeb4) {
                     _0x57de03[_0x363a('0x16e')] = _0x363a('0x28b');
                     return !![];
                 }
             });
             _0x30c526[_0x363a('0xb1')]['filter'](function(_0x4d1880, _0x54f184) {
-                if (_0x4d1880[_0x363a('0x17e')] && _0x4d1880[_0x363a('0x17e')]['id'] == _0x14eeb4) {
+                if (_0x4d1880['status'] && _0x4d1880['status']['id'] == _0x14eeb4) {
                     _0x4d1880[_0x363a('0x16e')] = _0x363a('0x28b');
                     return !![];
                 }
@@ -4852,19 +4861,19 @@ var app = new Vue({
                 'comment': null == document['getElementById'](_0x363a('0x28d')) ? '' : document['getElementById'](_0x363a('0x28d'))[_0x363a('0x59')]
             };
             var _0x584460 = new XMLHttpRequest();
-            _0x584460[_0x363a('0x178')](_0x363a('0x179'), REPORT[_0x363a('0xcf')](_0x363a('0x189'), _0x27e7e7[_0x363a('0xdc')])[_0x363a('0xcf')](_0x363a('0x1b8'), _0x5460c4['id']), !![]);
-            _0x584460[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x584460['open']('POST', REPORT.replace('[I]', _0x27e7e7['repository']).replace(_0x363a('0x1b8'), _0x5460c4['id']), !![]);
+            _0x584460['timeout'] = REQ_TIMEOUT;
             _0x584460[_0x363a('0x18a')]('Authorization', _0x363a('0x18c') + _0x27e7e7['at']);
-            _0x584460[_0x363a('0x18a')]('Content-type', _0x363a('0x17b'));
-            _0x584460[_0x363a('0x17c')] = function() {
-                if (_0x584460[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x584460['status'] == 0xc8) {} else if (_0x584460[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x27e7e7[_0x363a('0x17f')](_0x584460[_0x363a('0x180')], _0x584460[_0x363a('0x17e')], _0x363a('0x28e'));
+            _0x584460[_0x363a('0x18a')]('Content-type', 'application/x-www-form-urlencoded');
+            _0x584460['onreadystatechange'] = function() {
+                if (_0x584460[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x584460['status'] == 0xc8) {} else if (_0x584460[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                    _0x27e7e7['popError'](_0x584460['responseText'], _0x584460['status'], _0x363a('0x28e'));
                 }
                 _0x5460c4[_0x363a('0x28f')] = ![];
                 _0x27e7e7[_0x363a('0x18d')]();
             }
             ;
-            _0x584460[_0x363a('0x182')](encodeHtmlForm(_0x5c7d23));
+            _0x584460['send'](encodeHtmlForm(_0x5c7d23));
         },
         'actProfile': function() {
             var _0x1d79b3 = this['profile'][_0x363a('0xe6')];
@@ -4883,16 +4892,16 @@ var app = new Vue({
             _0x5b02aa[_0x363a('0xb5')][_0x363a('0x292')] = !![];
             _0x5b02aa[_0x363a('0x18d')]();
             var _0x488f04 = new XMLHttpRequest();
-            _0x488f04[_0x363a('0x178')](_0x363a('0x293'), PROFILE[_0x363a('0xcf')](_0x363a('0x189'), _0x5b02aa[_0x363a('0xdc')]), !![]);
+            _0x488f04['open'](_0x363a('0x293'), PROFILE.replace('[I]', _0x5b02aa['repository']), !![]);
             _0x488f04['timeout'] = REQ_TIMEOUT;
             _0x488f04['setRequestHeader'](_0x363a('0x18b'), 'Bearer\x20' + _0x5b02aa['at']);
-            _0x488f04['setRequestHeader'](_0x363a('0x1d5'), _0x363a('0x17b'));
-            _0x488f04[_0x363a('0x17c')] = function() {
-                if (_0x488f04[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x488f04[_0x363a('0x17e')] == 0xc8) {
+            _0x488f04['setRequestHeader'](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
+            _0x488f04['onreadystatechange'] = function() {
+                if (_0x488f04[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x488f04['status'] == 0xc8) {
                     _0x5b02aa[_0x363a('0x1cb')](_0x5b02aa[_0x363a('0xad')]['id']);
                     _0x5b02aa[_0x363a('0x8a')]();
                 } else if (_0x488f04[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x5b02aa[_0x363a('0x17f')](_0x488f04[_0x363a('0x180')], _0x488f04[_0x363a('0x17e')], _0x363a('0x294'));
+                    _0x5b02aa['popError'](_0x488f04['responseText'], _0x488f04['status'], _0x363a('0x294'));
                 }
                 _0x5b02aa['acct'][_0x363a('0x292')] = ![];
                 _0x5b02aa['profile'] = [];
@@ -4900,7 +4909,7 @@ var app = new Vue({
                 _0x5b02aa[_0x363a('0x18d')]();
             }
             ;
-            _0x488f04[_0x363a('0x182')](encodeHtmlForm(_0xc2b230));
+            _0x488f04['send'](encodeHtmlForm(_0xc2b230));
         },
         'actListProfile': function() {
             var _0x482c96 = this[_0x363a('0xe5')][_0x363a('0xe6')];
@@ -4916,15 +4925,15 @@ var app = new Vue({
             _0x5445e0[_0x363a('0xb9')][_0x363a('0x292')] = !![];
             _0x5445e0['$forceUpdate']();
             var _0x4ae111 = new XMLHttpRequest();
-            _0x4ae111['open']('PUT', LIST_OBJ[_0x363a('0xcf')](_0x363a('0x189'), _0x5445e0[_0x363a('0xdc')])[_0x363a('0xcf')]('[LID]', _0x5445e0['stream_list']['id']), !![]);
-            _0x4ae111[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x4ae111['open']('PUT', LIST_OBJ.replace('[I]', _0x5445e0['repository']).replace('[LID]', _0x5445e0['stream_list']['id']), !![]);
+            _0x4ae111['timeout'] = REQ_TIMEOUT;
             _0x4ae111['setRequestHeader'](_0x363a('0x18b'), _0x363a('0x18c') + _0x5445e0['at']);
-            _0x4ae111[_0x363a('0x18a')](_0x363a('0x1d5'), _0x363a('0x17b'));
-            _0x4ae111[_0x363a('0x17c')] = function() {
-                if (_0x4ae111['readyState'] == XMLHttpRequest[_0x363a('0x17d')] && _0x4ae111[_0x363a('0x17e')] == 0xc8) {
-                    _0x5445e0['stream_list'] = JSON[_0x363a('0x70')](_0x4ae111[_0x363a('0x180')]);
-                } else if (_0x4ae111[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
-                    _0x5445e0[_0x363a('0x17f')](_0x4ae111[_0x363a('0x180')], _0x4ae111[_0x363a('0x17e')], _0x363a('0x294'));
+            _0x4ae111[_0x363a('0x18a')](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
+            _0x4ae111['onreadystatechange'] = function() {
+                if (_0x4ae111['readyState'] == XMLHttpRequest['DONE'] && _0x4ae111['status'] == 0xc8) {
+                    _0x5445e0['stream_list'] = JSON[_0x363a('0x70')](_0x4ae111['responseText']);
+                } else if (_0x4ae111[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                    _0x5445e0['popError'](_0x4ae111['responseText'], _0x4ae111['status'], _0x363a('0x294'));
                 }
                 _0x5445e0[_0x363a('0xb9')][_0x363a('0x292')] = ![];
                 _0x5445e0['showStreamEdit'] = ![];
@@ -4932,7 +4941,7 @@ var app = new Vue({
                 _0x5445e0['$forceUpdate']();
             }
             ;
-            _0x4ae111[_0x363a('0x182')](encodeHtmlForm(_0x13f7a7));
+            _0x4ae111['send'](encodeHtmlForm(_0x13f7a7));
         },
         'updateImgLoading': function(_0x1c31e2) {
             var _0x3efaa2 = this;
@@ -4958,7 +4967,7 @@ var app = new Vue({
                 return;
             }
             var _0x32e81d = this;
-            var _0x354845 = _0x363a('0x297') == _0x32e81d[_0x363a('0x1ef')] || _0x363a('0x4f') == _0x32e81d['optAllOpen'] ? !![] : void 0x0;
+            var _0x354845 = _0x363a('0x297') == _0x32e81d[_0x363a('0x1ef')] || 'media' == _0x32e81d['optAllOpen'] ? !![] : void 0x0;
             var _0x4adbb3 = _0x363a('0x297') == _0x32e81d['optAllOpen'] || _0x363a('0x61') == _0x32e81d[_0x363a('0x1ef')] ? !![] : void 0x0;
             if (_0x363a('0x227') == _0x7e3127) {
                 _0x3332a9[_0x363a('0x298')] = _0x354845;
@@ -4967,8 +4976,8 @@ var app = new Vue({
                     _0x3332a9[_0x363a('0x10c')][_0x363a('0x298')] = _0x354845;
                     _0x3332a9[_0x363a('0x10c')][_0x363a('0x296')] = _0x4adbb3;
                 }
-                if (_0x3332a9[_0x363a('0x17e')]) {
-                    _0x3332a9[_0x363a('0x17e')][_0x363a('0x298')] = _0x354845;
+                if (_0x3332a9['status']) {
+                    _0x3332a9['status'][_0x363a('0x298')] = _0x354845;
                     _0x3332a9['status'][_0x363a('0x296')] = _0x4adbb3;
                 }
                 _0x32e81d[_0x363a('0x18d')]();
@@ -4999,16 +5008,16 @@ var app = new Vue({
                     _0x2b1974[_0x363a('0x10c')][_0x363a('0x298')] = _0x354845;
                     _0x2b1974[_0x363a('0x10c')][_0x363a('0x296')] = _0x4adbb3;
                 }
-                if (_0x2b1974[_0x363a('0x17e')]) {
+                if (_0x2b1974['status']) {
                     _0x2b1974['status'][_0x363a('0x298')] = _0x354845;
-                    _0x2b1974[_0x363a('0x17e')][_0x363a('0x296')] = _0x4adbb3;
+                    _0x2b1974['status'][_0x363a('0x296')] = _0x4adbb3;
                 }
             });
             _0x32e81d[_0x363a('0x18d')]();
         },
         'updateWrapperAll': function() {
             var _0x2c3978 = this;
-            var _0x5c6aee = 'both' == _0x2c3978[_0x363a('0x1ef')] || _0x363a('0x4f') == _0x2c3978[_0x363a('0x1ef')] ? !![] : void 0x0;
+            var _0x5c6aee = 'both' == _0x2c3978[_0x363a('0x1ef')] || 'media' == _0x2c3978[_0x363a('0x1ef')] ? !![] : void 0x0;
             var _0x1d416c = 'both' == _0x2c3978['optAllOpen'] || 'katsu' == _0x2c3978[_0x363a('0x1ef')] ? !![] : void 0x0;
             _0x2c3978['homes'][_0x363a('0x121')](function(_0x4c1474, _0x10ff79) {
                 _0x4c1474['media_opened'] = _0x5c6aee;
@@ -5023,15 +5032,15 @@ var app = new Vue({
                 _0x35644c[_0x363a('0x296')] = _0x1d416c;
             });
             _0x2c3978[_0x363a('0xb0')]['filter'](function(_0x240d8b, _0x360895) {
-                if (_0x240d8b[_0x363a('0x17e')]) {
-                    _0x240d8b[_0x363a('0x17e')]['media_opened'] = _0x5c6aee;
-                    _0x240d8b[_0x363a('0x17e')][_0x363a('0x296')] = _0x1d416c;
+                if (_0x240d8b['status']) {
+                    _0x240d8b['status']['media_opened'] = _0x5c6aee;
+                    _0x240d8b['status'][_0x363a('0x296')] = _0x1d416c;
                 }
             });
             _0x2c3978[_0x363a('0xb1')][_0x363a('0x121')](function(_0x2c2458, _0x2bf44b) {
-                if (_0x2c2458[_0x363a('0x17e')]) {
+                if (_0x2c2458['status']) {
                     _0x2c2458['status'][_0x363a('0x298')] = _0x5c6aee;
-                    _0x2c2458[_0x363a('0x17e')][_0x363a('0x296')] = _0x1d416c;
+                    _0x2c2458['status'][_0x363a('0x296')] = _0x1d416c;
                 }
             });
             _0x2c3978[_0x363a('0x15f')][_0x363a('0x121')](function(_0x263ff9, _0x4a630d) {
@@ -5076,30 +5085,30 @@ var app = new Vue({
             var _0x455ded = new RegExp(this[_0x363a('0x1f4')]);
             if (_0x363a('0x227') == _0x5a3621) {
                 if (_0x3e4291[_0x363a('0x10c')]) {
-                    _0x3e4291[_0x363a('0x10c')][_0x363a('0x299')] = _0x455ded[_0x363a('0x29a')](_0x3e4291[_0x363a('0x10c')][_0x363a('0x29b')] + _0x3e4291[_0x363a('0x10c')]['content'][_0x363a('0xcf')](/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
-                } else if (_0x3e4291[_0x363a('0x17e')]) {
-                    _0x3e4291['status'][_0x363a('0x299')] = _0x455ded[_0x363a('0x29a')](_0x3e4291[_0x363a('0x17e')][_0x363a('0x29b')] + _0x3e4291[_0x363a('0x17e')][_0x363a('0x22e')]['replace'](/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
+                    _0x3e4291[_0x363a('0x10c')][_0x363a('0x299')] = _0x455ded[_0x363a('0x29a')](_0x3e4291[_0x363a('0x10c')][_0x363a('0x29b')] + _0x3e4291[_0x363a('0x10c')]['content'].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
+                } else if (_0x3e4291['status']) {
+                    _0x3e4291['status'][_0x363a('0x299')] = _0x455ded[_0x363a('0x29a')](_0x3e4291['status'][_0x363a('0x29b')] + _0x3e4291['status'][_0x363a('0x22e')].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
                 } else {
-                    _0x3e4291[_0x363a('0x299')] = _0x455ded[_0x363a('0x29a')](_0x3e4291[_0x363a('0x29b')] + _0x3e4291['content'][_0x363a('0xcf')](/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
+                    _0x3e4291[_0x363a('0x299')] = _0x455ded[_0x363a('0x29a')](_0x3e4291[_0x363a('0x29b')] + _0x3e4291['content'].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
                 }
                 _0x160b73[_0x363a('0x18d')]();
                 return;
             }
             _0x3e4291[_0x363a('0x121')](function(_0x42fcdc, _0x58320c) {
                 if (_0x42fcdc[_0x363a('0x10c')]) {
-                    _0x42fcdc[_0x363a('0x10c')][_0x363a('0x299')] = _0x455ded[_0x363a('0x29a')](_0x42fcdc[_0x363a('0x10c')][_0x363a('0x29b')] + _0x42fcdc[_0x363a('0x10c')][_0x363a('0x22e')]['replace'](/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
-                } else if (_0x42fcdc[_0x363a('0x17e')]) {
-                    _0x42fcdc[_0x363a('0x17e')][_0x363a('0x299')] = _0x455ded[_0x363a('0x29a')](_0x42fcdc[_0x363a('0x17e')][_0x363a('0x29b')] + _0x42fcdc[_0x363a('0x17e')][_0x363a('0x22e')][_0x363a('0xcf')](/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
+                    _0x42fcdc[_0x363a('0x10c')][_0x363a('0x299')] = _0x455ded[_0x363a('0x29a')](_0x42fcdc[_0x363a('0x10c')][_0x363a('0x29b')] + _0x42fcdc[_0x363a('0x10c')][_0x363a('0x22e')].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
+                } else if (_0x42fcdc['status']) {
+                    _0x42fcdc['status'][_0x363a('0x299')] = _0x455ded[_0x363a('0x29a')](_0x42fcdc['status'][_0x363a('0x29b')] + _0x42fcdc['status'][_0x363a('0x22e')].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
                 } else {
-                    _0x42fcdc[_0x363a('0x299')] = _0x455ded[_0x363a('0x29a')](_0x42fcdc[_0x363a('0x29b')] + _0x42fcdc[_0x363a('0x22e')][_0x363a('0xcf')](/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
+                    _0x42fcdc[_0x363a('0x299')] = _0x455ded[_0x363a('0x29a')](_0x42fcdc[_0x363a('0x29b')] + _0x42fcdc[_0x363a('0x22e')].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
                 }
             });
             _0x160b73[_0x363a('0x18d')]();
         },
         'updateFilterAll': function() {
             if ('word' == this[_0x363a('0x1f1')]) {
-                var _0x4d138f = this[_0x363a('0x5e')][_0x363a('0x29c')]()[_0x363a('0x7f')](',')[_0x363a('0x121')](function(_0x2e3b42, _0x20e0b5) {
-                    _0x2e3b42 = _0x2e3b42[_0x363a('0xcf')](/[\\^$.*+?()[\]{}|]/g, _0x363a('0x29d'));
+                var _0x4d138f = this[_0x363a('0x5e')][_0x363a('0x29c')]()['split'](',')[_0x363a('0x121')](function(_0x2e3b42, _0x20e0b5) {
+                    _0x2e3b42 = _0x2e3b42.replace(/[\\^$.*+?()[\]{}|]/g, _0x363a('0x29d'));
                     return _0x2e3b42 !== '';
                 });
                 _0x4d138f[_0x363a('0xf0')](0xa);
@@ -5117,16 +5126,16 @@ var app = new Vue({
             var _0x163515 = new RegExp(this[_0x363a('0x1f4')]);
             _0x50c824[_0x363a('0xef')][_0x363a('0x121')](function(_0x319827, _0x235cdf) {
                 if (_0x319827[_0x363a('0x10c')]) {
-                    _0x319827[_0x363a('0x10c')][_0x363a('0x299')] = _0x163515[_0x363a('0x29a')](_0x319827[_0x363a('0x10c')][_0x363a('0x29b')] + _0x319827[_0x363a('0x10c')][_0x363a('0x22e')][_0x363a('0xcf')](/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
+                    _0x319827[_0x363a('0x10c')][_0x363a('0x299')] = _0x163515[_0x363a('0x29a')](_0x319827[_0x363a('0x10c')][_0x363a('0x29b')] + _0x319827[_0x363a('0x10c')][_0x363a('0x22e')].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
                 } else {
-                    _0x319827[_0x363a('0x299')] = _0x163515[_0x363a('0x29a')](_0x319827[_0x363a('0x29b')] + _0x319827[_0x363a('0x22e')][_0x363a('0xcf')](/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
+                    _0x319827[_0x363a('0x299')] = _0x163515[_0x363a('0x29a')](_0x319827[_0x363a('0x29b')] + _0x319827[_0x363a('0x22e')].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
                 }
             });
             _0x50c824[_0x363a('0xf9')][_0x363a('0x121')](function(_0x21446b, _0x5bfe56) {
-                _0x21446b[_0x363a('0x299')] = _0x163515[_0x363a('0x29a')](_0x21446b[_0x363a('0x29b')] + _0x21446b[_0x363a('0x22e')][_0x363a('0xcf')](/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
+                _0x21446b[_0x363a('0x299')] = _0x163515[_0x363a('0x29a')](_0x21446b[_0x363a('0x29b')] + _0x21446b[_0x363a('0x22e')].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
             });
             _0x50c824[_0x363a('0xff')][_0x363a('0x121')](function(_0x3609d8, _0x207aaa) {
-                _0x3609d8[_0x363a('0x299')] = _0x163515[_0x363a('0x29a')](_0x3609d8[_0x363a('0x29b')] + _0x3609d8[_0x363a('0x22e')]['replace'](/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
+                _0x3609d8[_0x363a('0x299')] = _0x163515[_0x363a('0x29a')](_0x3609d8[_0x363a('0x29b')] + _0x3609d8[_0x363a('0x22e')].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
             });
             _0x50c824['$forceUpdate']();
         },
@@ -5142,11 +5151,11 @@ var app = new Vue({
         },
         'setHistory': function() {
             var _0x852f2a = this;
-            history['pushState']('kktjs', null, location['href']);
+            history['pushState']('kktjs', null, location.href);
             window['addEventListener'](_0x363a('0x2a7'), function(_0x229dce) {
                 if (_0x852f2a['showEmojiPicker']) {
                     _0x852f2a[_0x363a('0x2a8')] = ![];
-                    history['pushState']('kktjs', null, location['href']);
+                    history['pushState']('kktjs', null, location.href);
                     return;
                 }
                 if (_0x852f2a['showForm'] || _0x852f2a['showSearch'] || _0x852f2a['showStream'] || _0x852f2a['showSetting'] || _0x852f2a['showLink']) {
@@ -5158,21 +5167,21 @@ var app = new Vue({
                     _0x852f2a['showStream'] = ![];
                     _0x852f2a['showSetting'] = ![];
                     _0x852f2a['showLink'] = ![];
-                    history['pushState']('kktjs', null, location['href']);
+                    history['pushState']('kktjs', null, location.href);
                     return;
                 }
                 if ('2' == _0x852f2a[_0x363a('0x154')] && !_0x852f2a[_0x363a('0x14a')]) {
                     _0x852f2a[_0x363a('0x2a9')]();
-                    history['pushState']('kktjs', null, location['href']);
+                    history['pushState']('kktjs', null, location.href);
                     return;
                 }
                 if ('2' != _0x852f2a[_0x363a('0x154')] && !_0x852f2a[_0x363a('0x14b')]) {
                     _0x852f2a[_0x363a('0x2aa')]();
-                    history['pushState']('kktjs', null, location['href']);
+                    history['pushState']('kktjs', null, location.href);
                     return;
                 }
                 _0x852f2a['showLink'] = !![];
-                history['pushState']('kktjs', null, location['href']);
+                history['pushState']('kktjs', null, location.href);
                 return;
             });
         },
@@ -5183,9 +5192,9 @@ var app = new Vue({
             var _0x31a278 = new XMLHttpRequest();
             _0x31a278[_0x363a('0x2ab')] = _0x363a('0x2ac');
             _0x31a278['open'](_0x363a('0x188'), _0x3f103f, !![]);
-            _0x31a278[_0x363a('0x17a')] = REQ_TIMEOUT;
-            _0x31a278[_0x363a('0x17c')] = function() {
-                if (_0x31a278['readyState'] == XMLHttpRequest['DONE'] && (_0x31a278[_0x363a('0x17e')] == 0x0 || _0x31a278[_0x363a('0x17e')] == 0xc8)) {
+            _0x31a278['timeout'] = REQ_TIMEOUT;
+            _0x31a278['onreadystatechange'] = function() {
+                if (_0x31a278['readyState'] == XMLHttpRequest['DONE'] && (_0x31a278['status'] == 0x0 || _0x31a278['status'] == 0xc8)) {
                     context[_0x363a('0x2ad')](_0x31a278[_0x363a('0x2ae')], function(_0x44907e) {
                         var _0x243bc7 = document[_0x363a('0x139')](_0x3c71f6);
                         _0x243bc7['addEventListener'](_0x363a('0x216'), function() {
@@ -5276,7 +5285,7 @@ var app = new Vue({
             if ('' != this['action_lock']) {
                 return ![];
             }
-            this[_0x363a('0x2c5')] = _0x363a('0x4f');
+            this[_0x363a('0x2c5')] = 'media';
             this['katsu'][_0x363a('0x2c6')]['push']({
                 'url': _0x4b79b6,
                 'preview_url': IMG_DUMMY,
@@ -5288,15 +5297,15 @@ var app = new Vue({
             var _0x773119 = new FormData();
             _0x773119[_0x363a('0x2c7')](_0x363a('0x2c8'), _0x1a700a);
             var _0x58d578 = new XMLHttpRequest();
-            _0x58d578[_0x363a('0x178')](_0x363a('0x179'), KATSU_MEDIA[_0x363a('0xcf')](_0x363a('0x189'), _0x38d96c['repository']), !![]);
-            _0x58d578[_0x363a('0x17a')] = REQ_TIMEOUT * 0xf0;
+            _0x58d578['open']('POST', KATSU_MEDIA.replace('[I]', _0x38d96c['repository']), !![]);
+            _0x58d578['timeout'] = REQ_TIMEOUT * 0xf0;
             _0x58d578[_0x363a('0x18a')]('Authorization', _0x363a('0x18c') + _0x38d96c['at']);
             _0x58d578['onreadystatechange'] = function() {
-                if (_0x58d578[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x58d578[_0x363a('0x17e')] == 0xc8) {
-                    _0x38d96c[_0x363a('0x61')][_0x363a('0x226')][_0x363a('0x1a2')](JSON['parse'](_0x58d578[_0x363a('0x180')]));
-                } else if (_0x58d578[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
+                if (_0x58d578[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x58d578['status'] == 0xc8) {
+                    _0x38d96c[_0x363a('0x61')][_0x363a('0x226')][_0x363a('0x1a2')](JSON['parse'](_0x58d578['responseText']));
+                } else if (_0x58d578[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
                     _0x38d96c[_0x363a('0x61')][_0x363a('0x2c6')][_0x363a('0x2c9')]();
-                    _0x38d96c[_0x363a('0x17f')](_0x58d578[_0x363a('0x180')], _0x58d578['status'], _0x363a('0x2ca'));
+                    _0x38d96c['popError'](_0x58d578['responseText'], _0x58d578['status'], _0x363a('0x2ca'));
                 }
                 _0x38d96c[_0x363a('0x2c5')] = '';
                 _0x38d96c[_0x363a('0x2cb')] = '0';
@@ -5338,7 +5347,7 @@ var app = new Vue({
                 return;
             }
             this[_0x363a('0x61')][_0x363a('0x22b')][_0x363a('0x2d0')] = this['katsu'][_0x363a('0x60')][_0x363a('0x63')][_0x363a('0x121')](function(_0x40ecd1, _0x41a6b6, _0x24e249) {
-                return _0x40ecd1['length'] > 0x0 && _0x40ecd1[_0x363a('0xcf')](/^[\s|　]+|[\s|　]+$/g, '')[_0x363a('0xaf')] > 0x0 && _0x24e249[_0x363a('0x7c')](_0x40ecd1) === _0x41a6b6;
+                return _0x40ecd1['length'] > 0x0 && _0x40ecd1.replace(/^[\s|　]+|[\s|　]+$/g, '')[_0x363a('0xaf')] > 0x0 && _0x24e249[_0x363a('0x7c')](_0x40ecd1) === _0x41a6b6;
             });
             for (var _0x9ba4dc of this[_0x363a('0x61')]['poll']['options']) {
                 if (_0x9ba4dc[_0x363a('0xaf')] > LIMIT_POLLOPTION) {
@@ -5360,8 +5369,8 @@ var app = new Vue({
             });
             this[_0x363a('0x61')][_0x363a('0x2d3')] = _0x1e214f;
             this[_0x363a('0x61')][_0x363a('0x29b')] = this[_0x363a('0x13f')];
-            this[_0x363a('0x61')][_0x363a('0x17e')] = this[_0x363a('0x5c')];
-            this['katsu']['status'] = this[_0x363a('0x61')][_0x363a('0x17e')]['replace'](/^#/g, '\x20#');
+            this[_0x363a('0x61')]['status'] = this[_0x363a('0x5c')];
+            this['katsu']['status'] = this[_0x363a('0x61')]['status'].replace(/^#/g, '\x20#');
             this['katsu'][_0x363a('0x22e')] = this[_0x363a('0x5c')];
             if (this[_0x363a('0x140')] && 0x0 != this['katsu'][_0x363a('0x22b')]['options'][_0x363a('0xaf')]) {
                 this[_0x363a('0x2d4')] = this[_0x363a('0x61')]['poll'];
@@ -5384,7 +5393,7 @@ var app = new Vue({
             var _0x5e35cf = this;
             var _0x284c21 = [];
             var _0x33bd48 = {
-                'status': this['katsu'][_0x363a('0x17e')],
+                'status': this['katsu']['status'],
                 'in_reply_to_id': this[_0x363a('0x61')]['in_reply_to_id'],
                 'media_ids': this[_0x363a('0x61')][_0x363a('0x2d3')],
                 'sensitive': this[_0x363a('0x61')][_0x363a('0x2d7')],
@@ -5393,26 +5402,26 @@ var app = new Vue({
                 'visibility': this[_0x363a('0x61')]['visibility']
             };
             var _0x4371cb = new XMLHttpRequest();
-            _0x4371cb[_0x363a('0x178')](_0x363a('0x179'), KATSU['replace'](_0x363a('0x189'), _0x5e35cf[_0x363a('0xdc')]), !![]);
-            _0x4371cb[_0x363a('0x17a')] = REQ_TIMEOUT;
+            _0x4371cb['open']('POST', KATSU.replace('[I]', _0x5e35cf['repository']), !![]);
+            _0x4371cb['timeout'] = REQ_TIMEOUT;
             _0x4371cb[_0x363a('0x18a')]('Authorization', 'Bearer\x20' + _0x5e35cf['at']);
             _0x4371cb['setRequestHeader'](_0x363a('0x1d5'), 'application/json');
-            _0x4371cb[_0x363a('0x17c')] = function() {
-                if (_0x4371cb[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')] && _0x4371cb['status'] == 0xc8) {
+            _0x4371cb['onreadystatechange'] = function() {
+                if (_0x4371cb[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x4371cb['status'] == 0xc8) {
                     _0x5e35cf[_0x363a('0x8c')]();
                     if (_0x5e35cf['showForm']) {
                         _0x5e35cf[_0x363a('0x136')]();
                         _0x5e35cf['showForm'] = ![];
                     }
-                } else if (_0x4371cb[_0x363a('0x184')] == XMLHttpRequest[_0x363a('0x17d')]) {
-                    _0x5e35cf[_0x363a('0x17f')](_0x4371cb[_0x363a('0x180')], _0x4371cb[_0x363a('0x17e')], 'Katsu');
+                } else if (_0x4371cb[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                    _0x5e35cf['popError'](_0x4371cb['responseText'], _0x4371cb['status'], 'Katsu');
                     _0x5e35cf[_0x363a('0x2c5')] = '';
                 }
                 _0x2ca602[_0x363a('0x2d8')] = ![];
                 _0x5e35cf[_0x363a('0x18d')]();
             }
             ;
-            _0x4371cb[_0x363a('0x182')](JSON[_0x363a('0x210')](_0x33bd48));
+            _0x4371cb['send'](JSON[_0x363a('0x210')](_0x33bd48));
         },
         'refreshKatsu': function(_0x3fff1a, _0x15b187) {
             var _0x3fff1a = document[_0x363a('0x139')]('katsu_spoiler');
@@ -5461,7 +5470,7 @@ var app = new Vue({
             if (null == _0x461ddc) {
                 return 0x0;
             }
-            return _0x461ddc[_0x363a('0x59')][_0x363a('0xaf')] - (_0x461ddc['value'][_0x363a('0xf')](/[\uD800-\uDBFF][\uDC00-\uDFFF]/g) || [])[_0x363a('0xaf')];
+            return _0x461ddc[_0x363a('0x59')][_0x363a('0xaf')] - (_0x461ddc['value']['match'](/[\uD800-\uDBFF][\uDC00-\uDFFF]/g) || [])[_0x363a('0xaf')];
         },
         'contentLength': function() {
             var _0x3c848c = document['getElementById'](_0x363a('0x174'));
@@ -5469,10 +5478,10 @@ var app = new Vue({
             if (null == _0x3c848c) {
                 return 0x0;
             }
-            if (_0x3c848c['value'][_0x363a('0xf')](/^#/)) {
+            if (_0x3c848c['value']['match'](/^#/)) {
                 _0x29b0a2 = 0x1;
             }
-            return _0x3c848c[_0x363a('0x59')][_0x363a('0xaf')] - (_0x3c848c[_0x363a('0x59')][_0x363a('0xf')](/[\uD800-\uDBFF][\uDC00-\uDFFF]/g) || [])[_0x363a('0xaf')] + _0x29b0a2;
+            return _0x3c848c[_0x363a('0x59')][_0x363a('0xaf')] - (_0x3c848c[_0x363a('0x59')]['match'](/[\uD800-\uDBFF][\uDC00-\uDFFF]/g) || [])[_0x363a('0xaf')] + _0x29b0a2;
         },
         'refreshCount': _[_0x363a('0xe1')](function() {
             app[_0x363a('0x18d')]();
@@ -5540,7 +5549,7 @@ var app = new Vue({
             this['katsu_spoiler_text'] = null != _0x37bee6 ? _0x37bee6[_0x363a('0x59')] : this[_0x363a('0x13f')];
             this[_0x363a('0x5c')] = null != _0x62d4ab ? _0x62d4ab[_0x363a('0x59')] : this[_0x363a('0x5c')];
             this['katsu'][_0x363a('0x29b')] = this[_0x363a('0x13f')];
-            this[_0x363a('0x61')][_0x363a('0x17e')] = this[_0x363a('0x5c')];
+            this[_0x363a('0x61')]['status'] = this[_0x363a('0x5c')];
             if (!this['showFormVote']) {
                 this[_0x363a('0x61')][_0x363a('0x22b')] = {
                     'options': [],
@@ -5580,7 +5589,7 @@ var app = new Vue({
                 this[_0x363a('0xbb')][_0x363a('0xf0')](_0x1960a2, 0x1);
             }
             this[_0x363a('0x13f')] = this[_0x363a('0x61')]['spoiler_text'];
-            this[_0x363a('0x5c')] = this['katsu'][_0x363a('0x17e')];
+            this[_0x363a('0x5c')] = this['katsu']['status'];
             _0x51c6b1['value'] = this[_0x363a('0x13f')];
             _0x59649d[_0x363a('0x59')] = this[_0x363a('0x5c')];
             this[_0x363a('0x13d')] = this[_0x363a('0x13f')][_0x363a('0xaf')] > 0x0 ? !![] : ![];
@@ -5828,19 +5837,19 @@ function swipedetect(_0x4f8ecc, _0x52cc36) {
 swipedetect(document.getElementById('app'), touchController);
 function getParameterByName(_0x55941c, _0x46df54) {
     if (!_0x46df54) {
-        _0x46df54 = window[_0x363a('0xb')]['href'];
+        _0x46df54 = window.location.href;
     }
-    var _0x2b40e4 = new RegExp('[?&]' + _0x55941c['replace'](/[\[\]]/g, _0x363a('0x29d')) + _0x363a('0x2f7'))[_0x363a('0x2f8')](_0x46df54);
+    var _0x2b40e4 = new RegExp('[?&]' + _0x55941c.replace(/[\[\]]/g, _0x363a('0x29d')) + _0x363a('0x2f7'))[_0x363a('0x2f8')](_0x46df54);
     if (!_0x2b40e4) {
         return null;
     }
     if (!_0x2b40e4[0x2]) {
         return '';
     }
-    return decodeURIComponent(_0x2b40e4[0x2][_0x363a('0xcf')](/\+/g, '\x20'));
+    return decodeURIComponent(_0x2b40e4[0x2].replace(/\+/g, '\x20'));
 }
 function base64ToBlob(_0x4bc369) {
-    var _0x316891 = window[_0x363a('0x2f9')](_0x4bc369[_0x363a('0x7f')](',')[0x1]);
+    var _0x316891 = window.atob(_0x4bc369['split'](',')[0x1]);
     var _0x372d33 = new Uint8Array(new ArrayBuffer(_0x316891[_0x363a('0xaf')]));
     for (var _0x3331e5 = 0x0; _0x3331e5 < _0x316891[_0x363a('0xaf')]; _0x3331e5++) {
         _0x372d33[_0x3331e5] = _0x316891[_0x363a('0x2fa')](_0x3331e5);
@@ -5892,7 +5901,7 @@ function escapeHtml(_0x50b1fb) {
     if (typeof _0x50b1fb !== _0x363a('0x305')) {
         return _0x50b1fb;
     }
-    return _0x50b1fb[_0x363a('0xcf')](/[&'`"<>]/g, function(_0x55f002) {
+    return _0x50b1fb.replace(/[&'`"<>]/g, function(_0x55f002) {
         return {
             '&': _0x363a('0x306'),
             '\'': _0x363a('0x307'),
@@ -5907,7 +5916,7 @@ function patchEmoji(_0x54d410, _0x133a9b) {
     var _0x4a5584 = _0x54d410;
     if (_0x133a9b != null && _0x133a9b[_0x363a('0xaf')] != 0x0) {
         _0x133a9b[_0x363a('0x121')](function(_0x4b3915, _0x2a9cd7) {
-            _0x4a5584 = _0x4a5584[_0x363a('0x7f')](':' + _0x4b3915[_0x363a('0x30c')] + ':')[_0x363a('0xcb')](_0x363a('0x30d') + _0x4b3915[_0x363a('0x30c')] + ':\x22\x20src=\x22' + _0x4b3915[_0x363a('0x30e')] + '\x22>');
+            _0x4a5584 = _0x4a5584['split'](':' + _0x4b3915[_0x363a('0x30c')] + ':')[_0x363a('0xcb')](_0x363a('0x30d') + _0x4b3915[_0x363a('0x30c')] + ':\x22\x20src=\x22' + _0x4b3915[_0x363a('0x30e')] + '\x22>');
         });
     }
     return _0x4a5584;
@@ -5918,6 +5927,6 @@ function encodeHtmlForm(_0x3d1718) {
         var _0x3ee273 = encodeURIComponent(_0x543b96) + '=' + encodeURIComponent(_0x3d1718[_0x543b96]);
         _0xa59a65[_0x363a('0x1a2')](_0x3ee273);
     }
-    return _0xa59a65['join']('&')[_0x363a('0xcf')](/%20/g, '+');
+    return _0xa59a65['join']('&').replace(/%20/g, '+');
 }
 app['_data'][_0x363a('0x200')] = _0x363a('0xa2');
