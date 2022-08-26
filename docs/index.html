@@ -2,13 +2,13 @@
 <html lang="ja" prefix="og: http://ogp.me/ns#">
 
 <head>
-  <link rel="canonical" href="./index.html">
+  <link rel="canonical" href="https://aikatsukamen.github.io/kktjs/">
   <meta charset="utf-8">
   <title>kktjs</title>
-  <link rel="stylesheet" href="./css/emojipicker.css">
-  <link rel="stylesheet" href="./css/Pv=0926_style.css">
-  <link rel="stylesheet" href="./css/font-awesome.min.css">
-  <link rel="stylesheet" href="./css/addtohomescreen.css">
+  <link rel="stylesheet" href="css/emojipicker.css">
+  <link rel="stylesheet" href="css/style.css?v=0926">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/addtohomescreen.css">
   <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta name="Description" content="キラキラッターをもっと素敵にするWebクライアント">
   <meta content="#000" name="theme-color">
@@ -16,7 +16,7 @@
   <meta property="og:title" content="kktjs" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://aikatsukamen.github.io/kktjs/" />
-  <meta property="og:image" content="img/touch/apple-touch-icon.png" />
+  <meta property="og:image" content="./img/touch/apple-touch-icon.png" />
   <meta property="og:site_name" content="aikatsukamen.github.io/kktjs" />
   <meta property="og:description" content="キラキラッターをもっと素敵にするWebクライアント" />
 
@@ -25,11 +25,11 @@
 
   <meta name="format-detection" content="telephone=no">
 
-  <link rel="icon" href="./img/favicon.ico" type="image/vnd.microsoft.icon">
-  <link rel="shortcut icon" href="./img/favicon.ico" type="image/vnd.microsoft.icon">
+  <link rel="icon" href=".img/favicon.ico" type="image/vnd.microsoft.icon">
+  <link rel="shortcut icon" href=".img/favicon.ico" type="image/vnd.microsoft.icon">
   <link rel="apple-touch-icon" sizes="152x152" href="./img/touch/apple-touch-icon.png">
 
-  <link rel="manifest" href="./js/manifest.json">
+  <link rel="manifest" href="./manifest.json">
 </head>
 
 <body>
@@ -97,7 +97,7 @@
             <path class="pkd" d="m0 12 9-12 9 12-9 12z" />
           </pattern>
         </defs>
-        <rect width="100%" height="100%" style="fill: url(./index.html#pttops)" />
+        <rect width="100%" height="100%" style="fill: url(#pttops)" />
       </svg>
     </div>
     <div v-if="'web' == app_mode" class="app-header control flex">
@@ -157,10 +157,10 @@
     </div>
     <media v-if="showMedia">
       <div class="modalbutton flex center" v-on:click="showMedia = false; modal_media = '';" slot="header">
-        <img v-if="null != modal_media.remote_url && ('image' == modal_media.type || 'unknown' == modal_media.type)" :src="https://aikatsukamen.github.io/modal_media.remote_url" alt="" class="fullimage">
-        <img v-else-if="'image' == modal_media.type" :src="https://aikatsukamen.github.io/modal_media.url" alt="" class="fullimage">
-        <video v-else-if="null != modal_media.remote_url" :src="https://aikatsukamen.github.io/modal_media.remote_url" class="fullimage" v-play="true" autoplay loop></video>
-        <video v-else :src="https://aikatsukamen.github.io/modal_media.url" class="fullimage" v-play="true" autoplay loop></video>
+        <img v-if="null != modal_media.remote_url && ('image' == modal_media.type || 'unknown' == modal_media.type)" :src="modal_media.remote_url" alt="" class="fullimage">
+        <img v-else-if="'image' == modal_media.type" :src="modal_media.url" alt="" class="fullimage">
+        <video v-else-if="null != modal_media.remote_url" :src="modal_media.remote_url" class="fullimage" v-play="true" autoplay loop></video>
+        <video v-else :src="modal_media.url" class="fullimage" v-play="true" autoplay loop></video>
       </div>
     </media>
     <emojipicker v-show="showEmojiPicker">
@@ -185,7 +185,7 @@
     <confirm v-if="showConfirm">
       <div slot="header">
         <div class="status flex" v-if="['delete','report','fav','unfav','reblog','unreblog','pin','unpin','vote','bookmark'].indexOf(modal_issue.confirmtype) != -1">
-          <img :src="https://aikatsukamen.github.io/checkAvatar(modal_issue.account.avatar_static)" class="avatar border" v-on:click="runAcct(modal_issue.account.id);" onerror="this.src=IMG_DUMMY">
+          <img :src="checkAvatar(modal_issue.account.avatar_static)" class="avatar border" v-on:click="runAcct(modal_issue.account.id);" onerror="this.src=IMG_DUMMY">
           <div class="content-before"><svg width="12" height="14">
               <use xlink:href="#cb"></use>
             </svg></div>
@@ -234,8 +234,8 @@
             </div>
             <div v-if="0 != modal_issue.media_attachments" class="media-wrapper bgcolor-gray hidden flex">
               <a v-for="media in modal_issue.media_attachments">
-                <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="https://aikatsukamen.github.io/media.url" class="media" playsinline muted autoplay loop></video>
-                <img v-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="https://aikatsukamen.github.io/checkMedia(media.preview_url,%20media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
+                <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="media.url" class="media" playsinline muted autoplay loop></video>
+                <img v-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="checkMedia(media.preview_url, media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
                 <i v-if="'video' == media.type || ('gifv' == media.type && '1' == optAutoPlay)" class="fa fa-fw fa-play-circle-o color-pk"></i>
               </a>
             </div>
@@ -247,8 +247,8 @@
               <h4 v-else>Media contents</h4>
               <small>Click to view</small>
             </div>
-            <a v-if="null != modal_issue.card" class="flex center card" :href="https://aikatsukamen.github.io/modal_issue.card.url" target="_blank" rel="noopener noreferrer">
-              <img v-if="null != modal_issue.card.image" :src="https://aikatsukamen.github.io/modal_issue.card.image" onerror="this.src=IMG_DUMMY">
+            <a v-if="null != modal_issue.card" class="flex center card" :href="modal_issue.card.url" target="_blank" rel="noopener noreferrer">
+              <img v-if="null != modal_issue.card.image" :src="modal_issue.card.image" onerror="this.src=IMG_DUMMY">
               <div class="detail-content hidden">
                 <span>{{modal_issue.card.title}}</span><br>
                 <small>{{formatDomain(modal_issue.card)}}</small>
@@ -264,7 +264,7 @@
           </div>
         </div>
         <div v-else-if="'katsu' == modal_issue.confirmtype" class="status flex">
-          <img :src="https://aikatsukamen.github.io/checkAvatar(user.avatar_static)" class="avatar border" v-on:click="runAcct(user.id);" onerror="this.src=IMG_DUMMY">
+          <img :src="checkAvatar(user.avatar_static)" class="avatar border" v-on:click="runAcct(user.id);" onerror="this.src=IMG_DUMMY">
           <div class="content-before"><svg width="12" height="14">
               <use xlink:href="#cb"></use>
             </svg></div>
@@ -309,8 +309,8 @@
             </div>
             <div v-if="0 != modal_issue.media_attachments" class="media-wrapper bgcolor-gray hidden flex">
               <a v-for="media in modal_issue.media_attachments">
-                <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="https://aikatsukamen.github.io/media.url" class="media" playsinline muted autoplay loop></video>
-                <img v-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="https://aikatsukamen.github.io/checkMedia(media.preview_url,%20media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
+                <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="media.url" class="media" playsinline muted autoplay loop></video>
+                <img v-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="checkMedia(media.preview_url, media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
                 <i v-if="'video' == media.type || ('gifv' == media.type && '1' == optAutoPlay)" class="fa fa-fw fa-play-circle-o color-pk"></i>
               </a>
             </div>
@@ -322,8 +322,8 @@
               <h4 v-else>Media contents</h4>
               <small>Click to view</small>
             </div>
-            <a v-if="null != modal_issue.card" class="flex center card" :href="https://aikatsukamen.github.io/modal_issue.card.url" target="_blank" rel="noopener noreferrer">
-              <img v-if="null != modal_issue.card.image" :src="https://aikatsukamen.github.io/modal_issue.card.image" onerror="this.src=IMG_DUMMY">
+            <a v-if="null != modal_issue.card" class="flex center card" :href="modal_issue.card.url" target="_blank" rel="noopener noreferrer">
+              <img v-if="null != modal_issue.card.image" :src="modal_issue.card.image" onerror="this.src=IMG_DUMMY">
               <div class="detail-content hidden">
                 <span>{{modal_issue.card.title}}</span><br>
                 <small>{{formatDomain(modal_issue.card)}}</small>
@@ -343,7 +343,7 @@
           </div>
         </div>
         <div v-else class="status flex">
-          <img :src="https://aikatsukamen.github.io/checkAvatar(modal_issue.avatar)" class="avatar border" onerror="this.src=IMG_DUMMY">
+          <img :src="checkAvatar(modal_issue.avatar)" class="avatar border" onerror="this.src=IMG_DUMMY">
           <div class="content">
             <div class="status-name flex start color-gr">
               <div class="hidden full">
@@ -669,7 +669,7 @@
             </span>
           </div>
           <div v-if="null != user.id" class="status flex">
-            <img :src="https://aikatsukamen.github.io/checkAvatar(user.avatar_static)" class="avatar border short" v-on:click="runUser('katsu');" onerror="this.src=IMG_DUMMY">
+            <img :src="checkAvatar(user.avatar_static)" class="avatar border short" v-on:click="runUser('katsu');" onerror="this.src=IMG_DUMMY">
             <div class="content border short">
               <div class="flex start hidden">
                 <a v-if="checkDisplayName(user.display_name)" class="color-pk" v-html="formatEmoji(user.display_name, user.emojis)"></a>
@@ -744,7 +744,7 @@
               <a :id="'home'+issue.id"></a>
               <div v-if="null != issue.reblog" class="status-header flex start">
                 <i class="fa fa-fw fa-retweet color-on"></i>
-                <img :src="https://aikatsukamen.github.io/checkAvatar(issue.account.avatar_static)" class="avatar border notif" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
+                <img :src="checkAvatar(issue.account.avatar_static)" class="avatar border notif" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
                 <div class="hidden full">
                   <div>
                     <span v-if="checkDisplayName(issue.account.display_name)" class="color-pk" v-html="formatEmoji(issue.account.display_name, issue.account.emojis)"></span>
@@ -762,7 +762,7 @@
 
               <div v-if="null != issue.reblog" class="status flex">
                 <span v-if="issue.loading_avatar" class="avatar border" v-on:click="runAcct(issue.reblog.account.id);"></span>
-                <img v-else :src="https://aikatsukamen.github.io/checkAvatar(issue.reblog.account.avatar_static)" class="avatar border" v-on:click="runAcct(issue.reblog.account.id);" onerror="this.src=IMG_DUMMY">
+                <img v-else :src="checkAvatar(issue.reblog.account.avatar_static)" class="avatar border" v-on:click="runAcct(issue.reblog.account.id);" onerror="this.src=IMG_DUMMY">
                 <div class="content-before"><svg width="12" height="14">
                     <use xlink:href="#cb"></use>
                   </svg></div>
@@ -820,9 +820,9 @@
                     </div>
                     <div v-if="0 != issue.reblog.media_attachments" class="media-wrapper bgcolor-gray hidden flex">
                       <a v-for="media in issue.reblog.media_attachments" @click="modal_media = media;showMedia = true;">
-                        <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="https://aikatsukamen.github.io/media.url" class="media" playsinline muted autoplay loop></video>
+                        <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="media.url" class="media" playsinline muted autoplay loop></video>
                         <span v-if="issue.loading_media && ('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" class="media"></span>
-                        <img v-else-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="https://aikatsukamen.github.io/checkMedia(media.preview_url,%20media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
+                        <img v-else-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="checkMedia(media.preview_url, media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
                         <i v-if="'video' == media.type || ('gifv' == media.type && '1' == optAutoPlay)" class="fa fa-fw fa-play-circle-o color-pk"></i>
                       </a>
                     </div>
@@ -835,8 +835,8 @@
                       <small>Click to view</small>
                     </div>
                   </div>
-                  <a v-if="!issue.caught_katsufilter && null != issue.reblog.card" class="flex center card" :href="https://aikatsukamen.github.io/issue.reblog.card.url" target="_blank" rel="noopener noreferrer">
-                    <img v-if="null != issue.reblog.card.image" :src="https://aikatsukamen.github.io/issue.reblog.card.image" onerror="this.src=IMG_DUMMY">
+                  <a v-if="!issue.caught_katsufilter && null != issue.reblog.card" class="flex center card" :href="issue.reblog.card.url" target="_blank" rel="noopener noreferrer">
+                    <img v-if="null != issue.reblog.card.image" :src="issue.reblog.card.image" onerror="this.src=IMG_DUMMY">
                     <div class="detail-content hidden">
                       <span>{{issue.reblog.card.title}}</span><br>
                       <small>{{formatDomain(issue.reblog.card)}}</small>
@@ -864,7 +864,7 @@
 
               <div v-else class="status flex">
                 <span v-if="issue.loading_avatar" class="avatar border" v-on:click="runAcct(issue.account.id);"></span>
-                <img v-else :src="https://aikatsukamen.github.io/checkAvatar(issue.account.avatar_static)" class="avatar border" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
+                <img v-else :src="checkAvatar(issue.account.avatar_static)" class="avatar border" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
                 <div class="content-before"><svg width="12" height="14">
                     <use xlink:href="#cb"></use>
                   </svg></div>
@@ -922,9 +922,9 @@
                     </div>
                     <div v-if="0 != issue.media_attachments" class="media-wrapper bgcolor-gray hidden flex">
                       <a v-for="media in issue.media_attachments" @click="modal_media = media;showMedia = true;">
-                        <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="https://aikatsukamen.github.io/media.url" class="media" playsinline muted autoplay loop></video>
+                        <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="media.url" class="media" playsinline muted autoplay loop></video>
                         <span v-if="issue.loading_media && ('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" class="media"></span>
-                        <img v-else-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="https://aikatsukamen.github.io/checkMedia(media.preview_url,%20media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
+                        <img v-else-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="checkMedia(media.preview_url, media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
                         <i v-if="'video' == media.type || ('gifv' == media.type && '1' == optAutoPlay)" class="fa fa-fw fa-play-circle-o color-pk"></i>
                       </a>
                     </div>
@@ -937,8 +937,8 @@
                       <small>Click to view</small>
                     </div>
                   </div>
-                  <a v-if="!issue.caught_katsufilter && null != issue.card" class="flex center card" :href="https://aikatsukamen.github.io/issue.card.url" target="_blank" rel="noopener noreferrer">
-                    <img v-if="null != issue.card.image" :src="https://aikatsukamen.github.io/issue.card.image" onerror="this.src=IMG_DUMMY">
+                  <a v-if="!issue.caught_katsufilter && null != issue.card" class="flex center card" :href="issue.card.url" target="_blank" rel="noopener noreferrer">
+                    <img v-if="null != issue.card.image" :src="issue.card.image" onerror="this.src=IMG_DUMMY">
                     <div class="detail-content hidden">
                       <span>{{issue.card.title}}</span><br>
                       <small>{{formatDomain(issue.card)}}</small>
@@ -965,7 +965,7 @@
               </div>
               <div class="status-header flex end">
                 <small v-if="issue.application && showDebugVia">
-                  via <a :href="https://aikatsukamen.github.io/issue.application.website" target="_blank" rel="noopener noreferrer">{{issue.application.name}} </a>
+                  via <a :href="issue.application.website" target="_blank" rel="noopener noreferrer">{{issue.application.name}} </a>
                 </small>
               </div>
             </div>
@@ -1019,7 +1019,7 @@
               </div>
               <div class="status flex">
                 <span v-if="issue.loading_avatar" class="avatar border" v-on:click="runAcct(issue.account.id);"></span>
-                <img v-else :src="https://aikatsukamen.github.io/checkAvatar(issue.account.avatar_static)" class="avatar border" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
+                <img v-else :src="checkAvatar(issue.account.avatar_static)" class="avatar border" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
                 <div class="content-before"><svg width="12" height="14">
                     <use xlink:href="#cb"></use>
                   </svg></div>
@@ -1077,9 +1077,9 @@
                     </div>
                     <div v-if="0 != issue.media_attachments" class="media-wrapper bgcolor-gray hidden flex">
                       <a v-for="media in issue.media_attachments" @click="modal_media = media;showMedia = true;">
-                        <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="https://aikatsukamen.github.io/media.url" class="media" playsinline muted autoplay loop></video>
+                        <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="media.url" class="media" playsinline muted autoplay loop></video>
                         <span v-if="issue.loading_media && ('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" class="media"></span>
-                        <img v-else-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="https://aikatsukamen.github.io/checkMedia(media.preview_url,%20media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
+                        <img v-else-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="checkMedia(media.preview_url, media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
                         <i v-if="'video' == media.type || ('gifv' == media.type && '1' == optAutoPlay)" class="fa fa-fw fa-play-circle-o color-pk"></i>
                       </a>
                     </div>
@@ -1092,8 +1092,8 @@
                       <small>Click to view</small>
                     </div>
                   </div>
-                  <a v-if="!issue.caught_katsufilter && null != issue.card" class="flex center card" :href="https://aikatsukamen.github.io/issue.card.url" target="_blank" rel="noopener noreferrer">
-                    <img v-if="null != issue.card.image" :src="https://aikatsukamen.github.io/issue.card.image" onerror="this.src=IMG_DUMMY">
+                  <a v-if="!issue.caught_katsufilter && null != issue.card" class="flex center card" :href="issue.card.url" target="_blank" rel="noopener noreferrer">
+                    <img v-if="null != issue.card.image" :src="issue.card.image" onerror="this.src=IMG_DUMMY">
                     <div class="detail-content hidden">
                       <span>{{issue.card.title}}</span><br>
                       <small>{{formatDomain(issue.card)}}</small>
@@ -1120,12 +1120,12 @@
               </div>
               <div class="status-header flex end">
                 <small v-if="issue.application && showDebugVia">
-                  via <a :href="https://aikatsukamen.github.io/issue.application.website" target="_blank" rel="noopener noreferrer">{{issue.application.name}} </a>
+                  via <a :href="issue.application.website" target="_blank" rel="noopener noreferrer">{{issue.application.name}} </a>
                 </small>
               </div>
               <div class="status-header flex end">
                 <small v-if="formatDomain(issue.account) != repository">
-                  from <a :href="https://aikatsukamen.github.io/'//'%20issue.account.domain" target="_blank" rel="noopener noreferrer">{{formatDomain(issue.account)}}</a>
+                  from <a :href="'//'+issue.account.domain" target="_blank" rel="noopener noreferrer">{{formatDomain(issue.account)}}</a>
                 </small>
               </div>
             </div>
@@ -1182,7 +1182,7 @@
                 <i v-else-if="'follow' == issue.type" class="fa fa-fw fa-user-plus color-gr"></i>
                 <i v-else-if="'poll' == issue.type" class="fa fa-fw fa-tasks color-gr"></i>
                 <span v-if="('reblog' == issue.type || 'favourite' == issue.type) && issue.loading_avatar" class="avatar border" v-on:click="runAcct(issue.account.id);"></span>
-                <img v-else-if="'reblog' == issue.type || 'favourite' == issue.type" :src="https://aikatsukamen.github.io/checkAvatar(issue.account.avatar_static)" class="avatar border notif" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
+                <img v-else-if="'reblog' == issue.type || 'favourite' == issue.type" :src="checkAvatar(issue.account.avatar_static)" class="avatar border notif" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
                 <div class="full">
                   <div class="hidden">
                     <span v-if="checkDisplayName(issue.account.display_name)" class="color-pk" v-html="formatEmoji(issue.account.display_name, issue.account.emojis)"></span>
@@ -1203,7 +1203,7 @@
 
               <div v-if="'mention' == issue.type" class="status flex">
                 <span v-if="issue.loading_avatar" class="avatar border" v-on:click="runAcct(issue.account.id);"></span>
-                <img v-else :src="https://aikatsukamen.github.io/checkAvatar(issue.account.avatar_static)" class="avatar border" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
+                <img v-else :src="checkAvatar(issue.account.avatar_static)" class="avatar border" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
                 <div class="content-before"><svg width="12" height="14">
                     <use xlink:href="#cb"></use>
                   </svg></div>
@@ -1250,9 +1250,9 @@
                   </div>
                   <div v-if="0 != issue.status.media_attachments" class="media-wrapper bgcolor-gray hidden flex">
                     <a v-for="media in issue.status.media_attachments" @click="modal_media = media;showMedia = true;">
-                      <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="https://aikatsukamen.github.io/media.url" class="media" playsinline muted autoplay loop></video>
+                      <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="media.url" class="media" playsinline muted autoplay loop></video>
                       <span v-if="issue.loading_media && ('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" class="media"></span>
-                      <img v-else-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="https://aikatsukamen.github.io/checkMedia(media.preview_url,%20media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
+                      <img v-else-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="checkMedia(media.preview_url, media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
                       <i v-if="'video' == media.type || ('gifv' == media.type && '1' == optAutoPlay)" class="fa fa-fw fa-play-circle-o color-pk"></i>
                     </a>
                   </div>
@@ -1264,8 +1264,8 @@
                     <h4 v-else>Media contents</h4>
                     <small>Click to view</small>
                   </div>
-                  <a v-if="null != issue.status.card" class="flex center card" :href="https://aikatsukamen.github.io/issue.status.card.url" target="_blank" rel="noopener noreferrer">
-                    <img v-if="null != issue.status.card.image" :src="https://aikatsukamen.github.io/issue.status.card.image" onerror="this.src=IMG_DUMMY">
+                  <a v-if="null != issue.status.card" class="flex center card" :href="issue.status.card.url" target="_blank" rel="noopener noreferrer">
+                    <img v-if="null != issue.status.card.image" :src="issue.status.card.image" onerror="this.src=IMG_DUMMY">
                     <div class="detail-content hidden">
                       <span>{{issue.status.card.title}}</span><br>
                       <small>{{formatDomain(issue.status.card)}}</small>
@@ -1292,7 +1292,7 @@
 
               <div v-else-if="'favourite' == issue.type || 'reblog' == issue.type || 'poll' == issue.type" class="status flex">
                 <span v-if="issue.loading_avatar" class="avatar border" v-on:click="runAcct(issue.status.account.id);"></span>
-                <img v-else :src="https://aikatsukamen.github.io/checkAvatar(issue.status.account.avatar_static)" class="avatar border" v-on:click="runAcct(issue.status.account.id);" onerror="this.src=IMG_DUMMY">
+                <img v-else :src="checkAvatar(issue.status.account.avatar_static)" class="avatar border" v-on:click="runAcct(issue.status.account.id);" onerror="this.src=IMG_DUMMY">
                 <div class="content-before"><svg width="12" height="14">
                     <use xlink:href="#cb"></use>
                   </svg></div>
@@ -1334,7 +1334,7 @@
 
               <div v-else class="status flex">
                 <span v-if="issue.loading_avatar" class="avatar border" v-on:click="runAcct(issue.account.id);"></span>
-                <img v-else :src="https://aikatsukamen.github.io/checkAvatar(issue.account.avatar_static)" class="avatar border" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
+                <img v-else :src="checkAvatar(issue.account.avatar_static)" class="avatar border" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
 
                 <div class="content border">
                   <div class="status-name flex start color-gr">
@@ -1400,7 +1400,7 @@
               </div>
               <div class="status flex">
                 <span v-if="issue.loading_avatar" class="avatar border" v-on:click="runAcct(issue.account.id);"></span>
-                <img v-else :src="https://aikatsukamen.github.io/checkAvatar(issue.account.avatar_static)" class="avatar border" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
+                <img v-else :src="checkAvatar(issue.account.avatar_static)" class="avatar border" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
                 <div class="content-before"><svg width="12" height="14">
                     <use xlink:href="#cb"></use>
                   </svg></div>
@@ -1458,9 +1458,9 @@
                     </div>
                     <div v-if="0 != issue.media_attachments" class="media-wrapper bgcolor-gray hidden flex">
                       <a v-for="media in issue.media_attachments" @click="modal_media = media;showMedia = true;">
-                        <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="https://aikatsukamen.github.io/media.url" class="media" playsinline muted autoplay loop></video>
+                        <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="media.url" class="media" playsinline muted autoplay loop></video>
                         <span v-if="issue.loading_media && ('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" class="media"></span>
-                        <img v-else-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="https://aikatsukamen.github.io/checkMedia(media.preview_url,%20media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
+                        <img v-else-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="checkMedia(media.preview_url, media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
                         <i v-if="'video' == media.type || ('gifv' == media.type && '1' == optAutoPlay)" class="fa fa-fw fa-play-circle-o color-pk"></i>
                       </a>
                     </div>
@@ -1473,8 +1473,8 @@
                       <small>Click to view</small>
                     </div>
                   </div>
-                  <a v-if="!issue.caught_katsufilter && null != issue.card" class="flex center card" :href="https://aikatsukamen.github.io/issue.card.url" target="_blank" rel="noopener noreferrer">
-                    <img v-if="null != issue.card.image" :src="https://aikatsukamen.github.io/issue.card.image" onerror="this.src=IMG_DUMMY">
+                  <a v-if="!issue.caught_katsufilter && null != issue.card" class="flex center card" :href="issue.card.url" target="_blank" rel="noopener noreferrer">
+                    <img v-if="null != issue.card.image" :src="issue.card.image" onerror="this.src=IMG_DUMMY">
                     <div class="detail-content hidden">
                       <span>{{issue.card.title}}</span><br>
                       <small>{{formatDomain(issue.card)}}</small>
@@ -1501,12 +1501,12 @@
               </div>
               <div class="status-header flex end">
                 <small v-if="issue.application && showDebugVia">
-                  via <a :href="https://aikatsukamen.github.io/issue.application.website" target="_blank" rel="noopener noreferrer">{{issue.application.name}} </a>
+                  via <a :href="issue.application.website" target="_blank" rel="noopener noreferrer">{{issue.application.name}} </a>
                 </small>
               </div>
               <div class="status-header flex end">
                 <small v-if="formatDomain(issue.account) != repository">
-                  from <a :href="https://aikatsukamen.github.io/'//'%20issue.account.domain" target="_blank" rel="noopener noreferrer">{{formatDomain(issue.account)}}</a>
+                  from <a :href="'//'+issue.account.domain" target="_blank" rel="noopener noreferrer">{{formatDomain(issue.account)}}</a>
                 </small>
               </div>
             </div>
@@ -1517,7 +1517,7 @@
               <div v-if="null != issue.reblog" class="status-header flex start">
                 <i class="fa fa-fw fa-retweet color-on"></i>
                 <span v-if="issue.loading_avatar" class="avatar border notif" v-on:click="runAcct(issue.account.id);"></span>
-                <img v-lese :src="https://aikatsukamen.github.io/checkAvatar(issue.account.avatar_static)" class="avatar border notif" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
+                <img v-lese :src="checkAvatar(issue.account.avatar_static)" class="avatar border notif" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
                 <div class="hidden full">
                   <div>
                     <span v-if="checkDisplayName(issue.account.display_name)" class="color-pk" v-html="formatEmoji(issue.account.display_name, issue.account.emojis)"></span>
@@ -1535,7 +1535,7 @@
 
               <div v-if="null != issue.reblog" class="status flex">
                 <span v-if="issue.loading_avatar" class="avatar border" v-on:click="runAcct(issue.account.id);"></span>
-                <img v-else :src="https://aikatsukamen.github.io/checkAvatar(issue.reblog.account.avatar_static)" class="avatar border" v-on:click="runAcct(issue.reblog.account.id);" onerror="this.src=IMG_DUMMY">
+                <img v-else :src="checkAvatar(issue.reblog.account.avatar_static)" class="avatar border" v-on:click="runAcct(issue.reblog.account.id);" onerror="this.src=IMG_DUMMY">
                 <div class="content-before"><svg width="12" height="14">
                     <use xlink:href="#cb"></use>
                   </svg></div>
@@ -1589,9 +1589,9 @@
                   </div>
                   <div v-if="0 != issue.reblog.media_attachments" class="media-wrapper bgcolor-gray hidden flex">
                     <a v-for="media in issue.reblog.media_attachments" @click="modal_media = media;showMedia = true;">
-                      <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="https://aikatsukamen.github.io/media.url" class="media" playsinline muted autoplay loop></video>
+                      <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="media.url" class="media" playsinline muted autoplay loop></video>
                       <span v-if="issue.loading_media && ('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" class="media"></span>
-                      <img v-else-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="https://aikatsukamen.github.io/checkMedia(media.preview_url,%20media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
+                      <img v-else-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="checkMedia(media.preview_url, media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
                       <i v-if="'video' == media.type || ('gifv' == media.type && '1' == optAutoPlay)" class="fa fa-fw fa-play-circle-o color-pk"></i>
                     </a>
                   </div>
@@ -1603,8 +1603,8 @@
                     <h4 v-else>Media contents</h4>
                     <small>Click to view</small>
                   </div>
-                  <a v-if="null != issue.reblog.card" class="flex center card" :href="https://aikatsukamen.github.io/issue.reblog.card.url" target="_blank" rel="noopener noreferrer">
-                    <img v-if="null != issue.reblog.card.image" :src="https://aikatsukamen.github.io/issue.reblog.card.image" onerror="this.src=IMG_DUMMY">
+                  <a v-if="null != issue.reblog.card" class="flex center card" :href="issue.reblog.card.url" target="_blank" rel="noopener noreferrer">
+                    <img v-if="null != issue.reblog.card.image" :src="issue.reblog.card.image" onerror="this.src=IMG_DUMMY">
                     <div class="detail-content hidden">
                       <span>{{issue.reblog.card.title}}</span><br>
                       <small>{{formatDomain(issue.reblog.card)}}</small>
@@ -1632,7 +1632,7 @@
 
               <div v-else class="status flex">
                 <span v-if="issue.loading_avatar" class="avatar border" v-on:click="runAcct(issue.account.id);"></span>
-                <img v-else :src="https://aikatsukamen.github.io/checkAvatar(issue.account.avatar_static)" class="avatar border" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
+                <img v-else :src="checkAvatar(issue.account.avatar_static)" class="avatar border" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
                 <div class="content-before"><svg width="12" height="14">
                     <use xlink:href="#cb"></use>
                   </svg></div>
@@ -1686,9 +1686,9 @@
                   </div>
                   <div v-if="0 != issue.media_attachments" class="media-wrapper bgcolor-gray hidden flex">
                     <a v-for="media in issue.media_attachments" @click="modal_media = media;showMedia = true;">
-                      <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="https://aikatsukamen.github.io/media.url" class="media" playsinline muted autoplay loop></video>
+                      <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="media.url" class="media" playsinline muted autoplay loop></video>
                       <span v-if="issue.loading_media && ('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" class="media"></span>
-                      <img v-else-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="https://aikatsukamen.github.io/checkMedia(media.preview_url,%20media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
+                      <img v-else-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="checkMedia(media.preview_url, media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
                       <i v-if="'video' == media.type || ('gifv' == media.type && '1' == optAutoPlay)" class="fa fa-fw fa-play-circle-o color-pk"></i>
                     </a>
                   </div>
@@ -1700,8 +1700,8 @@
                     <h4 v-else>Media contents</h4>
                     <small>Click to view</small>
                   </div>
-                  <a v-if="null != issue.card" class="flex center card" :href="https://aikatsukamen.github.io/issue.card.url" target="_blank" rel="noopener noreferrer">
-                    <img v-if="null != issue.card.image" :src="https://aikatsukamen.github.io/issue.card.image" onerror="this.src=IMG_DUMMY">
+                  <a v-if="null != issue.card" class="flex center card" :href="issue.card.url" target="_blank" rel="noopener noreferrer">
+                    <img v-if="null != issue.card.image" :src="issue.card.image" onerror="this.src=IMG_DUMMY">
                     <div class="detail-content hidden">
                       <span>{{issue.card.title}}</span><br>
                       <small>{{formatDomain(issue.card)}}</small>
@@ -1733,7 +1733,7 @@
             <div v-for="(issue, index) in discords" v-if="discord_unread <= index" class="status-wrapper" :class="issue.visibility">
               <div class="status flex">
                 <span v-if="issue.loading_avatar" class="avatar border"></span>
-                <img v-else :src="https://aikatsukamen.github.io/checkAvatarDiscord(issue.author)" class="avatar border" onerror="this.src=IMG_DUMMY">
+                <img v-else :src="checkAvatarDiscord(issue.author)" class="avatar border" onerror="this.src=IMG_DUMMY">
                 <div class="content-before"><svg width="12" height="14">
                     <use xlink:href="#cb"></use>
                   </svg></div>
@@ -1791,7 +1791,7 @@
 
           <div v-if="hasDetail && !fetch_watch.detail_chain && !fetch_watch.detail_fav && !fetch_watch.detail_reblog" class="status-list">
             <div v-for="(issue, index) in detail_chain.ancestors" class="status flex">
-              <img :src="https://aikatsukamen.github.io/checkAvatar(issue.account.avatar_static)" class="avatar border" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
+              <img :src="checkAvatar(issue.account.avatar_static)" class="avatar border" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
               <div class="content-before"><svg width="12" height="14">
                   <use xlink:href="#cb"></use>
                 </svg></div>
@@ -1845,8 +1845,8 @@
                 </div>
                 <div v-if="0 != issue.media_attachments" class="media-wrapper bgcolor-gray hidden flex">
                   <a v-for="media in issue.media_attachments" @click="modal_media = media;showMedia = true;">
-                    <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="https://aikatsukamen.github.io/media.url" class="media" playsinline muted autoplay loop></video>
-                    <img v-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="https://aikatsukamen.github.io/checkMedia(media.preview_url,%20media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
+                    <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="media.url" class="media" playsinline muted autoplay loop></video>
+                    <img v-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="checkMedia(media.preview_url, media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
                     <i v-if="'video' == media.type || ('gifv' == media.type && '1' == optAutoPlay)" class="fa fa-fw fa-play-circle-o color-pk"></i>
                   </a>
                 </div>
@@ -1858,8 +1858,8 @@
                   <h4 v-else>Media contents</h4>
                   <small>Click to view</small>
                 </div>
-                <a v-if="null != issue.card" class="flex center card" :href="https://aikatsukamen.github.io/issue.card.url" target="_blank" rel="noopener noreferrer">
-                  <img v-if="null != issue.card.image" :src="https://aikatsukamen.github.io/issue.card.image" onerror="this.src=IMG_DUMMY">
+                <a v-if="null != issue.card" class="flex center card" :href="issue.card.url" target="_blank" rel="noopener noreferrer">
+                  <img v-if="null != issue.card.image" :src="issue.card.image" onerror="this.src=IMG_DUMMY">
                   <div class="detail-content hidden">
                     <span>{{issue.card.title}}</span><br>
                     <small>{{formatDomain(issue.card)}}</small>
@@ -1891,7 +1891,7 @@
 
           <div v-if="hasDetail" class="status-list">
             <div class="status flex">
-              <img :src="https://aikatsukamen.github.io/checkAvatar(detail.account.avatar_static)" class="avatar border" v-on:click="runAcct(detail.account.id);" onerror="this.src=IMG_DUMMY">
+              <img :src="checkAvatar(detail.account.avatar_static)" class="avatar border" v-on:click="runAcct(detail.account.id);" onerror="this.src=IMG_DUMMY">
               <div class="content-before"><svg width="12" height="14">
                   <use xlink:href="#cb"></use>
                 </svg></div>
@@ -1949,8 +1949,8 @@
                 </div>
                 <div v-if="0 != detail.media_attachments" class="media-wrapper bgcolor-gray hidden flex">
                   <a v-for="media in detail.media_attachments" @click="modal_media = media;showMedia = true;">
-                    <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="https://aikatsukamen.github.io/media.url" class="media" playsinline muted autoplay loop></video>
-                    <img v-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="https://aikatsukamen.github.io/checkMedia(media.preview_url,%20media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
+                    <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="media.url" class="media" playsinline muted autoplay loop></video>
+                    <img v-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="checkMedia(media.preview_url, media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
                     <i v-if="'video' == media.type || ('gifv' == media.type && '1' == optAutoPlay)" class="fa fa-fw fa-play-circle-o color-pk"></i>
                   </a>
                 </div>
@@ -1966,19 +1966,19 @@
                   <div class="full hidden nodot">
                     <small>media links:</small>
                     <span v-for="media in detail.media_attachments">
-                      <a v-if="null != media.remote_url" :href="https://aikatsukamen.github.io/media.remote_url" rel="nofollow noopener" target="_blank">
+                      <a v-if="null != media.remote_url" :href="media.remote_url" rel="nofollow noopener" target="_blank">
                         <i v-if="'video' == media.type || 'gifv' == media.type" class="fa fa-fw fa-file-video-o color-gr"></i>
                         <i v-else class="fa fa-fw fa-file-image-o color-gr"></i>
                       </a>
-                      <a v-else :href="https://aikatsukamen.github.io/media.url" rel="nofollow noopener" target="_blank">
+                      <a v-else :href="media.url" rel="nofollow noopener" target="_blank">
                         <i v-if="'video' == media.type || 'gifv' == media.type" class="fa fa-fw fa-file-video-o color-gr"></i>
                         <i v-else class="fa fa-fw fa-file-image-o color-gr"></i>
                       </a>
                     </span>
                   </div>
                 </div>
-                <a v-if="null != detail.card" class="flex center card" :href="https://aikatsukamen.github.io/detail.card.url" target="_blank" rel="noopener noreferrer">
-                  <img v-if="null != detail.card.image" :src="https://aikatsukamen.github.io/detail.card.image" onerror="this.src=IMG_DUMMY">
+                <a v-if="null != detail.card" class="flex center card" :href="detail.card.url" target="_blank" rel="noopener noreferrer">
+                  <img v-if="null != detail.card.image" :src="detail.card.image" onerror="this.src=IMG_DUMMY">
                   <div class="detail-content hidden">
                     <span>{{detail.card.title}}</span><br>
                     <small>{{formatDomain(detail.card)}}</small>
@@ -1987,11 +1987,11 @@
                 <div v-if="!fetch_watch.detail_chain && !fetch_watch.detail_fav && !fetch_watch.detail_reblog" class="detail-bar flex end">
                   <div>
                     <div class="detail-select"><i class="fa fa-fw fa-retweet"></i><small>{{detail_reblog.length}}</small></div>
-                    <img v-for="account in detail_reblog" :src="https://aikatsukamen.github.io/checkAvatar(account.avatar_static)" v-on:click="runAcct(account.id);" class="avatar mini" onerror="this.src=IMG_DUMMY">
+                    <img v-for="account in detail_reblog" :src="checkAvatar(account.avatar_static)" v-on:click="runAcct(account.id);" class="avatar mini" onerror="this.src=IMG_DUMMY">
                   </div>
                   <div>
                     <div class="detail-select"><i class="fa fa-fw fa-star"></i><small>{{detail_fav.length}}</small></div>
-                    <img v-for="account in detail_fav" :src="https://aikatsukamen.github.io/checkAvatar(account.avatar_static)" v-on:click="runAcct(account.id);" class="avatar mini" onerror="this.src=IMG_DUMMY">
+                    <img v-for="account in detail_fav" :src="checkAvatar(account.avatar_static)" v-on:click="runAcct(account.id);" class="avatar mini" onerror="this.src=IMG_DUMMY">
                   </div>
                 </div>
                 <div class="action-bar flex end wrap">
@@ -2024,19 +2024,19 @@
             </div>
             <div class="status-header flex end">
               <small v-if="detail.application">
-                via <a :href="https://aikatsukamen.github.io/detail.application.website" target="_blank" rel="noopener noreferrer">{{detail.application.name}}</a>
+                via <a :href="detail.application.website" target="_blank" rel="noopener noreferrer">{{detail.application.name}}</a>
               </small>
             </div>
             <div class="status-header flex end">
               <small v-if="formatDomain(detail.account) != repository">
-                from <a :href="https://aikatsukamen.github.io/'//'%20detail.account.domain" target="_blank" rel="noopener noreferrer">{{formatDomain(detail.account)}}</a>
+                from <a :href="'//'+detail.account.domain" target="_blank" rel="noopener noreferrer">{{formatDomain(detail.account)}}</a>
               </small>
             </div>
           </div>
 
           <div v-if="hasDetail && !fetch_watch.detail_chain && !fetch_watch.detail_fav && !fetch_watch.detail_reblog" class="status-list">
             <div v-for="(issue, index) in detail_chain.descendants" class="status flex">
-              <img :src="https://aikatsukamen.github.io/checkAvatar(issue.account.avatar_static)" class="avatar border" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
+              <img :src="checkAvatar(issue.account.avatar_static)" class="avatar border" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
               <div class="content-before"><svg width="12" height="14">
                   <use xlink:href="#cb"></use>
                 </svg></div>
@@ -2090,8 +2090,8 @@
                 </div>
                 <div v-if="0 != issue.media_attachments" class="media-wrapper bgcolor-gray hidden flex">
                   <a v-for="media in issue.media_attachments" @click="modal_media = media;showMedia = true;">
-                    <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="https://aikatsukamen.github.io/media.url" class="media" playsinline muted autoplay loop></video>
-                    <img v-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="https://aikatsukamen.github.io/checkMedia(media.preview_url,%20media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
+                    <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="media.url" class="media" playsinline muted autoplay loop></video>
+                    <img v-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="checkMedia(media.preview_url, media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
                     <i v-if="'video' == media.type || ('gifv' == media.type && '1' == optAutoPlay)" class="fa fa-fw fa-play-circle-o color-pk"></i>
                   </a>
                 </div>
@@ -2103,8 +2103,8 @@
                   <h4 v-else>Media contents</h4>
                   <small>Click to view</small>
                 </div>
-                <a v-if="null != issue.card" class="flex center card" :href="https://aikatsukamen.github.io/issue.card.url" target="_blank" rel="noopener noreferrer">
-                  <img v-if="null != issue.card.image" :src="https://aikatsukamen.github.io/issue.card.image" onerror="this.src=IMG_DUMMY">
+                <a v-if="null != issue.card" class="flex center card" :href="issue.card.url" target="_blank" rel="noopener noreferrer">
+                  <img v-if="null != issue.card.image" :src="issue.card.image" onerror="this.src=IMG_DUMMY">
                   <div class="detail-content hidden">
                     <span>{{issue.card.title}}</span><br>
                     <small>{{formatDomain(issue.card)}}</small>
@@ -2159,10 +2159,10 @@
           <div v-if="hasAcctProfile && !fetch_watch.acct_profile && !fetch_watch.acct_profile_rel && !fetch_watch.acct_profile_pin && !fetch_watch.acct_profile_req" class="account-info">
             <div v-if="isMyAcct && user_requesting_count > 0" v-on:click="resetAcctColumn();fetchAcctFollowRequest();" class="button mini color-wh bgcolor-pk"><i class="fa fa-fw fa-info-circle"></i>Follow Request: {{user_requesting_count}}</div>
             <div v-if="!checkHeader(acct.header)" class="acct-header-wrapper">
-              <img :src="https://aikatsukamen.github.io/acct.header" class="media-header" onerror="this.src=IMG_DUMMY">
+              <img :src="acct.header" class="media-header" onerror="this.src=IMG_DUMMY">
             </div>
             <div class="flex">
-              <img :src="https://aikatsukamen.github.io/checkAvatar(acct.avatar)" class="avatar" onerror="this.src=IMG_DUMMY">
+              <img :src="checkAvatar(acct.avatar)" class="avatar" onerror="this.src=IMG_DUMMY">
               <div class="content">
                 <div class="status-name flex start color-gr">
                   <div class="hidden full">
@@ -2216,7 +2216,7 @@
               </div>
             </div>
             <div v-if="hasAcctNote" class="flex">
-              <img :src="https://aikatsukamen.github.io/checkAvatar(acct.avatar)" class="avatar border" onerror="this.src=IMG_DUMMY">
+              <img :src="checkAvatar(acct.avatar)" class="avatar border" onerror="this.src=IMG_DUMMY">
               <div class="content-before"><svg width="12" height="14">
                   <use xlink:href="#cb"></use>
                 </svg></div>
@@ -2229,7 +2229,7 @@
             <div v-for="(issue, index) in acct_pinned" class="status-wrapper" :class="issue.visibility">
 
               <div class="status flex">
-                <img :src="https://aikatsukamen.github.io/checkAvatar(issue.account.avatar_static)" class="avatar border" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
+                <img :src="checkAvatar(issue.account.avatar_static)" class="avatar border" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
                 <div class="content-before"><svg width="12" height="14">
                     <use xlink:href="#cb"></use>
                   </svg></div>
@@ -2283,8 +2283,8 @@
                   </div>
                   <div v-if="0 != issue.media_attachments" class="media-wrapper bgcolor-gray hidden flex">
                     <a v-for="media in issue.media_attachments" @click="modal_media = media;showMedia = true;">
-                      <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="https://aikatsukamen.github.io/media.url" class="media" playsinline muted autoplay loop></video>
-                      <img v-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="https://aikatsukamen.github.io/checkMedia(media.preview_url,%20media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
+                      <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="media.url" class="media" playsinline muted autoplay loop></video>
+                      <img v-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="checkMedia(media.preview_url, media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
                       <i v-if="'video' == media.type || ('gifv' == media.type && '1' == optAutoPlay)" class="fa fa-fw fa-play-circle-o color-pk"></i>
                     </a>
                   </div>
@@ -2296,8 +2296,8 @@
                     <h4 v-else>Media contents</h4>
                     <small>Click to view</small>
                   </div>
-                  <a v-if="null != issue.card" class="flex center card" :href="https://aikatsukamen.github.io/issue.card.url" target="_blank" rel="noopener noreferrer">
-                    <img v-if="null != issue.card.image" :src="https://aikatsukamen.github.io/issue.card.image" onerror="this.src=IMG_DUMMY">
+                  <a v-if="null != issue.card" class="flex center card" :href="issue.card.url" target="_blank" rel="noopener noreferrer">
+                    <img v-if="null != issue.card.image" :src="issue.card.image" onerror="this.src=IMG_DUMMY">
                     <div class="detail-content hidden">
                       <span>{{issue.card.title}}</span><br>
                       <small>{{formatDomain(issue.card)}}</small>
@@ -2346,7 +2346,7 @@
             <div v-for="(issue, index) in accts" class="status-wrapper" :class="issue.visibility">
               <div v-if="null != issue.reblog" class="status-header flex start">
                 <i class="fa fa-fw fa-retweet color-on"></i>
-                <img :src="https://aikatsukamen.github.io/checkAvatar(issue.account.avatar_static)" class="avatar border notif" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
+                <img :src="checkAvatar(issue.account.avatar_static)" class="avatar border notif" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
                 <div class="hidden full">
                   <div>
                     <span v-if="checkDisplayName(issue.account.display_name)" class="color-pk" v-html="formatEmoji(issue.account.display_name, issue.account.emojis)"></span>
@@ -2363,7 +2363,7 @@
               </div>
 
               <div v-if="null != issue.reblog" class="status flex">
-                <img :src="https://aikatsukamen.github.io/checkAvatar(issue.reblog.account.avatar_static)" class="avatar border" v-on:click="runAcct(issue.reblog.account.id);" onerror="this.src=IMG_DUMMY">
+                <img :src="checkAvatar(issue.reblog.account.avatar_static)" class="avatar border" v-on:click="runAcct(issue.reblog.account.id);" onerror="this.src=IMG_DUMMY">
                 <div class="content-before"><svg width="12" height="14">
                     <use xlink:href="#cb"></use>
                   </svg></div>
@@ -2417,8 +2417,8 @@
                   </div>
                   <div v-if="0 != issue.reblog.media_attachments" class="media-wrapper bgcolor-gray hidden flex">
                     <a v-for="media in issue.reblog.media_attachments" @click="modal_media = media;showMedia = true;">
-                      <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="https://aikatsukamen.github.io/media.url" class="media" playsinline muted autoplay loop></video>
-                      <img v-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="https://aikatsukamen.github.io/checkMedia(media.preview_url,%20media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
+                      <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="media.url" class="media" playsinline muted autoplay loop></video>
+                      <img v-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="checkMedia(media.preview_url, media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
                       <i v-if="'video' == media.type || ('gifv' == media.type && '1' == optAutoPlay)" class="fa fa-fw fa-play-circle-o color-pk"></i>
                     </a>
                   </div>
@@ -2430,8 +2430,8 @@
                     <h4 v-else>Media contents</h4>
                     <small>Click to view</small>
                   </div>
-                  <a v-if="null != issue.reblog.card" class="flex center card" :href="https://aikatsukamen.github.io/issue.reblog.card.url" target="_blank" rel="noopener noreferrer">
-                    <img v-if="null != issue.reblog.card.image" :src="https://aikatsukamen.github.io/issue.reblog.card.image" onerror="this.src=IMG_DUMMY">
+                  <a v-if="null != issue.reblog.card" class="flex center card" :href="issue.reblog.card.url" target="_blank" rel="noopener noreferrer">
+                    <img v-if="null != issue.reblog.card.image" :src="issue.reblog.card.image" onerror="this.src=IMG_DUMMY">
                     <div class="detail-content hidden">
                       <span>{{issue.reblog.card.title}}</span><br>
                       <small>{{formatDomain(issue.reblog.card)}}</small>
@@ -2458,7 +2458,7 @@
               </div>
 
               <div v-else class="status flex">
-                <img :src="https://aikatsukamen.github.io/checkAvatar(issue.account.avatar_static)" class="avatar border" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
+                <img :src="checkAvatar(issue.account.avatar_static)" class="avatar border" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
                 <div class="content-before"><svg width="12" height="14">
                     <use xlink:href="#cb"></use>
                   </svg></div>
@@ -2512,8 +2512,8 @@
                   </div>
                   <div v-if="0 != issue.media_attachments" class="media-wrapper bgcolor-gray hidden flex">
                     <a v-for="media in issue.media_attachments" @click="modal_media = media;showMedia = true;">
-                      <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="https://aikatsukamen.github.io/media.url" class="media" playsinline muted autoplay loop></video>
-                      <img v-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="https://aikatsukamen.github.io/checkMedia(media.preview_url,%20media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
+                      <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="media.url" class="media" playsinline muted autoplay loop></video>
+                      <img v-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="checkMedia(media.preview_url, media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
                       <i v-if="'video' == media.type || ('gifv' == media.type && '1' == optAutoPlay)" class="fa fa-fw fa-play-circle-o color-pk"></i>
                     </a>
                   </div>
@@ -2525,8 +2525,8 @@
                     <h4 v-else>Media contents</h4>
                     <small>Click to view</small>
                   </div>
-                  <a v-if="null != issue.card" class="flex center card" :href="https://aikatsukamen.github.io/issue.card.url" target="_blank" rel="noopener noreferrer">
-                    <img v-if="null != issue.card.image" :src="https://aikatsukamen.github.io/issue.card.image" onerror="this.src=IMG_DUMMY">
+                  <a v-if="null != issue.card" class="flex center card" :href="issue.card.url" target="_blank" rel="noopener noreferrer">
+                    <img v-if="null != issue.card.image" :src="issue.card.image" onerror="this.src=IMG_DUMMY">
                     <div class="detail-content hidden">
                       <span>{{issue.card.title}}</span><br>
                       <small>{{formatDomain(issue.card)}}</small>
@@ -2563,7 +2563,7 @@
           </div>
           <div v-else-if="hasAcctProfile && hasAcctUser && !fetch_watch.acct_profile && !fetch_watch.acct_profile_rel && !fetch_watch.acct_profile_pin && !fetch_watch.acct_profile_req" class="status-list high">
             <div v-for="issue in accts_users" class="status flex">
-              <img :src="https://aikatsukamen.github.io/checkAvatar(issue.avatar_static)" class="avatar border" v-on:click="runAcct(issue.id);" onerror="this.src=IMG_DUMMY">
+              <img :src="checkAvatar(issue.avatar_static)" class="avatar border" v-on:click="runAcct(issue.id);" onerror="this.src=IMG_DUMMY">
               <div class="content-before"><svg width="12" height="14">
                   <use xlink:href="#cb"></use>
                 </svg></div>
@@ -2684,7 +2684,7 @@
         </div>
         <div class="user-list">
           <div v-if="null != user.id" class="status flex">
-            <img :src="https://aikatsukamen.github.io/checkAvatar(user.avatar_static)" class="avatar border short" v-on:click="runUser('katsu');" onerror="this.src=IMG_DUMMY">
+            <img :src="checkAvatar(user.avatar_static)" class="avatar border short" v-on:click="runUser('katsu');" onerror="this.src=IMG_DUMMY">
             <div class="content border short">
               <div class="flex start hidden">
                 <a v-if="checkDisplayName(user.display_name)" class="color-pk" v-html="formatEmoji(user.display_name, user.emojis)"></a>
@@ -2774,7 +2774,7 @@
                 <span v-else v-on:click="fetchListSearch();" class="button color-wh bgcolor-pk">Search</span>
               </div>
               <div v-for="issue in stream_list_users" class="status flex">
-                <img :src="https://aikatsukamen.github.io/checkAvatar(issue.avatar_static)" class="avatar border" v-on:click="showStream = false; runAcct(issue.id);" onerror="this.src=IMG_DUMMY">
+                <img :src="checkAvatar(issue.avatar_static)" class="avatar border" v-on:click="showStream = false; runAcct(issue.id);" onerror="this.src=IMG_DUMMY">
                 <div class="content-before"><svg width="12" height="14">
                     <use xlink:href="#cb"></use>
                   </svg></div>
@@ -2883,7 +2883,7 @@
               <span v-for="issue in searchs.hashtags" v-on:click="runMulti('Hashtag', issue.name);reopenWsMulti('Hashtag', issue.name);" class="list-link border-lite full color-pk bgcolor-wh">#{{issue.name}}</span>
             </div>
             <div v-if="hasSearchAcctEx && search_type == 'acct'" v-for="issue in searchs.accounts_ex" class="status flex">
-              <img :src="https://aikatsukamen.github.io/checkAvatar(issue.avatar_static)" class="avatar border" v-on:click="showSearch = false; runAcct(issue.id);" onerror="this.src=IMG_DUMMY">
+              <img :src="checkAvatar(issue.avatar_static)" class="avatar border" v-on:click="showSearch = false; runAcct(issue.id);" onerror="this.src=IMG_DUMMY">
               <div class="content-before"><svg width="12" height="14">
                   <use xlink:href="#cb"></use>
                 </svg></div>
@@ -2909,7 +2909,7 @@
               </div>
             </div>
             <div v-if="hasSearch && search_type == 'katsu'" v-for="(issue, index) in searchs.statuses" class="status flex">
-              <img :src="https://aikatsukamen.github.io/checkAvatar(issue.account.avatar_static)" class="avatar border" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
+              <img :src="checkAvatar(issue.account.avatar_static)" class="avatar border" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
               <div class="content-before"><svg width="12" height="14">
                   <use xlink:href="#cb"></use>
                 </svg></div>
@@ -2963,8 +2963,8 @@
                 </div>
                 <div v-if="0 != issue.media_attachments" class="media-wrapper bgcolor-gray hidden flex">
                   <a v-for="media in issue.media_attachments" @click="modal_media = media;showMedia = true;">
-                    <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="https://aikatsukamen.github.io/media.url" class="media" playsinline muted autoplay loop></video>
-                    <img v-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="https://aikatsukamen.github.io/checkMedia(media.preview_url,%20media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
+                    <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="media.url" class="media" playsinline muted autoplay loop></video>
+                    <img v-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="checkMedia(media.preview_url, media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
                     <i v-if="'video' == media.type || ('gifv' == media.type && '1' == optAutoPlay)" class="fa fa-fw fa-play-circle-o color-pk"></i>
                   </a>
                 </div>
@@ -2976,8 +2976,8 @@
                   <h4 v-else>Media contents</h4>
                   <small>Click to view</small>
                 </div>
-                <a v-if="null != issue.card" class="flex center card" :href="https://aikatsukamen.github.io/issue.card.url" target="_blank" rel="noopener noreferrer">
-                  <img v-if="null != issue.card.image" :src="https://aikatsukamen.github.io/issue.card.image" onerror="this.src=IMG_DUMMY">
+                <a v-if="null != issue.card" class="flex center card" :href="issue.card.url" target="_blank" rel="noopener noreferrer">
+                  <img v-if="null != issue.card.image" :src="issue.card.image" onerror="this.src=IMG_DUMMY">
                   <div class="detail-content hidden">
                     <span>{{issue.card.title}}</span><br>
                     <small>{{formatDomain(issue.card)}}</small>
@@ -3023,7 +3023,7 @@
             <div class="form-option">
               <div class="action-bar full flex">
                 <div class="flex hidden">
-                  <img :src="https://aikatsukamen.github.io/checkAvatar(user.avatar)" class="avatar mini" v-on:click="showForm = false; runAcct(user.id);" onerror="this.src=IMG_DUMMY">
+                  <img :src="checkAvatar(user.avatar)" class="avatar mini" v-on:click="showForm = false; runAcct(user.id);" onerror="this.src=IMG_DUMMY">
                   <div class="status-name flex start color-gr">
                     <div class="hidden">
                       <a v-if="checkDisplayName(user.display_name)" class="color-pk" v-html="formatEmoji(user.display_name, user.emojis)"></a>
@@ -3051,7 +3051,7 @@
             <span v-else class="color-pk">{{katsu.reply.account.username}}</span>
           </div>
           <div v-if="hasReply" class="status flex form bgcolor-gray">
-            <img :src="https://aikatsukamen.github.io/checkAvatar(katsu.reply.account.avatar_static)" class="avatar border" v-on:click="runAcct(katsu.reply.account.id);" onerror="this.src=IMG_DUMMY">
+            <img :src="checkAvatar(katsu.reply.account.avatar_static)" class="avatar border" v-on:click="runAcct(katsu.reply.account.id);" onerror="this.src=IMG_DUMMY">
             <div class="content-before"><svg width="12" height="14">
                 <use xlink:href="#cb"></use>
               </svg></div>
@@ -3105,8 +3105,8 @@
               </div>
               <div v-if="0 != katsu.reply.media_attachments" class="media-wrapper bgcolor-gray hidden flex">
                 <a v-for="media in katsu.reply.media_attachments" @click="modal_media = media;showMedia = true;">
-                  <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="https://aikatsukamen.github.io/media.url" class="media" playsinline muted autoplay loop></video>
-                  <img v-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="https://aikatsukamen.github.io/checkMedia(media.preview_url,%20media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
+                  <video v-if="'gifv' == media.type && '2' == optAutoPlay" :src="media.url" class="media" playsinline muted autoplay loop></video>
+                  <img v-if="('gifv' != media.type || ('gifv' == media.type && '1' == optAutoPlay))" :src="checkMedia(media.preview_url, media.remote_url)" :alt="media.description" :title="media.description" class="media" onerror="this.src=IMG_DUMMY">
                   <i v-if="'video' == media.type || ('gifv' == media.type && '1' == optAutoPlay)" class="fa fa-fw fa-play-circle-o color-pk"></i>
                 </a>
               </div>
@@ -3212,10 +3212,10 @@
             <div v-if="0 != katsu['media_previews'].length" class="form-option">
               <div class="media-wrapper bgcolor-gray hidden flex">
                 <a v-for="(media, index) in katsu['media_previews']" @click="modal_media = media;showMedia = true;">
-                  <img v-if="null != katsu['media_attachments'][index] && ('image' == katsu['media_attachments'][index].type || 'image' == katsu['media_previews'][index].type)" :src="https://aikatsukamen.github.io/katsu['media_previews'][index].url" class="media">
-                  <img v-else-if="'image' == katsu['media_previews'][index].type" :src="https://aikatsukamen.github.io/media.url" class="media gray">
-                  <img v-else-if="null != katsu['media_attachments'][index] && ('video' == katsu['media_attachments'][index].type || 'gifv' == katsu['media_attachments'][index].type)" :src="https://aikatsukamen.github.io/katsu['media_attachments'][index].preview_url" class="media">
-                  <img v-else-if="'video' == katsu['media_previews'][index].type || 'gifv' == katsu['media_previews'][index].type" :src="https://aikatsukamen.github.io/media.preview_url" class="media gray">
+                  <img v-if="null != katsu['media_attachments'][index] && ('image' == katsu['media_attachments'][index].type || 'image' == katsu['media_previews'][index].type)" :src="katsu['media_previews'][index].url" class="media">
+                  <img v-else-if="'image' == katsu['media_previews'][index].type" :src="media.url" class="media gray">
+                  <img v-else-if="null != katsu['media_attachments'][index] && ('video' == katsu['media_attachments'][index].type || 'gifv' == katsu['media_attachments'][index].type)" :src="katsu['media_attachments'][index].preview_url" class="media">
+                  <img v-else-if="'video' == katsu['media_previews'][index].type || 'gifv' == katsu['media_previews'][index].type" :src="media.preview_url" class="media gray">
                   <i v-if="(null != katsu['media_attachments'][index] && ('video' == katsu['media_attachments'][index].type)) || ('video' == katsu['media_previews'][index].type)" class="fa fa-fw fa-play-circle-o color-pk"></i>
                 </a>
               </div>
@@ -3669,7 +3669,7 @@
             <path class="pkd" d="m0 12 9-12 9 12-9 12z" />
           </pattern>
         </defs>
-        <rect width="100%" height="100%" style="fill: url(./index.html#ptbottoms)" />
+        <rect width="100%" height="100%" style="fill: url(#ptbottoms)" />
       </svg>
     </div>
     <div v-if="'web' == app_mode && ua != 'pc'" class="app-footer flex control">
@@ -3688,23 +3688,23 @@
             <path class="grd" d="m0 57 40-57 40 57-40 57z" />
           </pattern>
         </defs>
-        <rect width="100%" height="100%" style="fill: url(./index.html#ptshoes)" />
+        <rect width="100%" height="100%" style="fill: url(#ptshoes)" />
       </svg>
       <input type="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.dib,.webp,.webm,.mp4,.m4v,image/jpeg,image/png,image/gif,image/bmp,image/webp,video/webm,video/mp4" name="file" id="uploader" class="invisible" onChange="importclick(this.files)">
       <button id="soundoff" class="invisible"></button>
       <button id="sound" class="invisible"></button>
       <button id="soundex" class="invisible"></button>
-      <img src="./img/missing_header.png" alt="">
+      <img src="img/missing_header.png" alt="">
     </div>
   </div>
 
-  <script src="./js/vue.min.js"></script>
-  <script src="./js/addtohomescreen.min.js"></script>
-  <script src="./js/inobounce.min.js"></script>
-  <script src="./js/emojione.js"></script>
-  <script src="./js/lodash.min.js"></script>
-  <script src="./js/main.js?v=0926"></script>
-  <script src="./js/picker.js" async></script>
+  <script src="js/vue.min.js"></script>
+  <script src="js/addtohomescreen.min.js"></script>
+  <script src="js/inobounce.min.js"></script>
+  <script src="js/emojione.js"></script>
+  <script src="js/lodash.min.js"></script>
+  <script src="js/main.js?v=0926"></script>
+  <script src="js/picker.js" async></script>
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js', { scope: './' }).then(reg => {
