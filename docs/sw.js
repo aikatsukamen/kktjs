@@ -1,7 +1,7 @@
 
 
 // const url = 'http://localhost:8080';
-// const url = 'https://sumire.work';
+// const url = 'https://aikatsukamen.github.io';
 const url = location.origin;
 
 const key = "v1.4.8_28";
