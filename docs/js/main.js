@@ -57,10 +57,11 @@ var redirect_sub = 'urn:ietf:wg:oauth:2.0:oob';
 // var client_secret_sub = 'dKK1HSpL9lEzFxWGGhl-52AbDcoVT4RfXg2SSDSZ_RA';
 // kamen
 /** 通常認証 */
-var client_id = 'qrzMcJTeBiaPYqScFTgx77dSwfI7vM4erlXyufeSVws';
+var client_id = 'drEx5E32sYxWm7Co8XaI0SZzD5Sven7oRCDGLiUxNw4';
 /** コード認証 */
 var client_id_sub = 'qrzMcJTeBiaPYqScFTgx77dSwfI7vM4erlXyufeSVws';
-var client_secret = '	mU6GdW47CI0p_hYbZfwSufcKZZ8NA-YkfmG93ztuSrQ';
+// const vapid_key = "BA-WSCqn52VjR-MiXZ7Qn_5KXsRPGEXHg1lNXk1Z0PGC8CckdInvECBFYrOs03BRRgB701OeEqQcjGq3-9dcBZ8=""
+var client_secret = '	600X5H8D0cuy4YkcAZT4yzh2MYbqKEpOQrYMH5u0cEU';
 var client_secret_sub = 'mU6GdW47CI0p_hYbZfwSufcKZZ8NA-YkfmG93ztuSrQ';
 var TOKEN = 'https://[I]/oauth/token';
 var AUTH_URL = 'https://[I]/oauth/authorize?client_id=[CID]&response_type=code&redirect_uri=[URL]&scope=read%20write%20follow';
