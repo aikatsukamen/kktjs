@@ -4,9 +4,9 @@
 // const url = 'https://aikatsukamen.github.io';
 const url = location.origin;
 
-const key = "v1.4.8_28";
+const key = "v1.4.8_30";
 const subkey = "?v=0926";
-console.log("sw: new cache! "+key);
+console.log("sw: new cache! " + key);
 
 const cache_keys = [
   key
@@ -15,9 +15,9 @@ const file = [
   url + '/kktjs/',
   // url + '/kktjs/index.html',
   url + '/kktjs/sw.js',
-  url + '/kktjs/css/style.css'+subkey,
-  url + '/kktjs/js/main.js'+subkey,
-  url + '/kktjs/js/main_readable.js'+subkey,
+  url + '/kktjs/css/style.css' + subkey,
+  url + '/kktjs/js/main.js' + subkey,
+  url + '/kktjs/js/main_readable.js' + subkey,
   url + '/kktjs/css/font-awesome.min.css',
   url + '/kktjs/sounds/boop.mp3',
   url + '/kktjs/fonts/roboto.ttf',
@@ -88,11 +88,11 @@ self.addEventListener('fetch', (event) => {
         //   console.log("sw res: "+response.url);
         // }
         return response || fetch(event.request).then((response) => {
-          if(/^https:\/\/cdn.jsdelivr.net\/|https:\/\/files.kirakiratter.com\/accounts\/avatars\//.test(event.request.url)){
+          if (/^https:\/\/cdn.jsdelivr.net\/|https:\/\/files.kirakiratter.com\/accounts\/avatars\//.test(event.request.url)) {
             // console.log("sw cache add: "+event.request.url);
             cache.put(event.request, response.clone());
-          // }else{
-          //   console.log("sw fetch: "+event.request.url);
+            // }else{
+            //   console.log("sw fetch: "+event.request.url);
           }
           return response;
         });
@@ -102,13 +102,13 @@ self.addEventListener('fetch', (event) => {
 });
 
 self.addEventListener('message', (event) => {
-  if(event.data == "check"){
-    console.log("sw: update check (now "+key+")");
+  if (event.data == "check") {
+    console.log("sw: update check (now " + key + ")");
     self.registration.update();
-  // }else if(event.data == "force"){
-  //   console.log("sw: kktjs update now");
-  //   self.skipWaiting();
-  // }else{
-  //   console.log("sw msg_test: "+event.data);
+    // }else if(event.data == "force"){
+    //   console.log("sw: kktjs update now");
+    //   self.skipWaiting();
+    // }else{
+    //   console.log("sw msg_test: "+event.data);
   }
 });
