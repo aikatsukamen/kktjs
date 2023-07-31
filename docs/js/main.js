@@ -91,8 +91,8 @@ var PROFILE = 'https://[I]/api/v1/accounts/update_credentials';
 var HOME = _0x363a('0x26');
 var LOCAL = 'https://[I]/api/v1/timelines/public?local=true&max_id=[PID]&limit=[LM]&';
 var GLOBAL = 'https://[I]/api/v1/timelines/public?max_id=[PID]&limit=[LM]&';
-var DIRECT = _0x363a('0x27');
-var NOTIF = _0x363a('0x28');
+var DIRECT = "https://kirakiratter.com/api/v1/conversations"; //_0x363a('0x27');
+var NOTIF = 'https://[I]/api/v1/notifications?max_id=[PID]&limit=[LM]&';
 var HASHTAG = _0x363a('0x29');
 var LIST = _0x363a('0x2a');
 var SEARCH = _0x363a('0x2b');
@@ -195,22 +195,22 @@ Vue[_0x363a('0x55')]('restore-kfr', {
 });
 Vue['directive'](_0x363a('0x5f'), {
     'inserted': function (_0x481b64) {
-        _0x481b64['value'] = null != app['_data']['katsu'][_0x363a('0x60')]['texts'][0x0] ? app['_data'][_0x363a('0x61')][_0x363a('0x60')]['texts'][0x0] : '';
+        _0x481b64['value'] = null != app['_data']['katsu'][_0x363a('0x60')]['texts'][0x0] ? app['_data']['katsu'][_0x363a('0x60')]['texts'][0x0] : '';
     }
 });
 Vue[_0x363a('0x55')](_0x363a('0x62'), {
     'inserted': function (_0x48525a) {
-        _0x48525a[_0x363a('0x59')] = null != app['_data'][_0x363a('0x61')][_0x363a('0x60')]['texts'][0x1] ? app['_data'][_0x363a('0x61')][_0x363a('0x60')][_0x363a('0x63')][0x1] : '';
+        _0x48525a[_0x363a('0x59')] = null != app['_data']['katsu'][_0x363a('0x60')]['texts'][0x1] ? app['_data']['katsu'][_0x363a('0x60')][_0x363a('0x63')][0x1] : '';
     }
 });
 Vue[_0x363a('0x55')]('restore-vote2', {
     'inserted': function (_0x3e830d) {
-        _0x3e830d[_0x363a('0x59')] = null != app['_data']['katsu'][_0x363a('0x60')]['texts'][0x2] ? app['_data'][_0x363a('0x61')]['poll_work'][_0x363a('0x63')][0x2] : '';
+        _0x3e830d[_0x363a('0x59')] = null != app['_data']['katsu'][_0x363a('0x60')]['texts'][0x2] ? app['_data']['katsu']['poll_work'][_0x363a('0x63')][0x2] : '';
     }
 });
 Vue[_0x363a('0x55')](_0x363a('0x64'), {
     'inserted': function (_0x39611e) {
-        _0x39611e[_0x363a('0x59')] = null != app['_data'][_0x363a('0x61')][_0x363a('0x60')][_0x363a('0x63')][0x3] ? app['_data'][_0x363a('0x61')][_0x363a('0x60')][_0x363a('0x63')][0x3] : '';
+        _0x39611e[_0x363a('0x59')] = null != app['_data']['katsu'][_0x363a('0x60')][_0x363a('0x63')][0x3] ? app['_data']['katsu'][_0x363a('0x60')][_0x363a('0x63')][0x3] : '';
     }
 });
 var app = new Vue({
@@ -304,7 +304,7 @@ var app = new Vue({
         'ua': 'pc',
         'uaop': '',
         'autologin': !![],
-        'user': null != userConf[_0x363a('0x6e')](_0x363a('0x6f')) ? JSON[_0x363a('0x70')](userConf[_0x363a('0x6e')](_0x363a('0x6f'))) : [],
+        'user': null != userConf[_0x363a('0x6e')](_0x363a('0x6f')) ? JSON.parse(userConf[_0x363a('0x6e')](_0x363a('0x6f'))) : [],
         'user_requesting_count': 0x0,
         'profile': {
             'name': '',
@@ -315,7 +315,7 @@ var app = new Vue({
             'name': ''
         },
         'user_discord': [],
-        'at_discord': null != userConf['getItem']('at_discord') ? JSON[_0x363a('0x70')](userConf[_0x363a('0x6e')]('at_discord')) : '',
+        'at_discord': null != userConf['getItem']('at_discord') ? JSON.parse(userConf[_0x363a('0x6e')]('at_discord')) : '',
         'discord_id': '',
         'discords': [],
         'discord_type': _0x363a('0x71'),
@@ -332,7 +332,7 @@ var app = new Vue({
         'local_posy': 0x0,
         'local_posy_b': 0x0,
         'local_unread': 0x0,
-        'local_id_bookmark': null != userConf[_0x363a('0x6e')](_0x363a('0x72')) ? JSON[_0x363a('0x70')](userConf['getItem'](_0x363a('0x72'))) : '',
+        'local_id_bookmark': null != userConf[_0x363a('0x6e')](_0x363a('0x72')) ? JSON.parse(userConf['getItem'](_0x363a('0x72'))) : '',
         'notif_id': '',
         'notifs': [],
         'notifs_filter': [],
@@ -348,7 +348,7 @@ var app = new Vue({
             'others': 0x0,
             'complete': !![]
         },
-        'notif_id_bookmark': null != userConf[_0x363a('0x6e')](_0x363a('0x73')) ? JSON[_0x363a('0x70')](userConf[_0x363a('0x6e')](_0x363a('0x73'))) : '',
+        'notif_id_bookmark': null != userConf[_0x363a('0x6e')](_0x363a('0x73')) ? JSON.parse(userConf[_0x363a('0x6e')](_0x363a('0x73'))) : '',
         'multi_id': '',
         'multis': [],
         'multi_type': '',
@@ -383,7 +383,7 @@ var app = new Vue({
         'stream_list_text': '',
         'stream_list_text_check': ![],
         'stream_list_profile_check': ![],
-        'stream_hashtags': null != userConf[_0x363a('0x6e')](_0x363a('0x74')) ? JSON[_0x363a('0x70')](userConf[_0x363a('0x6e')](_0x363a('0x74'))) : [],
+        'stream_hashtags': null != userConf[_0x363a('0x6e')](_0x363a('0x74')) ? JSON.parse(userConf[_0x363a('0x6e')](_0x363a('0x74'))) : [],
         'stream_hashtag_text': '',
         'stream_channels': [_0x363a('0x75'), _0x363a('0x76')],
         'katsu': {
@@ -465,8 +465,8 @@ var app = new Vue({
         'katsu_spoiler_text_bu': '',
         'katsu_content_text': '',
         'katsu_poll': null,
-        'content_text_drafts': null != userConf[_0x363a('0x6e')]('work_drafts') ? JSON[_0x363a('0x70')](userConf[_0x363a('0x6e')](_0x363a('0x78'))) : [],
-        'katsu_drafts': null != userConf[_0x363a('0x6e')]('work_katsu_drafts') ? JSON[_0x363a('0x70')](userConf[_0x363a('0x6e')](_0x363a('0x79'))) : [],
+        'content_text_drafts': null != userConf[_0x363a('0x6e')]('work_drafts') ? JSON.parse(userConf[_0x363a('0x6e')](_0x363a('0x78'))) : [],
+        'katsu_drafts': null != userConf[_0x363a('0x6e')]('work_katsu_drafts') ? JSON.parse(userConf[_0x363a('0x6e')](_0x363a('0x79'))) : [],
         'search_text': '',
         'searchs': [],
         'search_type': '',
@@ -484,7 +484,7 @@ var app = new Vue({
                 option = parseInt(option['split']('_')[0x0]);
             }
             if (option < 0xb) {
-                userDeviceOp = _0x363a('0x81');
+                userDeviceOp = 'ios';
             }
         } else if (userAgent[_0x363a('0x7c')]('android') != -0x1) {
             userDevice = _0x363a('0x82');
@@ -494,7 +494,7 @@ var app = new Vue({
                 userDeviceOp = _0x363a('0x84');
             }
         }
-        if (userDevice == _0x363a('0x81') || userDevice == 'pc' && userDeviceOp == _0x363a('0x84')) {
+        if (userDevice == 'ios' || userDevice == 'pc' && userDeviceOp == _0x363a('0x84')) {
             threshold_high = 0x0;
             threshold_low = 0x0;
             TIME_SCROLL = 0x64;
@@ -536,9 +536,9 @@ var app = new Vue({
         this[_0x363a('0x94')]();
         this[_0x363a('0x95')]();
         this['openWsHome']();
-        this[_0x363a('0x96')][_0x363a('0x97')] = !![];
+        this['fetch_lock'][_0x363a('0x97')] = !![];
         this[_0x363a('0x98')]();
-        this[_0x363a('0x99')] == 'Direct';
+        this['multi_type'] == 'Direct';
         this[_0x363a('0x9a')]();
         this['openWsMulti']();
         this['fetchNotifAll']();
@@ -552,7 +552,7 @@ var app = new Vue({
         this[_0x363a('0x9e')](_0x363a('0x9f'), null);
         this[_0x363a('0x9e')]('sound', BOOP);
         this[_0x363a('0x9e')](_0x363a('0xa0'), BOOP_EX);
-        if (this['ua'] == _0x363a('0x81') && this[_0x363a('0xa1')] != _0x363a('0xa2')) {
+        if (this['ua'] == 'ios' && this[_0x363a('0xa1')] != _0x363a('0xa2')) {
             this[_0x363a('0xa3')] = !![];
             this[_0x363a('0xa4')] = _0x363a('0xa5');
             this[_0x363a('0xa6')] = 0x0;
@@ -574,16 +574,16 @@ var app = new Vue({
             return 0x0 != this[_0x363a('0xad')]['length'] && this[_0x363a('0xad')]['id'] == this[_0x363a('0xae')] ? !![] : ![];
         },
         'hasHome': function () {
-            return this['homes'][_0x363a('0xaf')] > 0x0 ? !![] : ![];
+            return this['homes']['length'] > 0x0 ? !![] : ![];
         },
         'hasLocal': function () {
-            return this['locals'][_0x363a('0xaf')] > 0x0 ? !![] : ![];
+            return this['locals']['length'] > 0x0 ? !![] : ![];
         },
         'hasNotif': function () {
-            return this[_0x363a('0xb0')][_0x363a('0xaf')] > 0x0 ? !![] : ![];
+            return this['notifs']['length'] > 0x0 ? !![] : ![];
         },
         'hasNotifFilter': function () {
-            return this[_0x363a('0xb1')][_0x363a('0xaf')] > 0x0 ? !![] : ![];
+            return this['notifs_filter']['length'] > 0x0 ? !![] : ![];
         },
         'hasMulti': function () {
             return this['multis']['length'] > 0x0 ? !![] : ![];
@@ -598,37 +598,37 @@ var app = new Vue({
             return this[_0x363a('0xb3')]['accounts_ex'] != null ? !![] : ![];
         },
         'hasAcctProfile': function () {
-            return this[_0x363a('0xb5')] && this[_0x363a('0xb5')][_0x363a('0xaf')] != 0x0 && this['acct_relation'] ? !![] : ![];
+            return this['acct'] && this['acct']['length'] != 0x0 && this['acct_relation'] ? !![] : ![];
         },
         'hasAcct': function () {
-            return this['accts'][_0x363a('0xaf')] > 0x0 ? !![] : ![];
+            return this['accts']['length'] > 0x0 ? !![] : ![];
         },
         'hasAcctNote': function () {
-            return this[_0x363a('0xb5')][_0x363a('0xb6')][_0x363a('0xaf')] > 0x7 ? !![] : ![];
+            return this['acct'][_0x363a('0xb6')]['length'] > 0x7 ? !![] : ![];
         },
         'hasAcctUser': function () {
-            return this[_0x363a('0xb7')][_0x363a('0xaf')] > 0x0 && this[_0x363a('0xb8')][_0x363a('0xaf')] > 0x0 ? !![] : ![];
+            return this[_0x363a('0xb7')]['length'] > 0x0 && this[_0x363a('0xb8')]['length'] > 0x0 ? !![] : ![];
         },
         'hasStreamList': function () {
-            return this[_0x363a('0xb9')][_0x363a('0xaf')] != 0x0 ? !![] : ![];
+            return this[_0x363a('0xb9')]['length'] != 0x0 ? !![] : ![];
         },
         'hasReply': function () {
-            return this[_0x363a('0x61')][_0x363a('0xba')] && this['katsu'][_0x363a('0xba')]['id'] ? !![] : ![];
+            return this['katsu'][_0x363a('0xba')] && this['katsu'][_0x363a('0xba')]['id'] ? !![] : ![];
         },
         'hasKatsuDraft': function () {
-            return this['katsu_drafts'] && this[_0x363a('0xbb')][_0x363a('0xaf')] > 0x0 ? !![] : ![];
+            return this['katsu_drafts'] && this[_0x363a('0xbb')]['length'] > 0x0 ? !![] : ![];
         },
         'hasInfo': function () {
-            return this['result_text'] && this[_0x363a('0xa4')][_0x363a('0xaf')] > 0x0 ? !![] : ![];
+            return this['result_text'] && this[_0x363a('0xa4')]['length'] > 0x0 ? !![] : ![];
         },
         'isHashtagMax': function () {
-            return this[_0x363a('0xbc')][_0x363a('0xaf')] >= LIMIT_HASHTAGS ? !![] : ![];
+            return this[_0x363a('0xbc')]['length'] >= LIMIT_HASHTAGS ? !![] : ![];
         },
         'isListMax': function () {
             return this[_0x363a('0xbd')]['length'] >= LIMIT_LISTS ? !![] : ![];
         },
         'isListFollowMax': function () {
-            return this[_0x363a('0xbe')][_0x363a('0xaf')] == 0x0 || this[_0x363a('0xbe')][_0x363a('0xaf')] % LIMIT_USER != 0x0 ? !![] : ![];
+            return this[_0x363a('0xbe')]['length'] == 0x0 || this[_0x363a('0xbe')]['length'] % LIMIT_USER != 0x0 ? !![] : ![];
         }
     },
     'methods': {
@@ -640,18 +640,18 @@ var app = new Vue({
             var _0x4549b7 = new Date();
             _0x4549b7['setYear'](_0x4549b7['getFullYear']() - 0x1);
             if (_0x372dc8[_0x363a('0xc0')]() < _0x4549b7[_0x363a('0xc0')]()) {
-                return ('0' + _0x372dc8['getFullYear']())[_0x363a('0xc1')](-0x2) + '/' + ('0' + (_0x372dc8[_0x363a('0xc2')]() + 0x1))['slice'](-0x2) + '/' + ('0' + _0x372dc8[_0x363a('0xc3')]())[_0x363a('0xc1')](-0x2) + '\x20' + ('0' + _0x372dc8['getHours']())['slice'](-0x2) + ':' + ('0' + _0x372dc8[_0x363a('0xc4')]())[_0x363a('0xc1')](-0x2);
+                return ('0' + _0x372dc8['getFullYear']())['slice'](-0x2) + '/' + ('0' + (_0x372dc8[_0x363a('0xc2')]() + 0x1))['slice'](-0x2) + '/' + ('0' + _0x372dc8[_0x363a('0xc3')]())['slice'](-0x2) + '\x20' + ('0' + _0x372dc8['getHours']())['slice'](-0x2) + ':' + ('0' + _0x372dc8[_0x363a('0xc4')]())['slice'](-0x2);
             }
-            return ('0' + (_0x372dc8[_0x363a('0xc2')]() + 0x1))[_0x363a('0xc1')](-0x2) + '/' + ('0' + _0x372dc8[_0x363a('0xc3')]())[_0x363a('0xc1')](-0x2) + '\x20' + ('0' + _0x372dc8[_0x363a('0xc5')]())[_0x363a('0xc1')](-0x2) + ':' + ('0' + _0x372dc8[_0x363a('0xc4')]())[_0x363a('0xc1')](-0x2);
+            return ('0' + (_0x372dc8[_0x363a('0xc2')]() + 0x1))['slice'](-0x2) + '/' + ('0' + _0x372dc8[_0x363a('0xc3')]())['slice'](-0x2) + '\x20' + ('0' + _0x372dc8[_0x363a('0xc5')]())['slice'](-0x2) + ':' + ('0' + _0x372dc8[_0x363a('0xc4')]())['slice'](-0x2);
         },
         'formatDateFull': function (_0x7f6d0e) {
             var _0x23cc31 = new Date(_0x7f6d0e);
-            return ('0' + _0x23cc31[_0x363a('0xc6')]())['slice'](-0x2) + '/' + ('0' + (_0x23cc31[_0x363a('0xc2')]() + 0x1))['slice'](-0x2) + '/' + ('0' + _0x23cc31[_0x363a('0xc3')]())[_0x363a('0xc1')](-0x2) + '\x20' + ('0' + _0x23cc31[_0x363a('0xc5')]())[_0x363a('0xc1')](-0x2) + ':' + ('0' + _0x23cc31[_0x363a('0xc4')]())[_0x363a('0xc1')](-0x2) + ':' + ('0' + _0x23cc31[_0x363a('0xc7')]())['slice'](-0x2);
+            return ('0' + _0x23cc31[_0x363a('0xc6')]())['slice'](-0x2) + '/' + ('0' + (_0x23cc31[_0x363a('0xc2')]() + 0x1))['slice'](-0x2) + '/' + ('0' + _0x23cc31[_0x363a('0xc3')]())['slice'](-0x2) + '\x20' + ('0' + _0x23cc31[_0x363a('0xc5')]())['slice'](-0x2) + ':' + ('0' + _0x23cc31[_0x363a('0xc4')]())['slice'](-0x2) + ':' + ('0' + _0x23cc31[_0x363a('0xc7')]())['slice'](-0x2);
         },
         'formatDateVote': function (_0x3a103f) {
             var _0x4057e1 = new Date();
             _0x4057e1[_0x363a('0xc8')](_0x4057e1[_0x363a('0xc7')]() + _0x3a103f);
-            return _0x4057e1['getFullYear']() + '/' + ('0' + (_0x4057e1[_0x363a('0xc2')]() + 0x1))['slice'](-0x2) + '/' + ('0' + _0x4057e1['getDate']())[_0x363a('0xc1')](-0x2) + '\x20' + ('0' + _0x4057e1[_0x363a('0xc5')]())['slice'](-0x2) + ':' + ('0' + _0x4057e1[_0x363a('0xc4')]())[_0x363a('0xc1')](-0x2);
+            return _0x4057e1['getFullYear']() + '/' + ('0' + (_0x4057e1[_0x363a('0xc2')]() + 0x1))['slice'](-0x2) + '/' + ('0' + _0x4057e1['getDate']())['slice'](-0x2) + '\x20' + ('0' + _0x4057e1[_0x363a('0xc5')]())['slice'](-0x2) + ':' + ('0' + _0x4057e1[_0x363a('0xc4')]())['slice'](-0x2);
         },
         'formatContent': function (_0x2bd990, _0x543689) {
             return _0x2bd990 != null ? emojione[_0x363a('0xc9')](patchEmoji(_0x2bd990, _0x543689)['split'](_0x363a('0xca'))[_0x363a('0xcb')](_0x363a('0xcc'))['split']('<a\x20href=\x22https://kirakiratter.com/tags/')[_0x363a('0xcb')](_0x363a('0xcd'))['split'](_0x363a('0xce'))[_0x363a('0xcb')]('<a\x20href=\x22javascript:void(0)\x22\x20onClick=\x22app._data.search_userid\x20=\x20this.getAttribute(\x27user\x27);app.runUserId();return\x20false;\x22\x20user=\x22').replace(/>kirakiratter.com\/media\/[\s\S]*?<\/span>/g, _0x363a('0xd0'))).replace(/:name_badge:/g, '📛').replace(/  /g, _0x363a('0xd1')) : '';
@@ -672,12 +672,12 @@ var app = new Vue({
             return _0x1b6a15 != null ? emojione[_0x363a('0xc9')](patchEmoji(escapeHtml(_0x1b6a15), _0x2db5e9)).replace(/:name_badge:/g, '📛') : '';
         },
         'formatDomain': function (_0x59c410) {
-            _0x59c410[_0x363a('0xd7')] = !_0x59c410[_0x363a('0xd8')] ? _0x59c410[_0x363a('0xd9')] != null && _0x59c410[_0x363a('0xd9')]['match'](/^[httpsfile]+:\/{2,3}([0-9a-z\.\-:]+?):?[0-9]*?\//i)[0x1] : _0x59c410[_0x363a('0xd7')];
+            _0x59c410['domain'] = !_0x59c410['passed'] ? _0x59c410['url'] != null && _0x59c410['url']['match'](/^[httpsfile]+:\/{2,3}([0-9a-z\.\-:]+?):?[0-9]*?\//i)[0x1] : _0x59c410['domain'];
             _0x59c410['passed'] = !![];
             return _0x59c410['domain'];
         },
         'checkDisplayName': function (_0x386c4c) {
-            return _0x386c4c && _0x386c4c[_0x363a('0xaf')] > 0x0 && _0x386c4c.replace(/^[\s|　]+|[\s|　]+$/g, '')[_0x363a('0xaf')] > 0x0 ? !![] : ![];
+            return _0x386c4c && _0x386c4c['length'] > 0x0 && _0x386c4c.replace(/^[\s|　]+|[\s|　]+$/g, '')['length'] > 0x0 ? !![] : ![];
         },
         'checkKatsuChain': function (_0x40230c) {
             return 0x0 != _0x40230c['replies_count'] || null != _0x40230c[_0x363a('0xda')] ? !![] : ![];
@@ -710,11 +710,11 @@ var app = new Vue({
             });
             return _0x1746af;
         },
-        'checkStreamListText': _[_0x363a('0xe1')](function () {
+        'checkStreamListText': _['debounce'](function () {
             this[_0x363a('0xe2')] = this[_0x363a('0xe3')] != null && this['stream_list_text']['length'] > 0x0 ? !![] : ![];
         }, TIME_REFRESH),
-        'checkListProfile': _[_0x363a('0xe1')](function () {
-            this[_0x363a('0xe4')] = this[_0x363a('0xe5')]['name'] != null && this[_0x363a('0xe5')][_0x363a('0xe6')][_0x363a('0xaf')] > 0x0 ? !![] : ![];
+        'checkListProfile': _['debounce'](function () {
+            this[_0x363a('0xe4')] = this[_0x363a('0xe5')]['name'] != null && this[_0x363a('0xe5')][_0x363a('0xe6')]['length'] > 0x0 ? !![] : ![];
         }, TIME_REFRESH),
         'handleWheel': _['debounce'](function (_0x2ce36b) {
             if (!this[_0x363a('0xa3')]) {
@@ -723,7 +723,7 @@ var app = new Vue({
                 this['error_cnt'] = 0x0;
             }
         }, TIME_SCROLL),
-        'handleScrollHome': _[_0x363a('0xe1')](function (_0x5ee536) {
+        'handleScrollHome': _['debounce'](function (_0x5ee536) {
             if (!this[_0x363a('0xa3')]) {
                 this[_0x363a('0xe7')] = '';
                 this[_0x363a('0xa4')] = '';
@@ -731,29 +731,29 @@ var app = new Vue({
             }
             this['home_posy'] = parseInt(_0x5ee536[_0x363a('0xe8')]['scrollTop']);
             this[_0x363a('0xe9')] = parseInt(_0x5ee536[_0x363a('0xe8')][_0x363a('0xea')] - _0x5ee536[_0x363a('0xe8')][_0x363a('0xeb')] - _0x5ee536['target']['scrollTop']);
-            if (!this[_0x363a('0x96')][_0x363a('0xec')] && this[_0x363a('0xed')] != this[_0x363a('0xe9')] && threshold_low >= this['home_posy_b'] && 0x0 <= this[_0x363a('0xe9')]) {
+            if (!this['fetch_lock'][_0x363a('0xec')] && this[_0x363a('0xed')] != this[_0x363a('0xe9')] && threshold_low >= this['home_posy_b'] && 0x0 <= this[_0x363a('0xe9')]) {
                 this['fetch_lock'][_0x363a('0xec')] = !![];
-                this[_0x363a('0xee')] = this[_0x363a('0xef')]['length'] - LIMIT;
+                this[_0x363a('0xee')] = this['homes']['length'] - LIMIT;
                 this[_0x363a('0x95')]();
-            } else if (!this[_0x363a('0x96')][_0x363a('0xec')] && this[_0x363a('0xed')] != this[_0x363a('0xe9')] && threshold_high >= this['home_posy'] && 0x0 <= this[_0x363a('0xe9')]) {
+            } else if (!this['fetch_lock'][_0x363a('0xec')] && this[_0x363a('0xed')] != this[_0x363a('0xe9')] && threshold_high >= this['home_posy'] && 0x0 <= this[_0x363a('0xe9')]) {
                 if (this[_0x363a('0xee')] - LIMIT < 0x0) {
                     this['home_unread'] = 0x0;
-                    this[_0x363a('0xef')][_0x363a('0xf0')](LIMIT);
-                    this[_0x363a('0xf1')] = this[_0x363a('0xf2')] ? this['homes'][this['homes'][_0x363a('0xaf')] - 0x1]['id'] : '';
-                    this[_0x363a('0xf3')]['home'] = ![];
+                    this['homes'][_0x363a('0xf0')](LIMIT);
+                    this[_0x363a('0xf1')] = this[_0x363a('0xf2')] ? this['homes'][this['homes']['length'] - 0x1]['id'] : '';
+                    this['fetch_comp']['home'] = ![];
                     return;
                 }
                 this[_0x363a('0xee')] = this['home_unread'] - LIMIT;
                 if (0x0 >= this['home_posy']) {
-                    this[_0x363a('0xf4')](_0x363a('0xec'), this[_0x363a('0xef')][LIMIT + this[_0x363a('0xee')]]['id']);
+                    this[_0x363a('0xf4')](_0x363a('0xec'), this['homes'][LIMIT + this[_0x363a('0xee')]]['id']);
                 }
-            } else if (this[_0x363a('0xef')][_0x363a('0xaf')] - 0x1 - this[_0x363a('0xee')] > LIMIT * 0x2) {
-                this[_0x363a('0xef')][_0x363a('0xf0')](this['home_unread'] + LIMIT * 0x2);
-                this[_0x363a('0xf1')] = this[_0x363a('0xf2')] ? this[_0x363a('0xef')][this[_0x363a('0xef')]['length'] - 0x1]['id'] : '';
-                this[_0x363a('0xf3')][_0x363a('0xec')] = ![];
+            } else if (this['homes']['length'] - 0x1 - this[_0x363a('0xee')] > LIMIT * 0x2) {
+                this['homes'][_0x363a('0xf0')](this['home_unread'] + LIMIT * 0x2);
+                this[_0x363a('0xf1')] = this[_0x363a('0xf2')] ? this['homes'][this['homes']['length'] - 0x1]['id'] : '';
+                this['fetch_comp'][_0x363a('0xec')] = ![];
             }
         }, TIME_SCROLL),
-        'handleScrollLocal': _[_0x363a('0xe1')](function (_0x750d55) {
+        'handleScrollLocal': _['debounce'](function (_0x750d55) {
             if (!this[_0x363a('0xa3')]) {
                 this[_0x363a('0xe7')] = '';
                 this[_0x363a('0xa4')] = '';
@@ -761,29 +761,29 @@ var app = new Vue({
             }
             this[_0x363a('0xf5')] = parseInt(_0x750d55[_0x363a('0xe8')][_0x363a('0xf6')]);
             this[_0x363a('0xf7')] = parseInt(_0x750d55[_0x363a('0xe8')][_0x363a('0xea')] - _0x750d55[_0x363a('0xe8')][_0x363a('0xeb')] - _0x750d55['target'][_0x363a('0xf6')]);
-            if (!this[_0x363a('0x96')][_0x363a('0xf8')] && this[_0x363a('0xf5')] != this['local_posy_b'] && threshold_low >= this[_0x363a('0xf7')] && 0x0 <= this[_0x363a('0xf7')]) {
-                this[_0x363a('0x96')][_0x363a('0xf8')] = !![];
-                this['local_unread'] = this[_0x363a('0xf9')][_0x363a('0xaf')] - LIMIT;
+            if (!this['fetch_lock'][_0x363a('0xf8')] && this[_0x363a('0xf5')] != this['local_posy_b'] && threshold_low >= this[_0x363a('0xf7')] && 0x0 <= this[_0x363a('0xf7')]) {
+                this['fetch_lock'][_0x363a('0xf8')] = !![];
+                this['local_unread'] = this['locals']['length'] - LIMIT;
                 this[_0x363a('0x92')]();
-            } else if (!this[_0x363a('0x96')][_0x363a('0xf8')] && this[_0x363a('0xf5')] != this['local_posy_b'] && threshold_high >= this[_0x363a('0xf5')] && 0x0 <= this[_0x363a('0xf5')]) {
+            } else if (!this['fetch_lock'][_0x363a('0xf8')] && this[_0x363a('0xf5')] != this['local_posy_b'] && threshold_high >= this[_0x363a('0xf5')] && 0x0 <= this[_0x363a('0xf5')]) {
                 if (this[_0x363a('0xfa')] - LIMIT < 0x0) {
                     this[_0x363a('0xfa')] = 0x0;
-                    this[_0x363a('0xf9')][_0x363a('0xf0')](LIMIT);
-                    this['local_id'] = this['hasLocal'] ? this[_0x363a('0xf9')][this[_0x363a('0xf9')][_0x363a('0xaf')] - 0x1]['id'] : '';
-                    this[_0x363a('0xf3')][_0x363a('0xf8')] = ![];
+                    this['locals'][_0x363a('0xf0')](LIMIT);
+                    this['local_id'] = this['hasLocal'] ? this['locals'][this['locals']['length'] - 0x1]['id'] : '';
+                    this['fetch_comp'][_0x363a('0xf8')] = ![];
                     return;
                 }
                 this[_0x363a('0xfa')] = this[_0x363a('0xfa')] - LIMIT;
                 if (0x0 >= this[_0x363a('0xf5')]) {
-                    this[_0x363a('0xf4')](_0x363a('0xf8'), this[_0x363a('0xf9')][LIMIT + this[_0x363a('0xfa')]]['id']);
+                    this[_0x363a('0xf4')](_0x363a('0xf8'), this['locals'][LIMIT + this[_0x363a('0xfa')]]['id']);
                 }
-            } else if (this[_0x363a('0xf9')][_0x363a('0xaf')] - 0x1 - this[_0x363a('0xfa')] > LIMIT * 0x2) {
-                this[_0x363a('0xf9')]['splice'](this[_0x363a('0xfa')] + LIMIT * 0x2);
-                this['local_id'] = this['hasLocal'] ? this[_0x363a('0xf9')][this['locals'][_0x363a('0xaf')] - 0x1]['id'] : '';
-                this[_0x363a('0xf3')][_0x363a('0xf8')] = ![];
+            } else if (this['locals']['length'] - 0x1 - this[_0x363a('0xfa')] > LIMIT * 0x2) {
+                this['locals']['splice'](this[_0x363a('0xfa')] + LIMIT * 0x2);
+                this['local_id'] = this['hasLocal'] ? this['locals'][this['locals']['length'] - 0x1]['id'] : '';
+                this['fetch_comp'][_0x363a('0xf8')] = ![];
             }
         }, TIME_SCROLL),
-        'handleScrollMulti': _[_0x363a('0xe1')](function (_0x1602b7) {
+        'handleScrollMulti': _['debounce'](function (_0x1602b7) {
             if (!this[_0x363a('0xa3')]) {
                 this[_0x363a('0xe7')] = '';
                 this[_0x363a('0xa4')] = '';
@@ -791,29 +791,29 @@ var app = new Vue({
             }
             this[_0x363a('0xfb')] = parseInt(_0x1602b7[_0x363a('0xe8')][_0x363a('0xf6')]);
             this[_0x363a('0xfc')] = parseInt(_0x1602b7[_0x363a('0xe8')][_0x363a('0xea')] - _0x1602b7[_0x363a('0xe8')][_0x363a('0xeb')] - _0x1602b7[_0x363a('0xe8')][_0x363a('0xf6')]);
-            if (!this[_0x363a('0x96')]['multi'] && this[_0x363a('0xfb')] != this[_0x363a('0xfc')] && threshold_low >= this[_0x363a('0xfc')] && 0x0 <= this[_0x363a('0xfc')]) {
-                this[_0x363a('0x96')][_0x363a('0xfd')] = !![];
-                this[_0x363a('0xfe')] = this[_0x363a('0xff')][_0x363a('0xaf')] - LIMIT;
+            if (!this['fetch_lock']['multi'] && this[_0x363a('0xfb')] != this[_0x363a('0xfc')] && threshold_low >= this[_0x363a('0xfc')] && 0x0 <= this[_0x363a('0xfc')]) {
+                this['fetch_lock']['multi'] = !![];
+                this[_0x363a('0xfe')] = this[_0x363a('0xff')]['length'] - LIMIT;
                 this[_0x363a('0x9a')]();
-            } else if (!this[_0x363a('0x96')][_0x363a('0xfd')] && this[_0x363a('0xfb')] != this[_0x363a('0xfc')] && threshold_high >= this[_0x363a('0xfb')] && 0x0 <= this[_0x363a('0xfb')]) {
+            } else if (!this['fetch_lock']['multi'] && this[_0x363a('0xfb')] != this[_0x363a('0xfc')] && threshold_high >= this[_0x363a('0xfb')] && 0x0 <= this[_0x363a('0xfb')]) {
                 if (this[_0x363a('0xfe')] - LIMIT < 0x0) {
                     this[_0x363a('0xfe')] = 0x0;
                     this[_0x363a('0xff')][_0x363a('0xf0')](LIMIT);
-                    this[_0x363a('0x100')] = this[_0x363a('0x101')] ? this[_0x363a('0xff')][this[_0x363a('0xff')]['length'] - 0x1]['id'] : '';
-                    this['fetch_comp'][_0x363a('0xfd')] = ![];
+                    this['multi_id'] = this[_0x363a('0x101')] ? this[_0x363a('0xff')][this[_0x363a('0xff')]['length'] - 0x1]['id'] : '';
+                    this['fetch_comp']['multi'] = ![];
                     return;
                 }
                 this[_0x363a('0xfe')] = this[_0x363a('0xfe')] - LIMIT;
                 if (0x0 >= this[_0x363a('0xfb')]) {
-                    this['jumpKatsu'](_0x363a('0xfd'), this[_0x363a('0xff')][LIMIT + this[_0x363a('0xfe')]]['id']);
+                    this['jumpKatsu']('multi', this[_0x363a('0xff')][LIMIT + this[_0x363a('0xfe')]]['id']);
                 }
-            } else if (this['multis'][_0x363a('0xaf')] - 0x1 - this['multi_unread'] > LIMIT * 0x2) {
+            } else if (this['multis']['length'] - 0x1 - this['multi_unread'] > LIMIT * 0x2) {
                 this[_0x363a('0xff')][_0x363a('0xf0')](this[_0x363a('0xfe')] + LIMIT * 0x2);
                 this['multi_id'] = this[_0x363a('0x101')] ? this['multis'][this[_0x363a('0xff')]['length'] - 0x1]['id'] : '';
-                this[_0x363a('0xf3')][_0x363a('0xfd')] = ![];
+                this['fetch_comp']['multi'] = ![];
             }
         }, TIME_SCROLL),
-        'handleScrollNotif': _[_0x363a('0xe1')](function (_0x178d0c) {
+        'handleScrollNotif': _['debounce'](function (_0x178d0c) {
             if (!this[_0x363a('0xa3')]) {
                 this[_0x363a('0xe7')] = '';
                 this[_0x363a('0xa4')] = '';
@@ -822,29 +822,29 @@ var app = new Vue({
             this[_0x363a('0x102')] = parseInt(_0x178d0c[_0x363a('0xe8')][_0x363a('0xf6')]);
             this[_0x363a('0x103')] = parseInt(_0x178d0c[_0x363a('0xe8')][_0x363a('0xea')] - _0x178d0c[_0x363a('0xe8')][_0x363a('0xeb')] - _0x178d0c[_0x363a('0xe8')][_0x363a('0xf6')]);
             if (!this['fetch_lock']['notif'] && this[_0x363a('0x102')] != this[_0x363a('0x103')] && threshold_low >= this[_0x363a('0x103')]) {
-                this[_0x363a('0x96')][_0x363a('0x104')] = !![];
-                this[_0x363a('0x105')] = this[_0x363a('0xb1')]['length'] - LIMIT_NOTIF;
-                if (this[_0x363a('0x106')] == '') {
+                this['fetch_lock']['notif'] = !![];
+                this[_0x363a('0x105')] = this['notifs_filter']['length'] - LIMIT_NOTIF;
+                if (this['notif_type'] == '') {
                     this[_0x363a('0x107')]();
-                } else if (this[_0x363a('0x106')] == _0x363a('0x108')) {
+                } else if (this['notif_type'] == _0x363a('0x108')) {
                     this[_0x363a('0x109')]();
-                } else if (this['notif_type'] == _0x363a('0x10a')) {
+                } else if (this['notif_type'] == 'fav') {
                     this[_0x363a('0x10b')]();
-                } else if (this[_0x363a('0x106')] == _0x363a('0x10c')) {
+                } else if (this['notif_type'] == 'reblog') {
                     this[_0x363a('0x10d')]();
-                } else if (this[_0x363a('0x106')] == _0x363a('0x10e')) {
+                } else if (this['notif_type'] == _0x363a('0x10e')) {
                     this[_0x363a('0x10f')]();
                 }
             } else if (!this['fetch_lock']['notif'] && this[_0x363a('0x102')] != this[_0x363a('0x103')] && threshold_high >= this[_0x363a('0x102')]) {
                 if (this[_0x363a('0x105')] - LIMIT_NOTIF < 0x0) {
                     this[_0x363a('0x105')] = 0x0;
-                    if ('mention' == this[_0x363a('0x106')]) {
+                    if ('mention' == this['notif_type']) {
                         this[_0x363a('0x110')][_0x363a('0x108')] = 0x0;
-                    } else if (_0x363a('0x10a') == this['notif_type']) {
-                        this[_0x363a('0x110')][_0x363a('0x10a')] = 0x0;
+                    } else if ('fav' == this['notif_type']) {
+                        this[_0x363a('0x110')]['fav'] = 0x0;
                     } else if ('reblog' == this['notif_type']) {
-                        this[_0x363a('0x110')][_0x363a('0x10c')] = 0x0;
-                    } else if (_0x363a('0x10e') == this[_0x363a('0x106')]) {
+                        this[_0x363a('0x110')]['reblog'] = 0x0;
+                    } else if (_0x363a('0x10e') == this['notif_type']) {
                         this[_0x363a('0x110')][_0x363a('0x10e')] = 0x0;
                     } else {
                         this[_0x363a('0x110')][_0x363a('0x111')] = 0x0;
@@ -853,15 +853,15 @@ var app = new Vue({
                 }
                 this[_0x363a('0x105')] = this[_0x363a('0x105')] - LIMIT_NOTIF;
                 if (0x0 >= this[_0x363a('0x102')]) {
-                    this[_0x363a('0xf4')](_0x363a('0x104'), this[_0x363a('0xb1')][LIMIT_NOTIF + this[_0x363a('0x105')]]['id']);
+                    this[_0x363a('0xf4')]('notif', this['notifs_filter'][LIMIT_NOTIF + this[_0x363a('0x105')]]['id']);
                 }
-            } else if (this[_0x363a('0xb1')][_0x363a('0xaf')] - 0x1 - this[_0x363a('0x105')] > LIMIT_NOTIF * 0x2) {
-                this[_0x363a('0xb1')][_0x363a('0xf0')](this[_0x363a('0x105')] + LIMIT_NOTIF * 0x2);
-                this['notif_id'] = this[_0x363a('0x112')] ? this[_0x363a('0xb1')][this[_0x363a('0xb1')][_0x363a('0xaf')] - 0x1]['id'] : '';
-                this['fetch_comp'][_0x363a('0x113')] = ![];
+            } else if (this['notifs_filter']['length'] - 0x1 - this[_0x363a('0x105')] > LIMIT_NOTIF * 0x2) {
+                this['notifs_filter'][_0x363a('0xf0')](this[_0x363a('0x105')] + LIMIT_NOTIF * 0x2);
+                this['notif_id'] = this[_0x363a('0x112')] ? this['notifs_filter'][this['notifs_filter']['length'] - 0x1]['id'] : '';
+                this['fetch_comp']['notif_filter'] = ![];
             }
-            if ((this['ua'] == _0x363a('0x81') || this['uaop'] == 'macos_safari') && this[_0x363a('0xb1')]['length'] - 0x1 - this[_0x363a('0x105')] > LIMIT * 0x2) {
-                _0x178d0c['target'][_0x363a('0xf6')] = _0x178d0c[_0x363a('0xe8')][_0x363a('0xeb')] + this[_0x363a('0x103')] / ((this[_0x363a('0xb1')]['length'] - this[_0x363a('0x105')]) / LIMIT - 0x1);
+            if ((this['ua'] == 'ios' || this['uaop'] == 'macos_safari') && this['notifs_filter']['length'] - 0x1 - this[_0x363a('0x105')] > LIMIT * 0x2) {
+                _0x178d0c['target'][_0x363a('0xf6')] = _0x178d0c[_0x363a('0xe8')][_0x363a('0xeb')] + this[_0x363a('0x103')] / ((this['notifs_filter']['length'] - this[_0x363a('0x105')]) / LIMIT - 0x1);
             }
         }, TIME_SCROLL),
         'handleScrollAcct': _['debounce'](function (_0x3b2506) {
@@ -872,19 +872,19 @@ var app = new Vue({
             }
             var _0x4b3a7e = parseInt(_0x3b2506['target'][_0x363a('0xf6')]);
             var _0x5c913c = parseInt(_0x3b2506['target']['scrollHeight'] - _0x3b2506[_0x363a('0xe8')][_0x363a('0xeb')] - _0x3b2506[_0x363a('0xe8')][_0x363a('0xf6')]);
-            if (!this[_0x363a('0x96')][_0x363a('0xb5')] && _0x4b3a7e != _0x5c913c && 0x1 > _0x5c913c) {
-                this[_0x363a('0x96')][_0x363a('0xb5')] = !![];
-                if (this[_0x363a('0x114')] == _0x363a('0x61')) {
+            if (!this['fetch_lock']['acct'] && _0x4b3a7e != _0x5c913c && 0x1 > _0x5c913c) {
+                this['fetch_lock']['acct'] = !![];
+                if (this['acct_type'] == 'katsu') {
                     this[_0x363a('0x115')]();
-                } else if (this[_0x363a('0x114')] == 'media') {
+                } else if (this['acct_type'] == 'media') {
                     this[_0x363a('0x116')]();
-                } else if (this[_0x363a('0x114')] == _0x363a('0x10a')) {
+                } else if (this['acct_type'] == 'fav') {
                     this[_0x363a('0x117')]();
-                } else if (this[_0x363a('0x114')] == _0x363a('0x10e')) {
+                } else if (this['acct_type'] == _0x363a('0x10e')) {
                     this[_0x363a('0x118')]();
-                } else if (this[_0x363a('0x114')] == _0x363a('0x119')) {
+                } else if (this['acct_type'] == _0x363a('0x119')) {
                     this['fetchAcctFollower']();
-                } else if (this[_0x363a('0x114')] == 'mute') {
+                } else if (this['acct_type'] == 'mute') {
                     this[_0x363a('0x11a')]();
                 } else if (this['acct_type'] == _0x363a('0x11b')) {
                     this[_0x363a('0x11c')]();
@@ -893,7 +893,7 @@ var app = new Vue({
                 }
             }
         }, TIME_SCROLL),
-        'handleScrollDiscord': _[_0x363a('0xe1')](function (_0x358f78) {
+        'handleScrollDiscord': _['debounce'](function (_0x358f78) {
             if (!this['result_lock']) {
                 this[_0x363a('0xe7')] = '';
                 this[_0x363a('0xa4')] = '';
@@ -901,8 +901,8 @@ var app = new Vue({
             }
             var _0x193bbd = parseInt(_0x358f78['target']['scrollTop']);
             var _0x24bef0 = parseInt(_0x358f78[_0x363a('0xe8')][_0x363a('0xea')] - _0x358f78[_0x363a('0xe8')][_0x363a('0xeb')] - _0x358f78[_0x363a('0xe8')][_0x363a('0xf6')]);
-            if (!this[_0x363a('0x96')][_0x363a('0x11f')] && _0x193bbd != _0x24bef0 && 0x1 > _0x24bef0) {
-                this[_0x363a('0x96')][_0x363a('0x11f')] = !![];
+            if (!this['fetch_lock'][_0x363a('0x11f')] && _0x193bbd != _0x24bef0 && 0x1 > _0x24bef0) {
+                this['fetch_lock'][_0x363a('0x11f')] = !![];
                 this['fetchDiscord']();
             }
         }, TIME_SCROLL),
@@ -918,7 +918,7 @@ var app = new Vue({
         },
         'isBlock': function (_0x761ccb) {
             var _0x5e41b1 = ![];
-            this[_0x363a('0xb8')][_0x363a('0x121')](function (_0x3f0324, _0x2d861a) {
+            this[_0x363a('0xb8')]['filter'](function (_0x3f0324, _0x2d861a) {
                 if (_0x3f0324['id'] == _0x761ccb) {
                     _0x5e41b1 = _0x3f0324['blocking'];
                     return !![];
@@ -928,7 +928,7 @@ var app = new Vue({
         },
         'isRequest': function (_0xb46c73) {
             var _0x26f3a5 = ![];
-            this[_0x363a('0xb8')][_0x363a('0x121')](function (_0x439671, _0x5da162) {
+            this[_0x363a('0xb8')]['filter'](function (_0x439671, _0x5da162) {
                 if (_0x439671['id'] == _0xb46c73) {
                     _0x26f3a5 = _0x439671['requested'];
                     return !![];
@@ -938,7 +938,7 @@ var app = new Vue({
         },
         'isList': function (_0x412887) {
             var _0x9875ad = ![];
-            this[_0x363a('0x122')][_0x363a('0x121')](function (_0x42c8de, _0x34479f) {
+            this[_0x363a('0x122')]['filter'](function (_0x42c8de, _0x34479f) {
                 if (_0x42c8de['id'] == _0x412887) {
                     _0x9875ad = !![];
                     return !![];
@@ -948,7 +948,7 @@ var app = new Vue({
         },
         'isListFollow': function (_0x164709) {
             var _0xf68ab6 = ![];
-            this[_0x363a('0x123')][_0x363a('0x121')](function (_0x55d67f, _0x550bda) {
+            this[_0x363a('0x123')]['filter'](function (_0x55d67f, _0x550bda) {
                 if (_0x55d67f['id'] == _0x164709) {
                     _0xf68ab6 = _0x55d67f[_0x363a('0x120')];
                     return !![];
@@ -957,7 +957,7 @@ var app = new Vue({
             return _0xf68ab6;
         },
         'notifJudge': function (_0x8fccef) {
-            return this[_0x363a('0x106')] == '' || this[_0x363a('0x106')] == _0x363a('0x108') && _0x363a('0x108') == _0x8fccef[_0x363a('0x124')] || this[_0x363a('0x106')] == _0x363a('0x10a') && _0x363a('0x125') == _0x8fccef[_0x363a('0x124')] || this['notif_type'] == _0x363a('0x10c') && 'reblog' == _0x8fccef['type'] || this[_0x363a('0x106')] == _0x363a('0x10e') && _0x363a('0x10e') == _0x8fccef[_0x363a('0x124')] ? !![] : ![];
+            return this['notif_type'] == '' || this['notif_type'] == _0x363a('0x108') && _0x363a('0x108') == _0x8fccef[_0x363a('0x124')] || this['notif_type'] == 'fav' && _0x363a('0x125') == _0x8fccef[_0x363a('0x124')] || this['notif_type'] == 'reblog' && 'reblog' == _0x8fccef['type'] || this['notif_type'] == _0x363a('0x10e') && _0x363a('0x10e') == _0x8fccef[_0x363a('0x124')] ? !![] : ![];
         },
         'countNotifUnread': function () {
             var _0x1a6469 = {
@@ -969,24 +969,24 @@ var app = new Vue({
                 'complete': !![]
             };
             var _0x56a4ba = 0x0;
-            if ('' == this[_0x363a('0x126')]) {
+            if ('' == this['notif_id_bookmark']) {
                 return;
             }
-            for (var [_0x14c493, _0x165500] of this[_0x363a('0xb0')][_0x363a('0x127')]()) {
-                if (_0x165500['id'] <= this[_0x363a('0x126')]) {
+            for (var [_0x14c493, _0x165500] of this['notifs'][_0x363a('0x127')]()) {
+                if (_0x165500['id'] <= this['notif_id_bookmark']) {
                     break;
                 }
                 _0x56a4ba = _0x14c493 + 0x1;
                 if (_0x363a('0x108') == _0x165500[_0x363a('0x124')]) {
                     _0x1a6469[_0x363a('0x108')] = _0x1a6469[_0x363a('0x108')] + 0x1;
                 } else if (_0x363a('0x125') == _0x165500['type']) {
-                    _0x1a6469[_0x363a('0x10a')] = _0x1a6469[_0x363a('0x10a')] + 0x1;
+                    _0x1a6469['fav'] = _0x1a6469['fav'] + 0x1;
                 } else if ('reblog' == _0x165500[_0x363a('0x124')]) {
-                    _0x1a6469[_0x363a('0x10c')] = _0x1a6469[_0x363a('0x10c')] + 0x1;
+                    _0x1a6469['reblog'] = _0x1a6469['reblog'] + 0x1;
                 } else if (_0x363a('0x10e') == _0x165500[_0x363a('0x124')]) {
                     _0x1a6469['follow'] = _0x1a6469[_0x363a('0x10e')] + 0x1;
                 }
-                if (_0x56a4ba == this[_0x363a('0xb0')][_0x363a('0xaf')]) {
+                if (_0x56a4ba == this['notifs']['length']) {
                     _0x1a6469[_0x363a('0x128')] = ![];
                 }
             }
@@ -1136,7 +1136,7 @@ var app = new Vue({
         'runInit': function () {
             this[_0x363a('0x146')] = ![];
             this[_0x363a('0x147')] = ![];
-            this[_0x363a('0x148')] = ![];
+            this['showNotif'] = ![];
             this[_0x363a('0x149')] = ![];
             if (this['showForm']) {
                 this[_0x363a('0x136')]();
@@ -1150,8 +1150,8 @@ var app = new Vue({
             this[_0x363a('0x14b')] = ![];
             this[_0x363a('0x14c')] = _0x363a('0x14d');
             this[_0x363a('0x14e')] = _0x363a('0x14f');
-            this[_0x363a('0x99')] = _0x363a('0x150');
-            this[_0x363a('0x151')] = '';
+            this['multi_type'] = _0x363a('0x150');
+            this['multi_target'] = '';
             if (0x1 == this[_0x363a('0x152')]) {
                 this[_0x363a('0x153')] = !![];
                 if ('2' == this['optPtl']) {
@@ -1170,14 +1170,14 @@ var app = new Vue({
             this[_0x363a('0x153')] = ![];
             this['showHome'] = !![];
             this[_0x363a('0x14b')] = !![];
-            this[_0x363a('0x148')] = !![];
+            this['showNotif'] = !![];
         },
         'runCustom': function () {
             this[_0x363a('0x14a')] = !![];
             this[_0x363a('0x14b')] = !![];
             if (0x1 == this[_0x363a('0x152')]) {
                 this['optMode'] = !![];
-                if (!this[_0x363a('0x148')] && !this[_0x363a('0x146')] && !this[_0x363a('0x147')] && !this[_0x363a('0x149')]) {
+                if (!this['showNotif'] && !this[_0x363a('0x146')] && !this[_0x363a('0x147')] && !this[_0x363a('0x149')]) {
                     if ('2' != this[_0x363a('0x154')]) {
                         this[_0x363a('0x14a')] = ![];
                     } else {
@@ -1191,7 +1191,7 @@ var app = new Vue({
             }
             if (0x2 == this['optColumns']) {
                 this['optMode'] = !![];
-                if (this[_0x363a('0x148')] || this[_0x363a('0x146')] || this[_0x363a('0x147')] || this[_0x363a('0x149')]) {
+                if (this['showNotif'] || this[_0x363a('0x146')] || this[_0x363a('0x147')] || this[_0x363a('0x149')]) {
                     if ('2' != this[_0x363a('0x154')]) {
                         this[_0x363a('0x14a')] = ![];
                     } else {
@@ -1225,7 +1225,7 @@ var app = new Vue({
                 }
                 this[_0x363a('0x146')] = ![];
                 this[_0x363a('0x147')] = ![];
-                this[_0x363a('0x148')] = ![];
+                this['showNotif'] = ![];
                 this[_0x363a('0x149')] = ![];
                 if (this['showForm']) {
                     this[_0x363a('0x136')]();
@@ -1270,8 +1270,8 @@ var app = new Vue({
             }
         },
         'runNotif': function (_0x59ac49) {
-            this[_0x363a('0x106')] = '';
-            this[_0x363a('0x12b')] = this[_0x363a('0x148')] && !this[_0x363a('0x12b')] ? !![] : ![];
+            this['notif_type'] = '';
+            this[_0x363a('0x12b')] = this['showNotif'] && !this[_0x363a('0x12b')] ? !![] : ![];
             if (_0x363a('0x158') == _0x59ac49) {
                 this[_0x363a('0x105')] = 0x0;
                 this['notif_unread_filter'] = {
@@ -1282,31 +1282,31 @@ var app = new Vue({
                     'others': 0x0,
                     'complete': !![]
                 };
-                this[_0x363a('0x159')] = this['hasNotif'] ? this[_0x363a('0xb0')][this[_0x363a('0xb0')]['length'] - 0x1]['id'] : '';
-                this[_0x363a('0x126')] = this[_0x363a('0x15a')] ? this[_0x363a('0xb0')][0x0]['id'] : this[_0x363a('0x126')];
-                this[_0x363a('0x15b')]();
-                this[_0x363a('0xb1')] = this[_0x363a('0xb0')]['slice']();
+                this['notif_id'] = this['hasNotif'] ? this['notifs'][this['notifs']['length'] - 0x1]['id'] : '';
+                this['notif_id_bookmark'] = this[_0x363a('0x15a')] ? this['notifs'][0x0]['id'] : this['notif_id_bookmark'];
+                this['countNotifUnread']();
+                this['notifs_filter'] = this['notifs']['slice']();
                 this[_0x363a('0x15c')]();
-                this[_0x363a('0xf3')][_0x363a('0x113')] = this[_0x363a('0xf3')][_0x363a('0x104')];
-                this[_0x363a('0x96')][_0x363a('0x104')] = this[_0x363a('0x15a')] ? ![] : !![];
+                this['fetch_comp']['notif_filter'] = this['fetch_comp']['notif'];
+                this['fetch_lock']['notif'] = this[_0x363a('0x15a')] ? ![] : !![];
             } else if (_0x363a('0x108') == _0x59ac49) {
-                this[_0x363a('0x15d')]();
+                this['resetNotifColumn']();
                 this[_0x363a('0x110')][_0x363a('0x108')] = 0x0;
                 this[_0x363a('0x109')]();
-            } else if (_0x363a('0x10a') == _0x59ac49) {
+            } else if ('fav' == _0x59ac49) {
                 this['resetNotifColumn']();
-                this[_0x363a('0x110')][_0x363a('0x10a')] = 0x0;
+                this[_0x363a('0x110')]['fav'] = 0x0;
                 this[_0x363a('0x10b')]();
-            } else if (_0x363a('0x10c') == _0x59ac49) {
-                this[_0x363a('0x15d')]();
-                this[_0x363a('0x110')][_0x363a('0x10c')] = 0x0;
+            } else if ('reblog' == _0x59ac49) {
+                this['resetNotifColumn']();
+                this[_0x363a('0x110')]['reblog'] = 0x0;
                 this[_0x363a('0x10d')]();
             } else if (_0x363a('0x10e') == _0x59ac49) {
-                this[_0x363a('0x15d')]();
+                this['resetNotifColumn']();
                 this[_0x363a('0x110')][_0x363a('0x10e')] = 0x0;
                 this['fetchNotifFollow']();
             }
-            this[_0x363a('0x148')] = !![];
+            this['showNotif'] = !![];
             if (this['optMode']) {
                 if (0x2 == this[_0x363a('0x152')]) {
                     if (0x2 == this[_0x363a('0x154')]) {
@@ -1334,17 +1334,17 @@ var app = new Vue({
             this[_0x363a('0x149')] = ![];
         },
         'runUser': function (_0x16acc9) {
-            if (0x0 == this['user'][_0x363a('0xaf')]) {
+            if (0x0 == this['user']['length']) {
                 console['log'](_0x363a('0x15e'));
                 return;
             }
-            if (_0x363a('0x10a') == _0x16acc9 && this[_0x363a('0x114')] == _0x16acc9 && this[_0x363a('0x147')]) {
+            if ('fav' == _0x16acc9 && this['acct_type'] == _0x16acc9 && this[_0x363a('0x147')]) {
                 this['toggleSetting']();
                 return;
             }
             this[_0x363a('0x12f')] = ![];
-            this[_0x363a('0xb5')] = [];
-            this[_0x363a('0x15f')] = [];
+            this['acct'] = [];
+            this['accts'] = [];
             this[_0x363a('0x160')] = [];
             this['acct_id'] = '';
             this[_0x363a('0xae')] = this[_0x363a('0xad')]['id'];
@@ -1360,7 +1360,7 @@ var app = new Vue({
                 'showing_reblogs': ![]
             }];
             this[_0x363a('0x162')]();
-            if (_0x363a('0x61') == _0x16acc9) {
+            if ('katsu' == _0x16acc9) {
                 this['fetchAcctAll']();
             } else if ('media' == _0x16acc9) {
                 this['fetchAcctMedia']();
@@ -1368,7 +1368,7 @@ var app = new Vue({
                 this[_0x363a('0x118')]();
             } else if (_0x363a('0x119') == _0x16acc9) {
                 this[_0x363a('0x163')]();
-            } else if (_0x363a('0x10a') == _0x16acc9 || _0x363a('0x164') == _0x16acc9) {
+            } else if ('fav' == _0x16acc9 || _0x363a('0x164') == _0x16acc9) {
                 this['fetchAcctFav']();
             } else if ('mute' == _0x16acc9) {
                 this[_0x363a('0x11a')]();
@@ -1399,7 +1399,7 @@ var app = new Vue({
                 this['showSetting'] = ![];
                 this['showLink'] = ![];
             }
-            this[_0x363a('0x148')] = ![];
+            this['showNotif'] = ![];
             this[_0x363a('0x146')] = ![];
             this[_0x363a('0x149')] = ![];
             this[_0x363a('0x147')] = !![];
@@ -1442,7 +1442,7 @@ var app = new Vue({
             }
             this[_0x363a('0x146')] = ![];
             this[_0x363a('0x147')] = ![];
-            this[_0x363a('0x148')] = ![];
+            this['showNotif'] = ![];
         },
         'runDetail': function (_0xe930bb) {
             this[_0x363a('0xb2')] = [];
@@ -1466,17 +1466,17 @@ var app = new Vue({
                     this[_0x363a('0x14b')] = ![];
                 }
             }
-            this[_0x363a('0x148')] = ![];
+            this['showNotif'] = ![];
             this[_0x363a('0x147')] = ![];
             this['showMulti'] = ![];
         },
         'runAcct': function (_0x3b547b) {
             this['showAcctOption'] = ![];
             this['acct'] = [];
-            this[_0x363a('0x15f')] = [];
+            this['accts'] = [];
             this[_0x363a('0x160')] = [];
             this[_0x363a('0x161')] = [];
-            this[_0x363a('0x16c')] = '';
+            this['acct_id'] = '';
             this[_0x363a('0xae')] = _0x3b547b;
             this[_0x363a('0x162')]();
             this[_0x363a('0x115')]();
@@ -1495,7 +1495,7 @@ var app = new Vue({
                     this[_0x363a('0x14b')] = ![];
                 }
             }
-            this[_0x363a('0x148')] = ![];
+            this['showNotif'] = ![];
             this[_0x363a('0x146')] = ![];
             this[_0x363a('0x149')] = ![];
         },
@@ -1510,19 +1510,19 @@ var app = new Vue({
             var _0x25900a = new Array();
             var _0x5628a2 = this;
             if (null != _0x68b1ff && _0x68b1ff[_0x363a('0x16d')]) {
-                _0x13d3f4 = '@' + _0x68b1ff[_0x363a('0x16d')][_0x363a('0xb5')];
-                this[_0x363a('0x61')][_0x363a('0xda')] = _0x68b1ff['id'];
+                _0x13d3f4 = '@' + _0x68b1ff[_0x363a('0x16d')]['acct'];
+                this['katsu'][_0x363a('0xda')] = _0x68b1ff['id'];
                 this['katsu'][_0x363a('0xba')] = _0x68b1ff;
-                this[_0x363a('0x61')][_0x363a('0x16e')] = this[_0x363a('0x61')][_0x363a('0xba')][_0x363a('0x16e')];
+                this['katsu'][_0x363a('0x16e')] = this['katsu'][_0x363a('0xba')][_0x363a('0x16e')];
             } else {
-                _0x13d3f4 = '@' + _0x68b1ff[_0x363a('0xb5')];
+                _0x13d3f4 = '@' + _0x68b1ff['acct'];
                 this[_0x363a('0x142')] = !![];
                 this['katsu'][_0x363a('0x16e')] = _0x363a('0x16f');
             }
             if (null != _0x68b1ff[_0x363a('0x170')]) {
                 _0x68b1ff[_0x363a('0x170')][_0x363a('0x171')](function (_0x846e8a, _0x51b06a) {
-                    if ('@' + _0x846e8a[_0x363a('0xb5')] != _0x13d3f4 && _0x5628a2[_0x363a('0xad')]['acct'] != _0x846e8a[_0x363a('0xb5')]) {
-                        _0x25900a[_0x363a('0x172')]('@' + _0x846e8a[_0x363a('0xb5')]);
+                    if ('@' + _0x846e8a['acct'] != _0x13d3f4 && _0x5628a2[_0x363a('0xad')]['acct'] != _0x846e8a['acct']) {
+                        _0x25900a[_0x363a('0x172')]('@' + _0x846e8a['acct']);
                     }
                 });
             }
@@ -1536,7 +1536,7 @@ var app = new Vue({
         },
         'runToast': function (_0x52e27c) {
             if (!this['result_lock'] && _0x52e27c) {
-                if (_0x363a('0x104') == this['result_type']) {
+                if ('notif' == this['result_type']) {
                     this[_0x363a('0x155')](_0x363a('0x158'));
                 }
             }
@@ -1581,10 +1581,10 @@ var app = new Vue({
             _0x689045['timeout'] = REQ_TIMEOUT;
             _0x689045['setRequestHeader']('Content-type', 'application/x-www-form-urlencoded');
             _0x689045['onreadystatechange'] = function () {
-                if (_0x689045[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x689045['status'] == 0xc8) {
+                if (_0x689045['readyState'] == XMLHttpRequest['DONE'] && _0x689045['status'] == 0xc8) {
                     userConf[_0x363a('0x185')]('at', JSON['parse'](_0x689045['responseText'])['access_token']);
                     location.href = location.origin + location.pathname;
-                } else if (_0x689045[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                } else if (_0x689045['readyState'] == XMLHttpRequest['DONE']) {
                     _0x18f13c['popError'](_0x689045['responseText'], _0x689045['status'], _0x363a('0x187'));
                 }
             }
@@ -1595,18 +1595,18 @@ var app = new Vue({
             var _0x3041c5 = this;
             var _0x5c0028 = [];
             var _0x4f4920 = new XMLHttpRequest();
-            _0x4f4920['open'](_0x363a('0x188'), USER.replace('[I]', _0x3041c5['repository']));
+            _0x4f4920['open']('GET', USER.replace('[I]', _0x3041c5['repository']));
             _0x4f4920['timeout'] = REQ_TIMEOUT;
-            _0x4f4920[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x3041c5['at']);
+            _0x4f4920['setRequestHeader']('Authorization', 'Bearer ' + _0x3041c5['at']);
             _0x4f4920['onreadystatechange'] = function () {
-                if (_0x4f4920[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x4f4920['status'] == 0xc8) {
-                    _0x3041c5['user'] = JSON[_0x363a('0x70')](_0x4f4920['responseText']);
+                if (_0x4f4920['readyState'] == XMLHttpRequest['DONE'] && _0x4f4920['status'] == 0xc8) {
+                    _0x3041c5['user'] = JSON.parse(_0x4f4920['responseText']);
                     _0x3041c5[_0x363a('0x134')][_0x363a('0xad')] = ![];
-                    _0x3041c5[_0x363a('0x18d')]();
-                } else if (_0x4f4920[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                    _0x3041c5['$forceUpdate']();
+                } else if (_0x4f4920['readyState'] == XMLHttpRequest['DONE']) {
                     _0x3041c5['popError'](_0x4f4920['responseText'], _0x4f4920['status'], _0x363a('0x18e'));
                     _0x3041c5[_0x363a('0x134')]['user'] = !![];
-                } else if (_0x4f4920[_0x363a('0x184')] == 0x3 && _0x4f4920['status'] == 0x1f4) {
+                } else if (_0x4f4920['readyState'] == 0x3 && _0x4f4920['status'] == 0x1f4) {
                     userConf[_0x363a('0x18f')]('at');
                     userConf['removeItem'](_0x363a('0x6f'));
                     _0x3041c5['at'] = null;
@@ -1618,200 +1618,200 @@ var app = new Vue({
         },
         'resetHomeColumn': function () {
             this[_0x363a('0xf1')] = '';
-            this[_0x363a('0xef')] = [];
+            this['homes'] = [];
             this[_0x363a('0xee')] = 0x0;
             this['fetch_comp']['home'] = ![];
         },
         'resetLocalColumn': function () {
             this[_0x363a('0x190')] = '';
-            this[_0x363a('0xf9')] = [];
+            this['locals'] = [];
             this[_0x363a('0xfa')] = 0x0;
-            this[_0x363a('0xf3')]['local'] = ![];
+            this['fetch_comp']['local'] = ![];
         },
         'resetNotifColumn': function () {
-            this[_0x363a('0x159')] = '';
-            this[_0x363a('0xb1')] = [];
+            this['notif_id'] = '';
+            this['notifs_filter'] = [];
             this[_0x363a('0x105')] = '0';
-            this[_0x363a('0xf3')][_0x363a('0x113')] = ![];
+            this['fetch_comp']['notif_filter'] = ![];
         },
         'resetMultiColumn': function () {
-            this[_0x363a('0x100')] = '';
+            this['multi_id'] = '';
             this[_0x363a('0xff')] = [];
             this[_0x363a('0xfe')] = 0x0;
-            this[_0x363a('0xf3')]['multi'] = ![];
+            this['fetch_comp']['multi'] = ![];
         },
         'resetAcctColumn': function () {
             this['acct_id'] = '';
-            this[_0x363a('0x15f')] = [];
+            this['accts'] = [];
             this['accts_users'] = [];
-            this[_0x363a('0xf3')][_0x363a('0xb5')] = ![];
+            this['fetch_comp']['acct'] = ![];
         },
         'resetStreamList': function () {
             this[_0x363a('0x191')] = '';
             this[_0x363a('0xbe')] = [];
             this['stream_list_users_relation'] = [];
-            this[_0x363a('0xf3')][_0x363a('0x135')] = ![];
+            this['fetch_comp'][_0x363a('0x135')] = ![];
         },
-        'refetchHome': _[_0x363a('0xe1')](function () {
+        'refetchHome': _['debounce'](function () {
             var _0xabf162 = this;
             var _0x174de3 = [];
             var _0x13ba1a = HOME;
-            _0xabf162[_0x363a('0x96')]['home'] = !![];
+            _0xabf162['fetch_lock']['home'] = !![];
             var _0x39a20e = _0x363a('0xec');
             var _0x53760f = new XMLHttpRequest();
-            _0x53760f['open']('GET', _0x13ba1a.replace('[I]', _0xabf162['repository']).replace(_0x363a('0x192'), '').replace('[LM]', LIMIT));
+            _0x53760f['open']('GET', _0x13ba1a.replace('[I]', _0xabf162['repository']).replace('[PID]', '').replace('[LM]', LIMIT));
             _0x53760f['timeout'] = REQ_TIMEOUT;
-            _0x53760f[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0xabf162['at']);
+            _0x53760f['setRequestHeader']('Authorization', 'Bearer ' + _0xabf162['at']);
             _0x53760f['onreadystatechange'] = function () {
-                if (_0x53760f[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x53760f['status'] == 0xc8) {
+                if (_0x53760f['readyState'] == XMLHttpRequest['DONE'] && _0x53760f['status'] == 0xc8) {
                     if (_0x39a20e == _0x363a('0xec') && _0xabf162['fetch_lock']['home']) {
-                        _0x174de3 = JSON[_0x363a('0x70')](_0x53760f['responseText']);
-                        if (null != _0xabf162[_0x363a('0xef')] && !_0xabf162['equalArr'](_0x174de3, _0xabf162[_0x363a('0xef')])) {
-                            _0xabf162[_0x363a('0x193')](_0x174de3, _0x363a('0xec'));
+                        _0x174de3 = JSON.parse(_0x53760f['responseText']);
+                        if (null != _0xabf162['homes'] && !_0xabf162['equalArr'](_0x174de3, _0xabf162['homes'])) {
+                            _0xabf162['updateWrapperBM'](_0x174de3, _0x363a('0xec'));
                             _0xabf162['updateFilterBM'](_0x174de3, 'home');
                             _0xabf162[_0x363a('0x194')](_0x174de3);
                             _0xabf162['homes'] = _0x174de3;
                             _0xabf162[_0x363a('0xee')] = 0x0;
-                            _0xabf162['home_id'] = _0xabf162[_0x363a('0xef')][_0xabf162['homes'][_0x363a('0xaf')] - 0x1] ? _0xabf162[_0x363a('0xef')][_0xabf162[_0x363a('0xef')][_0x363a('0xaf')] - 0x1]['id'] : '0';
+                            _0xabf162['home_id'] = _0xabf162['homes'][_0xabf162['homes']['length'] - 0x1] ? _0xabf162['homes'][_0xabf162['homes']['length'] - 0x1]['id'] : '0';
                             _0xabf162['$nextTick'](function () {
                                 _0xabf162[_0x363a('0x195')]();
                                 _0xabf162[_0x363a('0x196')](_0x174de3);
                             });
                         }
-                        _0xabf162[_0x363a('0x96')][_0x363a('0xec')] = ![];
-                        _0xabf162[_0x363a('0xf3')][_0x363a('0xec')] = _0x174de3[_0x363a('0xaf')] < LIMIT;
-                        _0xabf162[_0x363a('0x18d')]();
+                        _0xabf162['fetch_lock'][_0x363a('0xec')] = ![];
+                        _0xabf162['fetch_comp'][_0x363a('0xec')] = _0x174de3['length'] < LIMIT;
+                        _0xabf162['$forceUpdate']();
                     }
-                } else if (_0x53760f[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0xabf162[_0x363a('0x96')][_0x363a('0xec')] = ![];
-                    _0xabf162[_0x363a('0x18d')]();
+                } else if (_0x53760f['readyState'] == XMLHttpRequest['DONE']) {
+                    _0xabf162['fetch_lock'][_0x363a('0xec')] = ![];
+                    _0xabf162['$forceUpdate']();
                 }
             }
                 ;
             _0x53760f['send']();
         }, 0x1f4),
-        'refetchLocal': _[_0x363a('0xe1')](function () {
+        'refetchLocal': _['debounce'](function () {
             var _0x2ca214 = this;
             var _0x4c597d = [];
             var _0x1fc859 = _0x2ca214[_0x363a('0x14e')] == 'Global' ? GLOBAL : LOCAL;
             _0x2ca214['fetch_lock'][_0x363a('0xf8')] = !![];
             var _0x3cfcd7 = _0x2ca214[_0x363a('0x14e')];
             var _0x260255 = new XMLHttpRequest();
-            _0x260255['open'](_0x363a('0x188'), _0x1fc859.replace('[I]', _0x2ca214['repository']).replace('[PID]', '').replace('[LM]', LIMIT));
+            _0x260255['open']('GET', _0x1fc859.replace('[I]', _0x2ca214['repository']).replace('[PID]', '').replace('[LM]', LIMIT));
             _0x260255['timeout'] = REQ_TIMEOUT;
-            _0x260255['setRequestHeader'](_0x363a('0x18b'), 'Bearer\x20' + _0x2ca214['at']);
+            _0x260255['setRequestHeader']('Authorization', 'Bearer\x20' + _0x2ca214['at']);
             _0x260255['onreadystatechange'] = function () {
-                if (_0x260255[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x260255['status'] == 0xc8) {
-                    if (_0x3cfcd7 == _0x2ca214[_0x363a('0x14e')] && _0x2ca214[_0x363a('0x96')][_0x363a('0xf8')]) {
-                        _0x4c597d = JSON[_0x363a('0x70')](_0x260255['responseText']);
-                        if (null != _0x2ca214[_0x363a('0xf9')] && !_0x2ca214['equalArr'](_0x4c597d, _0x2ca214[_0x363a('0xf9')])) {
-                            _0x2ca214[_0x363a('0x193')](_0x4c597d, _0x363a('0xf8'));
+                if (_0x260255['readyState'] == XMLHttpRequest['DONE'] && _0x260255['status'] == 0xc8) {
+                    if (_0x3cfcd7 == _0x2ca214[_0x363a('0x14e')] && _0x2ca214['fetch_lock'][_0x363a('0xf8')]) {
+                        _0x4c597d = JSON.parse(_0x260255['responseText']);
+                        if (null != _0x2ca214['locals'] && !_0x2ca214['equalArr'](_0x4c597d, _0x2ca214['locals'])) {
+                            _0x2ca214['updateWrapperBM'](_0x4c597d, _0x363a('0xf8'));
                             _0x2ca214[_0x363a('0x197')](_0x4c597d, _0x363a('0xf8'));
                             _0x2ca214['updateImgLoading'](_0x4c597d);
-                            _0x2ca214[_0x363a('0xf9')] = _0x4c597d;
+                            _0x2ca214['locals'] = _0x4c597d;
                             _0x2ca214['local_unread'] = 0x0;
-                            _0x2ca214['local_id'] = _0x2ca214['locals'][_0x2ca214['locals'][_0x363a('0xaf')] - 0x1] ? _0x2ca214[_0x363a('0xf9')][_0x2ca214['locals']['length'] - 0x1]['id'] : '0';
+                            _0x2ca214['local_id'] = _0x2ca214['locals'][_0x2ca214['locals']['length'] - 0x1] ? _0x2ca214['locals'][_0x2ca214['locals']['length'] - 0x1]['id'] : '0';
                             _0x2ca214[_0x363a('0x198')](function () {
                                 _0x2ca214['backLocal']();
                                 _0x2ca214['openImageAll'](_0x4c597d);
                             });
                         }
-                        _0x2ca214[_0x363a('0x96')][_0x363a('0xf8')] = ![];
-                        _0x2ca214[_0x363a('0xf3')][_0x363a('0xf8')] = _0x4c597d[_0x363a('0xaf')] < LIMIT;
-                        _0x2ca214[_0x363a('0x18d')]();
+                        _0x2ca214['fetch_lock'][_0x363a('0xf8')] = ![];
+                        _0x2ca214['fetch_comp'][_0x363a('0xf8')] = _0x4c597d['length'] < LIMIT;
+                        _0x2ca214['$forceUpdate']();
                     }
-                } else if (_0x260255[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x2ca214[_0x363a('0x96')][_0x363a('0xf8')] = ![];
-                    _0x2ca214[_0x363a('0x18d')]();
+                } else if (_0x260255['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x2ca214['fetch_lock'][_0x363a('0xf8')] = ![];
+                    _0x2ca214['$forceUpdate']();
                 }
             }
                 ;
             _0x260255['send']();
         }, 0x1f4),
-        'refetchMulti': _[_0x363a('0xe1')](function () {
+        'refetchMulti': _['debounce'](function () {
             var _0x4b35dc = this;
             var _0x439f9f = [];
-            var _0x51d465 = DIRECT;
-            if (_0x4b35dc[_0x363a('0x99')] == _0x363a('0x199')) {
-                _0x51d465 = LIST.replace(_0x363a('0x19a'), _0x4b35dc[_0x363a('0x151')]);
-            } else if (_0x4b35dc[_0x363a('0x99')] == 'Hashtag') {
-                _0x51d465 = HASHTAG.replace(_0x363a('0x19b'), _0x4b35dc[_0x363a('0x151')]);
+            var directUrl = DIRECT;
+            if (_0x4b35dc['multi_type'] == 'List') {
+                directUrl = LIST.replace('[LID]', _0x4b35dc['multi_target']);
+            } else if (_0x4b35dc['multi_type'] == 'Hashtag') {
+                directUrl = HASHTAG.replace(_0x363a('0x19b'), _0x4b35dc['multi_target']);
             }
-            _0x4b35dc[_0x363a('0x96')][_0x363a('0xfd')] = !![];
-            var _0x9d4feb = _0x4b35dc[_0x363a('0x99')];
-            var _0x4cffc6 = new XMLHttpRequest();
-            _0x4cffc6['open']('GET', _0x51d465.replace('[I]', _0x4b35dc['repository']).replace('[PID]', '').replace(_0x363a('0x19c'), LIMIT));
-            _0x4cffc6['timeout'] = REQ_TIMEOUT;
-            _0x4cffc6[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x4b35dc['at']);
-            _0x4cffc6['onreadystatechange'] = function () {
-                if (_0x4cffc6['readyState'] == XMLHttpRequest['DONE'] && _0x4cffc6['status'] == 0xc8) {
-                    if (_0x9d4feb == _0x4b35dc[_0x363a('0x99')] && _0x4b35dc[_0x363a('0x96')]['multi']) {
-                        _0x439f9f = JSON[_0x363a('0x70')](_0x4cffc6['responseText']);
+            _0x4b35dc['fetch_lock']['multi'] = !![];
+            var _0x9d4feb = _0x4b35dc['multi_type'];
+            const request = new XMLHttpRequest();
+            request.open('GET', directUrl.replace('[I]', _0x4b35dc['repository']).replace('[PID]', '').replace('[LM]', LIMIT));
+            request.timeout = REQ_TIMEOUT;
+            request['setRequestHeader']('Authorization', 'Bearer ' + _0x4b35dc['at']);
+            request['onreadystatechange'] = function () {
+                if (request['readyState'] == XMLHttpRequest['DONE'] && request['status'] == 0xc8) {
+                    if (_0x9d4feb == _0x4b35dc['multi_type'] && _0x4b35dc['fetch_lock']['multi']) {
+                        _0x439f9f = JSON.parse(request['responseText']);
                         if (null != _0x4b35dc[_0x363a('0xff')] && !_0x4b35dc[_0x363a('0x19d')](_0x439f9f, _0x4b35dc[_0x363a('0xff')])) {
-                            _0x4b35dc[_0x363a('0x193')](_0x439f9f, _0x363a('0xfd'));
-                            _0x4b35dc[_0x363a('0x197')](_0x439f9f, _0x363a('0xfd'));
+                            _0x4b35dc['updateWrapperBM'](_0x439f9f, 'multi');
+                            _0x4b35dc[_0x363a('0x197')](_0x439f9f, 'multi');
                             _0x4b35dc[_0x363a('0x194')](_0x439f9f);
                             _0x4b35dc[_0x363a('0xff')] = _0x439f9f;
                             _0x4b35dc['multi_unread'] = 0x0;
-                            _0x4b35dc[_0x363a('0x100')] = _0x4b35dc[_0x363a('0xff')][_0x4b35dc[_0x363a('0xff')]['length'] - 0x1] ? _0x4b35dc[_0x363a('0xff')][_0x4b35dc[_0x363a('0xff')]['length'] - 0x1]['id'] : '0';
+                            _0x4b35dc['multi_id'] = _0x4b35dc[_0x363a('0xff')][_0x4b35dc[_0x363a('0xff')]['length'] - 0x1] ? _0x4b35dc[_0x363a('0xff')][_0x4b35dc[_0x363a('0xff')]['length'] - 0x1]['id'] : '0';
                             _0x4b35dc['$nextTick'](function () {
                                 _0x4b35dc[_0x363a('0x19e')]();
                                 _0x4b35dc[_0x363a('0x196')](_0x439f9f);
                             });
                         }
-                        _0x4b35dc[_0x363a('0x96')][_0x363a('0xfd')] = ![];
-                        _0x4b35dc[_0x363a('0xf3')][_0x363a('0xfd')] = _0x439f9f[_0x363a('0xaf')] < LIMIT;
-                        _0x4b35dc[_0x363a('0x18d')]();
+                        _0x4b35dc['fetch_lock']['multi'] = ![];
+                        _0x4b35dc['fetch_comp']['multi'] = _0x439f9f['length'] < LIMIT;
+                        _0x4b35dc['$forceUpdate']();
                     }
-                } else if (_0x4cffc6[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x4b35dc[_0x363a('0x96')][_0x363a('0xfd')] = ![];
+                } else if (request['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x4b35dc['fetch_lock']['multi'] = ![];
                     _0x4b35dc['$forceUpdate']();
                 }
             }
                 ;
-            _0x4cffc6['send']();
+            request['send']();
         }, 0x1f4),
-        'refetchNotifAll': _[_0x363a('0xe1')](function () {
-            if (this[_0x363a('0x106')] != '') {
-                this[_0x363a('0x106')] = '';
-                this[_0x363a('0x15d')]();
+        'refetchNotifAll': _['debounce'](function () {
+            if (this['notif_type'] != '') {
+                this['notif_type'] = '';
+                this['resetNotifColumn']();
             }
             var _0x48fcb6 = this;
             var _0x7b4132 = [];
             var _0x55309e = [];
-            _0x48fcb6[_0x363a('0x96')][_0x363a('0x104')] = !![];
+            _0x48fcb6['fetch_lock']['notif'] = !![];
             var _0x3e9a0b = new XMLHttpRequest();
-            _0x3e9a0b['open'](_0x363a('0x188'), NOTIF.replace('[I]', _0x48fcb6['repository']).replace(_0x363a('0x192'), '').replace(_0x363a('0x19c'), LIMIT_NOTIF));
+            _0x3e9a0b['open']('GET', NOTIF.replace('[I]', _0x48fcb6['repository']).replace('[PID]', '').replace('[LM]', LIMIT_NOTIF));
             _0x3e9a0b['timeout'] = REQ_TIMEOUT;
-            _0x3e9a0b[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x48fcb6['at']);
+            _0x3e9a0b['setRequestHeader']('Authorization', 'Bearer ' + _0x48fcb6['at']);
             _0x3e9a0b['onreadystatechange'] = function () {
-                if (_0x3e9a0b[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x3e9a0b['status'] == 0xc8) {
-                    if (_0x48fcb6['notif_type'] == '' && _0x48fcb6[_0x363a('0x96')][_0x363a('0x104')]) {
-                        _0x7b4132 = JSON[_0x363a('0x70')](_0x3e9a0b['responseText']);
-                        _0x48fcb6[_0x363a('0x193')](_0x7b4132, _0x363a('0x104'));
-                        if (null != _0x48fcb6['notifs'] && !_0x48fcb6['equalArr'](_0x7b4132, _0x48fcb6[_0x363a('0xb0')])) {
-                            _0x48fcb6[_0x363a('0xb0')] = _0x7b4132[_0x363a('0xc1')]();
-                            _0x48fcb6['fetch_comp'][_0x363a('0x104')] = _0x7b4132[_0x363a('0xaf')] < LIMIT_NOTIF;
+                if (_0x3e9a0b['readyState'] == XMLHttpRequest['DONE'] && _0x3e9a0b['status'] == 0xc8) {
+                    if (_0x48fcb6['notif_type'] == '' && _0x48fcb6['fetch_lock']['notif']) {
+                        _0x7b4132 = JSON.parse(_0x3e9a0b['responseText']);
+                        _0x48fcb6['updateWrapperBM'](_0x7b4132, 'notif');
+                        if (null != _0x48fcb6['notifs'] && !_0x48fcb6['equalArr'](_0x7b4132, _0x48fcb6['notifs'])) {
+                            _0x48fcb6['notifs'] = _0x7b4132['slice']();
+                            _0x48fcb6['fetch_comp']['notif'] = _0x7b4132['length'] < LIMIT_NOTIF;
                         }
-                        if (null != _0x48fcb6[_0x363a('0xb1')] && !_0x48fcb6['equalArr'](_0x7b4132, _0x48fcb6[_0x363a('0xb1')])) {
-                            _0x48fcb6[_0x363a('0xb1')] = _0x7b4132;
-                            _0x55309e = null != _0x3e9a0b[_0x363a('0x19f')](_0x363a('0x1a0')) ? _0x3e9a0b[_0x363a('0x19f')](_0x363a('0x1a0'))['match'](/max_id=(.*?)>/) : null;
-                            _0x48fcb6['notif_id'] = null != _0x55309e && 0x0 != _0x55309e[0x1][_0x363a('0xaf')] ? _0x55309e[0x1] : '0';
-                            if (_0x48fcb6[_0x363a('0x148')]) {
-                                _0x48fcb6[_0x363a('0x126')] = _0x48fcb6[_0x363a('0x15a')] ? _0x48fcb6[_0x363a('0xb0')][0x0]['id'] : _0x48fcb6[_0x363a('0x126')];
-                                _0x48fcb6[_0x363a('0x15b')]();
+                        if (null != _0x48fcb6['notifs_filter'] && !_0x48fcb6['equalArr'](_0x7b4132, _0x48fcb6['notifs_filter'])) {
+                            _0x48fcb6['notifs_filter'] = _0x7b4132;
+                            _0x55309e = null != _0x3e9a0b['getResponseHeader']('link') ? _0x3e9a0b['getResponseHeader']('link')['match'](/max_id=(.*?)>/) : null;
+                            _0x48fcb6['notif_id'] = null != _0x55309e && 0x0 != _0x55309e[0x1]['length'] ? _0x55309e[0x1] : '0';
+                            if (_0x48fcb6['showNotif']) {
+                                _0x48fcb6['notif_id_bookmark'] = _0x48fcb6[_0x363a('0x15a')] ? _0x48fcb6['notifs'][0x0]['id'] : _0x48fcb6['notif_id_bookmark'];
+                                _0x48fcb6['countNotifUnread']();
                                 _0x48fcb6[_0x363a('0x198')](function () {
                                     _0x48fcb6[_0x363a('0x15c')]();
                                 });
                             }
                         }
-                        _0x48fcb6['fetch_lock'][_0x363a('0x104')] = ![];
-                        _0x48fcb6['fetch_comp']['notif_filter'] = _0x7b4132[_0x363a('0xaf')] < LIMIT_NOTIF;
-                        _0x48fcb6[_0x363a('0x18d')]();
+                        _0x48fcb6['fetch_lock']['notif'] = ![];
+                        _0x48fcb6['fetch_comp']['notif_filter'] = _0x7b4132['length'] < LIMIT_NOTIF;
+                        _0x48fcb6['$forceUpdate']();
                     }
-                } else if (_0x3e9a0b[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x48fcb6[_0x363a('0x96')]['notif'] = ![];
-                    _0x48fcb6[_0x363a('0x18d')]();
+                } else if (_0x3e9a0b['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x48fcb6['fetch_lock']['notif'] = ![];
+                    _0x48fcb6['$forceUpdate']();
                 }
             }
                 ;
@@ -1821,32 +1821,32 @@ var app = new Vue({
             var _0x8c242e = this;
             var _0x49d203 = [];
             var _0x13bb51 = HOME;
-            _0x8c242e[_0x363a('0x96')][_0x363a('0xec')] = !![];
+            _0x8c242e['fetch_lock'][_0x363a('0xec')] = !![];
             var _0x1686a4 = _0x363a('0xec');
             var _0x410108 = new XMLHttpRequest();
-            _0x410108['open'](_0x363a('0x188'), _0x13bb51.replace('[I]', _0x8c242e['repository']).replace('[PID]', _0x8c242e[_0x363a('0xf1')]).replace('[LM]', LIMIT));
+            _0x410108['open']('GET', _0x13bb51.replace('[I]', _0x8c242e['repository']).replace('[PID]', _0x8c242e[_0x363a('0xf1')]).replace('[LM]', LIMIT));
             _0x410108['timeout'] = REQ_TIMEOUT;
-            _0x410108[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x8c242e['at']);
+            _0x410108['setRequestHeader']('Authorization', 'Bearer ' + _0x8c242e['at']);
             _0x410108['onreadystatechange'] = function () {
                 if (_0x410108['readyState'] == XMLHttpRequest['DONE'] && _0x410108['status'] == 0xc8) {
                     if (_0x1686a4 == 'home' && _0x8c242e['fetch_lock'][_0x363a('0xec')]) {
-                        _0x49d203 = JSON[_0x363a('0x70')](_0x410108['responseText']);
-                        _0x8c242e[_0x363a('0x193')](_0x49d203, _0x363a('0xec'));
+                        _0x49d203 = JSON.parse(_0x410108['responseText']);
+                        _0x8c242e['updateWrapperBM'](_0x49d203, _0x363a('0xec'));
                         _0x8c242e[_0x363a('0x197')](_0x49d203, 'home');
-                        if (0x0 == _0x8c242e['homes'][_0x363a('0xaf')]) {
-                            _0x8c242e[_0x363a('0xef')] = _0x49d203;
+                        if (0x0 == _0x8c242e['homes']['length']) {
+                            _0x8c242e['homes'] = _0x49d203;
                         } else {
-                            Array[_0x363a('0x1a1')][_0x363a('0x1a2')][_0x363a('0x1a3')](_0x8c242e[_0x363a('0xef')], _0x49d203);
+                            Array['prototype']['push']['apply'](_0x8c242e['homes'], _0x49d203);
                         }
-                        _0x8c242e[_0x363a('0xf1')] = _0x8c242e[_0x363a('0xef')][_0x8c242e[_0x363a('0xef')][_0x363a('0xaf')] - 0x1] ? _0x8c242e[_0x363a('0xef')][_0x8c242e[_0x363a('0xef')]['length'] - 0x1]['id'] : '0';
-                        _0x8c242e[_0x363a('0x96')]['home'] = ![];
-                        _0x8c242e[_0x363a('0xf3')][_0x363a('0xec')] = _0x49d203[_0x363a('0xaf')] < LIMIT;
-                        _0x8c242e[_0x363a('0x18d')]();
+                        _0x8c242e[_0x363a('0xf1')] = _0x8c242e['homes'][_0x8c242e['homes']['length'] - 0x1] ? _0x8c242e['homes'][_0x8c242e['homes']['length'] - 0x1]['id'] : '0';
+                        _0x8c242e['fetch_lock']['home'] = ![];
+                        _0x8c242e['fetch_comp'][_0x363a('0xec')] = _0x49d203['length'] < LIMIT;
+                        _0x8c242e['$forceUpdate']();
                     }
-                } else if (_0x410108[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x8c242e[_0x363a('0x96')][_0x363a('0xec')] = ![];
+                } else if (_0x410108['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x8c242e['fetch_lock'][_0x363a('0xec')] = ![];
                     _0x8c242e['popError'](_0x410108['responseText'], _0x410108['status'], 'Home');
-                    _0x8c242e[_0x363a('0x18d')]();
+                    _0x8c242e['$forceUpdate']();
                 }
             }
                 ;
@@ -1856,32 +1856,32 @@ var app = new Vue({
             var _0x1e6453 = this;
             var _0x2c8951 = [];
             var _0x529fbb = _0x1e6453[_0x363a('0x14e')] == _0x363a('0x1a4') ? GLOBAL : LOCAL;
-            _0x1e6453[_0x363a('0x96')][_0x363a('0xf8')] = !![];
+            _0x1e6453['fetch_lock'][_0x363a('0xf8')] = !![];
             var _0x2dfab8 = _0x1e6453[_0x363a('0x14e')];
             var _0x24fa6f = new XMLHttpRequest();
-            _0x24fa6f['open'](_0x363a('0x188'), _0x529fbb.replace('[I]', _0x1e6453['repository']).replace(_0x363a('0x192'), _0x1e6453[_0x363a('0x190')]).replace('[LM]', LIMIT));
+            _0x24fa6f['open']('GET', _0x529fbb.replace('[I]', _0x1e6453['repository']).replace('[PID]', _0x1e6453[_0x363a('0x190')]).replace('[LM]', LIMIT));
             _0x24fa6f['timeout'] = REQ_TIMEOUT;
-            _0x24fa6f[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x1e6453['at']);
+            _0x24fa6f['setRequestHeader']('Authorization', 'Bearer ' + _0x1e6453['at']);
             _0x24fa6f['onreadystatechange'] = function () {
                 if (_0x24fa6f['readyState'] == XMLHttpRequest['DONE'] && _0x24fa6f['status'] == 0xc8) {
-                    if (_0x2dfab8 == _0x1e6453['local_type'] && _0x1e6453[_0x363a('0x96')][_0x363a('0xf8')]) {
-                        _0x2c8951 = JSON[_0x363a('0x70')](_0x24fa6f['responseText']);
-                        _0x1e6453[_0x363a('0x193')](_0x2c8951, _0x363a('0xf8'));
+                    if (_0x2dfab8 == _0x1e6453['local_type'] && _0x1e6453['fetch_lock'][_0x363a('0xf8')]) {
+                        _0x2c8951 = JSON.parse(_0x24fa6f['responseText']);
+                        _0x1e6453['updateWrapperBM'](_0x2c8951, _0x363a('0xf8'));
                         _0x1e6453[_0x363a('0x197')](_0x2c8951, _0x363a('0xf8'));
-                        if (0x0 == _0x1e6453['locals'][_0x363a('0xaf')]) {
-                            _0x1e6453[_0x363a('0xf9')] = _0x2c8951;
+                        if (0x0 == _0x1e6453['locals']['length']) {
+                            _0x1e6453['locals'] = _0x2c8951;
                         } else {
-                            Array[_0x363a('0x1a1')][_0x363a('0x1a2')]['apply'](_0x1e6453[_0x363a('0xf9')], _0x2c8951);
+                            Array['prototype']['push']['apply'](_0x1e6453['locals'], _0x2c8951);
                         }
-                        _0x1e6453[_0x363a('0x190')] = _0x1e6453[_0x363a('0xf9')][_0x1e6453[_0x363a('0xf9')]['length'] - 0x1] ? _0x1e6453['locals'][_0x1e6453[_0x363a('0xf9')][_0x363a('0xaf')] - 0x1]['id'] : '0';
+                        _0x1e6453[_0x363a('0x190')] = _0x1e6453['locals'][_0x1e6453['locals']['length'] - 0x1] ? _0x1e6453['locals'][_0x1e6453['locals']['length'] - 0x1]['id'] : '0';
                         _0x1e6453['fetch_lock'][_0x363a('0xf8')] = ![];
-                        _0x1e6453[_0x363a('0xf3')][_0x363a('0xf8')] = _0x2c8951[_0x363a('0xaf')] < LIMIT;
-                        _0x1e6453[_0x363a('0x18d')]();
+                        _0x1e6453['fetch_comp'][_0x363a('0xf8')] = _0x2c8951['length'] < LIMIT;
+                        _0x1e6453['$forceUpdate']();
                     }
-                } else if (_0x24fa6f[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x1e6453[_0x363a('0x96')][_0x363a('0xf8')] = ![];
+                } else if (_0x24fa6f['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x1e6453['fetch_lock'][_0x363a('0xf8')] = ![];
                     _0x1e6453['popError'](_0x24fa6f['responseText'], _0x24fa6f['status'], _0x363a('0x14f'));
-                    _0x1e6453[_0x363a('0x18d')]();
+                    _0x1e6453['$forceUpdate']();
                 }
             }
                 ;
@@ -1891,195 +1891,195 @@ var app = new Vue({
             var _0x5d0dc0 = this;
             var _0x4c3d9a = [];
             var _0x1057c2 = DIRECT;
-            if (_0x5d0dc0['multi_type'] == _0x363a('0x199')) {
-                _0x1057c2 = LIST.replace(_0x363a('0x19a'), _0x5d0dc0[_0x363a('0x151')]);
+            if (_0x5d0dc0['multi_type'] == 'List') {
+                _0x1057c2 = LIST.replace('[LID]', _0x5d0dc0['multi_target']);
             } else if (_0x5d0dc0['multi_type'] == 'Hashtag') {
-                _0x1057c2 = HASHTAG.replace(_0x363a('0x19b'), _0x5d0dc0[_0x363a('0x151')]);
+                _0x1057c2 = HASHTAG.replace(_0x363a('0x19b'), _0x5d0dc0['multi_target']);
             }
-            _0x5d0dc0[_0x363a('0x96')][_0x363a('0xfd')] = !![];
-            var _0x2ba106 = _0x5d0dc0[_0x363a('0x99')];
-            var _0x35b4d0 = new XMLHttpRequest();
-            _0x35b4d0['open'](_0x363a('0x188'), _0x1057c2.replace('[I]', _0x5d0dc0['repository']).replace('[PID]', _0x5d0dc0[_0x363a('0x100')]).replace('[LM]', LIMIT));
-            _0x35b4d0['timeout'] = REQ_TIMEOUT;
-            _0x35b4d0[_0x363a('0x18a')](_0x363a('0x18b'), 'Bearer\x20' + _0x5d0dc0['at']);
-            _0x35b4d0['onreadystatechange'] = function () {
-                if (_0x35b4d0[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x35b4d0['status'] == 0xc8) {
-                    if (_0x2ba106 == _0x5d0dc0[_0x363a('0x99')] && _0x5d0dc0[_0x363a('0x96')][_0x363a('0xfd')]) {
-                        _0x4c3d9a = JSON[_0x363a('0x70')](_0x35b4d0['responseText']);
-                        _0x5d0dc0[_0x363a('0x193')](_0x4c3d9a, _0x363a('0xfd'));
-                        _0x5d0dc0[_0x363a('0x197')](_0x4c3d9a, _0x363a('0xfd'));
+            _0x5d0dc0['fetch_lock']['multi'] = !![];
+            var _0x2ba106 = _0x5d0dc0['multi_type'];
+            var request = new XMLHttpRequest();
+            request['open']('GET', _0x1057c2.replace('[I]', _0x5d0dc0['repository']).replace('[PID]', _0x5d0dc0['multi_id']).replace('[LM]', LIMIT));
+            request['timeout'] = REQ_TIMEOUT;
+            request['setRequestHeader']('Authorization', 'Bearer\x20' + _0x5d0dc0['at']);
+            request['onreadystatechange'] = function () {
+                if (request['readyState'] == XMLHttpRequest['DONE'] && request['status'] == 0xc8) {
+                    if (_0x2ba106 == _0x5d0dc0['multi_type'] && _0x5d0dc0['fetch_lock']['multi']) {
+                        _0x4c3d9a = JSON.parse(request['responseText']);
+                        _0x5d0dc0['updateWrapperBM'](_0x4c3d9a, 'multi');
+                        _0x5d0dc0[_0x363a('0x197')](_0x4c3d9a, 'multi');
                         if (0x0 == _0x5d0dc0[_0x363a('0xff')]['length']) {
                             _0x5d0dc0['multis'] = _0x4c3d9a;
                         } else {
-                            Array[_0x363a('0x1a1')][_0x363a('0x1a2')][_0x363a('0x1a3')](_0x5d0dc0[_0x363a('0xff')], _0x4c3d9a);
+                            Array['prototype']['push']['apply'](_0x5d0dc0[_0x363a('0xff')], _0x4c3d9a);
                         }
-                        _0x5d0dc0[_0x363a('0x100')] = _0x5d0dc0['multis'][_0x5d0dc0[_0x363a('0xff')][_0x363a('0xaf')] - 0x1] ? _0x5d0dc0[_0x363a('0xff')][_0x5d0dc0[_0x363a('0xff')][_0x363a('0xaf')] - 0x1]['id'] : '0';
-                        _0x5d0dc0[_0x363a('0x96')][_0x363a('0xfd')] = ![];
-                        _0x5d0dc0[_0x363a('0xf3')]['multi'] = _0x4c3d9a[_0x363a('0xaf')] < LIMIT;
-                        _0x5d0dc0[_0x363a('0x18d')]();
+                        _0x5d0dc0['multi_id'] = _0x5d0dc0['multis'][_0x5d0dc0[_0x363a('0xff')]['length'] - 0x1] ? _0x5d0dc0[_0x363a('0xff')][_0x5d0dc0[_0x363a('0xff')]['length'] - 0x1]['id'] : '0';
+                        _0x5d0dc0['fetch_lock']['multi'] = ![];
+                        _0x5d0dc0['fetch_comp']['multi'] = _0x4c3d9a['length'] < LIMIT;
+                        _0x5d0dc0['$forceUpdate']();
                     }
-                } else if (_0x35b4d0[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x5d0dc0[_0x363a('0x96')]['multi'] = ![];
-                    _0x5d0dc0['popError'](_0x35b4d0['responseText'], _0x35b4d0['status'], 'Multi');
-                    _0x5d0dc0[_0x363a('0x18d')]();
+                } else if (request['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x5d0dc0['fetch_lock']['multi'] = ![];
+                    _0x5d0dc0['popError'](request['responseText'], request['status'], 'Multi');
+                    _0x5d0dc0['$forceUpdate']();
                 }
             }
                 ;
-            _0x35b4d0['send']();
+            request['send']();
         },
         'fetchNotifAll': function () {
-            if (this[_0x363a('0x106')] != '') {
-                this[_0x363a('0x106')] = '';
-                this[_0x363a('0x15d')]();
+            if (this['notif_type'] != '') {
+                this['notif_type'] = '';
+                this['resetNotifColumn']();
             }
             var _0x4cf7d8 = this;
             var _0x3cb087 = [];
             var _0x418121 = [];
-            _0x4cf7d8[_0x363a('0x96')][_0x363a('0x104')] = !![];
-            var _0x187b5a = new XMLHttpRequest();
-            _0x187b5a['open']('GET', NOTIF.replace('[I]', _0x4cf7d8['repository']).replace(_0x363a('0x192'), _0x4cf7d8[_0x363a('0x159')]).replace('[LM]', LIMIT_NOTIF));
-            _0x187b5a['timeout'] = REQ_TIMEOUT;
-            _0x187b5a['setRequestHeader'](_0x363a('0x18b'), _0x363a('0x18c') + _0x4cf7d8['at']);
-            _0x187b5a['onreadystatechange'] = function () {
-                if (_0x187b5a[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x187b5a['status'] == 0xc8) {
-                    if (_0x4cf7d8[_0x363a('0x106')] == '' && _0x4cf7d8[_0x363a('0x96')][_0x363a('0x104')]) {
-                        _0x3cb087 = JSON[_0x363a('0x70')](_0x187b5a['responseText']);
-                        _0x4cf7d8[_0x363a('0x193')](_0x3cb087, _0x363a('0x104'));
-                        if (0x0 == _0x4cf7d8['notifs'][_0x363a('0xaf')]) {
-                            _0x4cf7d8[_0x363a('0xb0')] = _0x3cb087[_0x363a('0xc1')]();
-                            _0x4cf7d8[_0x363a('0xf3')][_0x363a('0x104')] = _0x3cb087[_0x363a('0xaf')] < LIMIT_NOTIF;
+            _0x4cf7d8['fetch_lock']['notif'] = !![];
+            var request = new XMLHttpRequest();
+            request.open('GET', NOTIF.replace('[I]', _0x4cf7d8['repository']).replace('[PID]', _0x4cf7d8['notif_id']).replace('[LM]', LIMIT_NOTIF));
+            request['timeout'] = REQ_TIMEOUT;
+            request['setRequestHeader']('Authorization', 'Bearer ' + _0x4cf7d8['at']);
+            request['onreadystatechange'] = function () {
+                if (request['readyState'] == XMLHttpRequest['DONE'] && request['status'] == 0xc8) {
+                    if (_0x4cf7d8['notif_type'] == '' && _0x4cf7d8['fetch_lock']['notif']) {
+                        _0x3cb087 = JSON.parse(request.responseText);
+                        _0x4cf7d8['updateWrapperBM'](_0x3cb087, 'notif');
+                        if (0x0 == _0x4cf7d8['notifs']['length']) {
+                            _0x4cf7d8['notifs'] = _0x3cb087['slice']();
+                            _0x4cf7d8['fetch_comp']['notif'] = _0x3cb087['length'] < LIMIT_NOTIF;
                         }
                         if (0x0 == _0x4cf7d8['notifs_filter']['length']) {
-                            _0x4cf7d8[_0x363a('0xb1')] = _0x3cb087;
+                            _0x4cf7d8['notifs_filter'] = _0x3cb087;
                         } else {
-                            Array[_0x363a('0x1a1')][_0x363a('0x1a2')][_0x363a('0x1a3')](_0x4cf7d8[_0x363a('0xb1')], _0x3cb087);
+                            Array['prototype']['push']['apply'](_0x4cf7d8['notifs_filter'], _0x3cb087);
                         }
-                        _0x418121 = null != _0x187b5a[_0x363a('0x19f')](_0x363a('0x1a0')) ? _0x187b5a[_0x363a('0x19f')](_0x363a('0x1a0'))['match'](/max_id=(.*?)>/) : null;
-                        _0x4cf7d8[_0x363a('0x159')] = null != _0x418121 && 0x0 != _0x418121[0x1][_0x363a('0xaf')] ? _0x418121[0x1] : '0';
-                        if (_0x4cf7d8[_0x363a('0x148')]) {
-                            _0x4cf7d8[_0x363a('0x126')] = _0x4cf7d8[_0x363a('0x15a')] ? _0x4cf7d8[_0x363a('0xb0')][0x0]['id'] : _0x4cf7d8[_0x363a('0x126')];
-                            _0x4cf7d8[_0x363a('0x15b')]();
+                        _0x418121 = null != request['getResponseHeader']('link') ? request['getResponseHeader']('link')['match'](/max_id=(.*?)>/) : null;
+                        _0x4cf7d8['notif_id'] = null != _0x418121 && 0x0 != _0x418121[0x1]['length'] ? _0x418121[0x1] : '0';
+                        if (_0x4cf7d8['showNotif']) {
+                            _0x4cf7d8['notif_id_bookmark'] = _0x4cf7d8[_0x363a('0x15a')] ? _0x4cf7d8['notifs'][0x0]['id'] : _0x4cf7d8['notif_id_bookmark'];
+                            _0x4cf7d8['countNotifUnread']();
                         }
-                        _0x4cf7d8[_0x363a('0x96')][_0x363a('0x104')] = ![];
-                        _0x4cf7d8['fetch_comp'][_0x363a('0x113')] = _0x3cb087[_0x363a('0xaf')] < LIMIT_NOTIF;
-                        _0x4cf7d8[_0x363a('0x18d')]();
+                        _0x4cf7d8['fetch_lock']['notif'] = ![];
+                        _0x4cf7d8['fetch_comp']['notif_filter'] = _0x3cb087['length'] < LIMIT_NOTIF;
+                        _0x4cf7d8['$forceUpdate']();
                     }
-                } else if (_0x187b5a[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x4cf7d8[_0x363a('0x96')][_0x363a('0x104')] = ![];
-                    _0x4cf7d8['popError'](_0x187b5a['responseText'], _0x187b5a['status'], _0x363a('0x1a5'));
-                    _0x4cf7d8[_0x363a('0x18d')]();
+                } else if (request['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x4cf7d8['fetch_lock']['notif'] = ![];
+                    _0x4cf7d8['popError'](request['responseText'], request['status'], 'Notif');
+                    _0x4cf7d8['$forceUpdate']();
                 }
             }
                 ;
-            _0x187b5a['send']();
+            request['send']();
         },
         'fetchNotifMention': function () {
-            if (this[_0x363a('0x106')] != _0x363a('0x108')) {
-                this[_0x363a('0x106')] = _0x363a('0x108');
-                this[_0x363a('0x15d')]();
+            if (this['notif_type'] != _0x363a('0x108')) {
+                this['notif_type'] = _0x363a('0x108');
+                this['resetNotifColumn']();
             }
             var _0x1ef5bd = this;
             var _0x19af9f = [];
             var _0x933086 = [];
-            _0x1ef5bd[_0x363a('0x96')]['notif'] = !![];
-            var _0x40b945 = new XMLHttpRequest();
-            _0x40b945['open'](_0x363a('0x188'), NOTIF.replace('[I]', _0x1ef5bd['repository']).replace(_0x363a('0x192'), _0x1ef5bd[_0x363a('0x159')]).replace('[LM]', LIMIT_NOTIF) + '&exclude_types[]=follow&exclude_types[]=favourite&exclude_types[]=reblog');
-            _0x40b945['timeout'] = REQ_TIMEOUT;
-            _0x40b945[_0x363a('0x18a')]('Authorization', _0x363a('0x18c') + _0x1ef5bd['at']);
-            _0x40b945['onreadystatechange'] = function () {
-                if (_0x40b945[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x40b945['status'] == 0xc8) {
-                    if (_0x1ef5bd[_0x363a('0x106')] == _0x363a('0x108') && _0x1ef5bd[_0x363a('0x96')][_0x363a('0x104')]) {
-                        _0x19af9f = JSON[_0x363a('0x70')](_0x40b945['responseText']);
-                        _0x1ef5bd[_0x363a('0x193')](_0x19af9f, _0x363a('0x104'));
-                        if (0x0 == _0x1ef5bd[_0x363a('0xb1')][_0x363a('0xaf')]) {
-                            _0x1ef5bd[_0x363a('0xb1')] = _0x19af9f;
+            _0x1ef5bd['fetch_lock']['notif'] = !![];
+            var request = new XMLHttpRequest();
+            request['open']('GET', NOTIF.replace('[I]', _0x1ef5bd['repository']).replace('[PID]', _0x1ef5bd['notif_id']).replace('[LM]', LIMIT_NOTIF) + '&exclude_types[]=follow&exclude_types[]=favourite&exclude_types[]=reblog');
+            request['timeout'] = REQ_TIMEOUT;
+            request['setRequestHeader']('Authorization', 'Bearer ' + _0x1ef5bd['at']);
+            request['onreadystatechange'] = function () {
+                if (request['readyState'] == XMLHttpRequest['DONE'] && request['status'] == 0xc8) {
+                    if (_0x1ef5bd['notif_type'] == _0x363a('0x108') && _0x1ef5bd['fetch_lock']['notif']) {
+                        _0x19af9f = JSON.parse(request['responseText']);
+                        _0x1ef5bd['updateWrapperBM'](_0x19af9f, 'notif');
+                        if (0x0 == _0x1ef5bd['notifs_filter']['length']) {
+                            _0x1ef5bd['notifs_filter'] = _0x19af9f;
                         } else {
-                            Array[_0x363a('0x1a1')][_0x363a('0x1a2')][_0x363a('0x1a3')](_0x1ef5bd['notifs_filter'], _0x19af9f);
+                            Array['prototype']['push']['apply'](_0x1ef5bd['notifs_filter'], _0x19af9f);
                         }
-                        _0x933086 = null != _0x40b945[_0x363a('0x19f')]('link') ? _0x40b945[_0x363a('0x19f')](_0x363a('0x1a0'))['match'](/max_id=(.*?)>/) : null;
-                        _0x1ef5bd[_0x363a('0x159')] = null != _0x933086 && 0x0 != _0x933086[0x1][_0x363a('0xaf')] ? _0x933086[0x1] : '0';
-                        _0x1ef5bd[_0x363a('0x96')][_0x363a('0x104')] = ![];
-                        _0x1ef5bd[_0x363a('0xf3')][_0x363a('0x113')] = _0x19af9f[_0x363a('0xaf')] < LIMIT_NOTIF;
-                        _0x1ef5bd[_0x363a('0x18d')]();
+                        _0x933086 = null != request['getResponseHeader']('link') ? request['getResponseHeader']('link')['match'](/max_id=(.*?)>/) : null;
+                        _0x1ef5bd['notif_id'] = null != _0x933086 && 0x0 != _0x933086[0x1]['length'] ? _0x933086[0x1] : '0';
+                        _0x1ef5bd['fetch_lock']['notif'] = ![];
+                        _0x1ef5bd['fetch_comp']['notif_filter'] = _0x19af9f['length'] < LIMIT_NOTIF;
+                        _0x1ef5bd['$forceUpdate']();
                     }
-                } else if (_0x40b945[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x1ef5bd[_0x363a('0x96')][_0x363a('0x104')] = ![];
-                    _0x1ef5bd['popError'](_0x40b945['responseText'], _0x40b945['status'], 'Notif');
-                    _0x1ef5bd[_0x363a('0x18d')]();
+                } else if (request['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x1ef5bd['fetch_lock']['notif'] = ![];
+                    _0x1ef5bd['popError'](request['responseText'], request['status'], 'Notif');
+                    _0x1ef5bd['$forceUpdate']();
                 }
             }
                 ;
-            _0x40b945['send']();
+            request['send']();
         },
         'fetchNotifFav': function () {
-            if (this[_0x363a('0x106')] != _0x363a('0x10a')) {
-                this[_0x363a('0x106')] = _0x363a('0x10a');
-                this[_0x363a('0x15d')]();
+            if (this['notif_type'] != 'fav') {
+                this['notif_type'] = 'fav';
+                this['resetNotifColumn']();
             }
             var _0xf12e52 = this;
             var _0x39b4b6 = [];
             var _0xd6f484 = [];
-            _0xf12e52['fetch_lock'][_0x363a('0x104')] = !![];
+            _0xf12e52['fetch_lock']['notif'] = !![];
             var _0x470960 = new XMLHttpRequest();
-            _0x470960['open'](_0x363a('0x188'), NOTIF.replace('[I]', _0xf12e52['repository']).replace(_0x363a('0x192'), _0xf12e52[_0x363a('0x159')]).replace('[LM]', LIMIT_NOTIF) + _0x363a('0x1a6'));
+            _0x470960['open']('GET', NOTIF.replace('[I]', _0xf12e52['repository']).replace('[PID]', _0xf12e52['notif_id']).replace('[LM]', LIMIT_NOTIF) + '&exclude_types[]=follow&exclude_types[]=reblog&exclude_types[]=mention');
             _0x470960['timeout'] = REQ_TIMEOUT;
-            _0x470960[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0xf12e52['at']);
+            _0x470960['setRequestHeader']('Authorization', 'Bearer ' + _0xf12e52['at']);
             _0x470960['onreadystatechange'] = function () {
-                if (_0x470960[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x470960['status'] == 0xc8) {
-                    if (_0xf12e52['notif_type'] == 'fav' && _0xf12e52[_0x363a('0x96')]['notif']) {
-                        _0x39b4b6 = JSON[_0x363a('0x70')](_0x470960['responseText']);
-                        _0xf12e52[_0x363a('0x193')](_0x39b4b6, 'notif');
-                        if (0x0 == _0xf12e52[_0x363a('0xb1')]['length']) {
-                            _0xf12e52[_0x363a('0xb1')] = _0x39b4b6;
+                if (_0x470960['readyState'] == XMLHttpRequest['DONE'] && _0x470960['status'] == 0xc8) {
+                    if (_0xf12e52['notif_type'] == 'fav' && _0xf12e52['fetch_lock']['notif']) {
+                        _0x39b4b6 = JSON.parse(_0x470960['responseText']);
+                        _0xf12e52['updateWrapperBM'](_0x39b4b6, 'notif');
+                        if (0x0 == _0xf12e52['notifs_filter']['length']) {
+                            _0xf12e52['notifs_filter'] = _0x39b4b6;
                         } else {
-                            Array[_0x363a('0x1a1')]['push'][_0x363a('0x1a3')](_0xf12e52[_0x363a('0xb1')], _0x39b4b6);
+                            Array['prototype']['push']['apply'](_0xf12e52['notifs_filter'], _0x39b4b6);
                         }
-                        _0xd6f484 = null != _0x470960[_0x363a('0x19f')](_0x363a('0x1a0')) ? _0x470960[_0x363a('0x19f')](_0x363a('0x1a0'))['match'](/max_id=(.*?)>/) : null;
-                        _0xf12e52[_0x363a('0x159')] = null != _0xd6f484 && 0x0 != _0xd6f484[0x1][_0x363a('0xaf')] ? _0xd6f484[0x1] : '0';
-                        _0xf12e52[_0x363a('0x96')][_0x363a('0x104')] = ![];
-                        _0xf12e52[_0x363a('0xf3')][_0x363a('0x113')] = _0x39b4b6[_0x363a('0xaf')] < LIMIT_NOTIF;
-                        _0xf12e52[_0x363a('0x18d')]();
+                        _0xd6f484 = null != _0x470960['getResponseHeader']('link') ? _0x470960['getResponseHeader']('link')['match'](/max_id=(.*?)>/) : null;
+                        _0xf12e52['notif_id'] = null != _0xd6f484 && 0x0 != _0xd6f484[0x1]['length'] ? _0xd6f484[0x1] : '0';
+                        _0xf12e52['fetch_lock']['notif'] = ![];
+                        _0xf12e52['fetch_comp']['notif_filter'] = _0x39b4b6['length'] < LIMIT_NOTIF;
+                        _0xf12e52['$forceUpdate']();
                     }
                 } else if (_0x470960['readyState'] == XMLHttpRequest['DONE']) {
-                    _0xf12e52[_0x363a('0x96')][_0x363a('0x104')] = ![];
-                    _0xf12e52['popError'](_0x470960['responseText'], _0x470960['status'], _0x363a('0x1a5'));
-                    _0xf12e52[_0x363a('0x18d')]();
+                    _0xf12e52['fetch_lock']['notif'] = ![];
+                    _0xf12e52['popError'](_0x470960['responseText'], _0x470960['status'], 'Notif');
+                    _0xf12e52['$forceUpdate']();
                 }
             }
                 ;
             _0x470960['send']();
         },
         'fetchNotifFollow': function () {
-            if (this[_0x363a('0x106')] != _0x363a('0x10e')) {
-                this[_0x363a('0x106')] = _0x363a('0x10e');
+            if (this['notif_type'] != _0x363a('0x10e')) {
+                this['notif_type'] = _0x363a('0x10e');
                 this['resetNotifColumn']();
             }
             var _0x44855e = this;
             var _0x58db7d = [];
             var _0x149eab = [];
-            _0x44855e[_0x363a('0x96')][_0x363a('0x104')] = !![];
+            _0x44855e['fetch_lock']['notif'] = !![];
             var _0x2d6097 = new XMLHttpRequest();
-            _0x2d6097['open']('GET', NOTIF.replace('[I]', _0x44855e['repository']).replace(_0x363a('0x192'), _0x44855e[_0x363a('0x159')]).replace(_0x363a('0x19c'), LIMIT_NOTIF) + '&exclude_types[]=favourite&exclude_types[]=reblog&exclude_types[]=mention');
+            _0x2d6097['open']('GET', NOTIF.replace('[I]', _0x44855e['repository']).replace('[PID]', _0x44855e['notif_id']).replace('[LM]', LIMIT_NOTIF) + '&exclude_types[]=favourite&exclude_types[]=reblog&exclude_types[]=mention');
             _0x2d6097['timeout'] = REQ_TIMEOUT;
-            _0x2d6097[_0x363a('0x18a')](_0x363a('0x18b'), 'Bearer\x20' + _0x44855e['at']);
+            _0x2d6097['setRequestHeader']('Authorization', 'Bearer\x20' + _0x44855e['at']);
             _0x2d6097['onreadystatechange'] = function () {
-                if (_0x2d6097[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x2d6097['status'] == 0xc8) {
-                    if (_0x44855e['notif_type'] == _0x363a('0x10e') && _0x44855e[_0x363a('0x96')][_0x363a('0x104')]) {
-                        _0x58db7d = JSON[_0x363a('0x70')](_0x2d6097['responseText']);
-                        _0x44855e[_0x363a('0x193')](_0x58db7d, 'notif');
-                        if (0x0 == _0x44855e[_0x363a('0xb1')][_0x363a('0xaf')]) {
-                            _0x44855e[_0x363a('0xb1')] = _0x58db7d;
+                if (_0x2d6097['readyState'] == XMLHttpRequest['DONE'] && _0x2d6097['status'] == 0xc8) {
+                    if (_0x44855e['notif_type'] == _0x363a('0x10e') && _0x44855e['fetch_lock']['notif']) {
+                        _0x58db7d = JSON.parse(_0x2d6097['responseText']);
+                        _0x44855e['updateWrapperBM'](_0x58db7d, 'notif');
+                        if (0x0 == _0x44855e['notifs_filter']['length']) {
+                            _0x44855e['notifs_filter'] = _0x58db7d;
                         } else {
-                            Array[_0x363a('0x1a1')]['push'][_0x363a('0x1a3')](_0x44855e[_0x363a('0xb1')], _0x58db7d);
+                            Array['prototype']['push']['apply'](_0x44855e['notifs_filter'], _0x58db7d);
                         }
-                        _0x149eab = null != _0x2d6097[_0x363a('0x19f')](_0x363a('0x1a0')) ? _0x2d6097[_0x363a('0x19f')](_0x363a('0x1a0'))['match'](/max_id=(.*?)>/) : null;
-                        _0x44855e[_0x363a('0x159')] = null != _0x149eab && 0x0 != _0x149eab[0x1][_0x363a('0xaf')] ? _0x149eab[0x1] : '0';
-                        _0x44855e['fetch_lock'][_0x363a('0x104')] = ![];
-                        _0x44855e[_0x363a('0xf3')][_0x363a('0x113')] = _0x58db7d[_0x363a('0xaf')] < LIMIT_NOTIF;
-                        _0x44855e[_0x363a('0x18d')]();
+                        _0x149eab = null != _0x2d6097['getResponseHeader']('link') ? _0x2d6097['getResponseHeader']('link')['match'](/max_id=(.*?)>/) : null;
+                        _0x44855e['notif_id'] = null != _0x149eab && 0x0 != _0x149eab[0x1]['length'] ? _0x149eab[0x1] : '0';
+                        _0x44855e['fetch_lock']['notif'] = ![];
+                        _0x44855e['fetch_comp']['notif_filter'] = _0x58db7d['length'] < LIMIT_NOTIF;
+                        _0x44855e['$forceUpdate']();
                     }
                 } else if (_0x2d6097['readyState'] == XMLHttpRequest['DONE']) {
-                    _0x44855e['fetch_lock'][_0x363a('0x104')] = ![];
+                    _0x44855e['fetch_lock']['notif'] = ![];
                     _0x44855e['popError'](_0x2d6097['responseText'], _0x2d6097['status'], 'Notif');
                     _0x44855e['$forceUpdate']();
                 }
@@ -2088,109 +2088,109 @@ var app = new Vue({
             _0x2d6097['send']();
         },
         'fetchNotifReblog': function () {
-            if (this[_0x363a('0x106')] != _0x363a('0x10c')) {
-                this[_0x363a('0x106')] = _0x363a('0x10c');
-                this[_0x363a('0x15d')]();
+            if (this['notif_type'] != 'reblog') {
+                this['notif_type'] = 'reblog';
+                this['resetNotifColumn']();
             }
             var _0x3da5d8 = this;
             var _0x4c2972 = [];
             var _0x218281 = [];
-            _0x3da5d8['fetch_lock'][_0x363a('0x104')] = !![];
+            _0x3da5d8['fetch_lock']['notif'] = !![];
             var _0xfc1a5a = new XMLHttpRequest();
-            _0xfc1a5a['open'](_0x363a('0x188'), NOTIF.replace('[I]', _0x3da5d8['repository']).replace(_0x363a('0x192'), _0x3da5d8[_0x363a('0x159')]).replace(_0x363a('0x19c'), LIMIT_NOTIF) + _0x363a('0x1a7'));
+            _0xfc1a5a['open']('GET', NOTIF.replace('[I]', _0x3da5d8['repository']).replace('[PID]', _0x3da5d8['notif_id']).replace('[LM]', LIMIT_NOTIF) + _0x363a('0x1a7'));
             _0xfc1a5a['timeout'] = REQ_TIMEOUT;
-            _0xfc1a5a[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x3da5d8['at']);
+            _0xfc1a5a['setRequestHeader']('Authorization', 'Bearer ' + _0x3da5d8['at']);
             _0xfc1a5a['onreadystatechange'] = function () {
                 if (_0xfc1a5a['readyState'] == XMLHttpRequest['DONE'] && _0xfc1a5a['status'] == 0xc8) {
-                    if (_0x3da5d8[_0x363a('0x106')] == 'reblog' && _0x3da5d8[_0x363a('0x96')][_0x363a('0x104')]) {
-                        _0x4c2972 = JSON[_0x363a('0x70')](_0xfc1a5a['responseText']);
-                        _0x3da5d8[_0x363a('0x193')](_0x4c2972, _0x363a('0x104'));
-                        if (0x0 == _0x3da5d8[_0x363a('0xb1')][_0x363a('0xaf')]) {
-                            _0x3da5d8[_0x363a('0xb1')] = _0x4c2972;
+                    if (_0x3da5d8['notif_type'] == 'reblog' && _0x3da5d8['fetch_lock']['notif']) {
+                        _0x4c2972 = JSON.parse(_0xfc1a5a['responseText']);
+                        _0x3da5d8['updateWrapperBM'](_0x4c2972, 'notif');
+                        if (0x0 == _0x3da5d8['notifs_filter']['length']) {
+                            _0x3da5d8['notifs_filter'] = _0x4c2972;
                         } else {
-                            Array[_0x363a('0x1a1')][_0x363a('0x1a2')][_0x363a('0x1a3')](_0x3da5d8[_0x363a('0xb1')], _0x4c2972);
+                            Array['prototype']['push']['apply'](_0x3da5d8['notifs_filter'], _0x4c2972);
                         }
-                        _0x218281 = null != _0xfc1a5a[_0x363a('0x19f')](_0x363a('0x1a0')) ? _0xfc1a5a[_0x363a('0x19f')](_0x363a('0x1a0'))['match'](/max_id=(.*?)>/) : null;
-                        _0x3da5d8['notif_id'] = null != _0x218281 && 0x0 != _0x218281[0x1][_0x363a('0xaf')] ? _0x218281[0x1] : '0';
+                        _0x218281 = null != _0xfc1a5a['getResponseHeader']('link') ? _0xfc1a5a['getResponseHeader']('link')['match'](/max_id=(.*?)>/) : null;
+                        _0x3da5d8['notif_id'] = null != _0x218281 && 0x0 != _0x218281[0x1]['length'] ? _0x218281[0x1] : '0';
                         _0x3da5d8['fetch_lock']['notif'] = ![];
-                        _0x3da5d8[_0x363a('0xf3')][_0x363a('0x113')] = _0x4c2972[_0x363a('0xaf')] < LIMIT_NOTIF;
+                        _0x3da5d8['fetch_comp']['notif_filter'] = _0x4c2972['length'] < LIMIT_NOTIF;
                         _0x3da5d8['$forceUpdate']();
                     }
-                } else if (_0xfc1a5a[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x3da5d8[_0x363a('0x96')][_0x363a('0x104')] = ![];
-                    _0x3da5d8['popError'](_0xfc1a5a['responseText'], _0xfc1a5a['status'], _0x363a('0x1a5'));
-                    _0x3da5d8[_0x363a('0x18d')]();
+                } else if (_0xfc1a5a['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x3da5d8['fetch_lock']['notif'] = ![];
+                    _0x3da5d8['popError'](_0xfc1a5a['responseText'], _0xfc1a5a['status'], 'Notif');
+                    _0x3da5d8['$forceUpdate']();
                 }
             }
                 ;
             _0xfc1a5a['send']();
         },
         'fetchAcctAll': function () {
-            if (this[_0x363a('0x114')] != _0x363a('0x61')) {
-                this[_0x363a('0x114')] = _0x363a('0x61');
-                this[_0x363a('0x1a8')]();
+            if (this['acct_type'] != 'katsu') {
+                this['acct_type'] = 'katsu';
+                this['resetAcctColumn']();
             }
             var _0x126f91 = this;
             var _0x3b2388 = [];
-            _0x126f91[_0x363a('0x96')][_0x363a('0xb5')] = !![];
-            var _0x1e918e = new XMLHttpRequest();
-            _0x1e918e['open'](_0x363a('0x188'), ACCT.replace('[I]', _0x126f91['repository']).replace(_0x363a('0x1a9'), _0x126f91[_0x363a('0xae')]).replace('[PID]', _0x126f91['acct_id']).replace(_0x363a('0x19c'), LIMIT));
-            _0x1e918e['timeout'] = REQ_TIMEOUT;
-            _0x1e918e['setRequestHeader'](_0x363a('0x18b'), _0x363a('0x18c') + _0x126f91['at']);
-            _0x1e918e['onreadystatechange'] = function () {
-                if (_0x1e918e['readyState'] == XMLHttpRequest['DONE'] && _0x1e918e['status'] == 0xc8) {
-                    if (_0x126f91[_0x363a('0x114')] == _0x363a('0x61') && _0x126f91[_0x363a('0x96')][_0x363a('0xb5')]) {
-                        _0x3b2388 = JSON['parse'](_0x1e918e['responseText']);
-                        _0x126f91[_0x363a('0x193')](_0x3b2388, _0x363a('0xb5'));
-                        if (0x0 == _0x126f91[_0x363a('0x15f')]['length']) {
-                            _0x126f91[_0x363a('0x15f')] = _0x3b2388;
+            _0x126f91['fetch_lock']['acct'] = !![];
+            var request = new XMLHttpRequest();
+            request['open']('GET', ACCT.replace('[I]', _0x126f91['repository']).replace(_0x363a('0x1a9'), _0x126f91[_0x363a('0xae')]).replace('[PID]', _0x126f91['acct_id']).replace('[LM]', LIMIT));
+            request['timeout'] = REQ_TIMEOUT;
+            request['setRequestHeader']('Authorization', 'Bearer ' + _0x126f91['at']);
+            request['onreadystatechange'] = function () {
+                if (request['readyState'] == XMLHttpRequest['DONE'] && request['status'] == 0xc8) {
+                    if (_0x126f91['acct_type'] == 'katsu' && _0x126f91['fetch_lock']['acct']) {
+                        _0x3b2388 = JSON['parse'](request['responseText']);
+                        _0x126f91['updateWrapperBM'](_0x3b2388, 'acct');
+                        if (0x0 == _0x126f91['accts']['length']) {
+                            _0x126f91['accts'] = _0x3b2388;
                         } else {
-                            Array[_0x363a('0x1a1')][_0x363a('0x1a2')][_0x363a('0x1a3')](_0x126f91[_0x363a('0x15f')], _0x3b2388);
+                            Array['prototype']['push']['apply'](_0x126f91['accts'], _0x3b2388);
                         }
-                        _0x126f91[_0x363a('0x16c')] = _0x126f91[_0x363a('0x15f')][_0x126f91[_0x363a('0x15f')][_0x363a('0xaf')] - 0x1] ? _0x126f91['accts'][_0x126f91[_0x363a('0x15f')][_0x363a('0xaf')] - 0x1]['id'] : '0';
-                        _0x126f91[_0x363a('0x96')]['acct'] = ![];
-                        _0x126f91[_0x363a('0xf3')][_0x363a('0xb5')] = _0x3b2388[_0x363a('0xaf')] < LIMIT;
-                        _0x126f91[_0x363a('0x18d')]();
+                        _0x126f91['acct_id'] = _0x126f91['accts'][_0x126f91['accts']['length'] - 1] ? _0x126f91['accts'][_0x126f91['accts']['length'] - 0x1]['id'] : '0';
+                        _0x126f91['fetch_lock']['acct'] = ![];
+                        _0x126f91['fetch_comp']['acct'] = _0x3b2388['length'] < LIMIT;
+                        _0x126f91['$forceUpdate']();
                     }
-                } else if (_0x1e918e[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x126f91['fetch_lock'][_0x363a('0xb5')] = ![];
-                    _0x126f91['popError'](_0x1e918e['responseText'], _0x1e918e['status'], _0x363a('0x1aa'));
-                    _0x126f91[_0x363a('0x18d')]();
+                } else if (request['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x126f91['fetch_lock']['acct'] = ![];
+                    _0x126f91['popError'](request['responseText'], request['status'], 'Account');
+                    _0x126f91['$forceUpdate']();
                 }
             }
                 ;
-            _0x1e918e['send']();
+            request['send']();
         },
         'fetchAcctMedia': function () {
-            if (this[_0x363a('0x114')] != 'media') {
-                this[_0x363a('0x114')] = 'media';
+            if (this['acct_type'] != 'media') {
+                this['acct_type'] = 'media';
                 this['resetAcctColumn']();
             }
             var _0x1f152e = this;
             var _0x4e7836 = [];
             _0x1f152e['fetch_lock']['acct'] = !![];
             var _0x9df86d = new XMLHttpRequest();
-            _0x9df86d['open'](_0x363a('0x188'), MEDIA.replace('[I]', _0x1f152e['repository']).replace(_0x363a('0x1a9'), _0x1f152e[_0x363a('0xae')]).replace('[PID]', _0x1f152e[_0x363a('0x16c')]).replace(_0x363a('0x19c'), LIMIT));
+            _0x9df86d['open']('GET', MEDIA.replace('[I]', _0x1f152e['repository']).replace(_0x363a('0x1a9'), _0x1f152e[_0x363a('0xae')]).replace('[PID]', _0x1f152e['acct_id']).replace('[LM]', LIMIT));
             _0x9df86d['timeout'] = REQ_TIMEOUT;
-            _0x9df86d[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x1f152e['at']);
+            _0x9df86d['setRequestHeader']('Authorization', 'Bearer ' + _0x1f152e['at']);
             _0x9df86d['onreadystatechange'] = function () {
-                if (_0x9df86d[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x9df86d['status'] == 0xc8) {
-                    if (_0x1f152e[_0x363a('0x114')] == 'media' && _0x1f152e[_0x363a('0x96')]['acct']) {
-                        _0x4e7836 = JSON[_0x363a('0x70')](_0x9df86d['responseText']);
-                        _0x1f152e[_0x363a('0x193')](_0x4e7836, _0x363a('0xb5'));
-                        if (0x0 == _0x1f152e[_0x363a('0x15f')][_0x363a('0xaf')]) {
+                if (_0x9df86d['readyState'] == XMLHttpRequest['DONE'] && _0x9df86d['status'] == 0xc8) {
+                    if (_0x1f152e['acct_type'] == 'media' && _0x1f152e['fetch_lock']['acct']) {
+                        _0x4e7836 = JSON.parse(_0x9df86d['responseText']);
+                        _0x1f152e['updateWrapperBM'](_0x4e7836, 'acct');
+                        if (0x0 == _0x1f152e['accts']['length']) {
                             _0x1f152e['accts'] = _0x4e7836;
                         } else {
-                            Array[_0x363a('0x1a1')][_0x363a('0x1a2')]['apply'](_0x1f152e[_0x363a('0x15f')], _0x4e7836);
+                            Array['prototype']['push']['apply'](_0x1f152e['accts'], _0x4e7836);
                         }
-                        _0x1f152e[_0x363a('0x16c')] = _0x1f152e[_0x363a('0x15f')][_0x1f152e[_0x363a('0x15f')][_0x363a('0xaf')] - 0x1] ? _0x1f152e[_0x363a('0x15f')][_0x1f152e[_0x363a('0x15f')][_0x363a('0xaf')] - 0x1]['id'] : '0';
-                        _0x1f152e[_0x363a('0x96')][_0x363a('0xb5')] = ![];
-                        _0x1f152e[_0x363a('0xf3')]['acct'] = _0x4e7836[_0x363a('0xaf')] < LIMIT;
+                        _0x1f152e['acct_id'] = _0x1f152e['accts'][_0x1f152e['accts']['length'] - 0x1] ? _0x1f152e['accts'][_0x1f152e['accts']['length'] - 0x1]['id'] : '0';
+                        _0x1f152e['fetch_lock']['acct'] = ![];
+                        _0x1f152e['fetch_comp']['acct'] = _0x4e7836['length'] < LIMIT;
                         _0x1f152e['$forceUpdate']();
                     }
-                } else if (_0x9df86d[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x1f152e['fetch_lock'][_0x363a('0xb5')] = ![];
-                    _0x1f152e['popError'](_0x9df86d['responseText'], _0x9df86d['status'], _0x363a('0x1aa'));
+                } else if (_0x9df86d['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x1f152e['fetch_lock']['acct'] = ![];
+                    _0x1f152e['popError'](_0x9df86d['responseText'], _0x9df86d['status'], 'Account');
                     _0x1f152e['$forceUpdate']();
                 }
             }
@@ -2198,148 +2198,148 @@ var app = new Vue({
             _0x9df86d['send']();
         },
         'fetchAcctFav': function () {
-            if (this[_0x363a('0x114')] != _0x363a('0x10a')) {
-                this['acct_type'] = _0x363a('0x10a');
-                this[_0x363a('0x1a8')]();
+            if (this['acct_type'] != 'fav') {
+                this['acct_type'] = 'fav';
+                this['resetAcctColumn']();
             }
             var _0x15ab60 = this;
             var _0x1f082d = [];
             var _0xce2395 = [];
-            _0x15ab60[_0x363a('0x96')][_0x363a('0xb5')] = !![];
-            var _0x4f1d64 = new XMLHttpRequest();
-            _0x4f1d64['open'](_0x363a('0x188'), FAVO.replace('[I]', _0x15ab60['repository']).replace('[PID]', _0x15ab60[_0x363a('0x16c')]).replace(_0x363a('0x19c'), LIMIT));
-            _0x4f1d64['timeout'] = REQ_TIMEOUT;
-            _0x4f1d64['setRequestHeader'](_0x363a('0x18b'), _0x363a('0x18c') + _0x15ab60['at']);
-            _0x4f1d64['onreadystatechange'] = function () {
-                if (_0x4f1d64[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x4f1d64['status'] == 0xc8) {
-                    if (_0x15ab60['acct_type'] == _0x363a('0x10a') && _0x15ab60[_0x363a('0x96')][_0x363a('0xb5')]) {
-                        _0x1f082d = JSON[_0x363a('0x70')](_0x4f1d64['responseText']);
-                        _0x15ab60[_0x363a('0x193')](_0x1f082d, _0x363a('0xb5'));
-                        if (0x0 == _0x15ab60[_0x363a('0x15f')]['length']) {
-                            _0x15ab60[_0x363a('0x15f')] = _0x1f082d;
+            _0x15ab60['fetch_lock']['acct'] = !![];
+            var request = new XMLHttpRequest();
+            request['open']('GET', FAVO.replace('[I]', _0x15ab60['repository']).replace('[PID]', _0x15ab60['acct_id']).replace('[LM]', LIMIT));
+            request['timeout'] = REQ_TIMEOUT;
+            request['setRequestHeader']('Authorization', 'Bearer ' + _0x15ab60['at']);
+            request['onreadystatechange'] = function () {
+                if (request['readyState'] == XMLHttpRequest['DONE'] && request['status'] == 0xc8) {
+                    if (_0x15ab60['acct_type'] == 'fav' && _0x15ab60['fetch_lock']['acct']) {
+                        _0x1f082d = JSON.parse(request['responseText']);
+                        _0x15ab60['updateWrapperBM'](_0x1f082d, 'acct');
+                        if (0 == _0x15ab60['accts']['length']) {
+                            _0x15ab60['accts'] = _0x1f082d;
                         } else {
-                            Array['prototype'][_0x363a('0x1a2')][_0x363a('0x1a3')](_0x15ab60['accts'], _0x1f082d);
+                            Array['prototype']['push']['apply'](_0x15ab60['accts'], _0x1f082d);
                         }
-                        _0xce2395 = null != _0x4f1d64[_0x363a('0x19f')](_0x363a('0x1a0')) ? _0x4f1d64[_0x363a('0x19f')](_0x363a('0x1a0'))['match'](/max_id=(.*?)>/) : null;
-                        _0x15ab60[_0x363a('0x16c')] = null != _0xce2395 && 0x0 != _0xce2395[0x1][_0x363a('0xaf')] ? _0xce2395[0x1] : '0';
-                        _0x15ab60[_0x363a('0x96')]['acct'] = ![];
-                        _0x15ab60[_0x363a('0xf3')]['acct'] = _0x1f082d[_0x363a('0xaf')] < LIMIT;
-                        _0x15ab60[_0x363a('0x18d')]();
+                        _0xce2395 = null != request['getResponseHeader']('link') ? request['getResponseHeader']('link')['match'](/max_id=(.*?)>/) : null;
+                        _0x15ab60['acct_id'] = null != _0xce2395 && 0x0 != _0xce2395[0x1]['length'] ? _0xce2395[0x1] : '0';
+                        _0x15ab60['fetch_lock']['acct'] = ![];
+                        _0x15ab60['fetch_comp']['acct'] = _0x1f082d['length'] < LIMIT;
+                        _0x15ab60['$forceUpdate']();
                     }
-                } else if (_0x4f1d64[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x15ab60['fetch_lock'][_0x363a('0xb5')] = ![];
-                    _0x15ab60['popError'](_0x4f1d64['responseText'], _0x4f1d64['status'], _0x363a('0x1aa'));
-                    _0x15ab60[_0x363a('0x18d')]();
+                } else if (request['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x15ab60['fetch_lock']['acct'] = ![];
+                    _0x15ab60['popError'](request['responseText'], request['status'], 'Account');
+                    _0x15ab60['$forceUpdate']();
                 }
             }
                 ;
-            _0x4f1d64['send']();
+            request['send']();
         },
         'fetchAcctFollow': function () {
-            if (this[_0x363a('0x114')] != _0x363a('0x10e')) {
-                this[_0x363a('0x114')] = _0x363a('0x10e');
-                this[_0x363a('0x1a8')]();
+            if (this['acct_type'] != _0x363a('0x10e')) {
+                this['acct_type'] = _0x363a('0x10e');
+                this['resetAcctColumn']();
             }
             var _0xd6e26d = this;
             var _0x4f6bab = [];
             var _0x13cfc0 = [];
-            _0xd6e26d[_0x363a('0x96')]['acct'] = !![];
+            _0xd6e26d['fetch_lock']['acct'] = !![];
             var _0x5ee7a7 = new XMLHttpRequest();
-            _0x5ee7a7['open'](_0x363a('0x188'), FOLLOW.replace('[I]', _0xd6e26d['repository']).replace(_0x363a('0x1a9'), _0xd6e26d['acct_targetid']).replace(_0x363a('0x1ab'), _0xd6e26d[_0x363a('0x16c')]).replace('[LM]', LIMIT_USER));
+            _0x5ee7a7['open']('GET', FOLLOW.replace('[I]', _0xd6e26d['repository']).replace(_0x363a('0x1a9'), _0xd6e26d['acct_targetid']).replace(_0x363a('0x1ab'), _0xd6e26d['acct_id']).replace('[LM]', LIMIT_USER));
             _0x5ee7a7['timeout'] = REQ_TIMEOUT;
-            _0x5ee7a7[_0x363a('0x18a')](_0x363a('0x18b'), 'Bearer\x20' + _0xd6e26d['at']);
+            _0x5ee7a7['setRequestHeader']('Authorization', 'Bearer\x20' + _0xd6e26d['at']);
             _0x5ee7a7['onreadystatechange'] = function () {
-                if (_0x5ee7a7[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x5ee7a7['status'] == 0xc8) {
-                    if (_0xd6e26d[_0x363a('0x114')] == _0x363a('0x10e') && _0xd6e26d[_0x363a('0x96')]['acct']) {
-                        _0x4f6bab = JSON[_0x363a('0x70')](_0x5ee7a7['responseText']);
-                        if (0x0 == _0xd6e26d[_0x363a('0xb7')][_0x363a('0xaf')]) {
+                if (_0x5ee7a7['readyState'] == XMLHttpRequest['DONE'] && _0x5ee7a7['status'] == 0xc8) {
+                    if (_0xd6e26d['acct_type'] == _0x363a('0x10e') && _0xd6e26d['fetch_lock']['acct']) {
+                        _0x4f6bab = JSON.parse(_0x5ee7a7['responseText']);
+                        if (0x0 == _0xd6e26d[_0x363a('0xb7')]['length']) {
                             _0xd6e26d[_0x363a('0xb7')] = _0x4f6bab;
                         } else {
-                            Array[_0x363a('0x1a1')][_0x363a('0x1a2')]['apply'](_0xd6e26d[_0x363a('0xb7')], _0x4f6bab);
+                            Array['prototype']['push']['apply'](_0xd6e26d[_0x363a('0xb7')], _0x4f6bab);
                         }
-                        _0x13cfc0 = null != _0x5ee7a7[_0x363a('0x19f')](_0x363a('0x1a0')) ? _0x5ee7a7[_0x363a('0x19f')](_0x363a('0x1a0'))['match'](/max_id=(.*?)>/) : null;
-                        _0xd6e26d[_0x363a('0x16c')] = null != _0x13cfc0 && 0x0 != _0x13cfc0[0x1]['length'] ? _0x13cfc0[0x1] : '0';
-                        _0xd6e26d[_0x363a('0x96')][_0x363a('0xb5')] = ![];
-                        _0xd6e26d['fetch_comp'][_0x363a('0xb5')] = _0x4f6bab[_0x363a('0xaf')] < LIMIT_USER;
+                        _0x13cfc0 = null != _0x5ee7a7['getResponseHeader']('link') ? _0x5ee7a7['getResponseHeader']('link')['match'](/max_id=(.*?)>/) : null;
+                        _0xd6e26d['acct_id'] = null != _0x13cfc0 && 0x0 != _0x13cfc0[0x1]['length'] ? _0x13cfc0[0x1] : '0';
+                        _0xd6e26d['fetch_lock']['acct'] = ![];
+                        _0xd6e26d['fetch_comp']['acct'] = _0x4f6bab['length'] < LIMIT_USER;
                         _0xd6e26d[_0x363a('0x1ac')]();
                     }
-                } else if (_0x5ee7a7[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0xd6e26d[_0x363a('0x96')][_0x363a('0xb5')] = ![];
-                    _0xd6e26d['popError'](_0x5ee7a7['responseText'], _0x5ee7a7['status'], _0x363a('0x1aa'));
-                    _0xd6e26d[_0x363a('0x18d')]();
+                } else if (_0x5ee7a7['readyState'] == XMLHttpRequest['DONE']) {
+                    _0xd6e26d['fetch_lock']['acct'] = ![];
+                    _0xd6e26d['popError'](_0x5ee7a7['responseText'], _0x5ee7a7['status'], 'Account');
+                    _0xd6e26d['$forceUpdate']();
                 }
             }
                 ;
             _0x5ee7a7['send']();
         },
         'fetchAcctFollower': function () {
-            if (this[_0x363a('0x114')] != _0x363a('0x119')) {
+            if (this['acct_type'] != _0x363a('0x119')) {
                 this['acct_type'] = _0x363a('0x119');
-                this[_0x363a('0x1a8')]();
+                this['resetAcctColumn']();
             }
             var _0x4d83e4 = this;
             var _0x76005d = [];
             var _0x3d8c96 = [];
-            _0x4d83e4['fetch_lock'][_0x363a('0xb5')] = !![];
+            _0x4d83e4['fetch_lock']['acct'] = !![];
             var _0x524c19 = new XMLHttpRequest();
-            _0x524c19['open'](_0x363a('0x188'), FOLLOWER.replace('[I]', _0x4d83e4['repository']).replace(_0x363a('0x1a9'), _0x4d83e4[_0x363a('0xae')]).replace(_0x363a('0x1ab'), _0x4d83e4[_0x363a('0x16c')]).replace(_0x363a('0x19c'), LIMIT_USER));
+            _0x524c19['open']('GET', FOLLOWER.replace('[I]', _0x4d83e4['repository']).replace(_0x363a('0x1a9'), _0x4d83e4[_0x363a('0xae')]).replace(_0x363a('0x1ab'), _0x4d83e4['acct_id']).replace('[LM]', LIMIT_USER));
             _0x524c19['timeout'] = REQ_TIMEOUT;
-            _0x524c19[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x4d83e4['at']);
+            _0x524c19['setRequestHeader']('Authorization', 'Bearer ' + _0x4d83e4['at']);
             _0x524c19['onreadystatechange'] = function () {
-                if (_0x524c19[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x524c19['status'] == 0xc8) {
-                    if (_0x4d83e4[_0x363a('0x114')] == _0x363a('0x119') && _0x4d83e4[_0x363a('0x96')][_0x363a('0xb5')]) {
-                        _0x76005d = JSON[_0x363a('0x70')](_0x524c19['responseText']);
+                if (_0x524c19['readyState'] == XMLHttpRequest['DONE'] && _0x524c19['status'] == 0xc8) {
+                    if (_0x4d83e4['acct_type'] == _0x363a('0x119') && _0x4d83e4['fetch_lock']['acct']) {
+                        _0x76005d = JSON.parse(_0x524c19['responseText']);
                         if (0x0 == _0x4d83e4[_0x363a('0xb7')]['length']) {
                             _0x4d83e4['accts_users'] = _0x76005d;
                         } else {
-                            Array[_0x363a('0x1a1')][_0x363a('0x1a2')][_0x363a('0x1a3')](_0x4d83e4[_0x363a('0xb7')], _0x76005d);
+                            Array['prototype']['push']['apply'](_0x4d83e4[_0x363a('0xb7')], _0x76005d);
                         }
-                        _0x3d8c96 = null != _0x524c19[_0x363a('0x19f')](_0x363a('0x1a0')) ? _0x524c19[_0x363a('0x19f')](_0x363a('0x1a0'))['match'](/max_id=(.*?)>/) : null;
-                        _0x4d83e4[_0x363a('0x16c')] = null != _0x3d8c96 && 0x0 != _0x3d8c96[0x1]['length'] ? _0x3d8c96[0x1] : '0';
-                        _0x4d83e4[_0x363a('0x96')][_0x363a('0xb5')] = ![];
-                        _0x4d83e4[_0x363a('0xf3')][_0x363a('0xb5')] = _0x76005d[_0x363a('0xaf')] < LIMIT_USER;
+                        _0x3d8c96 = null != _0x524c19['getResponseHeader']('link') ? _0x524c19['getResponseHeader']('link')['match'](/max_id=(.*?)>/) : null;
+                        _0x4d83e4['acct_id'] = null != _0x3d8c96 && 0x0 != _0x3d8c96[0x1]['length'] ? _0x3d8c96[0x1] : '0';
+                        _0x4d83e4['fetch_lock']['acct'] = ![];
+                        _0x4d83e4['fetch_comp']['acct'] = _0x76005d['length'] < LIMIT_USER;
                         _0x4d83e4[_0x363a('0x1ac')]();
                     }
                 } else if (_0x524c19['readyState'] == XMLHttpRequest['DONE']) {
-                    _0x4d83e4[_0x363a('0x96')][_0x363a('0xb5')] = ![];
-                    _0x4d83e4['popError'](_0x524c19['responseText'], _0x524c19['status'], _0x363a('0x1aa'));
-                    _0x4d83e4[_0x363a('0x18d')]();
+                    _0x4d83e4['fetch_lock']['acct'] = ![];
+                    _0x4d83e4['popError'](_0x524c19['responseText'], _0x524c19['status'], 'Account');
+                    _0x4d83e4['$forceUpdate']();
                 }
             }
                 ;
             _0x524c19['send']();
         },
         'fetchAcctMute': function () {
-            if (this[_0x363a('0x114')] != _0x363a('0x1ad')) {
-                this[_0x363a('0x114')] = _0x363a('0x1ad');
+            if (this['acct_type'] != _0x363a('0x1ad')) {
+                this['acct_type'] = _0x363a('0x1ad');
                 this['resetAcctColumn']();
             }
             var _0x1963cc = this;
             var _0x354b5c = [];
             var _0x4ff7d3 = [];
-            _0x1963cc[_0x363a('0x96')][_0x363a('0xb5')] = !![];
+            _0x1963cc['fetch_lock']['acct'] = !![];
             var _0x179274 = new XMLHttpRequest();
-            _0x179274['open']('GET', MUTE.replace('[I]', _0x1963cc['repository']).replace(_0x363a('0x1ab'), _0x1963cc[_0x363a('0x16c')]).replace(_0x363a('0x19c'), LIMIT_USER));
+            _0x179274['open']('GET', MUTE.replace('[I]', _0x1963cc['repository']).replace(_0x363a('0x1ab'), _0x1963cc['acct_id']).replace('[LM]', LIMIT_USER));
             _0x179274['timeout'] = REQ_TIMEOUT;
-            _0x179274[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x1963cc['at']);
+            _0x179274['setRequestHeader']('Authorization', 'Bearer ' + _0x1963cc['at']);
             _0x179274['onreadystatechange'] = function () {
-                if (_0x179274[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x179274['status'] == 0xc8) {
-                    if (_0x1963cc['acct_type'] == _0x363a('0x1ad') && _0x1963cc[_0x363a('0x96')][_0x363a('0xb5')]) {
-                        _0x354b5c = JSON[_0x363a('0x70')](_0x179274['responseText']);
-                        if (0x0 == _0x1963cc[_0x363a('0xb7')][_0x363a('0xaf')]) {
+                if (_0x179274['readyState'] == XMLHttpRequest['DONE'] && _0x179274['status'] == 0xc8) {
+                    if (_0x1963cc['acct_type'] == _0x363a('0x1ad') && _0x1963cc['fetch_lock']['acct']) {
+                        _0x354b5c = JSON.parse(_0x179274['responseText']);
+                        if (0x0 == _0x1963cc[_0x363a('0xb7')]['length']) {
                             _0x1963cc['accts_users'] = _0x354b5c;
                         } else {
-                            Array[_0x363a('0x1a1')][_0x363a('0x1a2')][_0x363a('0x1a3')](_0x1963cc[_0x363a('0xb7')], _0x354b5c);
+                            Array['prototype']['push']['apply'](_0x1963cc[_0x363a('0xb7')], _0x354b5c);
                         }
-                        _0x4ff7d3 = null != _0x179274['getResponseHeader'](_0x363a('0x1a0')) ? _0x179274[_0x363a('0x19f')]('link')['match'](/max_id=(.*?)>/) : null;
-                        _0x1963cc[_0x363a('0x16c')] = null != _0x4ff7d3 && 0x0 != _0x4ff7d3[0x1]['length'] ? _0x4ff7d3[0x1] : '0';
-                        _0x1963cc[_0x363a('0x96')][_0x363a('0xb5')] = ![];
-                        _0x1963cc[_0x363a('0xf3')][_0x363a('0xb5')] = _0x354b5c[_0x363a('0xaf')] < LIMIT_USER;
+                        _0x4ff7d3 = null != _0x179274['getResponseHeader']('link') ? _0x179274['getResponseHeader']('link')['match'](/max_id=(.*?)>/) : null;
+                        _0x1963cc['acct_id'] = null != _0x4ff7d3 && 0x0 != _0x4ff7d3[0x1]['length'] ? _0x4ff7d3[0x1] : '0';
+                        _0x1963cc['fetch_lock']['acct'] = ![];
+                        _0x1963cc['fetch_comp']['acct'] = _0x354b5c['length'] < LIMIT_USER;
                         _0x1963cc[_0x363a('0x1ac')]();
                     }
-                } else if (_0x179274[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x1963cc[_0x363a('0x96')][_0x363a('0xb5')] = ![];
-                    _0x1963cc['popError'](_0x179274['responseText'], _0x179274['status'], _0x363a('0x1aa'));
+                } else if (_0x179274['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x1963cc['fetch_lock']['acct'] = ![];
+                    _0x1963cc['popError'](_0x179274['responseText'], _0x179274['status'], 'Account');
                     _0x1963cc['$forceUpdate']();
                 }
             }
@@ -2347,66 +2347,66 @@ var app = new Vue({
             _0x179274['send']();
         },
         'fetchAcctBlock': function () {
-            if (this[_0x363a('0x114')] != _0x363a('0x11b')) {
+            if (this['acct_type'] != _0x363a('0x11b')) {
                 this['acct_type'] = _0x363a('0x11b');
-                this[_0x363a('0x1a8')]();
+                this['resetAcctColumn']();
             }
             var _0x42ccd5 = this;
             var _0x54958c = [];
             var _0x5b2563 = [];
-            _0x42ccd5[_0x363a('0x96')][_0x363a('0xb5')] = !![];
+            _0x42ccd5['fetch_lock']['acct'] = !![];
             var _0x50fb49 = new XMLHttpRequest();
-            _0x50fb49['open'](_0x363a('0x188'), BLOCK.replace('[I]', _0x42ccd5['repository']).replace(_0x363a('0x1ab'), _0x42ccd5[_0x363a('0x16c')]).replace(_0x363a('0x19c'), LIMIT_USER));
+            _0x50fb49['open']('GET', BLOCK.replace('[I]', _0x42ccd5['repository']).replace(_0x363a('0x1ab'), _0x42ccd5['acct_id']).replace('[LM]', LIMIT_USER));
             _0x50fb49['timeout'] = REQ_TIMEOUT;
-            _0x50fb49['setRequestHeader'](_0x363a('0x18b'), _0x363a('0x18c') + _0x42ccd5['at']);
+            _0x50fb49['setRequestHeader']('Authorization', 'Bearer ' + _0x42ccd5['at']);
             _0x50fb49['onreadystatechange'] = function () {
-                if (_0x50fb49[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x50fb49['status'] == 0xc8) {
-                    if (_0x42ccd5[_0x363a('0x114')] == 'block' && _0x42ccd5[_0x363a('0x96')]['acct']) {
-                        _0x54958c = JSON[_0x363a('0x70')](_0x50fb49['responseText']);
-                        if (0x0 == _0x42ccd5[_0x363a('0xb7')][_0x363a('0xaf')]) {
+                if (_0x50fb49['readyState'] == XMLHttpRequest['DONE'] && _0x50fb49['status'] == 0xc8) {
+                    if (_0x42ccd5['acct_type'] == 'block' && _0x42ccd5['fetch_lock']['acct']) {
+                        _0x54958c = JSON.parse(_0x50fb49['responseText']);
+                        if (0x0 == _0x42ccd5[_0x363a('0xb7')]['length']) {
                             _0x42ccd5[_0x363a('0xb7')] = _0x54958c;
                         } else {
-                            Array[_0x363a('0x1a1')][_0x363a('0x1a2')][_0x363a('0x1a3')](_0x42ccd5['accts_users'], _0x54958c);
+                            Array['prototype']['push']['apply'](_0x42ccd5['accts_users'], _0x54958c);
                         }
-                        _0x5b2563 = null != _0x50fb49['getResponseHeader'](_0x363a('0x1a0')) ? _0x50fb49[_0x363a('0x19f')](_0x363a('0x1a0'))['match'](/max_id=(.*?)>/) : null;
-                        _0x42ccd5[_0x363a('0x16c')] = null != _0x5b2563 && 0x0 != _0x5b2563[0x1][_0x363a('0xaf')] ? _0x5b2563[0x1] : '0';
-                        _0x42ccd5[_0x363a('0x96')][_0x363a('0xb5')] = ![];
-                        _0x42ccd5['fetch_comp'][_0x363a('0xb5')] = _0x54958c[_0x363a('0xaf')] < LIMIT_USER;
+                        _0x5b2563 = null != _0x50fb49['getResponseHeader']('link') ? _0x50fb49['getResponseHeader']('link')['match'](/max_id=(.*?)>/) : null;
+                        _0x42ccd5['acct_id'] = null != _0x5b2563 && 0x0 != _0x5b2563[0x1]['length'] ? _0x5b2563[0x1] : '0';
+                        _0x42ccd5['fetch_lock']['acct'] = ![];
+                        _0x42ccd5['fetch_comp']['acct'] = _0x54958c['length'] < LIMIT_USER;
                         _0x42ccd5[_0x363a('0x1ac')]();
                     }
-                } else if (_0x50fb49[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x42ccd5[_0x363a('0x96')][_0x363a('0xb5')] = ![];
-                    _0x42ccd5['popError'](_0x50fb49['responseText'], _0x50fb49['status'], _0x363a('0x1aa'));
-                    _0x42ccd5[_0x363a('0x18d')]();
+                } else if (_0x50fb49['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x42ccd5['fetch_lock']['acct'] = ![];
+                    _0x42ccd5['popError'](_0x50fb49['responseText'], _0x50fb49['status'], 'Account');
+                    _0x42ccd5['$forceUpdate']();
                 }
             }
                 ;
             _0x50fb49['send']();
         },
         'fetchAcctFollowRequest': function () {
-            if (this[_0x363a('0x114')] != 'request') {
-                this[_0x363a('0x114')] = _0x363a('0x11d');
+            if (this['acct_type'] != 'request') {
+                this['acct_type'] = _0x363a('0x11d');
                 this['resetAcctColumn']();
             }
             var _0x298390 = this;
             var _0xaeb338 = [];
-            _0x298390[_0x363a('0x96')][_0x363a('0xb5')] = !![];
+            _0x298390['fetch_lock']['acct'] = !![];
             var _0x5d04af = new XMLHttpRequest();
-            _0x5d04af['open'](_0x363a('0x188'), FOLLOW_REQUEST.replace('[I]', _0x298390['repository']).replace(_0x363a('0x19c'), LIMIT_USER));
+            _0x5d04af['open']('GET', FOLLOW_REQUEST.replace('[I]', _0x298390['repository']).replace('[LM]', LIMIT_USER));
             _0x5d04af['timeout'] = REQ_TIMEOUT;
-            _0x5d04af['setRequestHeader'](_0x363a('0x18b'), _0x363a('0x18c') + _0x298390['at']);
+            _0x5d04af['setRequestHeader']('Authorization', 'Bearer ' + _0x298390['at']);
             _0x5d04af['onreadystatechange'] = function () {
-                if (_0x5d04af[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x5d04af['status'] == 0xc8) {
-                    if (_0x298390[_0x363a('0x114')] == _0x363a('0x11d') && _0x298390[_0x363a('0x96')]['acct']) {
+                if (_0x5d04af['readyState'] == XMLHttpRequest['DONE'] && _0x5d04af['status'] == 0xc8) {
+                    if (_0x298390['acct_type'] == _0x363a('0x11d') && _0x298390['fetch_lock']['acct']) {
                         _0xaeb338 = JSON['parse'](_0x5d04af['responseText']);
                         _0x298390[_0x363a('0xb7')] = _0xaeb338;
-                        _0x298390['user_requesting_count'] = _0x298390[_0x363a('0xb7')][_0x363a('0xaf')];
-                        _0x298390[_0x363a('0x96')][_0x363a('0xb5')] = ![];
-                        _0x298390[_0x363a('0xf3')][_0x363a('0xb5')] = _0xaeb338[_0x363a('0xaf')] < LIMIT_USER;
+                        _0x298390['user_requesting_count'] = _0x298390[_0x363a('0xb7')]['length'];
+                        _0x298390['fetch_lock']['acct'] = ![];
+                        _0x298390['fetch_comp']['acct'] = _0xaeb338['length'] < LIMIT_USER;
                         _0x298390['fetchAcctRelation']();
                     }
-                } else if (_0x5d04af[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x298390['fetch_lock'][_0x363a('0xb5')] = ![];
+                } else if (_0x5d04af['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x298390['fetch_lock']['acct'] = ![];
                     _0x298390['popError'](_0x5d04af['responseText'], _0x5d04af['status'], 'Account');
                     _0x298390['$forceUpdate']();
                 }
@@ -2420,21 +2420,21 @@ var app = new Vue({
             }
             var _0x4577f7 = 0x0;
             var _0x4d05be = RELATION.replace('[I]', this.repository);
-            while (_0x4577f7 < this['accts_users'][_0x363a('0xaf')]) {
+            while (_0x4577f7 < this['accts_users']['length']) {
                 _0x4d05be = _0x4d05be + _0x363a('0x1ae') + this['accts_users'][_0x4577f7]['id'] + '&';
                 _0x4577f7 = _0x4577f7 + 0x1 | 0x0;
             }
             var _0x4f2887 = this;
             var _0xecaeae = [];
             var _0x4e3482 = new XMLHttpRequest();
-            _0x4e3482['open'](_0x363a('0x188'), _0x4d05be);
+            _0x4e3482['open']('GET', _0x4d05be);
             _0x4e3482['timeout'] = REQ_TIMEOUT;
-            _0x4e3482[_0x363a('0x18a')]('Authorization', 'Bearer\x20' + _0x4f2887['at']);
+            _0x4e3482['setRequestHeader']('Authorization', 'Bearer\x20' + _0x4f2887['at']);
             _0x4e3482['onreadystatechange'] = function () {
                 if (_0x4e3482['readyState'] == XMLHttpRequest['DONE'] && _0x4e3482['status'] == 0xc8) {
-                    _0x4f2887[_0x363a('0xb8')] = JSON[_0x363a('0x70')](_0x4e3482['responseText']);
-                } else if (_0x4e3482[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x4f2887['popError'](_0x4e3482['responseText'], _0x4e3482['status'], _0x363a('0x1aa'));
+                    _0x4f2887[_0x363a('0xb8')] = JSON.parse(_0x4e3482['responseText']);
+                } else if (_0x4e3482['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x4f2887['popError'](_0x4e3482['responseText'], _0x4e3482['status'], 'Account');
                 }
             }
                 ;
@@ -2445,11 +2445,11 @@ var app = new Vue({
             var _0x17ead6 = [];
             _0x520997[_0x363a('0x1af')][_0x363a('0x1b0')] = !![];
             var _0x138eff = new XMLHttpRequest();
-            _0x138eff['open'](_0x363a('0x188'), ACCT_OBJ.replace('[I]', _0x520997['repository']).replace(_0x363a('0x1a9'), _0x520997[_0x363a('0xae')]));
+            _0x138eff['open']('GET', ACCT_OBJ.replace('[I]', _0x520997['repository']).replace(_0x363a('0x1a9'), _0x520997[_0x363a('0xae')]));
             _0x138eff['timeout'] = REQ_TIMEOUT;
-            _0x138eff[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x520997['at']);
+            _0x138eff['setRequestHeader']('Authorization', 'Bearer ' + _0x520997['at']);
             _0x138eff['onreadystatechange'] = function () {
-                if (_0x138eff[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x138eff['status'] == 0xc8) {
+                if (_0x138eff['readyState'] == XMLHttpRequest['DONE'] && _0x138eff['status'] == 0xc8) {
                     _0x520997['acct'] = JSON['parse'](_0x138eff['responseText']);
                     _0x520997[_0x363a('0x1af')]['acct_profile'] = ![];
                     _0x520997[_0x363a('0x1b1')]();
@@ -2458,9 +2458,9 @@ var app = new Vue({
                     } else {
                         _0x520997['fetchAcctProfileRelation']();
                     }
-                } else if (_0x138eff[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                } else if (_0x138eff['readyState'] == XMLHttpRequest['DONE']) {
                     _0x520997[_0x363a('0x1af')][_0x363a('0x1b0')] = ![];
-                    _0x520997['popError'](_0x138eff['responseText'], _0x138eff['status'], _0x363a('0x1aa'));
+                    _0x520997['popError'](_0x138eff['responseText'], _0x138eff['status'], 'Account');
                 }
             }
                 ;
@@ -2471,16 +2471,16 @@ var app = new Vue({
             var _0x376cf1 = [];
             _0x34a86a[_0x363a('0x1af')][_0x363a('0x1b4')] = !![];
             var _0x5b81f6 = new XMLHttpRequest();
-            _0x5b81f6['open'](_0x363a('0x188'), ACCT_RELATION.replace('[I]', _0x34a86a['repository']).replace('[AID]', _0x34a86a[_0x363a('0xae')]));
+            _0x5b81f6['open']('GET', ACCT_RELATION.replace('[I]', _0x34a86a['repository']).replace('[AID]', _0x34a86a[_0x363a('0xae')]));
             _0x5b81f6['timeout'] = REQ_TIMEOUT;
-            _0x5b81f6[_0x363a('0x18a')]('Authorization', 'Bearer\x20' + _0x34a86a['at']);
+            _0x5b81f6['setRequestHeader']('Authorization', 'Bearer\x20' + _0x34a86a['at']);
             _0x5b81f6['onreadystatechange'] = function () {
-                if (_0x5b81f6[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x5b81f6['status'] == 0xc8) {
+                if (_0x5b81f6['readyState'] == XMLHttpRequest['DONE'] && _0x5b81f6['status'] == 0xc8) {
                     _0x34a86a[_0x363a('0x161')] = JSON['parse'](_0x5b81f6['responseText']);
                     _0x34a86a['fetch_watch'][_0x363a('0x1b4')] = ![];
-                } else if (_0x5b81f6[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                } else if (_0x5b81f6['readyState'] == XMLHttpRequest['DONE']) {
                     _0x34a86a[_0x363a('0x1af')][_0x363a('0x1b4')] = ![];
-                    _0x34a86a['popError'](_0x5b81f6['responseText'], _0x5b81f6['status'], _0x363a('0x1aa'));
+                    _0x34a86a['popError'](_0x5b81f6['responseText'], _0x5b81f6['status'], 'Account');
                 }
             }
                 ;
@@ -2491,16 +2491,16 @@ var app = new Vue({
             var _0x4016f5 = [];
             _0xc85fae[_0x363a('0x1af')][_0x363a('0x1b5')] = !![];
             var _0x2b8c92 = new XMLHttpRequest();
-            _0x2b8c92['open'](_0x363a('0x188'), PINNED.replace('[I]', _0xc85fae['repository']).replace(_0x363a('0x1a9'), _0xc85fae[_0x363a('0xae')]));
+            _0x2b8c92['open']('GET', PINNED.replace('[I]', _0xc85fae['repository']).replace(_0x363a('0x1a9'), _0xc85fae[_0x363a('0xae')]));
             _0x2b8c92['timeout'] = REQ_TIMEOUT;
-            _0x2b8c92[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0xc85fae['at']);
+            _0x2b8c92['setRequestHeader']('Authorization', 'Bearer ' + _0xc85fae['at']);
             _0x2b8c92['onreadystatechange'] = function () {
-                if (_0x2b8c92[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x2b8c92['status'] == 0xc8) {
-                    _0x4016f5 = JSON[_0x363a('0x70')](_0x2b8c92['responseText']);
-                    _0xc85fae[_0x363a('0x193')](_0x4016f5, 'acct');
+                if (_0x2b8c92['readyState'] == XMLHttpRequest['DONE'] && _0x2b8c92['status'] == 0xc8) {
+                    _0x4016f5 = JSON.parse(_0x2b8c92['responseText']);
+                    _0xc85fae['updateWrapperBM'](_0x4016f5, 'acct');
                     _0xc85fae[_0x363a('0x160')] = _0x4016f5;
                     _0xc85fae[_0x363a('0x1af')]['acct_profile_pin'] = ![];
-                } else if (_0x2b8c92[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                } else if (_0x2b8c92['readyState'] == XMLHttpRequest['DONE']) {
                     _0xc85fae[_0x363a('0x1af')]['acct_profile_pin'] = ![];
                     _0xc85fae['popError'](_0x2b8c92['responseText'], _0x2b8c92['status'], 'Account');
                 }
@@ -2513,16 +2513,16 @@ var app = new Vue({
             var _0x4170a3 = [];
             _0x4dc31a[_0x363a('0x1af')][_0x363a('0x1b6')] = !![];
             var _0x314706 = new XMLHttpRequest();
-            _0x314706['open'](_0x363a('0x188'), FOLLOW_REQUEST.replace('[I]', _0x4dc31a['repository']).replace('[LM]', LIMIT_USER));
+            _0x314706['open']('GET', FOLLOW_REQUEST.replace('[I]', _0x4dc31a['repository']).replace('[LM]', LIMIT_USER));
             _0x314706['timeout'] = REQ_TIMEOUT;
-            _0x314706['setRequestHeader'](_0x363a('0x18b'), _0x363a('0x18c') + _0x4dc31a['at']);
+            _0x314706['setRequestHeader']('Authorization', 'Bearer ' + _0x4dc31a['at']);
             _0x314706['onreadystatechange'] = function () {
-                if (_0x314706[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x314706['status'] == 0xc8) {
-                    _0x4dc31a[_0x363a('0x1b7')] = JSON['parse'](_0x314706['responseText'])[_0x363a('0xaf')];
+                if (_0x314706['readyState'] == XMLHttpRequest['DONE'] && _0x314706['status'] == 0xc8) {
+                    _0x4dc31a[_0x363a('0x1b7')] = JSON['parse'](_0x314706['responseText'])['length'];
                     _0x4dc31a[_0x363a('0x1af')][_0x363a('0x1b6')] = ![];
-                } else if (_0x314706[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                } else if (_0x314706['readyState'] == XMLHttpRequest['DONE']) {
                     _0x4dc31a[_0x363a('0x1af')][_0x363a('0x1b6')] = ![];
-                    _0x4dc31a['popError'](_0x314706['responseText'], _0x314706['status'], _0x363a('0x1aa'));
+                    _0x4dc31a['popError'](_0x314706['responseText'], _0x314706['status'], 'Account');
                 }
             }
                 ;
@@ -2533,22 +2533,22 @@ var app = new Vue({
             var _0x4e451f = [];
             _0x2abd9f[_0x363a('0x1af')]['detail'] = !![];
             var _0x4be421 = new XMLHttpRequest();
-            _0x4be421['open'](_0x363a('0x188'), DETAIL.replace('[I]', _0x2abd9f['repository']).replace(_0x363a('0x1b8'), _0x2abd9f[_0x363a('0x16a')]));
+            _0x4be421['open']('GET', DETAIL.replace('[I]', _0x2abd9f['repository']).replace(_0x363a('0x1b8'), _0x2abd9f[_0x363a('0x16a')]));
             _0x4be421['timeout'] = REQ_TIMEOUT;
-            _0x4be421[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x2abd9f['at']);
+            _0x4be421['setRequestHeader']('Authorization', 'Bearer ' + _0x2abd9f['at']);
             _0x4be421['onreadystatechange'] = function () {
-                if (_0x4be421[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x4be421['status'] == 0xc8) {
-                    _0x4e451f = JSON[_0x363a('0x70')](_0x4be421['responseText']);
+                if (_0x4be421['readyState'] == XMLHttpRequest['DONE'] && _0x4be421['status'] == 0xc8) {
+                    _0x4e451f = JSON.parse(_0x4be421['responseText']);
                     _0x2abd9f['updateWrapperBM'](_0x4e451f, _0x363a('0xb2'));
                     _0x2abd9f['detail'] = _0x4e451f;
                     _0x2abd9f['fetch_watch']['detail'] = ![];
                     _0x2abd9f[_0x363a('0x1b9')]();
                     _0x2abd9f[_0x363a('0x1ba')]();
                     _0x2abd9f[_0x363a('0x1bb')]();
-                } else if (_0x4be421[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                } else if (_0x4be421['readyState'] == XMLHttpRequest['DONE']) {
                     _0x2abd9f[_0x363a('0x1af')]['detail'] = ![];
                     _0x2abd9f['popError'](_0x4be421['responseText'], _0x4be421['status'], _0x363a('0x1bc'));
-                    _0x2abd9f[_0x363a('0x18d')]();
+                    _0x2abd9f['$forceUpdate']();
                 }
             }
                 ;
@@ -2559,16 +2559,16 @@ var app = new Vue({
             var _0x2cc323 = [];
             _0x29b551['fetch_watch'][_0x363a('0x169')] = !![];
             var _0x1e6a68 = new XMLHttpRequest();
-            _0x1e6a68['open'](_0x363a('0x188'), DETAIL_CHAIN.replace('[I]', _0x29b551['repository']).replace(_0x363a('0x1b8'), _0x29b551[_0x363a('0x16a')]));
+            _0x1e6a68['open']('GET', DETAIL_CHAIN.replace('[I]', _0x29b551['repository']).replace(_0x363a('0x1b8'), _0x29b551[_0x363a('0x16a')]));
             _0x1e6a68['timeout'] = REQ_TIMEOUT;
-            _0x1e6a68['setRequestHeader'](_0x363a('0x18b'), _0x363a('0x18c') + _0x29b551['at']);
+            _0x1e6a68['setRequestHeader']('Authorization', 'Bearer ' + _0x29b551['at']);
             _0x1e6a68['onreadystatechange'] = function () {
-                if (_0x1e6a68[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x1e6a68['status'] == 0xc8) {
-                    _0x2cc323 = JSON[_0x363a('0x70')](_0x1e6a68['responseText']);
-                    _0x29b551[_0x363a('0x193')](_0x2cc323, _0x363a('0x169'));
+                if (_0x1e6a68['readyState'] == XMLHttpRequest['DONE'] && _0x1e6a68['status'] == 0xc8) {
+                    _0x2cc323 = JSON.parse(_0x1e6a68['responseText']);
+                    _0x29b551['updateWrapperBM'](_0x2cc323, _0x363a('0x169'));
                     _0x29b551[_0x363a('0x169')] = _0x2cc323;
                     _0x29b551[_0x363a('0x1af')][_0x363a('0x169')] = ![];
-                } else if (_0x1e6a68[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                } else if (_0x1e6a68['readyState'] == XMLHttpRequest['DONE']) {
                     _0x29b551['popError'](_0x1e6a68['responseText'], _0x1e6a68['status'], 'Detail');
                 }
             }
@@ -2580,12 +2580,12 @@ var app = new Vue({
             var _0x390224 = [];
             _0x3f01f0[_0x363a('0x1af')][_0x363a('0x1bd')] = !![];
             var _0x35d30f = new XMLHttpRequest();
-            _0x35d30f['open'](_0x363a('0x188'), DETAIL_FAV.replace('[I]', _0x3f01f0['repository']).replace(_0x363a('0x1b8'), _0x3f01f0[_0x363a('0x16a')]).replace(_0x363a('0x19c'), LIMIT_USER));
+            _0x35d30f['open']('GET', DETAIL_FAV.replace('[I]', _0x3f01f0['repository']).replace(_0x363a('0x1b8'), _0x3f01f0[_0x363a('0x16a')]).replace('[LM]', LIMIT_USER));
             _0x35d30f['timeout'] = REQ_TIMEOUT;
-            _0x35d30f[_0x363a('0x18a')](_0x363a('0x18b'), 'Bearer\x20' + _0x3f01f0['at']);
+            _0x35d30f['setRequestHeader']('Authorization', 'Bearer\x20' + _0x3f01f0['at']);
             _0x35d30f['onreadystatechange'] = function () {
-                if (_0x35d30f[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x35d30f['status'] == 0xc8) {
-                    _0x3f01f0[_0x363a('0x1bd')] = JSON[_0x363a('0x70')](_0x35d30f['responseText']);
+                if (_0x35d30f['readyState'] == XMLHttpRequest['DONE'] && _0x35d30f['status'] == 0xc8) {
+                    _0x3f01f0[_0x363a('0x1bd')] = JSON.parse(_0x35d30f['responseText']);
                     _0x3f01f0[_0x363a('0x1af')][_0x363a('0x1bd')] = ![];
                 } else if (_0x35d30f['readyState'] == XMLHttpRequest['DONE']) {
                     _0x3f01f0['popError'](_0x35d30f['responseText'], _0x35d30f['status'], 'Detail');
@@ -2599,12 +2599,12 @@ var app = new Vue({
             var _0x5a96cb = [];
             _0x7938c6[_0x363a('0x1af')][_0x363a('0x168')] = !![];
             var _0x295cbe = new XMLHttpRequest();
-            _0x295cbe['open'](_0x363a('0x188'), DETAIL_REBLOG.replace('[I]', _0x7938c6['repository']).replace(_0x363a('0x1b8'), _0x7938c6[_0x363a('0x16a')]).replace(_0x363a('0x19c'), LIMIT_USER));
+            _0x295cbe['open']('GET', DETAIL_REBLOG.replace('[I]', _0x7938c6['repository']).replace(_0x363a('0x1b8'), _0x7938c6[_0x363a('0x16a')]).replace('[LM]', LIMIT_USER));
             _0x295cbe['timeout'] = REQ_TIMEOUT;
-            _0x295cbe[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x7938c6['at']);
+            _0x295cbe['setRequestHeader']('Authorization', 'Bearer ' + _0x7938c6['at']);
             _0x295cbe['onreadystatechange'] = function () {
-                if (_0x295cbe[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x295cbe['status'] == 0xc8) {
-                    _0x7938c6[_0x363a('0x168')] = JSON[_0x363a('0x70')](_0x295cbe['responseText']);
+                if (_0x295cbe['readyState'] == XMLHttpRequest['DONE'] && _0x295cbe['status'] == 0xc8) {
+                    _0x7938c6[_0x363a('0x168')] = JSON.parse(_0x295cbe['responseText']);
                     _0x7938c6[_0x363a('0x1af')]['detail_reblog'] = ![];
                 } else if (_0x295cbe['readyState'] == XMLHttpRequest['DONE']) {
                     _0x7938c6['popError'](_0x295cbe['responseText'], _0x295cbe['status'], 'Detail');
@@ -2623,14 +2623,14 @@ var app = new Vue({
             this[_0x363a('0xb3')] = [];
             var _0xd51aac = this;
             var _0x34f42a = [];
-            _0xd51aac[_0x363a('0x96')][_0x363a('0x1c1')] = !![];
+            _0xd51aac['fetch_lock'][_0x363a('0x1c1')] = !![];
             var _0x343a28 = new XMLHttpRequest();
             _0x343a28['open']('GET', SEARCH.replace('[I]', _0xd51aac['repository']).replace(_0x363a('0x1c2'), _0xd51aac[_0x363a('0x1c3')]));
             _0x343a28['timeout'] = REQ_TIMEOUT;
-            _0x343a28[_0x363a('0x18a')]('Authorization', _0x363a('0x18c') + _0xd51aac['at']);
+            _0x343a28['setRequestHeader']('Authorization', 'Bearer ' + _0xd51aac['at']);
             _0x343a28['onreadystatechange'] = function () {
-                if (_0x343a28[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x343a28['status'] == 0xc8) {
-                    _0xd51aac['searchs'] = JSON[_0x363a('0x70')](_0x343a28['responseText']);
+                if (_0x343a28['readyState'] == XMLHttpRequest['DONE'] && _0x343a28['status'] == 0xc8) {
+                    _0xd51aac['searchs'] = JSON.parse(_0x343a28['responseText']);
                     _0xd51aac[_0x363a('0x1c4')]();
                 } else if (_0x343a28['readyState'] == XMLHttpRequest['DONE']) {
                     _0xd51aac['popError'](_0x343a28['responseText'], _0x343a28['status'], 'Search');
@@ -2643,25 +2643,25 @@ var app = new Vue({
             var _0x598b7a = this;
             var _0xd4675a = [];
             var _0xee2c76 = new XMLHttpRequest();
-            _0xee2c76['open'](_0x363a('0x188'), ACCT_SEARCH.replace('[I]', _0x598b7a['repository']).replace(_0x363a('0x1c2'), _0x598b7a[_0x363a('0x1c3')]).replace(_0x363a('0x1c5'), ![]).replace(_0x363a('0x19c'), LIMIT_USER));
+            _0xee2c76['open']('GET', ACCT_SEARCH.replace('[I]', _0x598b7a['repository']).replace(_0x363a('0x1c2'), _0x598b7a[_0x363a('0x1c3')]).replace(_0x363a('0x1c5'), ![]).replace('[LM]', LIMIT_USER));
             _0xee2c76['timeout'] = REQ_TIMEOUT;
-            _0xee2c76[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x598b7a['at']);
+            _0xee2c76['setRequestHeader']('Authorization', 'Bearer ' + _0x598b7a['at']);
             _0xee2c76['onreadystatechange'] = function () {
-                if (_0xee2c76[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0xee2c76['status'] == 0xc8) {
-                    _0x598b7a[_0x363a('0xb3')]['accounts_ex'] = JSON[_0x363a('0x70')](_0xee2c76['responseText']);
-                    if (_0x598b7a[_0x363a('0x1c6')] && 0x0 == _0x598b7a[_0x363a('0xb3')][_0x363a('0xb4')][_0x363a('0xaf')]) {
+                if (_0xee2c76['readyState'] == XMLHttpRequest['DONE'] && _0xee2c76['status'] == 0xc8) {
+                    _0x598b7a[_0x363a('0xb3')]['accounts_ex'] = JSON.parse(_0xee2c76['responseText']);
+                    if (_0x598b7a[_0x363a('0x1c6')] && 0x0 == _0x598b7a[_0x363a('0xb3')][_0x363a('0xb4')]['length']) {
                         if (0x0 == _0x598b7a[_0x363a('0xb3')][_0x363a('0x1c7')]['length']) {
                             _0x598b7a[_0x363a('0x1be')] = 'katsu';
                         } else {
-                            _0x598b7a[_0x363a('0x1be')] = _0x363a('0xb5');
+                            _0x598b7a[_0x363a('0x1be')] = 'acct';
                         }
                     }
-                    _0x598b7a[_0x363a('0x96')][_0x363a('0x1c1')] = ![];
+                    _0x598b7a['fetch_lock'][_0x363a('0x1c1')] = ![];
                     _0x598b7a['$forceUpdate']();
                 } else if (_0xee2c76['readyState'] == XMLHttpRequest['DONE']) {
                     _0x598b7a['fetch_lock'][_0x363a('0x1c1')] = ![];
                     _0x598b7a['popError'](_0xee2c76['responseText'], _0xee2c76['status'], 'Search');
-                    _0x598b7a[_0x363a('0x18d')]();
+                    _0x598b7a['$forceUpdate']();
                 }
             }
                 ;
@@ -2673,18 +2673,18 @@ var app = new Vue({
                 this[_0x363a('0x1c9')](this['detail_targetid']);
                 return;
             }
-            this[_0x363a('0x15f')] = [];
+            this['accts'] = [];
             this['acct_targetid'] = '';
             var _0x37a433 = this;
             var _0x3d8db3 = [];
             var _0x22637e = new XMLHttpRequest();
-            _0x22637e['open'](_0x363a('0x188'), SEARCH.replace('[I]', _0x37a433['repository']).replace(_0x363a('0x1c2'), _0x37a433['search_userid']));
+            _0x22637e['open']('GET', SEARCH.replace('[I]', _0x37a433['repository']).replace(_0x363a('0x1c2'), _0x37a433['search_userid']));
             _0x22637e['timeout'] = REQ_TIMEOUT;
-            _0x22637e[_0x363a('0x18a')]('Authorization', _0x363a('0x18c') + _0x37a433['at']);
+            _0x22637e['setRequestHeader']('Authorization', 'Bearer ' + _0x37a433['at']);
             _0x22637e['onreadystatechange'] = function () {
-                if (_0x22637e[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x22637e['status'] == 0xc8) {
-                    if (JSON[_0x363a('0x70')](_0x22637e['responseText'])[_0x363a('0x1ca')][_0x363a('0xaf')] && _0x37a433['search_userid'] == JSON[_0x363a('0x70')](_0x22637e['responseText'])[_0x363a('0x1ca')][0x0][_0x363a('0xb5')]) {
-                        _0x37a433['acct_targetid'] = JSON[_0x363a('0x70')](_0x22637e['responseText'])['accounts'][0x0]['id'];
+                if (_0x22637e['readyState'] == XMLHttpRequest['DONE'] && _0x22637e['status'] == 0xc8) {
+                    if (JSON.parse(_0x22637e['responseText'])[_0x363a('0x1ca')]['length'] && _0x37a433['search_userid'] == JSON.parse(_0x22637e['responseText'])[_0x363a('0x1ca')][0x0]['acct']) {
+                        _0x37a433['acct_targetid'] = JSON.parse(_0x22637e['responseText'])['accounts'][0x0]['id'];
                     }
                     _0x37a433[_0x363a('0x1cb')](_0x37a433[_0x363a('0xae')]);
                 } else if (_0x22637e['readyState'] == XMLHttpRequest['DONE']) {
@@ -2699,26 +2699,26 @@ var app = new Vue({
             var _0x190cc4 = this;
             var _0x121dfd = [];
             var _0x68ba5e = [];
-            _0x190cc4[_0x363a('0x96')][_0x363a('0x1cd')] = !![];
+            _0x190cc4['fetch_lock'][_0x363a('0x1cd')] = !![];
             _0x190cc4['$forceUpdate']();
             var _0x417c0d = new XMLHttpRequest();
-            _0x417c0d['open'](_0x363a('0x188'), SEARCH.replace('[I]', _0x190cc4['repository']).replace(_0x363a('0x1c2'), _0x190cc4[_0x363a('0x1c3')]));
+            _0x417c0d['open']('GET', SEARCH.replace('[I]', _0x190cc4['repository']).replace(_0x363a('0x1c2'), _0x190cc4[_0x363a('0x1c3')]));
             _0x417c0d['timeout'] = REQ_TIMEOUT;
-            _0x417c0d[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x190cc4['at']);
+            _0x417c0d['setRequestHeader']('Authorization', 'Bearer ' + _0x190cc4['at']);
             _0x417c0d['onreadystatechange'] = function () {
-                if (_0x417c0d[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x417c0d['status'] == 0xc8) {
-                    if (_0x190cc4[_0x363a('0x96')][_0x363a('0x1cd')]) {
+                if (_0x417c0d['readyState'] == XMLHttpRequest['DONE'] && _0x417c0d['status'] == 0xc8) {
+                    if (_0x190cc4['fetch_lock'][_0x363a('0x1cd')]) {
                         _0x68ba5e = JSON['parse'](_0x417c0d['responseText']);
                         if (null != _0x68ba5e[_0x363a('0xb4')][0x0] && _0x68ba5e[_0x363a('0xb4')][0x0][_0x363a('0xe6')]['toLowerCase']() == _0x190cc4['search_text']['toLowerCase']()) {
                             _0x190cc4[_0x363a('0x1cc')] = _0x190cc4['search_text'];
                         }
                     }
-                    _0x190cc4[_0x363a('0x96')][_0x363a('0x1cd')] = ![];
+                    _0x190cc4['fetch_lock'][_0x363a('0x1cd')] = ![];
                     _0x190cc4['$forceUpdate']();
-                } else if (_0x417c0d[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x190cc4[_0x363a('0x96')][_0x363a('0x1cd')] = ![];
+                } else if (_0x417c0d['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x190cc4['fetch_lock'][_0x363a('0x1cd')] = ![];
                     _0x190cc4['popError'](_0x417c0d['responseText'], _0x417c0d['status'], _0x363a('0x1ce'));
-                    _0x190cc4[_0x363a('0x18d')]();
+                    _0x190cc4['$forceUpdate']();
                 }
             }
                 ;
@@ -2727,19 +2727,19 @@ var app = new Vue({
         'fetchStreamList': function () {
             var _0xff44f6 = this;
             var _0x4c5241 = [];
-            _0xff44f6[_0x363a('0x96')][_0x363a('0x135')] = !![];
+            _0xff44f6['fetch_lock'][_0x363a('0x135')] = !![];
             var _0x5e9bc3 = new XMLHttpRequest();
-            _0x5e9bc3['open'](_0x363a('0x188'), LIST_ALL.replace('[I]', _0xff44f6['repository']));
+            _0x5e9bc3['open']('GET', LIST_ALL.replace('[I]', _0xff44f6['repository']));
             _0x5e9bc3['timeout'] = REQ_TIMEOUT;
-            _0x5e9bc3[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0xff44f6['at']);
+            _0x5e9bc3['setRequestHeader']('Authorization', 'Bearer ' + _0xff44f6['at']);
             _0x5e9bc3['onreadystatechange'] = function () {
                 if (_0x5e9bc3['readyState'] == XMLHttpRequest['DONE'] && _0x5e9bc3['status'] == 0xc8) {
-                    _0xff44f6['stream_lists'] = JSON[_0x363a('0x70')](_0x5e9bc3['responseText']);
-                    _0xff44f6[_0x363a('0x96')][_0x363a('0x135')] = ![];
+                    _0xff44f6['stream_lists'] = JSON.parse(_0x5e9bc3['responseText']);
+                    _0xff44f6['fetch_lock'][_0x363a('0x135')] = ![];
                     _0xff44f6[_0x363a('0x134')][_0x363a('0x135')] = ![];
-                } else if (_0x5e9bc3[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0xff44f6[_0x363a('0x96')]['lists'] = ![];
-                    _0xff44f6['popError'](_0x5e9bc3['responseText'], _0x5e9bc3['status'], _0x363a('0x199'));
+                } else if (_0x5e9bc3['readyState'] == XMLHttpRequest['DONE']) {
+                    _0xff44f6['fetch_lock']['lists'] = ![];
+                    _0xff44f6['popError'](_0x5e9bc3['responseText'], _0x5e9bc3['status'], 'List');
                     _0xff44f6['fetch_after'][_0x363a('0x135')] = !![];
                 }
             }
@@ -2753,23 +2753,23 @@ var app = new Vue({
             }
             var _0x1679c5 = this;
             var _0x1c562c = [];
-            _0x1679c5[_0x363a('0x96')][_0x363a('0x135')] = !![];
+            _0x1679c5['fetch_lock'][_0x363a('0x135')] = !![];
             var _0x9202a = new XMLHttpRequest();
-            _0x9202a['open'](_0x363a('0x188'), LIST_ACCT.replace('[I]', _0x1679c5['repository']).replace('[LID]', _0x1679c5[_0x363a('0xb9')]['id']));
+            _0x9202a['open']('GET', LIST_ACCT.replace('[I]', _0x1679c5['repository']).replace('[LID]', _0x1679c5[_0x363a('0xb9')]['id']));
             _0x9202a['timeout'] = REQ_TIMEOUT;
-            _0x9202a[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x1679c5['at']);
+            _0x9202a['setRequestHeader']('Authorization', 'Bearer ' + _0x1679c5['at']);
             _0x9202a['onreadystatechange'] = function () {
-                if (_0x9202a[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x9202a['status'] == 0xc8) {
-                    if (_0x1679c5['stream_list_type'] == _0x363a('0x1d0') && _0x1679c5[_0x363a('0x96')][_0x363a('0x135')]) {
-                        _0x1c562c = JSON[_0x363a('0x70')](_0x9202a['responseText']);
+                if (_0x9202a['readyState'] == XMLHttpRequest['DONE'] && _0x9202a['status'] == 0xc8) {
+                    if (_0x1679c5['stream_list_type'] == _0x363a('0x1d0') && _0x1679c5['fetch_lock'][_0x363a('0x135')]) {
+                        _0x1c562c = JSON.parse(_0x9202a['responseText']);
                         _0x1679c5[_0x363a('0xbe')] = _0x1c562c;
-                        _0x1679c5[_0x363a('0x96')][_0x363a('0x135')] = ![];
-                        _0x1679c5[_0x363a('0xf3')][_0x363a('0x135')] = !![];
+                        _0x1679c5['fetch_lock'][_0x363a('0x135')] = ![];
+                        _0x1679c5['fetch_comp'][_0x363a('0x135')] = !![];
                     }
                     _0x1679c5['fetchListAcctRelation']();
-                } else if (_0x9202a[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                } else if (_0x9202a['readyState'] == XMLHttpRequest['DONE']) {
                     _0x1679c5['fetch_lock'][_0x363a('0x135')] = ![];
-                    _0x1679c5['popError'](_0x9202a['responseText'], _0x9202a['status'], _0x363a('0x199'));
+                    _0x1679c5['popError'](_0x9202a['responseText'], _0x9202a['status'], 'List');
                 }
             }
                 ;
@@ -2781,12 +2781,12 @@ var app = new Vue({
             var _0x37feae = new XMLHttpRequest();
             _0x37feae['open']('GET', LIST_ACCT.replace('[I]', _0x21be21['repository']).replace('[LID]', _0x21be21[_0x363a('0xb9')]['id']));
             _0x37feae['timeout'] = REQ_TIMEOUT;
-            _0x37feae[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x21be21['at']);
+            _0x37feae['setRequestHeader']('Authorization', 'Bearer ' + _0x21be21['at']);
             _0x37feae['onreadystatechange'] = function () {
-                if (_0x37feae[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x37feae['status'] == 0xc8) {
-                    _0x21be21[_0x363a('0x122')] = JSON[_0x363a('0x70')](_0x37feae['responseText']);
-                } else if (_0x37feae[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x21be21['popError'](_0x37feae['responseText'], _0x37feae['status'], _0x363a('0x199'));
+                if (_0x37feae['readyState'] == XMLHttpRequest['DONE'] && _0x37feae['status'] == 0xc8) {
+                    _0x21be21[_0x363a('0x122')] = JSON.parse(_0x37feae['responseText']);
+                } else if (_0x37feae['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x21be21['popError'](_0x37feae['responseText'], _0x37feae['status'], 'List');
                 }
             }
                 ;
@@ -2798,7 +2798,7 @@ var app = new Vue({
                 this[_0x363a('0x1d2')] = ![];
                 this[_0x363a('0x1d1')]();
             }
-            this[_0x363a('0x96')]['lists'] = ![];
+            this['fetch_lock']['lists'] = ![];
         },
         'fetchListSearch': function () {
             if (this[_0x363a('0x1cf')] != _0x363a('0x1c1')) {
@@ -2807,23 +2807,23 @@ var app = new Vue({
             }
             var _0x7a68ef = this;
             var _0x3185d1 = [];
-            _0x7a68ef[_0x363a('0x96')][_0x363a('0x135')] = !![];
+            _0x7a68ef['fetch_lock'][_0x363a('0x135')] = !![];
             var _0x137166 = new XMLHttpRequest();
-            _0x137166['open'](_0x363a('0x188'), ACCT_SEARCH.replace('[I]', _0x7a68ef['repository']).replace(_0x363a('0x1c2'), _0x7a68ef[_0x363a('0x1c3')]).replace(_0x363a('0x1c5'), _0x7a68ef[_0x363a('0x1d2')]).replace('[LM]', LIMIT_USER));
+            _0x137166['open']('GET', ACCT_SEARCH.replace('[I]', _0x7a68ef['repository']).replace(_0x363a('0x1c2'), _0x7a68ef[_0x363a('0x1c3')]).replace(_0x363a('0x1c5'), _0x7a68ef[_0x363a('0x1d2')]).replace('[LM]', LIMIT_USER));
             _0x137166['timeout'] = REQ_TIMEOUT;
-            _0x137166[_0x363a('0x18a')]('Authorization', _0x363a('0x18c') + _0x7a68ef['at']);
+            _0x137166['setRequestHeader']('Authorization', 'Bearer ' + _0x7a68ef['at']);
             _0x137166['onreadystatechange'] = function () {
-                if (_0x137166[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x137166['status'] == 0xc8) {
-                    if (_0x7a68ef[_0x363a('0x1cf')] == _0x363a('0x1c1') && _0x7a68ef[_0x363a('0x96')]['lists']) {
-                        _0x3185d1 = JSON[_0x363a('0x70')](_0x137166['responseText']);
+                if (_0x137166['readyState'] == XMLHttpRequest['DONE'] && _0x137166['status'] == 0xc8) {
+                    if (_0x7a68ef[_0x363a('0x1cf')] == _0x363a('0x1c1') && _0x7a68ef['fetch_lock']['lists']) {
+                        _0x3185d1 = JSON.parse(_0x137166['responseText']);
                         _0x7a68ef[_0x363a('0xbe')] = _0x3185d1;
                         _0x7a68ef['fetch_lock'][_0x363a('0x135')] = ![];
-                        _0x7a68ef[_0x363a('0xf3')]['lists'] = !![];
+                        _0x7a68ef['fetch_comp']['lists'] = !![];
                     }
                     _0x7a68ef[_0x363a('0x1d3')]();
-                } else if (_0x137166[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x7a68ef[_0x363a('0x96')][_0x363a('0x135')] = ![];
-                    _0x7a68ef['popError'](_0x137166['responseText'], _0x137166['status'], _0x363a('0x199'));
+                } else if (_0x137166['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x7a68ef['fetch_lock'][_0x363a('0x135')] = ![];
+                    _0x7a68ef['popError'](_0x137166['responseText'], _0x137166['status'], 'List');
                 }
             }
                 ;
@@ -2837,29 +2837,29 @@ var app = new Vue({
             var _0x5033ff = this;
             var _0x422421 = [];
             var _0x2b0767 = [];
-            _0x5033ff[_0x363a('0x96')][_0x363a('0x135')] = !![];
+            _0x5033ff['fetch_lock'][_0x363a('0x135')] = !![];
             var _0x324f4f = new XMLHttpRequest();
-            _0x324f4f['open'](_0x363a('0x188'), FOLLOW.replace('[I]', _0x5033ff['repository']).replace('[AID]', _0x5033ff['user']['id']).replace('[UID]', _0x5033ff[_0x363a('0x191')]).replace(_0x363a('0x19c'), LIMIT_USER));
+            _0x324f4f['open']('GET', FOLLOW.replace('[I]', _0x5033ff['repository']).replace('[AID]', _0x5033ff['user']['id']).replace('[UID]', _0x5033ff[_0x363a('0x191')]).replace('[LM]', LIMIT_USER));
             _0x324f4f['timeout'] = REQ_TIMEOUT;
-            _0x324f4f['setRequestHeader']('Authorization', _0x363a('0x18c') + _0x5033ff['at']);
+            _0x324f4f['setRequestHeader']('Authorization', 'Bearer ' + _0x5033ff['at']);
             _0x324f4f['onreadystatechange'] = function () {
-                if (_0x324f4f[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x324f4f['status'] == 0xc8) {
-                    if (_0x5033ff['stream_list_type'] == _0x363a('0x10e') && _0x5033ff[_0x363a('0x96')][_0x363a('0x135')]) {
-                        _0x422421 = JSON[_0x363a('0x70')](_0x324f4f['responseText']);
-                        if (0x0 == _0x5033ff['stream_list_users'][_0x363a('0xaf')]) {
+                if (_0x324f4f['readyState'] == XMLHttpRequest['DONE'] && _0x324f4f['status'] == 0xc8) {
+                    if (_0x5033ff['stream_list_type'] == _0x363a('0x10e') && _0x5033ff['fetch_lock'][_0x363a('0x135')]) {
+                        _0x422421 = JSON.parse(_0x324f4f['responseText']);
+                        if (0x0 == _0x5033ff['stream_list_users']['length']) {
                             _0x5033ff[_0x363a('0xbe')] = _0x422421;
                         } else {
-                            Array['prototype'][_0x363a('0x1a2')]['apply'](_0x5033ff[_0x363a('0xbe')], _0x422421);
+                            Array['prototype']['push']['apply'](_0x5033ff[_0x363a('0xbe')], _0x422421);
                         }
-                        _0x2b0767 = null != _0x324f4f[_0x363a('0x19f')]('link') ? _0x324f4f[_0x363a('0x19f')](_0x363a('0x1a0'))['match'](/max_id=(.*?)>/) : null;
-                        _0x5033ff[_0x363a('0x191')] = null != _0x2b0767 && 0x0 != _0x2b0767[0x1][_0x363a('0xaf')] ? _0x2b0767[0x1] : '0';
-                        _0x5033ff[_0x363a('0x96')][_0x363a('0x135')] = ![];
-                        _0x5033ff[_0x363a('0xf3')][_0x363a('0x135')] = _0x422421[_0x363a('0xaf')] < LIMIT_USER;
+                        _0x2b0767 = null != _0x324f4f['getResponseHeader']('link') ? _0x324f4f['getResponseHeader']('link')['match'](/max_id=(.*?)>/) : null;
+                        _0x5033ff[_0x363a('0x191')] = null != _0x2b0767 && 0x0 != _0x2b0767[0x1]['length'] ? _0x2b0767[0x1] : '0';
+                        _0x5033ff['fetch_lock'][_0x363a('0x135')] = ![];
+                        _0x5033ff['fetch_comp'][_0x363a('0x135')] = _0x422421['length'] < LIMIT_USER;
                         _0x5033ff[_0x363a('0x1d3')]();
                     }
-                } else if (_0x324f4f[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x5033ff[_0x363a('0x96')][_0x363a('0x135')] = ![];
-                    _0x5033ff['popError'](_0x324f4f['responseText'], _0x324f4f['status'], _0x363a('0x199'));
+                } else if (_0x324f4f['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x5033ff['fetch_lock'][_0x363a('0x135')] = ![];
+                    _0x5033ff['popError'](_0x324f4f['responseText'], _0x324f4f['status'], 'List');
                 }
             }
                 ;
@@ -2873,53 +2873,53 @@ var app = new Vue({
             var _0x5980c3 = this;
             var _0x59993f = [];
             var _0x24f3cc = [];
-            _0x5980c3[_0x363a('0x96')][_0x363a('0x135')] = !![];
+            _0x5980c3['fetch_lock'][_0x363a('0x135')] = !![];
             var _0x17472a = new XMLHttpRequest();
-            _0x17472a['open']('GET', FOLLOWER.replace('[I]', _0x5980c3['repository']).replace('[AID]', _0x5980c3[_0x363a('0xad')]['id']).replace(_0x363a('0x1ab'), _0x5980c3['stream_list_id']).replace(_0x363a('0x19c'), LIMIT_USER));
+            _0x17472a['open']('GET', FOLLOWER.replace('[I]', _0x5980c3['repository']).replace('[AID]', _0x5980c3[_0x363a('0xad')]['id']).replace(_0x363a('0x1ab'), _0x5980c3['stream_list_id']).replace('[LM]', LIMIT_USER));
             _0x17472a['timeout'] = REQ_TIMEOUT;
-            _0x17472a[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x5980c3['at']);
+            _0x17472a['setRequestHeader']('Authorization', 'Bearer ' + _0x5980c3['at']);
             _0x17472a['onreadystatechange'] = function () {
-                if (_0x17472a[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x17472a['status'] == 0xc8) {
-                    if (_0x5980c3[_0x363a('0x1cf')] == _0x363a('0x119') && _0x5980c3[_0x363a('0x96')][_0x363a('0x135')]) {
-                        if (0x0 == _0x5980c3[_0x363a('0xbe')][_0x363a('0xaf')]) {
+                if (_0x17472a['readyState'] == XMLHttpRequest['DONE'] && _0x17472a['status'] == 0xc8) {
+                    if (_0x5980c3[_0x363a('0x1cf')] == _0x363a('0x119') && _0x5980c3['fetch_lock'][_0x363a('0x135')]) {
+                        if (0x0 == _0x5980c3[_0x363a('0xbe')]['length']) {
                             _0x5980c3[_0x363a('0xbe')] = JSON['parse'](_0x17472a['responseText']);
                         } else {
-                            Array[_0x363a('0x1a1')][_0x363a('0x1a2')][_0x363a('0x1a3')](_0x5980c3[_0x363a('0xbe')], JSON[_0x363a('0x70')](_0x17472a['responseText']));
+                            Array['prototype']['push']['apply'](_0x5980c3[_0x363a('0xbe')], JSON.parse(_0x17472a['responseText']));
                         }
-                        _0x24f3cc = null != _0x17472a[_0x363a('0x19f')](_0x363a('0x1a0')) ? _0x17472a[_0x363a('0x19f')](_0x363a('0x1a0'))['match'](/max_id=(.*?)>/) : null;
-                        _0x5980c3[_0x363a('0x191')] = null != _0x24f3cc && 0x0 != _0x24f3cc[0x1][_0x363a('0xaf')] ? _0x24f3cc[0x1] : '0';
-                        _0x5980c3[_0x363a('0x96')][_0x363a('0x135')] = ![];
+                        _0x24f3cc = null != _0x17472a['getResponseHeader']('link') ? _0x17472a['getResponseHeader']('link')['match'](/max_id=(.*?)>/) : null;
+                        _0x5980c3[_0x363a('0x191')] = null != _0x24f3cc && 0x0 != _0x24f3cc[0x1]['length'] ? _0x24f3cc[0x1] : '0';
+                        _0x5980c3['fetch_lock'][_0x363a('0x135')] = ![];
                         _0x5980c3['fetchListAcctRelation']();
                     }
-                } else if (_0x17472a[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x5980c3[_0x363a('0x96')][_0x363a('0x135')] = ![];
-                    _0x5980c3['popError'](_0x17472a['responseText'], _0x17472a['status'], _0x363a('0x199'));
+                } else if (_0x17472a['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x5980c3['fetch_lock'][_0x363a('0x135')] = ![];
+                    _0x5980c3['popError'](_0x17472a['responseText'], _0x17472a['status'], 'List');
                 }
             }
                 ;
             _0x17472a['send']();
         },
         'fetchListAcctRelation': function () {
-            if (0x0 == this[_0x363a('0xbe')][_0x363a('0xaf')]) {
+            if (0x0 == this[_0x363a('0xbe')]['length']) {
                 return;
             }
             var _0x2299b9 = 0x0;
             var _0x12ad4f = RELATION.replace('[I]', this.repository);
-            while (_0x2299b9 < this[_0x363a('0xbe')][_0x363a('0xaf')]) {
+            while (_0x2299b9 < this[_0x363a('0xbe')]['length']) {
                 _0x12ad4f = _0x12ad4f + _0x363a('0x1ae') + this[_0x363a('0xbe')][_0x2299b9]['id'] + '&';
                 _0x2299b9 = _0x2299b9 + 0x1 | 0x0;
             }
             var _0x1536f4 = this;
             var _0x11393f = [];
             var request = new XMLHttpRequest();
-            request['open'](_0x363a('0x188'), _0x12ad4f);
+            request['open']('GET', _0x12ad4f);
             request['timeout'] = REQ_TIMEOUT;
-            request[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x1536f4['at']);
+            request['setRequestHeader']('Authorization', 'Bearer ' + _0x1536f4['at']);
             request['onreadystatechange'] = function () {
-                if (request[_0x363a('0x184')] == XMLHttpRequest['DONE'] && request['status'] == 0xc8) {
-                    _0x1536f4[_0x363a('0x123')] = JSON[_0x363a('0x70')](request['responseText']);
-                } else if (request[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x1536f4['popError'](request['responseText'], request['status'], _0x363a('0x199'));
+                if (request['readyState'] == XMLHttpRequest['DONE'] && request['status'] == 0xc8) {
+                    _0x1536f4[_0x363a('0x123')] = JSON.parse(request['responseText']);
+                } else if (request['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x1536f4['popError'](request['responseText'], request['status'], 'List');
                 }
             }
                 ;
@@ -2963,11 +2963,11 @@ var app = new Vue({
             var _0x33a852 = new XMLHttpRequest();
             _0x33a852['open']('POST', DIS_TOKEN.replace('[I]', DIS_API).replace(_0x363a('0x1d4'), DIS_API_VER), !![]);
             _0x33a852['timeout'] = REQ_TIMEOUT;
-            _0x33a852[_0x363a('0x18a')](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
+            _0x33a852['setRequestHeader'](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
             _0x33a852['onreadystatechange'] = function () {
-                if (_0x33a852[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x33a852['status'] == 0xc8) {
+                if (_0x33a852['readyState'] == XMLHttpRequest['DONE'] && _0x33a852['status'] == 0xc8) {
                     userConf['setItem']('at_discord', _0x33a852['responseText']);
-                } else if (_0x33a852[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                } else if (_0x33a852['readyState'] == XMLHttpRequest['DONE']) {
                     _0x2cf9e6['popError'](_0x33a852['responseText'], _0x33a852['status'], 'Login');
                 }
             }
@@ -2979,7 +2979,7 @@ var app = new Vue({
             var _0x34969e = [];
             var date = new Date();
             var _0x38b86d = {
-                'content': ('0' + date[_0x363a('0xc5')]())[_0x363a('0xc1')](-0x2) + ':' + ('0' + date[_0x363a('0xc4')]())[_0x363a('0xc1')](-0x2),
+                'content': ('0' + date[_0x363a('0xc5')]())['slice'](-0x2) + ':' + ('0' + date[_0x363a('0xc4')]())['slice'](-0x2),
                 'username': _0x254c57[_0x363a('0x1da')][_0x363a('0x1db')],
                 'avatar_url': _0x363a('0xde') + _0x363a('0x1dc') + _0x254c57[_0x363a('0x1da')]['id'] + '/' + _0x254c57[_0x363a('0x1da')]['avatar'] + _0x363a('0xe0')
             };
@@ -2988,7 +2988,7 @@ var app = new Vue({
             _0x4573a7['timeout'] = REQ_TIMEOUT;
             _0x4573a7['setRequestHeader'](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
             _0x4573a7['onreadystatechange'] = function () {
-                if (_0x4573a7[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x4573a7['status'] == 0xc8) { } else if (_0x4573a7[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                if (_0x4573a7['readyState'] == XMLHttpRequest['DONE'] && _0x4573a7['status'] == 0xc8) { } else if (_0x4573a7['readyState'] == XMLHttpRequest['DONE']) {
                     _0x254c57['popError'](_0x4573a7['responseText'], _0x4573a7['status'], 'Login');
                 }
             }
@@ -3028,7 +3028,7 @@ var app = new Vue({
                 _0x47418d = 0x3;
                 _0x16db8f = ![];
             }
-            this[_0x363a('0x1e0')] = null != userConf[_0x363a('0x6e')](_0x363a('0x1e1')) ? JSON[_0x363a('0x70')](userConf[_0x363a('0x6e')](_0x363a('0x1e1'))) : {};
+            this[_0x363a('0x1e0')] = null != userConf[_0x363a('0x6e')](_0x363a('0x1e1')) ? JSON.parse(userConf[_0x363a('0x6e')](_0x363a('0x1e1'))) : {};
             if (null != userConf[_0x363a('0x6e')]('conf_std')) {
                 this[_0x363a('0x1e2')] = null != this['confs'] && null != this[_0x363a('0x1e0')]['ver'] ? this[_0x363a('0x1e0')][_0x363a('0x1e3')] : 0x0;
                 this[_0x363a('0x152')] = null != this['confs'] && null != this['confs']['columns'] ? this['confs'][_0x363a('0x9c')] : _0x47418d;
@@ -3067,7 +3067,7 @@ var app = new Vue({
                 this[_0x363a('0x204')] = null != this[_0x363a('0x1e0')] && null != this['confs'][_0x363a('0x205')] ? this[_0x363a('0x1e0')][_0x363a('0x205')] : '';
                 this[_0x363a('0xa1')] = null != this[_0x363a('0x1e0')] && null != this['confs'][_0x363a('0x206')] ? this[_0x363a('0x1e0')][_0x363a('0x206')] : '';
                 this['optShortNotif'] = null != this[_0x363a('0x1e0')] && null != this[_0x363a('0x1e0')][_0x363a('0x207')] ? this[_0x363a('0x1e0')][_0x363a('0x207')] : !![];
-                this['optPushNotif'] = null != this[_0x363a('0x1e0')] && null != this[_0x363a('0x1e0')][_0x363a('0x1a2')] ? this[_0x363a('0x1e0')][_0x363a('0x1a2')] : !![];
+                this['optPushNotif'] = null != this[_0x363a('0x1e0')] && null != this[_0x363a('0x1e0')]['push'] ? this[_0x363a('0x1e0')]['push'] : !![];
             } else {
                 this[_0x363a('0x1e2')] = 0x0;
                 this[_0x363a('0x152')] = null != userConf[_0x363a('0x6e')](_0x363a('0x9c')) ? userConf[_0x363a('0x6e')](_0x363a('0x9c')) : _0x47418d;
@@ -3242,7 +3242,7 @@ var app = new Vue({
             this[_0x363a('0x1e0')]['bottoms'] = this[_0x363a('0x204')];
             this[_0x363a('0x1e0')][_0x363a('0x206')] = this[_0x363a('0xa1')];
             this['confs'][_0x363a('0x207')] = this[_0x363a('0x20c')];
-            this[_0x363a('0x1e0')][_0x363a('0x1a2')] = this[_0x363a('0x20d')];
+            this[_0x363a('0x1e0')]['push'] = this[_0x363a('0x20d')];
             userConf[_0x363a('0x185')](_0x363a('0x1e1'), JSON[_0x363a('0x210')](this[_0x363a('0x1e0')]));
             this['runCustom']();
         },
@@ -3262,10 +3262,10 @@ var app = new Vue({
             location[_0x363a('0x211')]();
         },
         'serviceWorkerUpdateCheck': function () {
-            this[_0x363a('0x96')][_0x363a('0x212')] = !![];
+            this['fetch_lock'][_0x363a('0x212')] = !![];
             navigator['serviceWorker'][_0x363a('0x6d')][_0x363a('0x213')](_0x363a('0x214'));
             setTimeout(function () {
-                app['_data'][_0x363a('0x96')][_0x363a('0x212')] = ![];
+                app['_data']['fetch_lock'][_0x363a('0x212')] = ![];
             }, REQ_TIMEOUT / 0xa);
         },
         'reloadForce': function () {
@@ -3287,20 +3287,20 @@ var app = new Vue({
             userConf[_0x363a('0x185')](_0x363a('0x72'), JSON[_0x363a('0x210')](this[_0x363a('0x215')]));
         },
         'runSettingBookmarkNotif': function () {
-            userConf[_0x363a('0x185')](_0x363a('0x73'), JSON[_0x363a('0x210')](this[_0x363a('0x126')]));
+            userConf[_0x363a('0x185')](_0x363a('0x73'), JSON[_0x363a('0x210')](this['notif_id_bookmark']));
         },
         'playSound': function (_0x5f022b) {
             var _0x8bf28a = document[_0x363a('0x139')](_0x5f022b);
             _0x8bf28a[_0x363a('0x216')]();
         },
         'openImage': function (_0x78638c) {
-            _0x78638c[_0x363a('0x217')] = ![];
+            _0x78638c['loading_avatar'] = ![];
             _0x78638c['loading_media'] = ![];
         },
         'openImageAll': function (_0x2689c6) {
-            _0x2689c6[_0x363a('0x121')](function (_0x122f76, _0x3f5bd1) {
-                _0x122f76[_0x363a('0x217')] = ![];
-                _0x122f76[_0x363a('0x218')] = ![];
+            _0x2689c6['filter'](function (_0x122f76, _0x3f5bd1) {
+                _0x122f76['loading_avatar'] = ![];
+                _0x122f76['loading_media'] = ![];
             });
         },
         'openWsHome': function () {
@@ -3309,14 +3309,14 @@ var app = new Vue({
             if (wsHome == null && _0x44ce94['at'] != null) {
                 wsHome = new WebSocket(_0x3cfda4.replace('[I]', _0x44ce94['repository']).replace('[AT]', _0x44ce94['at']));
                 wsHome['onopen'] = _0x37ed0f;
-                wsHome[_0x363a('0x219')] = _[_0x363a('0xe1')](_0x3b7770, 0xc8);
+                wsHome[_0x363a('0x219')] = _['debounce'](_0x3b7770, 0xc8);
                 wsHome[_0x363a('0x21a')] = _0x5e5580;
                 wsHome[_0x363a('0x21b')] = _0xe88f8b;
                 function _0x37ed0f() {
                     setTimeout(function () {
                         try {
                             _0x44ce94['connHome'] = 'open';
-                            _0x44ce94[_0x363a('0x96')][_0x363a('0x21c')] = ![];
+                            _0x44ce94['fetch_lock'][_0x363a('0x21c')] = ![];
                             wsHome['send']('5j');
                         } catch (_0x1c206b) {
                             _0x5e5580();
@@ -3324,7 +3324,7 @@ var app = new Vue({
                     }, 0x1f4);
                 }
                 ; function _0x3b7770(_0x1f02e9) {
-                    _0x44ce94[_0x363a('0x96')]['homews'] = !![];
+                    _0x44ce94['fetch_lock']['homews'] = !![];
                     _0x44ce94[_0x363a('0x21d')] = 'ready';
                     wsHome = null;
                     if (_0x44ce94[_0x363a('0x21e')]) {
@@ -3338,7 +3338,7 @@ var app = new Vue({
                 ; function _0x5e5580(_0x56da40) {
                     _0x44ce94[_0x363a('0x21d')] = _0x363a('0x221');
                     if (wsHome != null) {
-                        _0x44ce94[_0x363a('0x96')][_0x363a('0x21c')] = !![];
+                        _0x44ce94['fetch_lock'][_0x363a('0x21c')] = !![];
                         _0x44ce94[_0x363a('0x21d')] = 'close';
                         wsHome[_0x363a('0x222')]();
                     }
@@ -3347,44 +3347,44 @@ var app = new Vue({
                     var _0x109fd1 = JSON['parse'](_0x30a4f5[_0x363a('0x223')]);
                     var _0x1c8865 = JSON['parse'](_0x109fd1[_0x363a('0x224')]);
                     if (_0x363a('0x212') == _0x109fd1[_0x363a('0x225')]) {
-                        if (null == _0x44ce94['homes'][0x0] || null != _0x44ce94[_0x363a('0xef')][0x0] && _0x44ce94[_0x363a('0xf1')] > KKT1_LASTID && _0x44ce94[_0x363a('0xf1')] > _0x1c8865['id']) {
+                        if (null == _0x44ce94['homes'][0x0] || null != _0x44ce94['homes'][0x0] && _0x44ce94[_0x363a('0xf1')] > KKT1_LASTID && _0x44ce94[_0x363a('0xf1')] > _0x1c8865['id']) {
                             return;
                         }
                         if (0x0 == _0x44ce94[_0x363a('0xed')] && 0x0 == _0x44ce94[_0x363a('0xee')]) {
                             _0x44ce94['homes'][_0x363a('0xf0')](LIMIT - 0x1);
-                            _0x44ce94['home_id'] = _0x44ce94['hasHome'] ? _0x44ce94[_0x363a('0xef')][_0x44ce94[_0x363a('0xef')][_0x363a('0xaf')] - 0x1]['id'] : '';
+                            _0x44ce94['home_id'] = _0x44ce94['hasHome'] ? _0x44ce94['homes'][_0x44ce94['homes']['length'] - 0x1]['id'] : '';
                             _0x44ce94['fetch_comp'][_0x363a('0xec')] = ![];
                         } else {
                             _0x44ce94['home_unread'] = _0x44ce94[_0x363a('0xee')] + 0x1;
                         }
-                        _0x1c8865[_0x363a('0x217')] = !![];
-                        if (null != _0x1c8865[_0x363a('0x10c')] && 0x0 != _0x1c8865[_0x363a('0x10c')][_0x363a('0x226')] || 0x0 != _0x1c8865[_0x363a('0x226')]) {
-                            _0x1c8865[_0x363a('0x218')] = !![];
+                        _0x1c8865['loading_avatar'] = !![];
+                        if (null != _0x1c8865['reblog'] && 0x0 != _0x1c8865['reblog']['media_attachments'] || 0x0 != _0x1c8865['media_attachments']) {
+                            _0x1c8865['loading_media'] = !![];
                         }
-                        _0x44ce94[_0x363a('0x193')](_0x1c8865, _0x363a('0x227'));
+                        _0x44ce94['updateWrapperBM'](_0x1c8865, _0x363a('0x227'));
                         _0x44ce94[_0x363a('0x197')](_0x1c8865, _0x363a('0x227'));
-                        _0x44ce94[_0x363a('0xef')][_0x363a('0x172')](_0x1c8865);
-                        _0x44ce94[_0x363a('0x18d')]();
+                        _0x44ce94['homes'][_0x363a('0x172')](_0x1c8865);
+                        _0x44ce94['$forceUpdate']();
                         _0x44ce94[_0x363a('0x198')](function () {
                             _0x44ce94[_0x363a('0x228')](_0x1c8865);
                         });
                     } else if (_0x363a('0x229') == _0x109fd1[_0x363a('0x225')]) {
-                        if (null == _0x44ce94['notifs'][0x0] || null != _0x44ce94['notifs'][0x0] && _0x44ce94[_0x363a('0x159')] > KKT1_LASTID && _0x44ce94[_0x363a('0x159')] > _0x1c8865['id']) {
+                        if (null == _0x44ce94['notifs'][0x0] || null != _0x44ce94['notifs'][0x0] && _0x44ce94['notif_id'] > KKT1_LASTID && _0x44ce94['notif_id'] > _0x1c8865['id']) {
                             return;
                         }
-                        if (_0x44ce94[_0x363a('0x148')] && 0x0 == _0x44ce94[_0x363a('0x102')] && 0x0 == _0x44ce94[_0x363a('0x105')] && _0x44ce94[_0x363a('0x22a')](_0x1c8865)) {
-                            _0x44ce94[_0x363a('0xb1')][_0x363a('0xf0')](LIMIT_NOTIF - 0x1);
-                            _0x44ce94[_0x363a('0x159')] = _0x44ce94[_0x363a('0x15a')] ? _0x44ce94[_0x363a('0xb1')][_0x44ce94[_0x363a('0xb1')][_0x363a('0xaf')] - 0x1]['id'] : '';
-                            _0x44ce94[_0x363a('0x126')] = _0x1c8865['id'];
-                            _0x44ce94[_0x363a('0x15b')]();
-                            _0x44ce94[_0x363a('0xf3')]['notif_filter'] = ![];
+                        if (_0x44ce94['showNotif'] && 0x0 == _0x44ce94[_0x363a('0x102')] && 0x0 == _0x44ce94[_0x363a('0x105')] && _0x44ce94[_0x363a('0x22a')](_0x1c8865)) {
+                            _0x44ce94['notifs_filter'][_0x363a('0xf0')](LIMIT_NOTIF - 0x1);
+                            _0x44ce94['notif_id'] = _0x44ce94[_0x363a('0x15a')] ? _0x44ce94['notifs_filter'][_0x44ce94['notifs_filter']['length'] - 0x1]['id'] : '';
+                            _0x44ce94['notif_id_bookmark'] = _0x1c8865['id'];
+                            _0x44ce94['countNotifUnread']();
+                            _0x44ce94['fetch_comp']['notif_filter'] = ![];
                         } else {
                             if (_0x363a('0x108') == _0x1c8865[_0x363a('0x124')]) {
                                 _0x44ce94[_0x363a('0x110')][_0x363a('0x108')] = _0x44ce94['notif_unread_filter'][_0x363a('0x108')] + 0x1;
                             } else if ('favourite' == _0x1c8865[_0x363a('0x124')]) {
-                                _0x44ce94[_0x363a('0x110')][_0x363a('0x10a')] = _0x44ce94[_0x363a('0x110')][_0x363a('0x10a')] + 0x1;
-                            } else if (_0x363a('0x10c') == _0x1c8865[_0x363a('0x124')]) {
-                                _0x44ce94[_0x363a('0x110')]['reblog'] = _0x44ce94['notif_unread_filter'][_0x363a('0x10c')] + 0x1;
+                                _0x44ce94[_0x363a('0x110')]['fav'] = _0x44ce94[_0x363a('0x110')]['fav'] + 0x1;
+                            } else if ('reblog' == _0x1c8865[_0x363a('0x124')]) {
+                                _0x44ce94[_0x363a('0x110')]['reblog'] = _0x44ce94['notif_unread_filter']['reblog'] + 0x1;
                             } else if (_0x363a('0x10e') == _0x1c8865[_0x363a('0x124')]) {
                                 _0x44ce94[_0x363a('0x110')][_0x363a('0x10e')] = _0x44ce94[_0x363a('0x110')][_0x363a('0x10e')] + 0x1;
                             } else {
@@ -3394,17 +3394,17 @@ var app = new Vue({
                         if (_0x363a('0x22b') == _0x1c8865[_0x363a('0x124')]) {
                             _0x44ce94[_0x363a('0x22c')](_0x1c8865['status']['id'], _0x1c8865['status'][_0x363a('0x22b')]);
                         }
-                        _0x1c8865[_0x363a('0x217')] = !![];
-                        if (null != _0x1c8865['status'] && (null != _0x1c8865['status'][_0x363a('0x10c')] && 0x0 != _0x1c8865['status']['reblog']['media_attachments'] || 0x0 != _0x1c8865['status'][_0x363a('0x226')])) {
-                            _0x1c8865[_0x363a('0x218')] = !![];
+                        _0x1c8865['loading_avatar'] = !![];
+                        if (null != _0x1c8865['status'] && (null != _0x1c8865['status']['reblog'] && 0x0 != _0x1c8865['status']['reblog']['media_attachments'] || 0x0 != _0x1c8865['status']['media_attachments'])) {
+                            _0x1c8865['loading_media'] = !![];
                         }
                         _0x44ce94['notifs_filter'][_0x363a('0x172')](_0x1c8865);
-                        _0x44ce94[_0x363a('0xb0')]['unshift'](_0x1c8865);
-                        _0x44ce94[_0x363a('0x18d')]();
+                        _0x44ce94['notifs']['unshift'](_0x1c8865);
+                        _0x44ce94['$forceUpdate']();
                         _0x44ce94[_0x363a('0x198')](function () {
                             _0x44ce94[_0x363a('0x228')](_0x1c8865);
                         });
-                        var _0x2ff618 = 0x0 != _0x1c8865['account'][_0x363a('0x12d')][_0x363a('0xaf')] ? _0x1c8865['account']['display_name'] : _0x1c8865[_0x363a('0x16d')][_0x363a('0xb5')];
+                        var _0x2ff618 = 0x0 != _0x1c8865['account'][_0x363a('0x12d')]['length'] ? _0x1c8865['account']['display_name'] : _0x1c8865[_0x363a('0x16d')]['acct'];
                         var _0x172d00 = _0x1c8865[_0x363a('0x124')] == _0x363a('0x10e') ? 'you' : _0x363a('0x22d');
                         var _0x5551c0 = _0x2ff618 + '‭\x20' + _0x1c8865['type'] + '\x20' + _0x172d00;
                         var _0x3a5570 = {
@@ -3415,7 +3415,7 @@ var app = new Vue({
                             _0x44ce94[_0x363a('0x230')](_0x363a('0x231') + _0x44ce94[_0x363a('0xa1')]);
                         }
                         if (_0x44ce94[_0x363a('0x20c')]) {
-                            _0x44ce94['result_type'] = _0x363a('0x104');
+                            _0x44ce94['result_type'] = 'notif';
                             _0x44ce94[_0x363a('0xa4')] = _0x2ff618 + '‭\x20' + _0x1c8865[_0x363a('0x124')] + _0x363a('0x232') + _0x3a5570['body'];
                         }
                         if (_0x44ce94['optPushNotif']) {
@@ -3429,17 +3429,17 @@ var app = new Vue({
             }
         },
         'reopenWsHome': function (_0x312ae2) {
-            if (this['home_type'] == _0x312ae2 || this[_0x363a('0x96')][_0x363a('0x21c')]) {
+            if (this['home_type'] == _0x312ae2 || this['fetch_lock'][_0x363a('0x21c')]) {
                 return;
             }
-            this[_0x363a('0x96')][_0x363a('0x21c')] = !![];
+            this['fetch_lock'][_0x363a('0x21c')] = !![];
             this[_0x363a('0x21d')] = _0x363a('0x222');
             this['home_type'] = _0x363a('0x235') != _0x312ae2 && null != _0x312ae2 ? _0x312ae2 : this['home_type'];
             this[_0x363a('0x94')]();
             this[_0x363a('0x95')]();
             this['resetNotifColumn']();
-            this[_0x363a('0xb0')] = [];
-            this[_0x363a('0xf3')]['notif'] = ![];
+            this['notifs'] = [];
+            this['fetch_comp']['notif'] = ![];
             this[_0x363a('0x107')]();
             if (wsHome != null) {
                 wsHome[_0x363a('0x222')]();
@@ -3450,16 +3450,16 @@ var app = new Vue({
             if (null != _0x27ef62) {
                 _0x27ef62[_0x363a('0xf6')] = 0x0;
                 this[_0x363a('0xee')] = 0x0;
-                this[_0x363a('0xef')][_0x363a('0xf0')](LIMIT);
-                this[_0x363a('0xf1')] = this[_0x363a('0xf2')] ? this[_0x363a('0xef')][this[_0x363a('0xef')]['length'] - 0x1]['id'] : '';
-                this[_0x363a('0xf3')][_0x363a('0xec')] = ![];
+                this['homes'][_0x363a('0xf0')](LIMIT);
+                this[_0x363a('0xf1')] = this[_0x363a('0xf2')] ? this['homes'][this['homes']['length'] - 0x1]['id'] : '';
+                this['fetch_comp'][_0x363a('0xec')] = ![];
             }
         },
         'backHome': function () {
             var _0x3540a7 = document[_0x363a('0x139')](_0x363a('0xec'));
             if (null != _0x3540a7) {
                 _0x3540a7[_0x363a('0xf6')] = 0x0;
-                this[_0x363a('0x96')][_0x363a('0xec')] = ![];
+                this['fetch_lock'][_0x363a('0xec')] = ![];
             }
         },
         'nextHome': function () {
@@ -3480,7 +3480,7 @@ var app = new Vue({
             if (wsLocal == null && _0x4b646e['at'] != null) {
                 wsLocal = new WebSocket(_0x5e7fea.replace('[I]', _0x4b646e['repository']).replace(_0x363a('0x236'), _0x4b646e['at']));
                 wsLocal[_0x363a('0x237')] = _0x1d6410;
-                wsLocal['onclose'] = _[_0x363a('0xe1')](_0x8b86f8, 0xc8);
+                wsLocal['onclose'] = _['debounce'](_0x8b86f8, 0xc8);
                 wsLocal['onerror'] = _0x1870a7;
                 wsLocal[_0x363a('0x21b')] = _0x1719e1;
                 function _0x1d6410() {
@@ -3508,34 +3508,34 @@ var app = new Vue({
                 ; function _0x1870a7(_0x3a6aee) {
                     _0x4b646e[_0x363a('0x238')] = _0x363a('0x221');
                     if (wsLocal != null) {
-                        _0x4b646e[_0x363a('0x96')][_0x363a('0x90')] = !![];
+                        _0x4b646e['fetch_lock'][_0x363a('0x90')] = !![];
                         _0x4b646e[_0x363a('0x238')] = _0x363a('0x222');
                         wsLocal[_0x363a('0x222')]();
                     }
                 }
                 ; function _0x1719e1(_0x3ee549) {
-                    var _0x43b0f1 = JSON[_0x363a('0x70')](_0x3ee549[_0x363a('0x223')]);
-                    var _0x4c2dc9 = JSON[_0x363a('0x70')](_0x43b0f1[_0x363a('0x224')]);
+                    var _0x43b0f1 = JSON.parse(_0x3ee549[_0x363a('0x223')]);
+                    var _0x4c2dc9 = JSON.parse(_0x43b0f1[_0x363a('0x224')]);
                     var _0x55d664, _0x49f5cd;
                     if (_0x363a('0x212') == _0x43b0f1['event']) {
-                        if (null == _0x4b646e[_0x363a('0xf9')][0x0] || null != _0x4b646e[_0x363a('0xf9')][0x0] && _0x4b646e['local_id'] > KKT1_LASTID && _0x4b646e['local_id'] > _0x4c2dc9['id']) {
+                        if (null == _0x4b646e['locals'][0x0] || null != _0x4b646e['locals'][0x0] && _0x4b646e['local_id'] > KKT1_LASTID && _0x4b646e['local_id'] > _0x4c2dc9['id']) {
                             return;
                         }
                         if (0x0 == _0x4b646e[_0x363a('0xf5')] && 0x0 == _0x4b646e[_0x363a('0xfa')]) {
-                            _0x4b646e[_0x363a('0xf9')][_0x363a('0xf0')](LIMIT - 0x1);
-                            _0x4b646e[_0x363a('0x190')] = _0x4b646e[_0x363a('0x23a')] ? _0x4b646e[_0x363a('0xf9')][_0x4b646e[_0x363a('0xf9')][_0x363a('0xaf')] - 0x1]['id'] : '';
-                            _0x4b646e[_0x363a('0xf3')]['local'] = ![];
+                            _0x4b646e['locals'][_0x363a('0xf0')](LIMIT - 0x1);
+                            _0x4b646e[_0x363a('0x190')] = _0x4b646e[_0x363a('0x23a')] ? _0x4b646e['locals'][_0x4b646e['locals']['length'] - 0x1]['id'] : '';
+                            _0x4b646e['fetch_comp']['local'] = ![];
                         } else {
                             _0x4b646e[_0x363a('0xfa')] = _0x4b646e['local_unread'] + 0x1;
                         }
                         _0x4c2dc9['loading_avatar'] = !![];
-                        if (0x0 != _0x4c2dc9[_0x363a('0x226')]) {
-                            _0x4c2dc9[_0x363a('0x218')] = !![];
+                        if (0x0 != _0x4c2dc9['media_attachments']) {
+                            _0x4c2dc9['loading_media'] = !![];
                         }
-                        _0x4b646e[_0x363a('0x193')](_0x4c2dc9, _0x363a('0x227'));
+                        _0x4b646e['updateWrapperBM'](_0x4c2dc9, _0x363a('0x227'));
                         _0x4b646e[_0x363a('0x197')](_0x4c2dc9, _0x363a('0x227'));
                         _0x4b646e['locals'][_0x363a('0x172')](_0x4c2dc9);
-                        _0x4b646e[_0x363a('0x18d')]();
+                        _0x4b646e['$forceUpdate']();
                         _0x4b646e[_0x363a('0x198')](function () {
                             _0x4b646e[_0x363a('0x228')](_0x4c2dc9);
                         });
@@ -3547,10 +3547,10 @@ var app = new Vue({
             }
         },
         'reopenWsLocal': function (_0x1a6119) {
-            if (this[_0x363a('0x14e')] == _0x1a6119 || this[_0x363a('0x96')][_0x363a('0x90')]) {
+            if (this[_0x363a('0x14e')] == _0x1a6119 || this['fetch_lock'][_0x363a('0x90')]) {
                 return;
             }
-            this[_0x363a('0x96')]['localws'] = !![];
+            this['fetch_lock']['localws'] = !![];
             this[_0x363a('0x238')] = _0x363a('0x222');
             this[_0x363a('0x14e')] = _0x363a('0x235') != _0x1a6119 && null != _0x1a6119 ? _0x1a6119 : this[_0x363a('0x14e')];
             this['resetLocalColumn']();
@@ -3564,16 +3564,16 @@ var app = new Vue({
             if (null != _0x348592) {
                 _0x348592[_0x363a('0xf6')] = 0x0;
                 this[_0x363a('0xfa')] = 0x0;
-                this[_0x363a('0xf9')]['splice'](LIMIT);
-                this[_0x363a('0x190')] = this[_0x363a('0x23a')] ? this[_0x363a('0xf9')][this[_0x363a('0xf9')][_0x363a('0xaf')] - 0x1]['id'] : '';
-                this[_0x363a('0xf3')][_0x363a('0xf8')] = ![];
+                this['locals']['splice'](LIMIT);
+                this[_0x363a('0x190')] = this[_0x363a('0x23a')] ? this['locals'][this['locals']['length'] - 0x1]['id'] : '';
+                this['fetch_comp'][_0x363a('0xf8')] = ![];
             }
         },
         'backLocal': function () {
             var _0x36cada = document[_0x363a('0x139')](_0x363a('0xf8'));
             if (null != _0x36cada) {
                 _0x36cada[_0x363a('0xf6')] = 0x0;
-                this[_0x363a('0x96')][_0x363a('0xf8')] = ![];
+                this['fetch_lock'][_0x363a('0xf8')] = ![];
             }
         },
         'nextLocal': function () {
@@ -3585,22 +3585,22 @@ var app = new Vue({
         'openWsMulti': function () {
             var _0x295005 = this;
             var _0x1cd0fa = ST_DIRECT;
-            if (_0x295005[_0x363a('0x99')] == _0x363a('0x199')) {
-                _0x1cd0fa = ST_LIST.replace(_0x363a('0x19a'), _0x295005['multi_target']);
-            } else if (_0x295005[_0x363a('0x99')] == _0x363a('0x23b')) {
-                _0x1cd0fa = ST_HASHTAG.replace(_0x363a('0x19b'), _0x295005[_0x363a('0x151')]);
+            if (_0x295005['multi_type'] == 'List') {
+                _0x1cd0fa = ST_LIST.replace('[LID]', _0x295005['multi_target']);
+            } else if (_0x295005['multi_type'] == _0x363a('0x23b')) {
+                _0x1cd0fa = ST_HASHTAG.replace(_0x363a('0x19b'), _0x295005['multi_target']);
             }
             if (wsMulti == null && _0x295005['at'] != null) {
                 wsMulti = new WebSocket(_0x1cd0fa.replace('[I]', _0x295005['repository']).replace('[AT]', _0x295005['at']));
                 wsMulti[_0x363a('0x237')] = _0x195c15;
-                wsMulti['onclose'] = _[_0x363a('0xe1')](_0xb78230, 0xc8);
+                wsMulti['onclose'] = _['debounce'](_0xb78230, 0xc8);
                 wsMulti[_0x363a('0x21a')] = _0x5a9cd8;
                 wsMulti[_0x363a('0x21b')] = _0x68a050;
                 function _0x195c15() {
                     setTimeout(function () {
                         try {
                             _0x295005[_0x363a('0x23c')] = 'open';
-                            _0x295005[_0x363a('0x96')]['multiws'] = ![];
+                            _0x295005['fetch_lock']['multiws'] = ![];
                             wsMulti['send']('5j');
                         } catch (_0x577fd5) {
                             _0x68a050();
@@ -3608,7 +3608,7 @@ var app = new Vue({
                     }, 0x1f4);
                 }
                 ; function _0xb78230(_0x35f22d) {
-                    _0x295005[_0x363a('0x96')]['multiws'] = !![];
+                    _0x295005['fetch_lock']['multiws'] = !![];
                     _0x295005[_0x363a('0x23c')] = 'ready';
                     wsMulti = null;
                     if (_0x295005[_0x363a('0x21e')]) {
@@ -3627,25 +3627,25 @@ var app = new Vue({
                     }
                 }
                 ; function _0x68a050(_0xad3e45) {
-                    var _0x2b6070 = JSON[_0x363a('0x70')](_0xad3e45['data']);
-                    var _0x3e1dc6 = JSON[_0x363a('0x70')](_0x2b6070['payload']);
+                    var _0x2b6070 = JSON.parse(_0xad3e45['data']);
+                    var _0x3e1dc6 = JSON.parse(_0x2b6070['payload']);
                     var _0x5798ad, _0xd10c45;
                     if (_0x363a('0x212') == _0x2b6070[_0x363a('0x225')]) {
-                        if (null == _0x295005[_0x363a('0xff')][0x0] || null != _0x295005[_0x363a('0xff')][0x0] && _0x295005[_0x363a('0x100')] > KKT1_LASTID && _0x295005[_0x363a('0x100')] > _0x3e1dc6['id']) {
+                        if (null == _0x295005[_0x363a('0xff')][0x0] || null != _0x295005[_0x363a('0xff')][0x0] && _0x295005['multi_id'] > KKT1_LASTID && _0x295005['multi_id'] > _0x3e1dc6['id']) {
                             return;
                         }
                         if (0x0 == _0x295005[_0x363a('0xfb')] && 0x0 == _0x295005[_0x363a('0xfe')]) {
                             _0x295005[_0x363a('0xff')][_0x363a('0xf0')](LIMIT - 0x1);
-                            _0x295005[_0x363a('0x100')] = _0x295005[_0x363a('0x101')] ? _0x295005[_0x363a('0xff')][_0x295005[_0x363a('0xff')][_0x363a('0xaf')] - 0x1]['id'] : '';
-                            _0x295005['fetch_comp'][_0x363a('0xfd')] = ![];
+                            _0x295005['multi_id'] = _0x295005[_0x363a('0x101')] ? _0x295005[_0x363a('0xff')][_0x295005[_0x363a('0xff')]['length'] - 0x1]['id'] : '';
+                            _0x295005['fetch_comp']['multi'] = ![];
                         } else {
                             _0x295005[_0x363a('0xfe')] = _0x295005[_0x363a('0xfe')] + 0x1;
                         }
-                        _0x3e1dc6[_0x363a('0x217')] = !![];
-                        if (null != _0x3e1dc6[_0x363a('0x10c')] && 0x0 != _0x3e1dc6[_0x363a('0x10c')][_0x363a('0x226')] || 0x0 != _0x3e1dc6[_0x363a('0x226')]) {
-                            _0x3e1dc6[_0x363a('0x218')] = !![];
+                        _0x3e1dc6['loading_avatar'] = !![];
+                        if (null != _0x3e1dc6['reblog'] && 0x0 != _0x3e1dc6['reblog']['media_attachments'] || 0x0 != _0x3e1dc6['media_attachments']) {
+                            _0x3e1dc6['loading_media'] = !![];
                         }
-                        _0x295005[_0x363a('0x193')](_0x3e1dc6, _0x363a('0x227'));
+                        _0x295005['updateWrapperBM'](_0x3e1dc6, _0x363a('0x227'));
                         _0x295005['updateFilterBM'](_0x3e1dc6, _0x363a('0x227'));
                         _0x295005['multis']['unshift'](_0x3e1dc6);
                         _0x295005['$forceUpdate']();
@@ -3662,18 +3662,18 @@ var app = new Vue({
         'reopenWsMulti': function (_0x2cb3b0, _0x40e5c1) {
             var _0xd643f0 = _0x40e5c1;
             var _0x38d452 = _0x40e5c1;
-            if (_0x363a('0x199') == _0x2cb3b0) {
+            if ('List' == _0x2cb3b0) {
                 _0xd643f0 = _0x40e5c1['id'];
                 _0x38d452 = _0x40e5c1['title'];
             }
-            if (this[_0x363a('0x99')] == _0x2cb3b0 && this[_0x363a('0x151')]['toLowerCase']() == (_0xd643f0 + '')['toLowerCase']() || this[_0x363a('0x96')][_0x363a('0x97')]) {
+            if (this['multi_type'] == _0x2cb3b0 && this['multi_target']['toLowerCase']() == (_0xd643f0 + '')['toLowerCase']() || this['fetch_lock'][_0x363a('0x97')]) {
                 return;
             }
-            this[_0x363a('0x96')][_0x363a('0x97')] = !![];
+            this['fetch_lock'][_0x363a('0x97')] = !![];
             this[_0x363a('0x23c')] = _0x363a('0x222');
             if (_0x363a('0x235') != _0x2cb3b0 && null != _0x2cb3b0) {
-                this[_0x363a('0x99')] = _0x2cb3b0;
-                this[_0x363a('0x151')] = _0xd643f0;
+                this['multi_type'] = _0x2cb3b0;
+                this['multi_target'] = _0xd643f0;
                 this[_0x363a('0x23e')] = _0x38d452;
             }
             this[_0x363a('0x98')]();
@@ -3683,24 +3683,24 @@ var app = new Vue({
             }
         },
         'upMulti': function () {
-            var _0x31ed05 = document[_0x363a('0x139')](_0x363a('0xfd'));
+            var _0x31ed05 = document[_0x363a('0x139')]('multi');
             if (null != _0x31ed05) {
                 _0x31ed05[_0x363a('0xf6')] = 0x0;
                 this[_0x363a('0xfe')] = 0x0;
                 this[_0x363a('0xff')][_0x363a('0xf0')](LIMIT);
-                this[_0x363a('0x100')] = this[_0x363a('0x101')] ? this['multis'][this[_0x363a('0xff')][_0x363a('0xaf')] - 0x1]['id'] : '';
-                this[_0x363a('0xf3')][_0x363a('0xfd')] = ![];
+                this['multi_id'] = this[_0x363a('0x101')] ? this['multis'][this[_0x363a('0xff')]['length'] - 0x1]['id'] : '';
+                this['fetch_comp']['multi'] = ![];
             }
         },
         'backMulti': function () {
-            var _0x23c6cb = document[_0x363a('0x139')](_0x363a('0xfd'));
+            var _0x23c6cb = document[_0x363a('0x139')]('multi');
             if (null != _0x23c6cb) {
                 _0x23c6cb[_0x363a('0xf6')] = 0x0;
-                this[_0x363a('0x96')][_0x363a('0xfd')] = ![];
+                this['fetch_lock']['multi'] = ![];
             }
         },
         'nextMulti': function () {
-            var _0x511fba = document[_0x363a('0x139')](_0x363a('0xfd'));
+            var _0x511fba = document[_0x363a('0x139')]('multi');
             if (null != _0x511fba) {
                 _0x511fba['scrollTop'] = _0x511fba[_0x363a('0xea')];
             }
@@ -3722,14 +3722,14 @@ var app = new Vue({
             var _0x12be43 = this;
             var _0x3f5ec8 = [];
             var _0x4dab1c = new XMLHttpRequest();
-            _0x4dab1c['open'](_0x363a('0x188'), DIS_USER.replace('[I]', DIS_API).replace('[V]', DIS_API_VER));
+            _0x4dab1c['open']('GET', DIS_USER.replace('[I]', DIS_API).replace('[V]', DIS_API_VER));
             _0x4dab1c['timeout'] = REQ_TIMEOUT;
-            _0x4dab1c[_0x363a('0x18a')](_0x363a('0x18b'), 'Bearer\x20' + _0x12be43[_0x363a('0x1d9')]['access_token']);
+            _0x4dab1c['setRequestHeader']('Authorization', 'Bearer\x20' + _0x12be43[_0x363a('0x1d9')]['access_token']);
             _0x4dab1c['onreadystatechange'] = function () {
-                if (_0x4dab1c[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x4dab1c['status'] == 0xc8) {
-                    _0x12be43[_0x363a('0x1da')] = JSON[_0x363a('0x70')](_0x4dab1c['responseText']);
+                if (_0x4dab1c['readyState'] == XMLHttpRequest['DONE'] && _0x4dab1c['status'] == 0xc8) {
+                    _0x12be43[_0x363a('0x1da')] = JSON.parse(_0x4dab1c['responseText']);
                     _0x12be43['actKatsuDiscord']();
-                } else if (_0x4dab1c[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                } else if (_0x4dab1c['readyState'] == XMLHttpRequest['DONE']) {
                     _0x12be43['popError'](_0x4dab1c['responseText'], _0x4dab1c['status'], 'Discord');
                 }
             }
@@ -3740,14 +3740,14 @@ var app = new Vue({
             var _0x1389c4 = this;
             var _0x421eac = [];
             var _0xeb4b7d = new XMLHttpRequest();
-            _0xeb4b7d['open'](_0x363a('0x188'), DIS_ST.replace('[I]', DIS_API).replace(_0x363a('0x1d4'), DIS_API_VER));
+            _0xeb4b7d['open']('GET', DIS_ST.replace('[I]', DIS_API).replace(_0x363a('0x1d4'), DIS_API_VER));
             _0xeb4b7d['timeout'] = REQ_TIMEOUT;
-            _0xeb4b7d[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x1389c4[_0x363a('0x1d9')]['access_token']);
+            _0xeb4b7d['setRequestHeader']('Authorization', 'Bearer ' + _0x1389c4[_0x363a('0x1d9')]['access_token']);
             _0xeb4b7d['onreadystatechange'] = function () {
                 if (_0xeb4b7d['readyState'] == XMLHttpRequest['DONE'] && _0xeb4b7d['status'] == 0xc8) {
-                    ST_DISCORD = JSON[_0x363a('0x70')](_0xeb4b7d['responseText'])[_0x363a('0xd9')] + _0x363a('0x242');
+                    ST_DISCORD = JSON.parse(_0xeb4b7d['responseText'])['url'] + _0x363a('0x242');
                     _0x1389c4[_0x363a('0x243')]();
-                } else if (_0xeb4b7d[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                } else if (_0xeb4b7d['readyState'] == XMLHttpRequest['DONE']) {
                     _0x1389c4['popError'](_0xeb4b7d['responseText'], _0xeb4b7d['status'], _0x363a('0x244'));
                 }
             }
@@ -3762,25 +3762,25 @@ var app = new Vue({
             if ('' != _0x21069f['discord_id']) {
                 _0x30fe10 = _0x30fe10 + _0x363a('0x245') + _0x21069f[_0x363a('0x246')];
             }
-            _0x21069f[_0x363a('0x96')][_0x363a('0x11f')] = !![];
+            _0x21069f['fetch_lock'][_0x363a('0x11f')] = !![];
             var _0x33905f = new XMLHttpRequest();
-            _0x33905f['open']('GET', _0x30fe10.replace('[I]', DIS_API).replace(_0x363a('0x1d4'), DIS_API_VER).replace('[CH]', DIS_CHANNEL[_0x21069f['discord_type']]).replace(_0x363a('0x19c'), LIMIT_DIS));
+            _0x33905f['open']('GET', _0x30fe10.replace('[I]', DIS_API).replace(_0x363a('0x1d4'), DIS_API_VER).replace('[CH]', DIS_CHANNEL[_0x21069f['discord_type']]).replace('[LM]', LIMIT_DIS));
             _0x33905f['timeout'] = REQ_TIMEOUT;
-            _0x33905f[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x247'));
+            _0x33905f['setRequestHeader']('Authorization', _0x363a('0x247'));
             _0x33905f['onreadystatechange'] = function () {
-                if (_0x33905f[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x33905f['status'] == 0xc8) {
+                if (_0x33905f['readyState'] == XMLHttpRequest['DONE'] && _0x33905f['status'] == 0xc8) {
                     if (_0x372485 == _0x21069f['discord_type'] && _0x21069f['fetch_lock'][_0x363a('0x11f')]) {
                         if (0x0 == _0x21069f[_0x363a('0x248')]['length']) {
                             _0x21069f[_0x363a('0x248')] = JSON['parse'](_0x33905f['responseText']);
                         } else {
-                            Array['prototype']['push'][_0x363a('0x1a3')](_0x21069f[_0x363a('0x248')], JSON[_0x363a('0x70')](_0x33905f['responseText']));
+                            Array['prototype']['push']['apply'](_0x21069f[_0x363a('0x248')], JSON.parse(_0x33905f['responseText']));
                         }
-                        _0x21069f[_0x363a('0x246')] = _0x21069f[_0x363a('0x248')][_0x21069f[_0x363a('0x248')][_0x363a('0xaf')] - 0x1] ? _0x21069f[_0x363a('0x248')][_0x21069f[_0x363a('0x248')][_0x363a('0xaf')] - 0x1]['id'] : '0';
+                        _0x21069f[_0x363a('0x246')] = _0x21069f[_0x363a('0x248')][_0x21069f[_0x363a('0x248')]['length'] - 0x1] ? _0x21069f[_0x363a('0x248')][_0x21069f[_0x363a('0x248')]['length'] - 0x1]['id'] : '0';
                     }
-                    _0x21069f[_0x363a('0x96')]['discord'] = ![];
-                    _0x21069f[_0x363a('0x18d')]();
-                } else if (_0x33905f[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x21069f[_0x363a('0x96')]['discord'] = ![];
+                    _0x21069f['fetch_lock']['discord'] = ![];
+                    _0x21069f['$forceUpdate']();
+                } else if (_0x33905f['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x21069f['fetch_lock']['discord'] = ![];
                     _0x21069f['popError'](_0x33905f['responseText'], _0x33905f['status'], 'Discord');
                 }
             }
@@ -3827,7 +3827,7 @@ var app = new Vue({
                     };
                     wsDiscord['send'](JSON[_0x363a('0x210')](_0x3b47e5));
                     _0x5c41f4['connDiscord'] = 'open';
-                    _0x5c41f4[_0x363a('0x96')][_0x363a('0x24c')] = ![];
+                    _0x5c41f4['fetch_lock'][_0x363a('0x24c')] = ![];
                 }
                     ;
                 wsDiscord[_0x363a('0x219')] = function (_0x5c6e6d) {
@@ -3839,7 +3839,7 @@ var app = new Vue({
                 }
                     ;
                 wsDiscord[_0x363a('0x21b')] = function (_0xb14bfe) {
-                    var _0x40782d = JSON[_0x363a('0x70')](_0xb14bfe['data']);
+                    var _0x40782d = JSON.parse(_0xb14bfe['data']);
                     if (0xa == _0x40782d['op']) {
                         wsDiscord[_0x363a('0x24f')](_0x40782d['d'][_0x363a('0x250')]);
                     }
@@ -3907,25 +3907,25 @@ var app = new Vue({
                 return;
             }
             _0x4079d0[_0x363a('0x25b')] = !![];
-            this[_0x363a('0x18d')]();
+            this['$forceUpdate']();
             var _0x31f25a = new Array();
-            _0x31f25a[_0x363a('0x1a2')](_0x4079d0['id']);
+            _0x31f25a['push'](_0x4079d0['id']);
             var _0x498b70 = this;
             var _0x331e22 = [];
             var _0x27256 = {
                 'account_ids': _0x31f25a
             };
             var _0x40198c = new XMLHttpRequest();
-            _0x40198c['open']('POST', LIST_ACCT.replace('[I]', _0x498b70['repository']).replace(_0x363a('0x19a'), _0x498b70[_0x363a('0xb9')]['id']), !![]);
+            _0x40198c['open']('POST', LIST_ACCT.replace('[I]', _0x498b70['repository']).replace('[LID]', _0x498b70[_0x363a('0xb9')]['id']), !![]);
             _0x40198c['timeout'] = REQ_TIMEOUT;
-            _0x40198c['setRequestHeader'](_0x363a('0x18b'), _0x363a('0x18c') + _0x498b70['at']);
-            _0x40198c[_0x363a('0x18a')](_0x363a('0x1d5'), 'application/json');
+            _0x40198c['setRequestHeader']('Authorization', 'Bearer ' + _0x498b70['at']);
+            _0x40198c['setRequestHeader'](_0x363a('0x1d5'), 'application/json');
             _0x40198c['onreadystatechange'] = function () {
-                if (_0x40198c[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x40198c['status'] == 0xc8) {
+                if (_0x40198c['readyState'] == XMLHttpRequest['DONE'] && _0x40198c['status'] == 0xc8) {
                     _0x498b70[_0x363a('0x25c')](_0x4079d0, !![]);
-                    _0x498b70[_0x363a('0x18d')]();
-                } else if (_0x40198c[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x498b70['popError'](_0x40198c['responseText'], _0x40198c['status'], _0x363a('0x199'));
+                    _0x498b70['$forceUpdate']();
+                } else if (_0x40198c['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x498b70['popError'](_0x40198c['responseText'], _0x40198c['status'], 'List');
                 }
                 _0x4079d0[_0x363a('0x25b')] = ![];
                 _0x498b70['$forceUpdate']();
@@ -3939,9 +3939,9 @@ var app = new Vue({
                 return;
             }
             _0x4c2176['req_list'] = !![];
-            this[_0x363a('0x18d')]();
+            this['$forceUpdate']();
             var _0x301a64 = new Array();
-            _0x301a64[_0x363a('0x1a2')](_0x4c2176['id']);
+            _0x301a64['push'](_0x4c2176['id']);
             var _0x32fd9a = this;
             var _0xf33099 = [];
             var _0x31d0b0 = {
@@ -3950,24 +3950,24 @@ var app = new Vue({
             var _0x2527b7 = new XMLHttpRequest();
             _0x2527b7['open']('DELETE', LIST_ACCT.replace('[I]', _0x32fd9a['repository']).replace('[LID]', _0x32fd9a[_0x363a('0xb9')]['id']), !![]);
             _0x2527b7['timeout'] = REQ_TIMEOUT;
-            _0x2527b7[_0x363a('0x18a')]('Authorization', _0x363a('0x18c') + _0x32fd9a['at']);
-            _0x2527b7[_0x363a('0x18a')](_0x363a('0x1d5'), _0x363a('0x25e'));
+            _0x2527b7['setRequestHeader']('Authorization', 'Bearer ' + _0x32fd9a['at']);
+            _0x2527b7['setRequestHeader'](_0x363a('0x1d5'), _0x363a('0x25e'));
             _0x2527b7['onreadystatechange'] = function () {
-                if (_0x2527b7[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x2527b7['status'] == 0xc8) {
+                if (_0x2527b7['readyState'] == XMLHttpRequest['DONE'] && _0x2527b7['status'] == 0xc8) {
                     _0x32fd9a[_0x363a('0x25c')](_0x4c2176, ![]);
-                    _0x32fd9a[_0x363a('0x18d')]();
+                    _0x32fd9a['$forceUpdate']();
                 } else if (_0x2527b7['readyState'] == XMLHttpRequest['DONE']) {
-                    _0x32fd9a['popError'](_0x2527b7['responseText'], _0x2527b7['status'], _0x363a('0x199'));
+                    _0x32fd9a['popError'](_0x2527b7['responseText'], _0x2527b7['status'], 'List');
                 }
                 _0x4c2176[_0x363a('0x25b')] = ![];
-                _0x32fd9a[_0x363a('0x18d')]();
+                _0x32fd9a['$forceUpdate']();
             }
                 ;
             _0x2527b7['send'](JSON[_0x363a('0x210')](_0x31d0b0));
         },
         'updateList': function (_0x5510db, _0x42cd76) {
             if (_0x42cd76) {
-                this[_0x363a('0x122')][_0x363a('0x1a2')](_0x5510db);
+                this[_0x363a('0x122')]['push'](_0x5510db);
             } else {
                 var _0x343894 = this;
                 var _0x22e5b8;
@@ -3981,7 +3981,7 @@ var app = new Vue({
                     this[_0x363a('0x122')][_0x363a('0xf0')](_0x22e5b8, 0x1);
                 }
             }
-            this[_0x363a('0x18d')]();
+            this['$forceUpdate']();
         },
         'runAddList': function () {
             if (this['fetch_lock'][_0x363a('0x135')]) {
@@ -3993,53 +3993,53 @@ var app = new Vue({
                 'title': this[_0x363a('0xe3')]
             };
             _0x28ffab['fetch_lock'][_0x363a('0x135')] = !![];
-            _0x28ffab[_0x363a('0x18d')]();
+            _0x28ffab['$forceUpdate']();
             var _0x38d9be = new XMLHttpRequest();
             _0x38d9be['open']('POST', LIST_ALL.replace('[I]', _0x28ffab['repository']), !![]);
             _0x38d9be['timeout'] = REQ_TIMEOUT;
-            _0x38d9be[_0x363a('0x18a')](_0x363a('0x18b'), 'Bearer\x20' + _0x28ffab['at']);
+            _0x38d9be['setRequestHeader']('Authorization', 'Bearer\x20' + _0x28ffab['at']);
             _0x38d9be['setRequestHeader']('Content-type', 'application/x-www-form-urlencoded');
             _0x38d9be['onreadystatechange'] = function () {
-                if (_0x38d9be[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x38d9be['status'] == 0xc8) {
+                if (_0x38d9be['readyState'] == XMLHttpRequest['DONE'] && _0x38d9be['status'] == 0xc8) {
                     _0x28ffab[_0x363a('0x8b')]();
-                } else if (_0x38d9be[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x28ffab['popError'](_0x38d9be['responseText'], _0x38d9be['status'], _0x363a('0x199'));
+                } else if (_0x38d9be['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x28ffab['popError'](_0x38d9be['responseText'], _0x38d9be['status'], 'List');
                 }
                 document[_0x363a('0x139')](_0x363a('0x25f'))[_0x363a('0x59')] = '';
-                _0x28ffab[_0x363a('0x96')][_0x363a('0x135')] = ![];
-                _0x28ffab[_0x363a('0x18d')]();
+                _0x28ffab['fetch_lock'][_0x363a('0x135')] = ![];
+                _0x28ffab['$forceUpdate']();
             }
                 ;
             _0x38d9be['send'](encodeHtmlForm(_0x31c4c6));
         },
         'runRemoveList': function (_0x2979bd, _0x33558f) {
-            if (this[_0x363a('0x96')][_0x363a('0x135')]) {
+            if (this['fetch_lock'][_0x363a('0x135')]) {
                 return;
             }
             var _0x45cd89 = this;
             var _0x51ac2d = [];
-            _0x45cd89[_0x363a('0x96')][_0x363a('0x135')] = !![];
-            _0x45cd89[_0x363a('0x18d')]();
+            _0x45cd89['fetch_lock'][_0x363a('0x135')] = !![];
+            _0x45cd89['$forceUpdate']();
             var _0x3c3e38 = new XMLHttpRequest();
-            _0x3c3e38['open'](_0x363a('0x260'), LIST_OBJ.replace('[I]', _0x45cd89['repository']).replace(_0x363a('0x19a'), _0x2979bd), !![]);
+            _0x3c3e38['open'](_0x363a('0x260'), LIST_OBJ.replace('[I]', _0x45cd89['repository']).replace('[LID]', _0x2979bd), !![]);
             _0x3c3e38['timeout'] = REQ_TIMEOUT;
-            _0x3c3e38[_0x363a('0x18a')]('Authorization', _0x363a('0x18c') + _0x45cd89['at']);
-            _0x3c3e38[_0x363a('0x18a')](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
+            _0x3c3e38['setRequestHeader']('Authorization', 'Bearer ' + _0x45cd89['at']);
+            _0x3c3e38['setRequestHeader'](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
             _0x3c3e38['onreadystatechange'] = function () {
-                if (_0x3c3e38[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x3c3e38['status'] == 0xc8) {
+                if (_0x3c3e38['readyState'] == XMLHttpRequest['DONE'] && _0x3c3e38['status'] == 0xc8) {
                     _0x45cd89[_0x363a('0x8b')]();
-                } else if (_0x3c3e38[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x45cd89['popError'](_0x3c3e38['responseText'], _0x3c3e38['status'], _0x363a('0x199'));
+                } else if (_0x3c3e38['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x45cd89['popError'](_0x3c3e38['responseText'], _0x3c3e38['status'], 'List');
                 }
-                _0x45cd89[_0x363a('0x96')][_0x363a('0x135')] = ![];
-                _0x45cd89[_0x363a('0x18d')]();
+                _0x45cd89['fetch_lock'][_0x363a('0x135')] = ![];
+                _0x45cd89['$forceUpdate']();
             }
                 ;
             _0x3c3e38['send'](encodeHtmlForm());
         },
         'addStreamHashtag': function () {
             if (this['stream_hashtag_text'] != null && this[_0x363a('0x1cc')] != '' && this[_0x363a('0xbc')][_0x363a('0x7c')](this[_0x363a('0x1cc')]) == -0x1) {
-                this[_0x363a('0xbc')][_0x363a('0x1a2')](this[_0x363a('0x1cc')]);
+                this[_0x363a('0xbc')]['push'](this[_0x363a('0x1cc')]);
             }
             document[_0x363a('0x139')](_0x363a('0x261'))['value'] = '';
             this[_0x363a('0x1c3')] = '';
@@ -4062,11 +4062,11 @@ var app = new Vue({
             var _0x4d82dd = new Array();
             _0x43463d[_0x363a('0x22b')]['choices'][_0x363a('0x171')](function (_0x531f62, _0x3534fb) {
                 if (_0x531f62) {
-                    _0x4d82dd[_0x363a('0x1a2')](_0x3534fb + '');
+                    _0x4d82dd['push'](_0x3534fb + '');
                 }
             });
             _0x43463d['req_vote'] = !![];
-            this[_0x363a('0x18d')]();
+            this['$forceUpdate']();
             var _0xbfd9d2 = this;
             var _0x5c7866 = [];
             var _0xf0ed26 = {
@@ -4075,62 +4075,62 @@ var app = new Vue({
             var _0x989dfd = new XMLHttpRequest();
             _0x989dfd['open']('POST', VOTE.replace('[I]', _0xbfd9d2['repository']).replace(_0x363a('0x263'), _0x43463d[_0x363a('0x22b')]['id']), !![]);
             _0x989dfd['timeout'] = REQ_TIMEOUT;
-            _0x989dfd[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0xbfd9d2['at']);
-            _0x989dfd[_0x363a('0x18a')](_0x363a('0x1d5'), _0x363a('0x25e'));
+            _0x989dfd['setRequestHeader']('Authorization', 'Bearer ' + _0xbfd9d2['at']);
+            _0x989dfd['setRequestHeader'](_0x363a('0x1d5'), _0x363a('0x25e'));
             _0x989dfd['onreadystatechange'] = function () {
-                if (_0x989dfd[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x989dfd['status'] == 0xc8) {
-                    _0xbfd9d2[_0x363a('0x22b')] = JSON[_0x363a('0x70')](_0x989dfd['responseText']);
+                if (_0x989dfd['readyState'] == XMLHttpRequest['DONE'] && _0x989dfd['status'] == 0xc8) {
+                    _0xbfd9d2[_0x363a('0x22b')] = JSON.parse(_0x989dfd['responseText']);
                     _0xbfd9d2[_0x363a('0x22c')](_0x43463d['id'], _0xbfd9d2[_0x363a('0x22b')]);
-                } else if (_0x989dfd[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                } else if (_0x989dfd['readyState'] == XMLHttpRequest['DONE']) {
                     _0xbfd9d2['popError'](_0x989dfd['responseText'], _0x989dfd['status'], _0x363a('0x264'));
                 }
                 _0x43463d[_0x363a('0x265')] = ![];
-                _0xbfd9d2[_0x363a('0x18d')]();
+                _0xbfd9d2['$forceUpdate']();
             }
                 ;
             _0x989dfd['send'](JSON['stringify'](_0xf0ed26));
         },
         'updateVote': function (_0x20fb65, _0x582ab7) {
             var _0x3dec96 = this;
-            _0x3dec96[_0x363a('0xef')][_0x363a('0x121')](function (_0x37d52f, _0x54458c) {
+            _0x3dec96['homes']['filter'](function (_0x37d52f, _0x54458c) {
                 if (_0x37d52f['id'] == _0x20fb65) {
                     _0x37d52f[_0x363a('0x22b')] = _0x582ab7;
                     return !![];
                 }
-                if (_0x37d52f[_0x363a('0x10c')] && _0x37d52f['reblog']['id'] == _0x20fb65) {
-                    _0x37d52f[_0x363a('0x10c')]['poll'] = _0x582ab7;
+                if (_0x37d52f['reblog'] && _0x37d52f['reblog']['id'] == _0x20fb65) {
+                    _0x37d52f['reblog']['poll'] = _0x582ab7;
                     return !![];
                 }
             });
-            _0x3dec96[_0x363a('0xf9')][_0x363a('0x121')](function (_0x258676, _0x3c9a36) {
+            _0x3dec96['locals']['filter'](function (_0x258676, _0x3c9a36) {
                 if (_0x258676['id'] == _0x20fb65) {
                     _0x258676[_0x363a('0x22b')] = _0x582ab7;
                     return !![];
                 }
             });
-            _0x3dec96[_0x363a('0xb0')][_0x363a('0x121')](function (_0x8ad24d, _0x7dfcc8) {
+            _0x3dec96['notifs']['filter'](function (_0x8ad24d, _0x7dfcc8) {
                 if (_0x8ad24d['status'] && _0x8ad24d['status']['id'] == _0x20fb65) {
                     _0x8ad24d['status'][_0x363a('0x22b')] = _0x582ab7;
                     return !![];
                 }
             });
-            _0x3dec96[_0x363a('0xb1')][_0x363a('0x121')](function (_0x2e267e, _0x349fd1) {
+            _0x3dec96['notifs_filter']['filter'](function (_0x2e267e, _0x349fd1) {
                 if (_0x2e267e['status'] && _0x2e267e['status']['id'] == _0x20fb65) {
                     _0x2e267e['status']['poll'] = _0x582ab7;
                     return !![];
                 }
             });
-            _0x3dec96['accts'][_0x363a('0x121')](function (_0x44c2ab, _0x42de4c) {
+            _0x3dec96['accts']['filter'](function (_0x44c2ab, _0x42de4c) {
                 if (_0x44c2ab['id'] == _0x20fb65) {
                     _0x44c2ab[_0x363a('0x22b')] = _0x582ab7;
                     return !![];
                 }
-                if (_0x44c2ab[_0x363a('0x10c')] && _0x44c2ab[_0x363a('0x10c')]['id'] == _0x20fb65) {
-                    _0x44c2ab[_0x363a('0x10c')]['poll'] = _0x582ab7;
+                if (_0x44c2ab['reblog'] && _0x44c2ab['reblog']['id'] == _0x20fb65) {
+                    _0x44c2ab['reblog']['poll'] = _0x582ab7;
                     return !![];
                 }
             });
-            _0x3dec96[_0x363a('0x160')][_0x363a('0x121')](function (_0x164d7c, _0x4adb40) {
+            _0x3dec96[_0x363a('0x160')]['filter'](function (_0x164d7c, _0x4adb40) {
                 if (_0x164d7c['id'] == _0x20fb65) {
                     _0x164d7c[_0x363a('0x22b')] = _0x582ab7;
                     return !![];
@@ -4139,69 +4139,69 @@ var app = new Vue({
             if (_0x3dec96[_0x363a('0xb2')]['id'] == _0x20fb65) {
                 _0x3dec96[_0x363a('0xb2')][_0x363a('0x22b')] = _0x582ab7;
             }
-            if (0x0 != _0x3dec96['detail_chain'][_0x363a('0xaf')]) {
+            if (0x0 != _0x3dec96['detail_chain']['length']) {
                 _0x3dec96[_0x363a('0x169')][_0x363a('0x266')]['filter'](function (_0x97a840, _0x251da4) {
                     if (_0x97a840['id'] == _0x20fb65) {
                         _0x97a840[_0x363a('0x22b')] = _0x582ab7;
                         return !![];
                     }
                 });
-                _0x3dec96[_0x363a('0x169')][_0x363a('0x267')][_0x363a('0x121')](function (_0x381811, _0x27fa49) {
+                _0x3dec96[_0x363a('0x169')][_0x363a('0x267')]['filter'](function (_0x381811, _0x27fa49) {
                     if (_0x381811['id'] == _0x20fb65) {
                         _0x381811[_0x363a('0x22b')] = _0x582ab7;
                         return !![];
                     }
                 });
             }
-            _0x3dec96[_0x363a('0xff')][_0x363a('0x121')](function (_0x4418ed, _0x566b9e) {
+            _0x3dec96[_0x363a('0xff')]['filter'](function (_0x4418ed, _0x566b9e) {
                 if (_0x4418ed['id'] == _0x20fb65) {
                     _0x4418ed['poll'] = _0x582ab7;
                     return !![];
                 }
             });
-            _0x3dec96[_0x363a('0x18d')]();
+            _0x3dec96['$forceUpdate']();
         },
         'setVote': function (_0x27e3ac, _0x4e84a5) {
             if (null == _0x27e3ac[_0x363a('0x22b')][_0x363a('0xbf')] || !_0x27e3ac[_0x363a('0x22b')][_0x363a('0x268')]) {
                 _0x27e3ac[_0x363a('0x22b')][_0x363a('0xbf')] = [![], ![], ![], ![]];
             }
             _0x27e3ac[_0x363a('0x22b')]['choices'][_0x4e84a5] = !_0x27e3ac[_0x363a('0x22b')][_0x363a('0xbf')][_0x4e84a5];
-            this[_0x363a('0x18d')]();
+            this['$forceUpdate']();
         },
         'runExtime': function () {
-            var _0x49c9f7 = app['_data'][_0x363a('0x61')][_0x363a('0x60')][_0x363a('0x269')][0x0] * 0x15180 + app['_data'][_0x363a('0x61')][_0x363a('0x60')][_0x363a('0x269')][0x1] * 0xe10 + app['_data'][_0x363a('0x61')][_0x363a('0x60')]['extime'][0x2] * 0x3c;
+            var _0x49c9f7 = app['_data']['katsu'][_0x363a('0x60')][_0x363a('0x269')][0x0] * 0x15180 + app['_data']['katsu'][_0x363a('0x60')][_0x363a('0x269')][0x1] * 0xe10 + app['_data']['katsu'][_0x363a('0x60')]['extime'][0x2] * 0x3c;
             if (_0x49c9f7 < 0x12c) {
                 _0x49c9f7 = 0x12c;
-                app['_data'][_0x363a('0x61')][_0x363a('0x60')]['extime'] = [0x0, 0x0, 0x5];
+                app['_data']['katsu'][_0x363a('0x60')]['extime'] = [0x0, 0x0, 0x5];
             } else if (_0x49c9f7 > LIMIT_POLLEXPIRE) {
                 _0x49c9f7 = LIMIT_POLLEXPIRE;
-                app['_data'][_0x363a('0x61')]['poll_work'][_0x363a('0x269')] = [0x1c, 0x0, 0x0];
+                app['_data']['katsu']['poll_work'][_0x363a('0x269')] = [0x1c, 0x0, 0x0];
             }
-            app['_data'][_0x363a('0x61')]['poll'][_0x363a('0x26a')] = _0x49c9f7;
+            app['_data']['katsu']['poll'][_0x363a('0x26a')] = _0x49c9f7;
         },
         'actFav': function (_0x4e8b10, _0x5a1b64) {
-            if (0x1 == this[_0x363a('0x1f9')][_0x363a('0x10a')] && !![] !== _0x5a1b64) {
+            if (0x1 == this[_0x363a('0x1f9')]['fav'] && !![] !== _0x5a1b64) {
                 this[_0x363a('0x1fa')](_0x4e8b10, 'fav');
                 return;
             }
             _0x4e8b10[_0x363a('0x26b')] = !![];
-            this[_0x363a('0x18d')]();
+            this['$forceUpdate']();
             var _0x48f901 = this;
             var _0x56ad37 = [];
             var _0x5468c7 = {};
             var _0xa4e12d = new XMLHttpRequest();
             _0xa4e12d['open']('POST', ACT_FAV.replace('[I]', _0x48f901['repository']).replace(_0x363a('0x1b8'), _0x4e8b10['id']), !![]);
             _0xa4e12d['timeout'] = REQ_TIMEOUT;
-            _0xa4e12d['setRequestHeader'](_0x363a('0x18b'), _0x363a('0x18c') + _0x48f901['at']);
-            _0xa4e12d[_0x363a('0x18a')]('Content-type', 'application/x-www-form-urlencoded');
+            _0xa4e12d['setRequestHeader']('Authorization', 'Bearer ' + _0x48f901['at']);
+            _0xa4e12d['setRequestHeader']('Content-type', 'application/x-www-form-urlencoded');
             _0xa4e12d['onreadystatechange'] = function () {
-                if (_0xa4e12d[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0xa4e12d['status'] == 0xc8) {
+                if (_0xa4e12d['readyState'] == XMLHttpRequest['DONE'] && _0xa4e12d['status'] == 0xc8) {
                     _0x48f901[_0x363a('0x26c')](_0x4e8b10['id'], !![]);
-                } else if (_0xa4e12d[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                } else if (_0xa4e12d['readyState'] == XMLHttpRequest['DONE']) {
                     _0x48f901['popError'](_0xa4e12d['responseText'], _0xa4e12d['status'], _0x363a('0x26d'));
                 }
                 _0x4e8b10[_0x363a('0x26b')] = ![];
-                _0x48f901[_0x363a('0x18d')]();
+                _0x48f901['$forceUpdate']();
             }
                 ;
             _0xa4e12d['send'](encodeHtmlForm(_0x5468c7));
@@ -4213,17 +4213,17 @@ var app = new Vue({
                 return;
             }
             _0x144e2b[_0x363a('0x26b')] = !![];
-            this[_0x363a('0x18d')]();
+            this['$forceUpdate']();
             var _0x285081 = this;
             var _0x30c1b4 = [];
             var _0x597e1e = {};
             var _0x147359 = new XMLHttpRequest();
             _0x147359['open']('POST', ACT_UNFAV.replace('[I]', _0x285081['repository']).replace(_0x363a('0x1b8'), _0x144e2b['id']), !![]);
             _0x147359['timeout'] = REQ_TIMEOUT;
-            _0x147359[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x285081['at']);
+            _0x147359['setRequestHeader']('Authorization', 'Bearer ' + _0x285081['at']);
             _0x147359['setRequestHeader']('Content-type', 'application/x-www-form-urlencoded');
             _0x147359['onreadystatechange'] = function () {
-                if (_0x147359[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x147359['status'] == 0xc8) {
+                if (_0x147359['readyState'] == XMLHttpRequest['DONE'] && _0x147359['status'] == 0xc8) {
                     _0x285081[_0x363a('0x26c')](_0x144e2b['id'], null);
                 } else if (_0x147359['readyState'] == XMLHttpRequest['DONE']) {
                     _0x285081['popError'](_0x147359['responseText'], _0x147359['status'], _0x363a('0x26d'));
@@ -4237,98 +4237,98 @@ var app = new Vue({
         },
         'updateFav': function (_0x640610, _0x57be38) {
             var _0x150a12 = this;
-            _0x150a12[_0x363a('0xef')][_0x363a('0x121')](function (_0x3cd414, _0x86e889) {
+            _0x150a12['homes']['filter'](function (_0x3cd414, _0x86e889) {
                 if (_0x3cd414['id'] == _0x640610) {
                     _0x3cd414['favourited'] = _0x57be38;
                     return !![];
                 }
-                if (_0x3cd414[_0x363a('0x10c')] && _0x3cd414[_0x363a('0x10c')]['id'] == _0x640610) {
-                    _0x3cd414[_0x363a('0x10c')][_0x363a('0x26e')] = _0x57be38;
+                if (_0x3cd414['reblog'] && _0x3cd414['reblog']['id'] == _0x640610) {
+                    _0x3cd414['reblog']['favourited'] = _0x57be38;
                     return !![];
                 }
             });
-            _0x150a12[_0x363a('0xf9')][_0x363a('0x121')](function (_0x69931f, _0x5775d5) {
+            _0x150a12['locals']['filter'](function (_0x69931f, _0x5775d5) {
                 if (_0x69931f['id'] == _0x640610) {
-                    _0x69931f[_0x363a('0x26e')] = _0x57be38;
+                    _0x69931f['favourited'] = _0x57be38;
                     return !![];
                 }
             });
-            _0x150a12[_0x363a('0xb0')][_0x363a('0x121')](function (_0x3b6a1e, _0x248060) {
+            _0x150a12['notifs']['filter'](function (_0x3b6a1e, _0x248060) {
                 if (_0x3b6a1e['status'] && _0x3b6a1e['status']['id'] == _0x640610) {
-                    _0x3b6a1e['status'][_0x363a('0x26e')] = _0x57be38;
+                    _0x3b6a1e['status']['favourited'] = _0x57be38;
                     return !![];
                 }
             });
-            _0x150a12[_0x363a('0xb1')][_0x363a('0x121')](function (_0x217dc7, _0x3ce80e) {
+            _0x150a12['notifs_filter']['filter'](function (_0x217dc7, _0x3ce80e) {
                 if (_0x217dc7['status'] && _0x217dc7['status']['id'] == _0x640610) {
-                    _0x217dc7['status'][_0x363a('0x26e')] = _0x57be38;
+                    _0x217dc7['status']['favourited'] = _0x57be38;
                     return !![];
                 }
             });
-            _0x150a12[_0x363a('0x15f')][_0x363a('0x121')](function (_0x17a753, _0x38a031) {
+            _0x150a12['accts']['filter'](function (_0x17a753, _0x38a031) {
                 if (_0x17a753['id'] == _0x640610) {
-                    _0x17a753[_0x363a('0x26e')] = _0x57be38;
+                    _0x17a753['favourited'] = _0x57be38;
                     return !![];
                 }
-                if (_0x17a753[_0x363a('0x10c')] && _0x17a753[_0x363a('0x10c')]['id'] == _0x640610) {
-                    _0x17a753['reblog'][_0x363a('0x26e')] = _0x57be38;
+                if (_0x17a753['reblog'] && _0x17a753['reblog']['id'] == _0x640610) {
+                    _0x17a753['reblog']['favourited'] = _0x57be38;
                     return !![];
                 }
             });
             _0x150a12[_0x363a('0x160')]['filter'](function (_0x52d35b, _0xc4528c) {
                 if (_0x52d35b['id'] == _0x640610) {
-                    _0x52d35b[_0x363a('0x26e')] = _0x57be38;
+                    _0x52d35b['favourited'] = _0x57be38;
                     return !![];
                 }
             });
             if (_0x150a12[_0x363a('0xb2')]['id'] == _0x640610) {
-                _0x150a12[_0x363a('0xb2')][_0x363a('0x26e')] = _0x57be38;
+                _0x150a12[_0x363a('0xb2')]['favourited'] = _0x57be38;
             }
-            if (0x0 != _0x150a12[_0x363a('0x169')][_0x363a('0xaf')]) {
-                _0x150a12[_0x363a('0x169')][_0x363a('0x266')][_0x363a('0x121')](function (_0x411ab4, _0x357468) {
+            if (0x0 != _0x150a12[_0x363a('0x169')]['length']) {
+                _0x150a12[_0x363a('0x169')][_0x363a('0x266')]['filter'](function (_0x411ab4, _0x357468) {
                     if (_0x411ab4['id'] == _0x640610) {
                         _0x411ab4['favourited'] = _0x57be38;
                         return !![];
                     }
                 });
-                _0x150a12[_0x363a('0x169')][_0x363a('0x267')][_0x363a('0x121')](function (_0x501c97, _0x1f1a7a) {
+                _0x150a12[_0x363a('0x169')][_0x363a('0x267')]['filter'](function (_0x501c97, _0x1f1a7a) {
                     if (_0x501c97['id'] == _0x640610) {
-                        _0x501c97[_0x363a('0x26e')] = _0x57be38;
+                        _0x501c97['favourited'] = _0x57be38;
                         return !![];
                     }
                 });
             }
-            _0x150a12[_0x363a('0xff')][_0x363a('0x121')](function (_0xee3a6b, _0x5d8be2) {
+            _0x150a12[_0x363a('0xff')]['filter'](function (_0xee3a6b, _0x5d8be2) {
                 if (_0xee3a6b['id'] == _0x640610) {
-                    _0xee3a6b[_0x363a('0x26e')] = _0x57be38;
+                    _0xee3a6b['favourited'] = _0x57be38;
                     return !![];
                 }
             });
-            _0x150a12[_0x363a('0x18d')]();
+            _0x150a12['$forceUpdate']();
         },
         'actReblog': function (_0xbe94bc, _0x15be0f) {
             if (0x1 == this[_0x363a('0x1f9')]['reblog'] && !![] !== _0x15be0f) {
-                this[_0x363a('0x1fa')](_0xbe94bc, _0x363a('0x10c'));
+                this[_0x363a('0x1fa')](_0xbe94bc, 'reblog');
                 return;
             }
             _0xbe94bc[_0x363a('0x26f')] = !![];
-            this[_0x363a('0x18d')]();
+            this['$forceUpdate']();
             var _0x59b59e = this;
             var _0xfd46b4 = [];
             var _0x1279c6 = {};
             var _0x312e80 = new XMLHttpRequest();
             _0x312e80['open']('POST', ACT_REBLOG.replace('[I]', _0x59b59e['repository']).replace(_0x363a('0x1b8'), _0xbe94bc['id']), !![]);
             _0x312e80['timeout'] = REQ_TIMEOUT;
-            _0x312e80[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x59b59e['at']);
-            _0x312e80[_0x363a('0x18a')](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
+            _0x312e80['setRequestHeader']('Authorization', 'Bearer ' + _0x59b59e['at']);
+            _0x312e80['setRequestHeader'](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
             _0x312e80['onreadystatechange'] = function () {
-                if (_0x312e80[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x312e80['status'] == 0xc8) {
+                if (_0x312e80['readyState'] == XMLHttpRequest['DONE'] && _0x312e80['status'] == 0xc8) {
                     _0x59b59e[_0x363a('0x270')](_0xbe94bc['id'], !![]);
-                } else if (_0x312e80[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                } else if (_0x312e80['readyState'] == XMLHttpRequest['DONE']) {
                     _0x59b59e['popError'](_0x312e80['responseText'], _0x312e80['status'], 'Reblog');
                 }
                 _0xbe94bc[_0x363a('0x26f')] = ![];
-                _0x59b59e[_0x363a('0x18d')]();
+                _0x59b59e['$forceUpdate']();
             }
                 ;
             _0x312e80['send'](encodeHtmlForm(_0x1279c6));
@@ -4339,23 +4339,23 @@ var app = new Vue({
                 return;
             }
             _0x411ccc[_0x363a('0x26f')] = !![];
-            this[_0x363a('0x18d')]();
+            this['$forceUpdate']();
             var _0x3e1fc8 = this;
             var _0x263f32 = [];
             var _0x5c3f03 = {};
             var _0x2ee731 = new XMLHttpRequest();
             _0x2ee731['open']('POST', ACT_UNREBLOG.replace('[I]', _0x3e1fc8['repository']).replace(_0x363a('0x1b8'), _0x411ccc['id']), !![]);
             _0x2ee731['timeout'] = REQ_TIMEOUT;
-            _0x2ee731[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x3e1fc8['at']);
-            _0x2ee731[_0x363a('0x18a')](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
+            _0x2ee731['setRequestHeader']('Authorization', 'Bearer ' + _0x3e1fc8['at']);
+            _0x2ee731['setRequestHeader'](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
             _0x2ee731['onreadystatechange'] = function () {
-                if (_0x2ee731[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x2ee731['status'] == 0xc8) {
+                if (_0x2ee731['readyState'] == XMLHttpRequest['DONE'] && _0x2ee731['status'] == 0xc8) {
                     _0x3e1fc8[_0x363a('0x270')](_0x411ccc['id'], null);
-                } else if (_0x2ee731[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                } else if (_0x2ee731['readyState'] == XMLHttpRequest['DONE']) {
                     _0x3e1fc8['popError'](_0x2ee731['responseText'], _0x2ee731['status'], _0x363a('0x272'));
                 }
                 _0x411ccc[_0x363a('0x26f')] = ![];
-                _0x3e1fc8[_0x363a('0x18d')]();
+                _0x3e1fc8['$forceUpdate']();
             }
                 ;
             _0x2ee731['send'](encodeHtmlForm(_0x5c3f03));
@@ -4367,40 +4367,40 @@ var app = new Vue({
                     _0x3fa094[_0x363a('0x273')] = _0x339cfb;
                     return !![];
                 }
-                if (_0x3fa094[_0x363a('0x10c')] && _0x3fa094[_0x363a('0x10c')]['id'] == _0x3b6be9) {
+                if (_0x3fa094['reblog'] && _0x3fa094['reblog']['id'] == _0x3b6be9) {
                     _0x3fa094['reblog'][_0x363a('0x273')] = _0x339cfb;
                     return !![];
                 }
             });
-            _0x380e4d[_0x363a('0xf9')][_0x363a('0x121')](function (_0x2d8561, _0x26fb8d) {
+            _0x380e4d['locals']['filter'](function (_0x2d8561, _0x26fb8d) {
                 if (_0x2d8561['id'] == _0x3b6be9) {
                     _0x2d8561['reblogged'] = _0x339cfb;
                     return !![];
                 }
             });
-            _0x380e4d['notifs'][_0x363a('0x121')](function (_0x29da09, _0x366e09) {
+            _0x380e4d['notifs']['filter'](function (_0x29da09, _0x366e09) {
                 if (_0x29da09['status'] && _0x29da09['status']['id'] == _0x3b6be9) {
                     _0x29da09['status'][_0x363a('0x273')] = _0x339cfb;
                     return !![];
                 }
             });
-            _0x380e4d[_0x363a('0xb1')][_0x363a('0x121')](function (_0x50d7c6, _0x352d5a) {
+            _0x380e4d['notifs_filter']['filter'](function (_0x50d7c6, _0x352d5a) {
                 if (_0x50d7c6['status'] && _0x50d7c6['status']['id'] == _0x3b6be9) {
                     _0x50d7c6['status'][_0x363a('0x273')] = _0x339cfb;
                     return !![];
                 }
             });
-            _0x380e4d[_0x363a('0x15f')][_0x363a('0x121')](function (_0x3df931, _0x508d92) {
+            _0x380e4d['accts']['filter'](function (_0x3df931, _0x508d92) {
                 if (_0x3df931['id'] == _0x3b6be9) {
                     _0x3df931[_0x363a('0x273')] = _0x339cfb;
                     return !![];
                 }
-                if (_0x3df931[_0x363a('0x10c')] && _0x3df931['reblog']['id'] == _0x3b6be9) {
-                    _0x3df931[_0x363a('0x10c')][_0x363a('0x273')] = _0x339cfb;
+                if (_0x3df931['reblog'] && _0x3df931['reblog']['id'] == _0x3b6be9) {
+                    _0x3df931['reblog'][_0x363a('0x273')] = _0x339cfb;
                     return !![];
                 }
             });
-            _0x380e4d[_0x363a('0x160')][_0x363a('0x121')](function (_0x283394, _0x290dc1) {
+            _0x380e4d[_0x363a('0x160')]['filter'](function (_0x283394, _0x290dc1) {
                 if (_0x283394['id'] == _0x3b6be9) {
                     _0x283394[_0x363a('0x273')] = _0x339cfb;
                     return !![];
@@ -4409,8 +4409,8 @@ var app = new Vue({
             if (_0x380e4d[_0x363a('0xb2')]['id'] == _0x3b6be9) {
                 _0x380e4d['detail'][_0x363a('0x273')] = _0x339cfb;
             }
-            if (0x0 != _0x380e4d[_0x363a('0x169')][_0x363a('0xaf')]) {
-                _0x380e4d[_0x363a('0x169')][_0x363a('0x266')][_0x363a('0x121')](function (_0xec8998, _0x35ca66) {
+            if (0x0 != _0x380e4d[_0x363a('0x169')]['length']) {
+                _0x380e4d[_0x363a('0x169')][_0x363a('0x266')]['filter'](function (_0xec8998, _0x35ca66) {
                     if (_0xec8998['id'] == _0x3b6be9) {
                         _0xec8998[_0x363a('0x273')] = _0x339cfb;
                         return !![];
@@ -4423,7 +4423,7 @@ var app = new Vue({
                     }
                 });
             }
-            _0x380e4d['multis'][_0x363a('0x121')](function (_0xc66fcb, _0x5e67b0) {
+            _0x380e4d['multis']['filter'](function (_0xc66fcb, _0x5e67b0) {
                 if (_0xc66fcb['id'] == _0x3b6be9) {
                     _0xc66fcb['reblogged'] = _0x339cfb;
                     return !![];
@@ -4437,25 +4437,25 @@ var app = new Vue({
                 return;
             }
             _0x5315b5[_0x363a('0x274')] = !![];
-            this[_0x363a('0x18d')]();
+            this['$forceUpdate']();
             var _0x2c2bda = this;
             var _0xd72143 = [];
             var _0x262d49 = {};
             var _0x4f4a63 = new XMLHttpRequest();
             _0x4f4a63['open']('POST', ACT_FOLLOW.replace('[I]', _0x2c2bda['repository']).replace('[AID]', _0x5315b5['id']), !![]);
             _0x4f4a63['timeout'] = REQ_TIMEOUT;
-            _0x4f4a63[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x2c2bda['at']);
-            _0x4f4a63[_0x363a('0x18a')]('Content-type', 'application/x-www-form-urlencoded');
+            _0x4f4a63['setRequestHeader']('Authorization', 'Bearer ' + _0x2c2bda['at']);
+            _0x4f4a63['setRequestHeader']('Content-type', 'application/x-www-form-urlencoded');
             _0x4f4a63['onreadystatechange'] = function () {
                 if (_0x4f4a63['readyState'] == XMLHttpRequest['DONE'] && _0x4f4a63['status'] == 0xc8) {
-                    _0x2c2bda[_0x363a('0x161')][0x0] = JSON[_0x363a('0x70')](_0x4f4a63['responseText']);
+                    _0x2c2bda[_0x363a('0x161')][0x0] = JSON.parse(_0x4f4a63['responseText']);
                     _0x2c2bda[_0x363a('0x275')](_0x5315b5['id'], _0x2c2bda['acct_relation'][0x0]);
-                    _0x2c2bda[_0x363a('0x18d')]();
-                } else if (_0x4f4a63[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                    _0x2c2bda['$forceUpdate']();
+                } else if (_0x4f4a63['readyState'] == XMLHttpRequest['DONE']) {
                     _0x2c2bda['popError'](_0x4f4a63['responseText'], _0x4f4a63['status'], 'Follow');
                 }
                 _0x5315b5[_0x363a('0x274')] = ![];
-                _0x2c2bda[_0x363a('0x18d')]();
+                _0x2c2bda['$forceUpdate']();
             }
                 ;
             _0x4f4a63['send'](encodeHtmlForm(_0x262d49));
@@ -4466,25 +4466,25 @@ var app = new Vue({
                 return;
             }
             _0x1e69a7['req_follow'] = !![];
-            this[_0x363a('0x18d')]();
+            this['$forceUpdate']();
             var _0x20f54f = this;
             var _0x4ac3ff = [];
             var _0x527aaf = {};
             var _0x3dea81 = new XMLHttpRequest();
             _0x3dea81['open']('POST', ACT_UNFOLLOW.replace('[I]', _0x20f54f['repository']).replace(_0x363a('0x1a9'), _0x1e69a7['id']), !![]);
             _0x3dea81['timeout'] = REQ_TIMEOUT;
-            _0x3dea81[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x20f54f['at']);
+            _0x3dea81['setRequestHeader']('Authorization', 'Bearer ' + _0x20f54f['at']);
             _0x3dea81['setRequestHeader'](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
             _0x3dea81['onreadystatechange'] = function () {
-                if (_0x3dea81[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x3dea81['status'] == 0xc8) {
-                    _0x20f54f[_0x363a('0x161')][0x0] = JSON[_0x363a('0x70')](_0x3dea81['responseText']);
+                if (_0x3dea81['readyState'] == XMLHttpRequest['DONE'] && _0x3dea81['status'] == 0xc8) {
+                    _0x20f54f[_0x363a('0x161')][0x0] = JSON.parse(_0x3dea81['responseText']);
                     _0x20f54f['updateRelation'](_0x1e69a7['id'], _0x20f54f[_0x363a('0x161')][0x0]);
-                    _0x20f54f[_0x363a('0x18d')]();
+                    _0x20f54f['$forceUpdate']();
                 } else if (_0x3dea81['readyState'] == XMLHttpRequest['DONE']) {
                     _0x20f54f['popError'](_0x3dea81['responseText'], _0x3dea81['status'], _0x363a('0x277'));
                 }
                 _0x1e69a7['req_follow'] = ![];
-                _0x20f54f[_0x363a('0x18d')]();
+                _0x20f54f['$forceUpdate']();
             }
                 ;
             _0x3dea81['send'](encodeHtmlForm(_0x527aaf));
@@ -4499,23 +4499,23 @@ var app = new Vue({
                     return !![];
                 }
             });
-            _0x31b925[_0x363a('0x18d')]();
+            _0x31b925['$forceUpdate']();
         },
         'actFollowAuth': function (_0x3b296d, _0x5d55ec) {
             _0x3b296d[_0x363a('0x274')] = !![];
-            this[_0x363a('0x18d')]();
+            this['$forceUpdate']();
             var _0x4da9d6 = this;
             var _0x3a09ff = [];
             var _0x384f7c = {};
             var _0x42bbe0 = new XMLHttpRequest();
             _0x42bbe0['open']('POST', FOLLOW_AUTH.replace('[I]', _0x4da9d6['repository']).replace(_0x363a('0x1a9'), _0x3b296d['id']), !![]);
             _0x42bbe0['timeout'] = REQ_TIMEOUT;
-            _0x42bbe0['setRequestHeader'](_0x363a('0x18b'), 'Bearer\x20' + _0x4da9d6['at']);
-            _0x42bbe0[_0x363a('0x18a')]('Content-type', 'application/x-www-form-urlencoded');
+            _0x42bbe0['setRequestHeader']('Authorization', 'Bearer\x20' + _0x4da9d6['at']);
+            _0x42bbe0['setRequestHeader']('Content-type', 'application/x-www-form-urlencoded');
             _0x42bbe0['onreadystatechange'] = function () {
-                if (_0x42bbe0[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x42bbe0['status'] == 0xc8) {
+                if (_0x42bbe0['readyState'] == XMLHttpRequest['DONE'] && _0x42bbe0['status'] == 0xc8) {
                     _0x4da9d6[_0x363a('0x27a')](_0x3b296d['id'], !![]);
-                } else if (_0x42bbe0[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                } else if (_0x42bbe0['readyState'] == XMLHttpRequest['DONE']) {
                     _0x4da9d6['popError'](_0x42bbe0['responseText'], _0x42bbe0['status'], 'Request');
                 }
                 _0x3b296d['req_follow'] = ![];
@@ -4526,23 +4526,23 @@ var app = new Vue({
         },
         'actUnFollowAuth': function (_0x41145, _0x6533f8) {
             _0x41145[_0x363a('0x274')] = !![];
-            this[_0x363a('0x18d')]();
+            this['$forceUpdate']();
             var _0x2d2649 = this;
             var _0x5f4533 = [];
             var _0x1337fa = {};
             var _0x4b4b4e = new XMLHttpRequest();
             _0x4b4b4e['open']('POST', FOLLOW_REJECT.replace('[I]', _0x2d2649['repository']).replace(_0x363a('0x1a9'), _0x41145['id']), !![]);
             _0x4b4b4e['timeout'] = REQ_TIMEOUT;
-            _0x4b4b4e[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x2d2649['at']);
+            _0x4b4b4e['setRequestHeader']('Authorization', 'Bearer ' + _0x2d2649['at']);
             _0x4b4b4e['setRequestHeader'](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
             _0x4b4b4e['onreadystatechange'] = function () {
                 if (_0x4b4b4e['readyState'] == XMLHttpRequest['DONE'] && _0x4b4b4e['status'] == 0xc8) {
                     _0x2d2649['updateFollowAuth'](_0x41145['id'], ![]);
-                } else if (_0x4b4b4e[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                } else if (_0x4b4b4e['readyState'] == XMLHttpRequest['DONE']) {
                     _0x2d2649['popError'](_0x4b4b4e['responseText'], _0x4b4b4e['status'], _0x363a('0x27b'));
                 }
                 _0x41145[_0x363a('0x274')] = ![];
-                _0x2d2649[_0x363a('0x18d')]();
+                _0x2d2649['$forceUpdate']();
             }
                 ;
             _0x4b4b4e['send'](encodeHtmlForm(_0x1337fa));
@@ -4564,25 +4564,25 @@ var app = new Vue({
                 return;
             }
             _0x5f2d0b[_0x363a('0x27d')] = !![];
-            this[_0x363a('0x18d')]();
+            this['$forceUpdate']();
             var _0x2b01d9 = this;
             var _0x2ee2e9 = [];
             var _0x65540e = {};
             var _0xa12cc2 = new XMLHttpRequest();
             _0xa12cc2['open']('POST', ACT_MUTE.replace('[I]', _0x2b01d9['repository']).replace('[AID]', _0x5f2d0b['id']), !![]);
             _0xa12cc2['timeout'] = REQ_TIMEOUT;
-            _0xa12cc2[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x2b01d9['at']);
-            _0xa12cc2[_0x363a('0x18a')](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
+            _0xa12cc2['setRequestHeader']('Authorization', 'Bearer ' + _0x2b01d9['at']);
+            _0xa12cc2['setRequestHeader'](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
             _0xa12cc2['onreadystatechange'] = function () {
-                if (_0xa12cc2[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0xa12cc2['status'] == 0xc8) {
-                    _0x2b01d9[_0x363a('0x161')][0x0] = JSON[_0x363a('0x70')](_0xa12cc2['responseText']);
+                if (_0xa12cc2['readyState'] == XMLHttpRequest['DONE'] && _0xa12cc2['status'] == 0xc8) {
+                    _0x2b01d9[_0x363a('0x161')][0x0] = JSON.parse(_0xa12cc2['responseText']);
                     _0x2b01d9[_0x363a('0x275')](_0x5f2d0b['id'], _0x2b01d9[_0x363a('0x161')][0x0]);
                     _0x2b01d9['$forceUpdate']();
-                } else if (_0xa12cc2[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                } else if (_0xa12cc2['readyState'] == XMLHttpRequest['DONE']) {
                     _0x2b01d9['popError'](_0xa12cc2['responseText'], _0xa12cc2['status'], _0x363a('0x27e'));
                 }
                 _0x5f2d0b['req_mute'] = ![];
-                _0x2b01d9[_0x363a('0x18d')]();
+                _0x2b01d9['$forceUpdate']();
             }
                 ;
             _0xa12cc2['send'](encodeHtmlForm(_0x65540e));
@@ -4600,14 +4600,14 @@ var app = new Vue({
             var _0x2a8640 = new XMLHttpRequest();
             _0x2a8640['open']('POST', ACT_UNMUTE.replace('[I]', _0x568e46['repository']).replace(_0x363a('0x1a9'), _0x4d46d9['id']), !![]);
             _0x2a8640['timeout'] = REQ_TIMEOUT;
-            _0x2a8640[_0x363a('0x18a')](_0x363a('0x18b'), 'Bearer\x20' + _0x568e46['at']);
-            _0x2a8640[_0x363a('0x18a')](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
+            _0x2a8640['setRequestHeader']('Authorization', 'Bearer\x20' + _0x568e46['at']);
+            _0x2a8640['setRequestHeader'](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
             _0x2a8640['onreadystatechange'] = function () {
-                if (_0x2a8640[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x2a8640['status'] == 0xc8) {
-                    _0x568e46[_0x363a('0x161')][0x0] = JSON[_0x363a('0x70')](_0x2a8640['responseText']);
+                if (_0x2a8640['readyState'] == XMLHttpRequest['DONE'] && _0x2a8640['status'] == 0xc8) {
+                    _0x568e46[_0x363a('0x161')][0x0] = JSON.parse(_0x2a8640['responseText']);
                     _0x568e46[_0x363a('0x275')](_0x4d46d9['id'], _0x568e46[_0x363a('0x161')][0x0]);
-                    _0x568e46[_0x363a('0x18d')]();
-                } else if (_0x2a8640[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                    _0x568e46['$forceUpdate']();
+                } else if (_0x2a8640['readyState'] == XMLHttpRequest['DONE']) {
                     _0x568e46['popError'](_0x2a8640['responseText'], _0x2a8640['status'], _0x363a('0x27e'));
                 }
                 _0x4d46d9[_0x363a('0x27d')] = ![];
@@ -4622,25 +4622,25 @@ var app = new Vue({
                 return;
             }
             _0x542d5b['req_block'] = !![];
-            this[_0x363a('0x18d')]();
+            this['$forceUpdate']();
             var _0x107968 = this;
             var _0x2e0472 = [];
             var _0x5c1844 = {};
             var _0xc635b3 = new XMLHttpRequest();
             _0xc635b3['open']('POST', ACT_BLOCK.replace('[I]', _0x107968['repository']).replace(_0x363a('0x1a9'), _0x542d5b['id']), !![]);
             _0xc635b3['timeout'] = REQ_TIMEOUT;
-            _0xc635b3[_0x363a('0x18a')](_0x363a('0x18b'), _0x363a('0x18c') + _0x107968['at']);
-            _0xc635b3[_0x363a('0x18a')]('Content-type', 'application/x-www-form-urlencoded');
+            _0xc635b3['setRequestHeader']('Authorization', 'Bearer ' + _0x107968['at']);
+            _0xc635b3['setRequestHeader']('Content-type', 'application/x-www-form-urlencoded');
             _0xc635b3['onreadystatechange'] = function () {
-                if (_0xc635b3[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0xc635b3['status'] == 0xc8) {
-                    _0x107968[_0x363a('0x161')][0x0] = JSON[_0x363a('0x70')](_0xc635b3['responseText']);
+                if (_0xc635b3['readyState'] == XMLHttpRequest['DONE'] && _0xc635b3['status'] == 0xc8) {
+                    _0x107968[_0x363a('0x161')][0x0] = JSON.parse(_0xc635b3['responseText']);
                     _0x107968['updateRelation'](_0x542d5b['id'], _0x107968[_0x363a('0x161')][0x0]);
-                    _0x107968[_0x363a('0x18d')]();
-                } else if (_0xc635b3[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                    _0x107968['$forceUpdate']();
+                } else if (_0xc635b3['readyState'] == XMLHttpRequest['DONE']) {
                     _0x107968['popError'](_0xc635b3['responseText'], _0xc635b3['status'], 'Block');
                 }
                 _0x542d5b[_0x363a('0x280')] = ![];
-                _0x107968[_0x363a('0x18d')]();
+                _0x107968['$forceUpdate']();
             }
                 ;
             _0xc635b3['send'](encodeHtmlForm(_0x5c1844));
@@ -4651,25 +4651,25 @@ var app = new Vue({
                 return;
             }
             _0x363ed0[_0x363a('0x280')] = !![];
-            this[_0x363a('0x18d')]();
+            this['$forceUpdate']();
             var _0x49c0f8 = this;
             var _0x33f04d = [];
             var _0x2110c6 = {};
             var _0x3d3ded = new XMLHttpRequest();
             _0x3d3ded['open']('POST', ACT_UNBLOCK.replace('[I]', _0x49c0f8['repository']).replace(_0x363a('0x1a9'), _0x363ed0['id']), !![]);
             _0x3d3ded['timeout'] = REQ_TIMEOUT;
-            _0x3d3ded['setRequestHeader'](_0x363a('0x18b'), 'Bearer\x20' + _0x49c0f8['at']);
-            _0x3d3ded[_0x363a('0x18a')](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
+            _0x3d3ded['setRequestHeader']('Authorization', 'Bearer\x20' + _0x49c0f8['at']);
+            _0x3d3ded['setRequestHeader'](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
             _0x3d3ded['onreadystatechange'] = function () {
-                if (_0x3d3ded[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x3d3ded['status'] == 0xc8) {
-                    _0x49c0f8[_0x363a('0x161')][0x0] = JSON[_0x363a('0x70')](_0x3d3ded['responseText']);
+                if (_0x3d3ded['readyState'] == XMLHttpRequest['DONE'] && _0x3d3ded['status'] == 0xc8) {
+                    _0x49c0f8[_0x363a('0x161')][0x0] = JSON.parse(_0x3d3ded['responseText']);
                     _0x49c0f8[_0x363a('0x275')](_0x363ed0['id'], _0x49c0f8[_0x363a('0x161')][0x0]);
-                    _0x49c0f8[_0x363a('0x18d')]();
-                } else if (_0x3d3ded[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                    _0x49c0f8['$forceUpdate']();
+                } else if (_0x3d3ded['readyState'] == XMLHttpRequest['DONE']) {
                     _0x49c0f8['popError'](_0x3d3ded['responseText'], _0x3d3ded['status'], _0x363a('0x282'));
                 }
                 _0x363ed0[_0x363a('0x280')] = ![];
-                _0x49c0f8[_0x363a('0x18d')]();
+                _0x49c0f8['$forceUpdate']();
             }
                 ;
             _0x3d3ded['send'](encodeHtmlForm(_0x2110c6));
@@ -4680,7 +4680,7 @@ var app = new Vue({
                 this[_0x363a('0x1fa')](_0x46db79, _0x363a('0x283'));
                 return;
             }
-            this[_0x363a('0x160')][_0x363a('0x121')](function (_0x29ae18, _0x4f3928) {
+            this[_0x363a('0x160')]['filter'](function (_0x29ae18, _0x4f3928) {
                 if (_0x29ae18['id'] == _0x46db79['id']) {
                     _0x35187a = !![];
                     return !![];
@@ -4690,23 +4690,23 @@ var app = new Vue({
                 return;
             }
             _0x46db79[_0x363a('0x284')] = !![];
-            this[_0x363a('0x18d')]();
+            this['$forceUpdate']();
             var _0xdc3c52 = this;
             var _0x5ab5ab = [];
             var _0x2951b3 = {};
             var _0x3057e8 = new XMLHttpRequest();
             _0x3057e8['open']('POST', ACT_PIN.replace('[I]', _0xdc3c52['repository']).replace(_0x363a('0x1b8'), _0x46db79['id']), !![]);
             _0x3057e8['timeout'] = REQ_TIMEOUT;
-            _0x3057e8['setRequestHeader'](_0x363a('0x18b'), _0x363a('0x18c') + _0xdc3c52['at']);
-            _0x3057e8[_0x363a('0x18a')](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
+            _0x3057e8['setRequestHeader']('Authorization', 'Bearer ' + _0xdc3c52['at']);
+            _0x3057e8['setRequestHeader'](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
             _0x3057e8['onreadystatechange'] = function () {
-                if (_0x3057e8[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x3057e8['status'] == 0xc8) {
+                if (_0x3057e8['readyState'] == XMLHttpRequest['DONE'] && _0x3057e8['status'] == 0xc8) {
                     _0xdc3c52[_0x363a('0x285')](_0x46db79['id'], !![]);
-                } else if (_0x3057e8[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                } else if (_0x3057e8['readyState'] == XMLHttpRequest['DONE']) {
                     _0xdc3c52['popError'](_0x3057e8['responseText'], _0x3057e8['status'], _0x363a('0x286'));
                 }
                 _0x46db79[_0x363a('0x284')] = ![];
-                _0xdc3c52[_0x363a('0x18d')]();
+                _0xdc3c52['$forceUpdate']();
             }
                 ;
             _0x3057e8['send'](encodeHtmlForm(_0x2951b3));
@@ -4724,16 +4724,16 @@ var app = new Vue({
             var _0x2874bb = new XMLHttpRequest();
             _0x2874bb['open']('POST', ACT_UNPIN.replace('[I]', _0x4713ef['repository']).replace(_0x363a('0x1b8'), _0x145f92['id']), !![]);
             _0x2874bb['timeout'] = REQ_TIMEOUT;
-            _0x2874bb['setRequestHeader'](_0x363a('0x18b'), _0x363a('0x18c') + _0x4713ef['at']);
-            _0x2874bb[_0x363a('0x18a')](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
+            _0x2874bb['setRequestHeader']('Authorization', 'Bearer ' + _0x4713ef['at']);
+            _0x2874bb['setRequestHeader'](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
             _0x2874bb['onreadystatechange'] = function () {
-                if (_0x2874bb[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x2874bb['status'] == 0xc8) {
+                if (_0x2874bb['readyState'] == XMLHttpRequest['DONE'] && _0x2874bb['status'] == 0xc8) {
                     _0x4713ef[_0x363a('0x285')](_0x145f92['id'], ![]);
-                } else if (_0x2874bb[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                } else if (_0x2874bb['readyState'] == XMLHttpRequest['DONE']) {
                     _0x4713ef['popError'](_0x2874bb['responseText'], _0x2874bb['status'], _0x363a('0x286'));
                 }
                 _0x145f92[_0x363a('0x284')] = ![];
-                _0x4713ef[_0x363a('0x18d')]();
+                _0x4713ef['$forceUpdate']();
             }
                 ;
             _0x2874bb['send'](encodeHtmlForm(_0x39f9d1));
@@ -4741,7 +4741,7 @@ var app = new Vue({
         'updatePin': function (_0xe339bb, _0x463d4e) {
             var _0x1a2698 = this;
             _0x1a2698[_0x363a('0x1b1')]();
-            _0x1a2698[_0x363a('0x15f')][_0x363a('0x121')](function (_0x58a946, _0x26c6ee) {
+            _0x1a2698['accts']['filter'](function (_0x58a946, _0x26c6ee) {
                 if (_0x58a946['id'] == _0xe339bb) {
                     _0x58a946[_0x363a('0x288')] = _0x463d4e;
                     return !![];
@@ -4751,20 +4751,20 @@ var app = new Vue({
                 _0x1a2698[_0x363a('0xb2')][_0x363a('0x288')] = _0x463d4e;
             }
             if (0x0 != _0x1a2698[_0x363a('0x169')]['length']) {
-                _0x1a2698['detail_chain'][_0x363a('0x266')][_0x363a('0x121')](function (_0x457a74, _0x4bb9bf) {
+                _0x1a2698['detail_chain'][_0x363a('0x266')]['filter'](function (_0x457a74, _0x4bb9bf) {
                     if (_0x457a74['id'] == _0xe339bb) {
                         _0x457a74[_0x363a('0x288')] = _0x463d4e;
                         return !![];
                     }
                 });
-                _0x1a2698[_0x363a('0x169')][_0x363a('0x267')][_0x363a('0x121')](function (_0x5816d8, _0x1d392c) {
+                _0x1a2698[_0x363a('0x169')][_0x363a('0x267')]['filter'](function (_0x5816d8, _0x1d392c) {
                     if (_0x5816d8['id'] == _0xe339bb) {
                         _0x5816d8[_0x363a('0x288')] = _0x463d4e;
                         return !![];
                     }
                 });
             }
-            _0x1a2698[_0x363a('0x18d')]();
+            _0x1a2698['$forceUpdate']();
         },
         'actDelete': function (_0x56d8ab, _0x2acf7a) {
             if (0x1 == this[_0x363a('0x1f9')][_0x363a('0x233')] && !![] !== _0x2acf7a) {
@@ -4772,17 +4772,17 @@ var app = new Vue({
                 return;
             }
             _0x56d8ab[_0x363a('0x289')] = !![];
-            this[_0x363a('0x18d')]();
+            this['$forceUpdate']();
             var _0x5f5670 = this;
             var _0x1908e3 = [];
             var _0x4b0efb = {};
             var _0xeb277b = new XMLHttpRequest();
             _0xeb277b['open'](_0x363a('0x260'), DETAIL.replace('[I]', _0x5f5670['repository']).replace(_0x363a('0x1b8'), _0x56d8ab['id']), !![]);
             _0xeb277b['timeout'] = REQ_TIMEOUT;
-            _0xeb277b[_0x363a('0x18a')](_0x363a('0x18b'), 'Bearer\x20' + _0x5f5670['at']);
-            _0xeb277b[_0x363a('0x18a')](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
+            _0xeb277b['setRequestHeader']('Authorization', 'Bearer\x20' + _0x5f5670['at']);
+            _0xeb277b['setRequestHeader'](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
             _0xeb277b['onreadystatechange'] = function () {
-                if (_0xeb277b[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0xeb277b['status'] == 0xc8) {
+                if (_0xeb277b['readyState'] == XMLHttpRequest['DONE'] && _0xeb277b['status'] == 0xc8) {
                     _0x5f5670['updateDelete'](_0x56d8ab['id']);
                     _0x5f5670[_0x363a('0x1cb')](_0x5f5670[_0x363a('0xad')]['id']);
                 } else if (_0xeb277b['readyState'] == XMLHttpRequest['DONE']) {
@@ -4796,40 +4796,40 @@ var app = new Vue({
         },
         'updateDelete': function (_0x14eeb4) {
             var _0x30c526 = this;
-            _0x30c526[_0x363a('0xef')][_0x363a('0x121')](function (_0x3e73bb, _0x336e58) {
+            _0x30c526['homes']['filter'](function (_0x3e73bb, _0x336e58) {
                 if (_0x3e73bb['id'] == _0x14eeb4) {
                     _0x3e73bb[_0x363a('0x16e')] = 'deleted';
                     return !![];
                 }
-                if (_0x3e73bb[_0x363a('0x10c')] && _0x3e73bb[_0x363a('0x10c')]['id'] == _0x14eeb4) {
+                if (_0x3e73bb['reblog'] && _0x3e73bb['reblog']['id'] == _0x14eeb4) {
                     _0x3e73bb[_0x363a('0x16e')] = _0x363a('0x28b');
                     return !![];
                 }
             });
-            _0x30c526[_0x363a('0xf9')]['filter'](function (_0x3d1604, _0x13ca17) {
+            _0x30c526['locals']['filter'](function (_0x3d1604, _0x13ca17) {
                 if (_0x3d1604['id'] == _0x14eeb4) {
                     _0x3d1604[_0x363a('0x16e')] = _0x363a('0x28b');
                     return !![];
                 }
             });
-            _0x30c526[_0x363a('0xb0')][_0x363a('0x121')](function (_0x57de03, _0xd17f56) {
+            _0x30c526['notifs']['filter'](function (_0x57de03, _0xd17f56) {
                 if (_0x57de03['status'] && _0x57de03['status']['id'] == _0x14eeb4) {
                     _0x57de03[_0x363a('0x16e')] = _0x363a('0x28b');
                     return !![];
                 }
             });
-            _0x30c526[_0x363a('0xb1')]['filter'](function (_0x4d1880, _0x54f184) {
+            _0x30c526['notifs_filter']['filter'](function (_0x4d1880, _0x54f184) {
                 if (_0x4d1880['status'] && _0x4d1880['status']['id'] == _0x14eeb4) {
                     _0x4d1880[_0x363a('0x16e')] = _0x363a('0x28b');
                     return !![];
                 }
             });
-            _0x30c526['accts'][_0x363a('0x121')](function (_0x34e1c9, _0x1cebfe) {
+            _0x30c526['accts']['filter'](function (_0x34e1c9, _0x1cebfe) {
                 if (_0x34e1c9['id'] == _0x14eeb4) {
                     _0x34e1c9[_0x363a('0x16e')] = 'deleted';
                     return !![];
                 }
-                if (_0x34e1c9[_0x363a('0x10c')] && _0x34e1c9[_0x363a('0x10c')]['id'] == _0x14eeb4) {
+                if (_0x34e1c9['reblog'] && _0x34e1c9['reblog']['id'] == _0x14eeb4) {
                     _0x34e1c9[_0x363a('0x16e')] = _0x363a('0x28b');
                     return !![];
                 }
@@ -4840,7 +4840,7 @@ var app = new Vue({
                     return !![];
                 }
             });
-            _0x30c526[_0x363a('0xff')][_0x363a('0x121')](function (_0x46c3bc, _0x4ddcc5) {
+            _0x30c526[_0x363a('0xff')]['filter'](function (_0x46c3bc, _0x4ddcc5) {
                 if (_0x46c3bc['id'] == _0x14eeb4) {
                     _0x46c3bc['visibility'] = _0x363a('0x28b');
                     return !![];
@@ -4866,24 +4866,24 @@ var app = new Vue({
             var _0x584460 = new XMLHttpRequest();
             _0x584460['open']('POST', REPORT.replace('[I]', _0x27e7e7['repository']).replace(_0x363a('0x1b8'), _0x5460c4['id']), !![]);
             _0x584460['timeout'] = REQ_TIMEOUT;
-            _0x584460[_0x363a('0x18a')]('Authorization', _0x363a('0x18c') + _0x27e7e7['at']);
-            _0x584460[_0x363a('0x18a')]('Content-type', 'application/x-www-form-urlencoded');
+            _0x584460['setRequestHeader']('Authorization', 'Bearer ' + _0x27e7e7['at']);
+            _0x584460['setRequestHeader']('Content-type', 'application/x-www-form-urlencoded');
             _0x584460['onreadystatechange'] = function () {
-                if (_0x584460[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x584460['status'] == 0xc8) { } else if (_0x584460[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                if (_0x584460['readyState'] == XMLHttpRequest['DONE'] && _0x584460['status'] == 0xc8) { } else if (_0x584460['readyState'] == XMLHttpRequest['DONE']) {
                     _0x27e7e7['popError'](_0x584460['responseText'], _0x584460['status'], _0x363a('0x28e'));
                 }
                 _0x5460c4[_0x363a('0x28f')] = ![];
-                _0x27e7e7[_0x363a('0x18d')]();
+                _0x27e7e7['$forceUpdate']();
             }
                 ;
             _0x584460['send'](encodeHtmlForm(_0x5c7d23));
         },
         'actProfile': function () {
             var _0x1d79b3 = this['profile'][_0x363a('0xe6')];
-            if (this['profile'][_0x363a('0x290')] != null && this[_0x363a('0x12e')][_0x363a('0x290')][_0x363a('0xaf')] > 0x0) {
+            if (this['profile'][_0x363a('0x290')] != null && this[_0x363a('0x12e')][_0x363a('0x290')]['length'] > 0x0) {
                 _0x1d79b3 = _0x1d79b3 + '‮' + this['profile'][_0x363a('0x290')] + '‭';
             }
-            if (_0x1d79b3[_0x363a('0xaf')] > LIMIT_ACCTNAME) {
+            if (_0x1d79b3['length'] > LIMIT_ACCTNAME) {
                 this[_0x363a('0xa4')] = _0x363a('0x291');
                 return;
             }
@@ -4892,31 +4892,31 @@ var app = new Vue({
             var _0xc2b230 = {
                 'display_name': _0x1d79b3
             };
-            _0x5b02aa[_0x363a('0xb5')][_0x363a('0x292')] = !![];
-            _0x5b02aa[_0x363a('0x18d')]();
+            _0x5b02aa['acct'][_0x363a('0x292')] = !![];
+            _0x5b02aa['$forceUpdate']();
             var _0x488f04 = new XMLHttpRequest();
             _0x488f04['open'](_0x363a('0x293'), PROFILE.replace('[I]', _0x5b02aa['repository']), !![]);
             _0x488f04['timeout'] = REQ_TIMEOUT;
-            _0x488f04['setRequestHeader'](_0x363a('0x18b'), 'Bearer\x20' + _0x5b02aa['at']);
+            _0x488f04['setRequestHeader']('Authorization', 'Bearer\x20' + _0x5b02aa['at']);
             _0x488f04['setRequestHeader'](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
             _0x488f04['onreadystatechange'] = function () {
-                if (_0x488f04[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x488f04['status'] == 0xc8) {
+                if (_0x488f04['readyState'] == XMLHttpRequest['DONE'] && _0x488f04['status'] == 0xc8) {
                     _0x5b02aa[_0x363a('0x1cb')](_0x5b02aa[_0x363a('0xad')]['id']);
                     _0x5b02aa[_0x363a('0x8a')]();
-                } else if (_0x488f04[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                } else if (_0x488f04['readyState'] == XMLHttpRequest['DONE']) {
                     _0x5b02aa['popError'](_0x488f04['responseText'], _0x488f04['status'], _0x363a('0x294'));
                 }
                 _0x5b02aa['acct'][_0x363a('0x292')] = ![];
                 _0x5b02aa['profile'] = [];
                 _0x5b02aa[_0x363a('0x12c')] = ![];
-                _0x5b02aa[_0x363a('0x18d')]();
+                _0x5b02aa['$forceUpdate']();
             }
                 ;
             _0x488f04['send'](encodeHtmlForm(_0xc2b230));
         },
         'actListProfile': function () {
             var _0x482c96 = this[_0x363a('0xe5')][_0x363a('0xe6')];
-            if (_0x482c96[_0x363a('0xaf')] > LIMIT_LISTNAME) {
+            if (_0x482c96['length'] > LIMIT_LISTNAME) {
                 this[_0x363a('0xa4')] = _0x363a('0x295');
                 return;
             }
@@ -4930,12 +4930,12 @@ var app = new Vue({
             var _0x4ae111 = new XMLHttpRequest();
             _0x4ae111['open']('PUT', LIST_OBJ.replace('[I]', _0x5445e0['repository']).replace('[LID]', _0x5445e0['stream_list']['id']), !![]);
             _0x4ae111['timeout'] = REQ_TIMEOUT;
-            _0x4ae111['setRequestHeader'](_0x363a('0x18b'), _0x363a('0x18c') + _0x5445e0['at']);
-            _0x4ae111[_0x363a('0x18a')](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
+            _0x4ae111['setRequestHeader']('Authorization', 'Bearer ' + _0x5445e0['at']);
+            _0x4ae111['setRequestHeader'](_0x363a('0x1d5'), 'application/x-www-form-urlencoded');
             _0x4ae111['onreadystatechange'] = function () {
                 if (_0x4ae111['readyState'] == XMLHttpRequest['DONE'] && _0x4ae111['status'] == 0xc8) {
-                    _0x5445e0['stream_list'] = JSON[_0x363a('0x70')](_0x4ae111['responseText']);
-                } else if (_0x4ae111[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                    _0x5445e0['stream_list'] = JSON.parse(_0x4ae111['responseText']);
+                } else if (_0x4ae111['readyState'] == XMLHttpRequest['DONE']) {
                     _0x5445e0['popError'](_0x4ae111['responseText'], _0x4ae111['status'], _0x363a('0x294'));
                 }
                 _0x5445e0[_0x363a('0xb9')][_0x363a('0x292')] = ![];
@@ -4949,9 +4949,9 @@ var app = new Vue({
         'updateImgLoading': function (_0x1c31e2) {
             var _0x3efaa2 = this;
             _0x1c31e2['filter'](function (_0x338855, _0xbd1025) {
-                _0x338855[_0x363a('0x217')] = !![];
-                if (null != _0x338855[_0x363a('0x10c')] && 0x0 != _0x338855[_0x363a('0x10c')]['media_attachments'] || 0x0 != _0x338855[_0x363a('0x226')]) {
-                    _0x338855[_0x363a('0x218')] = !![];
+                _0x338855['loading_avatar'] = !![];
+                if (null != _0x338855['reblog'] && 0x0 != _0x338855['reblog']['media_attachments'] || 0x0 != _0x338855['media_attachments']) {
+                    _0x338855['loading_media'] = !![];
                 }
             });
             _0x3efaa2['$forceUpdate']();
@@ -4963,7 +4963,7 @@ var app = new Vue({
         },
         'updateContentWrapper': function (_0x349496, _0x2b8e9d) {
             _0x349496[_0x363a('0x296')] = _0x2b8e9d;
-            this[_0x363a('0x18d')]();
+            this['$forceUpdate']();
         },
         'updateWrapperBM': function (_0x3332a9, _0x7e3127) {
             if ('' == this[_0x363a('0x1ef')]) {
@@ -4971,114 +4971,114 @@ var app = new Vue({
             }
             var _0x32e81d = this;
             var _0x354845 = _0x363a('0x297') == _0x32e81d[_0x363a('0x1ef')] || 'media' == _0x32e81d['optAllOpen'] ? !![] : void 0x0;
-            var _0x4adbb3 = _0x363a('0x297') == _0x32e81d['optAllOpen'] || _0x363a('0x61') == _0x32e81d[_0x363a('0x1ef')] ? !![] : void 0x0;
+            var _0x4adbb3 = _0x363a('0x297') == _0x32e81d['optAllOpen'] || 'katsu' == _0x32e81d[_0x363a('0x1ef')] ? !![] : void 0x0;
             if (_0x363a('0x227') == _0x7e3127) {
                 _0x3332a9[_0x363a('0x298')] = _0x354845;
                 _0x3332a9['content_opened'] = _0x4adbb3;
-                if (_0x3332a9[_0x363a('0x10c')]) {
-                    _0x3332a9[_0x363a('0x10c')][_0x363a('0x298')] = _0x354845;
-                    _0x3332a9[_0x363a('0x10c')][_0x363a('0x296')] = _0x4adbb3;
+                if (_0x3332a9['reblog']) {
+                    _0x3332a9['reblog'][_0x363a('0x298')] = _0x354845;
+                    _0x3332a9['reblog'][_0x363a('0x296')] = _0x4adbb3;
                 }
                 if (_0x3332a9['status']) {
                     _0x3332a9['status'][_0x363a('0x298')] = _0x354845;
                     _0x3332a9['status'][_0x363a('0x296')] = _0x4adbb3;
                 }
-                _0x32e81d[_0x363a('0x18d')]();
+                _0x32e81d['$forceUpdate']();
                 return;
             }
             if (_0x363a('0xb2') == _0x7e3127) {
                 _0x3332a9[_0x363a('0x298')] = _0x354845;
                 _0x3332a9[_0x363a('0x296')] = _0x4adbb3;
-                _0x32e81d[_0x363a('0x18d')]();
+                _0x32e81d['$forceUpdate']();
                 return;
             }
-            if (_0x363a('0x169') == _0x7e3127 && 0x0 != _0x3332a9[_0x363a('0xaf')]) {
-                _0x3332a9[_0x363a('0x266')][_0x363a('0x121')](function (_0x1ca57f, _0x542290) {
+            if (_0x363a('0x169') == _0x7e3127 && 0x0 != _0x3332a9['length']) {
+                _0x3332a9[_0x363a('0x266')]['filter'](function (_0x1ca57f, _0x542290) {
                     _0x1ca57f[_0x363a('0x298')] = _0x354845;
                     _0x1ca57f['content_opened'] = _0x4adbb3;
                 });
-                _0x3332a9['descendants'][_0x363a('0x121')](function (_0xcf85aa, _0x448dcc) {
+                _0x3332a9['descendants']['filter'](function (_0xcf85aa, _0x448dcc) {
                     _0xcf85aa['media_opened'] = _0x354845;
                     _0xcf85aa[_0x363a('0x296')] = _0x4adbb3;
                 });
-                _0x32e81d[_0x363a('0x18d')]();
+                _0x32e81d['$forceUpdate']();
                 return;
             }
-            _0x3332a9[_0x363a('0x121')](function (_0x2b1974, _0x4786ca) {
+            _0x3332a9['filter'](function (_0x2b1974, _0x4786ca) {
                 _0x2b1974[_0x363a('0x298')] = _0x354845;
                 _0x2b1974[_0x363a('0x296')] = _0x4adbb3;
-                if (_0x2b1974[_0x363a('0x10c')]) {
-                    _0x2b1974[_0x363a('0x10c')][_0x363a('0x298')] = _0x354845;
-                    _0x2b1974[_0x363a('0x10c')][_0x363a('0x296')] = _0x4adbb3;
+                if (_0x2b1974['reblog']) {
+                    _0x2b1974['reblog'][_0x363a('0x298')] = _0x354845;
+                    _0x2b1974['reblog'][_0x363a('0x296')] = _0x4adbb3;
                 }
                 if (_0x2b1974['status']) {
                     _0x2b1974['status'][_0x363a('0x298')] = _0x354845;
                     _0x2b1974['status'][_0x363a('0x296')] = _0x4adbb3;
                 }
             });
-            _0x32e81d[_0x363a('0x18d')]();
+            _0x32e81d['$forceUpdate']();
         },
         'updateWrapperAll': function () {
             var _0x2c3978 = this;
             var _0x5c6aee = 'both' == _0x2c3978[_0x363a('0x1ef')] || 'media' == _0x2c3978[_0x363a('0x1ef')] ? !![] : void 0x0;
             var _0x1d416c = 'both' == _0x2c3978['optAllOpen'] || 'katsu' == _0x2c3978[_0x363a('0x1ef')] ? !![] : void 0x0;
-            _0x2c3978['homes'][_0x363a('0x121')](function (_0x4c1474, _0x10ff79) {
+            _0x2c3978['homes']['filter'](function (_0x4c1474, _0x10ff79) {
                 _0x4c1474['media_opened'] = _0x5c6aee;
                 _0x4c1474[_0x363a('0x296')] = _0x1d416c;
                 if (_0x4c1474['reblog']) {
-                    _0x4c1474[_0x363a('0x10c')][_0x363a('0x298')] = _0x5c6aee;
+                    _0x4c1474['reblog'][_0x363a('0x298')] = _0x5c6aee;
                     _0x4c1474['reblog'][_0x363a('0x296')] = _0x1d416c;
                 }
             });
-            _0x2c3978[_0x363a('0xf9')][_0x363a('0x121')](function (_0x35644c, _0x5113b4) {
+            _0x2c3978['locals']['filter'](function (_0x35644c, _0x5113b4) {
                 _0x35644c[_0x363a('0x298')] = _0x5c6aee;
                 _0x35644c[_0x363a('0x296')] = _0x1d416c;
             });
-            _0x2c3978[_0x363a('0xb0')]['filter'](function (_0x240d8b, _0x360895) {
+            _0x2c3978['notifs']['filter'](function (_0x240d8b, _0x360895) {
                 if (_0x240d8b['status']) {
                     _0x240d8b['status']['media_opened'] = _0x5c6aee;
                     _0x240d8b['status'][_0x363a('0x296')] = _0x1d416c;
                 }
             });
-            _0x2c3978[_0x363a('0xb1')][_0x363a('0x121')](function (_0x2c2458, _0x2bf44b) {
+            _0x2c3978['notifs_filter']['filter'](function (_0x2c2458, _0x2bf44b) {
                 if (_0x2c2458['status']) {
                     _0x2c2458['status'][_0x363a('0x298')] = _0x5c6aee;
                     _0x2c2458['status'][_0x363a('0x296')] = _0x1d416c;
                 }
             });
-            _0x2c3978[_0x363a('0x15f')][_0x363a('0x121')](function (_0x263ff9, _0x4a630d) {
+            _0x2c3978['accts']['filter'](function (_0x263ff9, _0x4a630d) {
                 _0x263ff9['media_opened'] = _0x5c6aee;
                 _0x263ff9[_0x363a('0x296')] = _0x1d416c;
-                if (_0x263ff9[_0x363a('0x10c')]) {
-                    _0x263ff9[_0x363a('0x10c')][_0x363a('0x298')] = _0x5c6aee;
-                    _0x263ff9[_0x363a('0x10c')][_0x363a('0x296')] = _0x1d416c;
+                if (_0x263ff9['reblog']) {
+                    _0x263ff9['reblog'][_0x363a('0x298')] = _0x5c6aee;
+                    _0x263ff9['reblog'][_0x363a('0x296')] = _0x1d416c;
                 }
             });
-            _0x2c3978['acct_pinned'][_0x363a('0x121')](function (_0x3d46e8, _0x228381) {
+            _0x2c3978['acct_pinned']['filter'](function (_0x3d46e8, _0x228381) {
                 _0x3d46e8[_0x363a('0x298')] = _0x5c6aee;
                 _0x3d46e8[_0x363a('0x296')] = _0x1d416c;
             });
             _0x2c3978['detail'][_0x363a('0x298')] = _0x5c6aee;
             _0x2c3978[_0x363a('0xb2')][_0x363a('0x296')] = _0x1d416c;
-            if (0x0 != _0x2c3978[_0x363a('0x169')][_0x363a('0xaf')]) {
-                _0x2c3978[_0x363a('0x169')][_0x363a('0x266')][_0x363a('0x121')](function (_0xba81b9, _0x18ab68) {
+            if (0x0 != _0x2c3978[_0x363a('0x169')]['length']) {
+                _0x2c3978[_0x363a('0x169')][_0x363a('0x266')]['filter'](function (_0xba81b9, _0x18ab68) {
                     _0xba81b9[_0x363a('0x298')] = _0x5c6aee;
                     _0xba81b9[_0x363a('0x296')] = _0x1d416c;
                 });
-                _0x2c3978['detail_chain']['descendants'][_0x363a('0x121')](function (_0x2f8102, _0x56d009) {
+                _0x2c3978['detail_chain']['descendants']['filter'](function (_0x2f8102, _0x56d009) {
                     _0x2f8102[_0x363a('0x298')] = _0x5c6aee;
                     _0x2f8102[_0x363a('0x296')] = _0x1d416c;
                 });
             }
-            _0x2c3978[_0x363a('0xff')][_0x363a('0x121')](function (_0x42d835, _0x16b29f) {
+            _0x2c3978[_0x363a('0xff')]['filter'](function (_0x42d835, _0x16b29f) {
                 _0x42d835[_0x363a('0x298')] = _0x5c6aee;
                 _0x42d835[_0x363a('0x296')] = _0x1d416c;
             });
-            _0x2c3978[_0x363a('0x18d')]();
+            _0x2c3978['$forceUpdate']();
         },
         'updateWrapper': function (_0x44a4cc, _0x401cf8) {
             _0x44a4cc[_0x363a('0x299')] = _0x401cf8;
-            this[_0x363a('0x18d')]();
+            this['$forceUpdate']();
         },
         'updateFilterBM': function (_0x3e4291, _0x5a3621) {
             if ('' == this[_0x363a('0x1f1')]) {
@@ -5087,36 +5087,36 @@ var app = new Vue({
             var _0x160b73 = this;
             var _0x455ded = new RegExp(this[_0x363a('0x1f4')]);
             if (_0x363a('0x227') == _0x5a3621) {
-                if (_0x3e4291[_0x363a('0x10c')]) {
-                    _0x3e4291[_0x363a('0x10c')][_0x363a('0x299')] = _0x455ded[_0x363a('0x29a')](_0x3e4291[_0x363a('0x10c')][_0x363a('0x29b')] + _0x3e4291[_0x363a('0x10c')]['content'].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
+                if (_0x3e4291['reblog']) {
+                    _0x3e4291['reblog'][_0x363a('0x299')] = _0x455ded[_0x363a('0x29a')](_0x3e4291['reblog'][_0x363a('0x29b')] + _0x3e4291['reblog']['content'].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
                 } else if (_0x3e4291['status']) {
                     _0x3e4291['status'][_0x363a('0x299')] = _0x455ded[_0x363a('0x29a')](_0x3e4291['status'][_0x363a('0x29b')] + _0x3e4291['status'][_0x363a('0x22e')].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
                 } else {
                     _0x3e4291[_0x363a('0x299')] = _0x455ded[_0x363a('0x29a')](_0x3e4291[_0x363a('0x29b')] + _0x3e4291['content'].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
                 }
-                _0x160b73[_0x363a('0x18d')]();
+                _0x160b73['$forceUpdate']();
                 return;
             }
-            _0x3e4291[_0x363a('0x121')](function (_0x42fcdc, _0x58320c) {
-                if (_0x42fcdc[_0x363a('0x10c')]) {
-                    _0x42fcdc[_0x363a('0x10c')][_0x363a('0x299')] = _0x455ded[_0x363a('0x29a')](_0x42fcdc[_0x363a('0x10c')][_0x363a('0x29b')] + _0x42fcdc[_0x363a('0x10c')][_0x363a('0x22e')].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
+            _0x3e4291['filter'](function (_0x42fcdc, _0x58320c) {
+                if (_0x42fcdc['reblog']) {
+                    _0x42fcdc['reblog'][_0x363a('0x299')] = _0x455ded[_0x363a('0x29a')](_0x42fcdc['reblog'][_0x363a('0x29b')] + _0x42fcdc['reblog'][_0x363a('0x22e')].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
                 } else if (_0x42fcdc['status']) {
                     _0x42fcdc['status'][_0x363a('0x299')] = _0x455ded[_0x363a('0x29a')](_0x42fcdc['status'][_0x363a('0x29b')] + _0x42fcdc['status'][_0x363a('0x22e')].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
                 } else {
                     _0x42fcdc[_0x363a('0x299')] = _0x455ded[_0x363a('0x29a')](_0x42fcdc[_0x363a('0x29b')] + _0x42fcdc[_0x363a('0x22e')].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
                 }
             });
-            _0x160b73[_0x363a('0x18d')]();
+            _0x160b73['$forceUpdate']();
         },
         'updateFilterAll': function () {
             if ('word' == this[_0x363a('0x1f1')]) {
-                var _0x4d138f = this[_0x363a('0x5e')][_0x363a('0x29c')]()['split'](',')[_0x363a('0x121')](function (_0x2e3b42, _0x20e0b5) {
+                var _0x4d138f = this[_0x363a('0x5e')][_0x363a('0x29c')]()['split'](',')['filter'](function (_0x2e3b42, _0x20e0b5) {
                     _0x2e3b42 = _0x2e3b42.replace(/[\\^$.*+?()[\]{}|]/g, _0x363a('0x29d'));
                     return _0x2e3b42 !== '';
                 });
                 _0x4d138f[_0x363a('0xf0')](0xa);
                 this['optKatsuFilterRaw'] = _0x4d138f[_0x363a('0xcb')](',');
-                this[_0x363a('0x29e')] = _0x4d138f[_0x363a('0xaf')] >= 0xa ? _0x4d138f[_0x363a('0xaf')] + _0x363a('0x29f') : _0x4d138f[_0x363a('0xaf')] + _0x363a('0x2a0');
+                this[_0x363a('0x29e')] = _0x4d138f['length'] >= 0xa ? _0x4d138f['length'] + _0x363a('0x29f') : _0x4d138f['length'] + _0x363a('0x2a0');
                 this[_0x363a('0x1f4')] = '(' + _0x4d138f[_0x363a('0xcb')]('|') + ')';
             } else if (_0x363a('0x2a1') == this[_0x363a('0x1f1')]) {
                 this[_0x363a('0x29e')] = _0x363a('0x2a2');
@@ -5127,27 +5127,27 @@ var app = new Vue({
             }
             var _0x50c824 = this;
             var _0x163515 = new RegExp(this[_0x363a('0x1f4')]);
-            _0x50c824[_0x363a('0xef')][_0x363a('0x121')](function (_0x319827, _0x235cdf) {
-                if (_0x319827[_0x363a('0x10c')]) {
-                    _0x319827[_0x363a('0x10c')][_0x363a('0x299')] = _0x163515[_0x363a('0x29a')](_0x319827[_0x363a('0x10c')][_0x363a('0x29b')] + _0x319827[_0x363a('0x10c')][_0x363a('0x22e')].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
+            _0x50c824['homes']['filter'](function (_0x319827, _0x235cdf) {
+                if (_0x319827['reblog']) {
+                    _0x319827['reblog'][_0x363a('0x299')] = _0x163515[_0x363a('0x29a')](_0x319827['reblog'][_0x363a('0x29b')] + _0x319827['reblog'][_0x363a('0x22e')].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
                 } else {
                     _0x319827[_0x363a('0x299')] = _0x163515[_0x363a('0x29a')](_0x319827[_0x363a('0x29b')] + _0x319827[_0x363a('0x22e')].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
                 }
             });
-            _0x50c824[_0x363a('0xf9')][_0x363a('0x121')](function (_0x21446b, _0x5bfe56) {
+            _0x50c824['locals']['filter'](function (_0x21446b, _0x5bfe56) {
                 _0x21446b[_0x363a('0x299')] = _0x163515[_0x363a('0x29a')](_0x21446b[_0x363a('0x29b')] + _0x21446b[_0x363a('0x22e')].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
             });
-            _0x50c824[_0x363a('0xff')][_0x363a('0x121')](function (_0x3609d8, _0x207aaa) {
+            _0x50c824[_0x363a('0xff')]['filter'](function (_0x3609d8, _0x207aaa) {
                 _0x3609d8[_0x363a('0x299')] = _0x163515[_0x363a('0x29a')](_0x3609d8[_0x363a('0x29b')] + _0x3609d8[_0x363a('0x22e')].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
             });
             _0x50c824['$forceUpdate']();
         },
         'setResizer': function () {
             var _0x22c968 = this;
-            window[_0x363a('0x2a3')] = _[_0x363a('0xe1')](function () {
+            window[_0x363a('0x2a3')] = _['debounce'](function () {
                 _0x22c968[_0x363a('0x2a4')](window['innerWidth']);
             }, 0x258);
-            window['onorientationchange'] = _[_0x363a('0xe1')](function () {
+            window['onorientationchange'] = _['debounce'](function () {
                 _0x22c968[_0x363a('0x2a4')](window['innerWidth']);
             }, 0xc8);
             this[_0x363a('0x2a4')](window['innerWidth']);
@@ -5194,7 +5194,7 @@ var app = new Vue({
             }
             var _0x31a278 = new XMLHttpRequest();
             _0x31a278[_0x363a('0x2ab')] = _0x363a('0x2ac');
-            _0x31a278['open'](_0x363a('0x188'), _0x3f103f, !![]);
+            _0x31a278['open']('GET', _0x3f103f, !![]);
             _0x31a278['timeout'] = REQ_TIMEOUT;
             _0x31a278['onreadystatechange'] = function () {
                 if (_0x31a278['readyState'] == XMLHttpRequest['DONE'] && (_0x31a278['status'] == 0x0 || _0x31a278['status'] == 0xc8)) {
@@ -5302,12 +5302,12 @@ var app = new Vue({
             var _0x58d578 = new XMLHttpRequest();
             _0x58d578['open']('POST', KATSU_MEDIA.replace('[I]', _0x38d96c['repository']), !![]);
             _0x58d578['timeout'] = REQ_TIMEOUT * 0xf0;
-            _0x58d578[_0x363a('0x18a')]('Authorization', _0x363a('0x18c') + _0x38d96c['at']);
+            _0x58d578['setRequestHeader']('Authorization', 'Bearer ' + _0x38d96c['at']);
             _0x58d578['onreadystatechange'] = function () {
-                if (_0x58d578[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x58d578['status'] == 0xc8) {
-                    _0x38d96c[_0x363a('0x61')][_0x363a('0x226')][_0x363a('0x1a2')](JSON['parse'](_0x58d578['responseText']));
-                } else if (_0x58d578[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
-                    _0x38d96c[_0x363a('0x61')][_0x363a('0x2c6')][_0x363a('0x2c9')]();
+                if (_0x58d578['readyState'] == XMLHttpRequest['DONE'] && _0x58d578['status'] == 0xc8) {
+                    _0x38d96c['katsu']['media_attachments']['push'](JSON['parse'](_0x58d578['responseText']));
+                } else if (_0x58d578['readyState'] == XMLHttpRequest['DONE']) {
+                    _0x38d96c['katsu'][_0x363a('0x2c6')][_0x363a('0x2c9')]();
                     _0x38d96c['popError'](_0x58d578['responseText'], _0x58d578['status'], _0x363a('0x2ca'));
                 }
                 _0x38d96c[_0x363a('0x2c5')] = '';
@@ -5317,11 +5317,11 @@ var app = new Vue({
             _0x58d578['send'](_0x773119);
         },
         'removeMedia': function (_0x5f4a2a) {
-            if (null == this[_0x363a('0x61')][_0x363a('0x226')][_0x5f4a2a]) {
+            if (null == this['katsu']['media_attachments'][_0x5f4a2a]) {
                 return;
             }
-            this[_0x363a('0x61')]['media_previews'][_0x363a('0xf0')](_0x5f4a2a, 0x1);
-            this[_0x363a('0x61')][_0x363a('0x226')][_0x363a('0xf0')](_0x5f4a2a, 0x1);
+            this['katsu']['media_previews'][_0x363a('0xf0')](_0x5f4a2a, 0x1);
+            this['katsu']['media_attachments'][_0x363a('0xf0')](_0x5f4a2a, 0x1);
         },
         'saveKatsu': function () {
             if (!this[_0x363a('0x1fe')]) {
@@ -5338,7 +5338,7 @@ var app = new Vue({
         },
         'actKatsuShortCut': function () {
             if ((event[_0x363a('0x2cc')] && !event[_0x363a('0x2cd')] || !event[_0x363a('0x2cc')] && event[_0x363a('0x2cd')]) && event[_0x363a('0x2ce')] == 0xd) {
-                this['actKatsu'](this[_0x363a('0x61')]);
+                this['actKatsu'](this['katsu']);
             }
         },
         'actKatsu': function (_0x2ca602, _0x969d50) {
@@ -5349,79 +5349,79 @@ var app = new Vue({
             if (!this[_0x363a('0x2cf')]()) {
                 return;
             }
-            this[_0x363a('0x61')][_0x363a('0x22b')][_0x363a('0x2d0')] = this['katsu'][_0x363a('0x60')][_0x363a('0x63')][_0x363a('0x121')](function (_0x40ecd1, _0x41a6b6, _0x24e249) {
-                return _0x40ecd1['length'] > 0x0 && _0x40ecd1.replace(/^[\s|　]+|[\s|　]+$/g, '')[_0x363a('0xaf')] > 0x0 && _0x24e249[_0x363a('0x7c')](_0x40ecd1) === _0x41a6b6;
+            this['katsu'][_0x363a('0x22b')][_0x363a('0x2d0')] = this['katsu'][_0x363a('0x60')][_0x363a('0x63')]['filter'](function (_0x40ecd1, _0x41a6b6, _0x24e249) {
+                return _0x40ecd1['length'] > 0x0 && _0x40ecd1.replace(/^[\s|　]+|[\s|　]+$/g, '')['length'] > 0x0 && _0x24e249[_0x363a('0x7c')](_0x40ecd1) === _0x41a6b6;
             });
-            for (var _0x9ba4dc of this[_0x363a('0x61')]['poll']['options']) {
-                if (_0x9ba4dc[_0x363a('0xaf')] > LIMIT_POLLOPTION) {
+            for (var _0x9ba4dc of this['katsu']['poll']['options']) {
+                if (_0x9ba4dc['length'] > LIMIT_POLLOPTION) {
                     this[_0x363a('0xa4')] = _0x363a('0x2d1');
                     return;
                 }
             }
-            ; if (this[_0x363a('0x140')] && 0x1 == this[_0x363a('0x61')][_0x363a('0x22b')]['options']['length']) {
+            ; if (this[_0x363a('0x140')] && 0x1 == this['katsu'][_0x363a('0x22b')]['options']['length']) {
                 this[_0x363a('0xa4')] = _0x363a('0x2d2');
                 return;
             }
-            this[_0x363a('0x2c5')] = _0x363a('0x61');
+            this[_0x363a('0x2c5')] = 'katsu';
             var _0x1e214f = new Array();
-            this['katsu'][_0x363a('0x226')][_0x363a('0x171')](function (_0x4621ae, _0x54f06e) {
+            this['katsu']['media_attachments'][_0x363a('0x171')](function (_0x4621ae, _0x54f06e) {
                 if (_0x54f06e >= 0x4) {
                     return;
                 }
-                _0x1e214f[_0x363a('0x1a2')](_0x4621ae['id']);
+                _0x1e214f['push'](_0x4621ae['id']);
             });
-            this[_0x363a('0x61')][_0x363a('0x2d3')] = _0x1e214f;
-            this[_0x363a('0x61')][_0x363a('0x29b')] = this[_0x363a('0x13f')];
-            this[_0x363a('0x61')]['status'] = this[_0x363a('0x5c')];
-            this['katsu']['status'] = this[_0x363a('0x61')]['status'].replace(/^#/g, '\x20#');
+            this['katsu'][_0x363a('0x2d3')] = _0x1e214f;
+            this['katsu'][_0x363a('0x29b')] = this[_0x363a('0x13f')];
+            this['katsu']['status'] = this[_0x363a('0x5c')];
+            this['katsu']['status'] = this['katsu']['status'].replace(/^#/g, '\x20#');
             this['katsu'][_0x363a('0x22e')] = this[_0x363a('0x5c')];
-            if (this[_0x363a('0x140')] && 0x0 != this['katsu'][_0x363a('0x22b')]['options'][_0x363a('0xaf')]) {
-                this[_0x363a('0x2d4')] = this[_0x363a('0x61')]['poll'];
-                this[_0x363a('0x61')][_0x363a('0x22b')]['choices'] = [![], ![], ![], ![]];
-                this[_0x363a('0x61')][_0x363a('0x60')][_0x363a('0x2d5')] = this['formatDateVote'](this[_0x363a('0x61')][_0x363a('0x22b')]['expires_in']);
+            if (this[_0x363a('0x140')] && 0x0 != this['katsu'][_0x363a('0x22b')]['options']['length']) {
+                this[_0x363a('0x2d4')] = this['katsu']['poll'];
+                this['katsu'][_0x363a('0x22b')]['choices'] = [![], ![], ![], ![]];
+                this['katsu'][_0x363a('0x60')][_0x363a('0x2d5')] = this['formatDateVote'](this['katsu'][_0x363a('0x22b')]['expires_in']);
             } else {
                 this[_0x363a('0x2d4')] = null;
             }
-            if (0x0 == this[_0x363a('0x61')][_0x363a('0x2d3')][_0x363a('0xaf')]) {
-                this[_0x363a('0x61')][_0x363a('0x2d6')] = ![];
+            if (0x0 == this['katsu'][_0x363a('0x2d3')]['length']) {
+                this['katsu'][_0x363a('0x2d6')] = ![];
             }
-            this[_0x363a('0x61')][_0x363a('0x2d7')] = this[_0x363a('0x61')][_0x363a('0x2d6')] || 0x0 < this[_0x363a('0x13f')][_0x363a('0xaf')] ? !![] : ![];
-            if (0x1 == this['optConfirm'][_0x363a('0x61')] && !![] !== _0x969d50) {
-                this[_0x363a('0x1fa')](_0x2ca602, _0x363a('0x61'));
+            this['katsu'][_0x363a('0x2d7')] = this['katsu'][_0x363a('0x2d6')] || 0x0 < this[_0x363a('0x13f')]['length'] ? !![] : ![];
+            if (0x1 == this['optConfirm']['katsu'] && !![] !== _0x969d50) {
+                this[_0x363a('0x1fa')](_0x2ca602, 'katsu');
                 this['action_lock'] = '';
                 return;
             }
             _0x2ca602['req_katsu'] = !![];
-            this[_0x363a('0x18d')]();
+            this['$forceUpdate']();
             var _0x5e35cf = this;
             var _0x284c21 = [];
             var _0x33bd48 = {
                 'status': this['katsu']['status'],
-                'in_reply_to_id': this[_0x363a('0x61')]['in_reply_to_id'],
-                'media_ids': this[_0x363a('0x61')][_0x363a('0x2d3')],
-                'sensitive': this[_0x363a('0x61')][_0x363a('0x2d7')],
+                'in_reply_to_id': this['katsu']['in_reply_to_id'],
+                'media_ids': this['katsu'][_0x363a('0x2d3')],
+                'sensitive': this['katsu'][_0x363a('0x2d7')],
                 'spoiler_text': this[_0x363a('0x13f')],
                 'poll': this[_0x363a('0x2d4')],
-                'visibility': this[_0x363a('0x61')]['visibility']
+                'visibility': this['katsu']['visibility']
             };
             var _0x4371cb = new XMLHttpRequest();
             _0x4371cb['open']('POST', KATSU.replace('[I]', _0x5e35cf['repository']), !![]);
             _0x4371cb['timeout'] = REQ_TIMEOUT;
-            _0x4371cb[_0x363a('0x18a')]('Authorization', 'Bearer\x20' + _0x5e35cf['at']);
+            _0x4371cb['setRequestHeader']('Authorization', 'Bearer\x20' + _0x5e35cf['at']);
             _0x4371cb['setRequestHeader'](_0x363a('0x1d5'), 'application/json');
             _0x4371cb['onreadystatechange'] = function () {
-                if (_0x4371cb[_0x363a('0x184')] == XMLHttpRequest['DONE'] && _0x4371cb['status'] == 0xc8) {
+                if (_0x4371cb['readyState'] == XMLHttpRequest['DONE'] && _0x4371cb['status'] == 0xc8) {
                     _0x5e35cf[_0x363a('0x8c')]();
                     if (_0x5e35cf['showForm']) {
                         _0x5e35cf[_0x363a('0x136')]();
                         _0x5e35cf['showForm'] = ![];
                     }
-                } else if (_0x4371cb[_0x363a('0x184')] == XMLHttpRequest['DONE']) {
+                } else if (_0x4371cb['readyState'] == XMLHttpRequest['DONE']) {
                     _0x5e35cf['popError'](_0x4371cb['responseText'], _0x4371cb['status'], 'Katsu');
                     _0x5e35cf[_0x363a('0x2c5')] = '';
                 }
                 _0x2ca602[_0x363a('0x2d8')] = ![];
-                _0x5e35cf[_0x363a('0x18d')]();
+                _0x5e35cf['$forceUpdate']();
             }
                 ;
             _0x4371cb['send'](JSON[_0x363a('0x210')](_0x33bd48));
@@ -5429,7 +5429,7 @@ var app = new Vue({
         'refreshKatsu': function (_0x3fff1a, _0x15b187) {
             var _0x3fff1a = document[_0x363a('0x139')]('katsu_spoiler');
             var _0x15b187 = document[_0x363a('0x139')](_0x363a('0x174'));
-            this[_0x363a('0x61')] = {
+            this['katsu'] = {
                 'status': '',
                 'in_reply_to_id': null,
                 'reply': [],
@@ -5464,8 +5464,8 @@ var app = new Vue({
             }
             this[_0x363a('0x13d')] = ![];
             this[_0x363a('0x140')] = ![];
-            this[_0x363a('0x141')] = this[_0x363a('0x2dc')][_0x363a('0xaf')] > 0x0 ? !![] : ![];
-            this[_0x363a('0x142')] = this[_0x363a('0x61')][_0x363a('0x16e')] != 'public' ? !![] : ![];
+            this[_0x363a('0x141')] = this[_0x363a('0x2dc')]['length'] > 0x0 ? !![] : ![];
+            this[_0x363a('0x142')] = this['katsu'][_0x363a('0x16e')] != 'public' ? !![] : ![];
             this['action_lock'] = '';
         },
         'spoilerLength': function () {
@@ -5473,7 +5473,7 @@ var app = new Vue({
             if (null == _0x461ddc) {
                 return 0x0;
             }
-            return _0x461ddc[_0x363a('0x59')][_0x363a('0xaf')] - (_0x461ddc['value']['match'](/[\uD800-\uDBFF][\uDC00-\uDFFF]/g) || [])[_0x363a('0xaf')];
+            return _0x461ddc[_0x363a('0x59')]['length'] - (_0x461ddc['value']['match'](/[\uD800-\uDBFF][\uDC00-\uDFFF]/g) || [])['length'];
         },
         'contentLength': function () {
             var _0x3c848c = document['getElementById'](_0x363a('0x174'));
@@ -5484,15 +5484,15 @@ var app = new Vue({
             if (_0x3c848c['value']['match'](/^#/)) {
                 _0x29b0a2 = 0x1;
             }
-            return _0x3c848c[_0x363a('0x59')][_0x363a('0xaf')] - (_0x3c848c[_0x363a('0x59')]['match'](/[\uD800-\uDBFF][\uDC00-\uDFFF]/g) || [])[_0x363a('0xaf')] + _0x29b0a2;
+            return _0x3c848c[_0x363a('0x59')]['length'] - (_0x3c848c[_0x363a('0x59')]['match'](/[\uD800-\uDBFF][\uDC00-\uDFFF]/g) || [])['length'] + _0x29b0a2;
         },
-        'refreshCount': _[_0x363a('0xe1')](function () {
-            app[_0x363a('0x18d')]();
+        'refreshCount': _['debounce'](function () {
+            app['$forceUpdate']();
         }, TIME_REFRESH),
         'addSpoiler': function (_0x1e58d2) {
             var _0x4b6644 = document[_0x363a('0x139')](_0x363a('0x173'));
             var _0x342c76 = _0x4b6644['value'][_0x363a('0x2dd')](0x0, _0x4b6644[_0x363a('0x2de')]);
-            var _0x5d8af7 = _0x4b6644[_0x363a('0x59')][_0x363a('0x2dd')](_0x4b6644[_0x363a('0x2de')], _0x4b6644[_0x363a('0x59')][_0x363a('0xaf')]);
+            var _0x5d8af7 = _0x4b6644[_0x363a('0x59')][_0x363a('0x2dd')](_0x4b6644[_0x363a('0x2de')], _0x4b6644[_0x363a('0x59')]['length']);
             this['katsu_spoiler_text'] = _0x342c76 + _0x1e58d2 + _0x5d8af7;
             _0x4b6644[_0x363a('0x59')] = this[_0x363a('0x13f')];
         },
@@ -5510,7 +5510,7 @@ var app = new Vue({
         'addContent': function (_0x51d0d4) {
             var _0x4d3706 = document[_0x363a('0x139')]('katsu_content');
             var _0x42f402 = _0x4d3706[_0x363a('0x59')][_0x363a('0x2dd')](0x0, _0x4d3706[_0x363a('0x2de')]);
-            var _0xbcc4d3 = _0x4d3706[_0x363a('0x59')]['substr'](_0x4d3706[_0x363a('0x2de')], _0x4d3706[_0x363a('0x59')][_0x363a('0xaf')]);
+            var _0xbcc4d3 = _0x4d3706[_0x363a('0x59')]['substr'](_0x4d3706[_0x363a('0x2de')], _0x4d3706[_0x363a('0x59')]['length']);
             this[_0x363a('0x5c')] = _0x42f402 + _0x51d0d4 + _0xbcc4d3;
             _0x4d3706[_0x363a('0x59')] = this[_0x363a('0x5c')];
         },
@@ -5538,7 +5538,7 @@ var app = new Vue({
                 return;
             }
             var _0x255a2b = _0x3eae02[_0x363a('0x59')]['substr'](0x0, _0x3eae02[_0x363a('0x2de')]);
-            var _0x15e2d6 = _0x3eae02['value']['substr'](_0x3eae02['selectionStart'], _0x3eae02[_0x363a('0x59')][_0x363a('0xaf')]);
+            var _0x15e2d6 = _0x3eae02['value']['substr'](_0x3eae02['selectionStart'], _0x3eae02[_0x363a('0x59')]['length']);
             this[_0x363a('0x5c')] = _0x255a2b + this[_0x363a('0x2dc')][_0x41b094] + _0x15e2d6;
             _0x3eae02['value'] = this['katsu_content_text'];
             this[_0x363a('0x5d')]();
@@ -5552,20 +5552,20 @@ var app = new Vue({
             this['katsu_spoiler_text'] = null != _0x37bee6 ? _0x37bee6[_0x363a('0x59')] : this[_0x363a('0x13f')];
             this[_0x363a('0x5c')] = null != _0x62d4ab ? _0x62d4ab[_0x363a('0x59')] : this[_0x363a('0x5c')];
             this['katsu'][_0x363a('0x29b')] = this[_0x363a('0x13f')];
-            this[_0x363a('0x61')]['status'] = this[_0x363a('0x5c')];
+            this['katsu']['status'] = this[_0x363a('0x5c')];
             if (!this['showFormVote']) {
-                this[_0x363a('0x61')][_0x363a('0x22b')] = {
+                this['katsu'][_0x363a('0x22b')] = {
                     'options': [],
                     'multiple': ![],
                     'expires_in': 0x15180
                 };
-                this[_0x363a('0x61')][_0x363a('0x60')] = {
+                this['katsu'][_0x363a('0x60')] = {
                     'texts': [],
                     'expires_at': '',
                     'extime': [0x1, 0x0, 0x0]
                 };
             }
-            this[_0x363a('0xbb')][_0x363a('0x172')](this[_0x363a('0x61')]);
+            this[_0x363a('0xbb')][_0x363a('0x172')](this['katsu']);
             var _0x3d5ee8 = document[_0x363a('0x139')](_0x363a('0x2df'));
             var _0x5be2c5 = document[_0x363a('0x139')](_0x363a('0x2e0'));
             var _0x4a6db7 = document['getElementById'](_0x363a('0x2e1'));
@@ -5587,32 +5587,32 @@ var app = new Vue({
         'draftToKatsu': function (_0x1960a2, _0xe130dc) {
             var _0x51c6b1 = document[_0x363a('0x139')](_0x363a('0x173'));
             var _0x59649d = document['getElementById']('katsu_content');
-            this[_0x363a('0x61')] = this[_0x363a('0xbb')][_0x1960a2];
+            this['katsu'] = this[_0x363a('0xbb')][_0x1960a2];
             if (_0xe130dc) {
                 this[_0x363a('0xbb')][_0x363a('0xf0')](_0x1960a2, 0x1);
             }
-            this[_0x363a('0x13f')] = this[_0x363a('0x61')]['spoiler_text'];
+            this[_0x363a('0x13f')] = this['katsu']['spoiler_text'];
             this[_0x363a('0x5c')] = this['katsu']['status'];
             _0x51c6b1['value'] = this[_0x363a('0x13f')];
             _0x59649d[_0x363a('0x59')] = this[_0x363a('0x5c')];
-            this[_0x363a('0x13d')] = this[_0x363a('0x13f')][_0x363a('0xaf')] > 0x0 ? !![] : ![];
-            this['showFormVote'] = this[_0x363a('0x61')][_0x363a('0x60')][_0x363a('0x63')][_0x363a('0xaf')] > 0x0 ? !![] : ![];
-            this[_0x363a('0x142')] = this[_0x363a('0x61')][_0x363a('0x16e')] != _0x363a('0x2db') ? !![] : ![];
+            this[_0x363a('0x13d')] = this[_0x363a('0x13f')]['length'] > 0x0 ? !![] : ![];
+            this['showFormVote'] = this['katsu'][_0x363a('0x60')][_0x363a('0x63')]['length'] > 0x0 ? !![] : ![];
+            this[_0x363a('0x142')] = this['katsu'][_0x363a('0x16e')] != _0x363a('0x2db') ? !![] : ![];
             var _0x1574a5 = document[_0x363a('0x139')](_0x363a('0x2df'));
             var _0x267354 = document[_0x363a('0x139')]('vote_title_1');
             var _0x3b2dc1 = document[_0x363a('0x139')](_0x363a('0x2e1'));
             var _0x3b2757 = document[_0x363a('0x139')]('vote_title_3');
             if (null != _0x1574a5) {
-                _0x1574a5[_0x363a('0x59')] = null != this[_0x363a('0x61')][_0x363a('0x60')]['texts'][0x0] ? this[_0x363a('0x61')][_0x363a('0x60')]['texts'][0x0] : '';
+                _0x1574a5[_0x363a('0x59')] = null != this['katsu'][_0x363a('0x60')]['texts'][0x0] ? this['katsu'][_0x363a('0x60')]['texts'][0x0] : '';
             }
             if (null != _0x267354) {
-                _0x267354[_0x363a('0x59')] = null != this[_0x363a('0x61')][_0x363a('0x60')][_0x363a('0x63')][0x1] ? this[_0x363a('0x61')][_0x363a('0x60')][_0x363a('0x63')][0x1] : '';
+                _0x267354[_0x363a('0x59')] = null != this['katsu'][_0x363a('0x60')][_0x363a('0x63')][0x1] ? this['katsu'][_0x363a('0x60')][_0x363a('0x63')][0x1] : '';
             }
             if (null != _0x3b2dc1) {
-                _0x3b2dc1[_0x363a('0x59')] = null != this[_0x363a('0x61')][_0x363a('0x60')][_0x363a('0x63')][0x2] ? this[_0x363a('0x61')][_0x363a('0x60')]['texts'][0x2] : '';
+                _0x3b2dc1[_0x363a('0x59')] = null != this['katsu'][_0x363a('0x60')][_0x363a('0x63')][0x2] ? this['katsu'][_0x363a('0x60')]['texts'][0x2] : '';
             }
             if (null != _0x3b2757) {
-                _0x3b2757[_0x363a('0x59')] = null != this[_0x363a('0x61')][_0x363a('0x60')][_0x363a('0x63')][0x3] ? this[_0x363a('0x61')]['poll_work'][_0x363a('0x63')][0x3] : '';
+                _0x3b2757[_0x363a('0x59')] = null != this['katsu'][_0x363a('0x60')][_0x363a('0x63')][0x3] ? this['katsu']['poll_work'][_0x363a('0x63')][0x3] : '';
             }
             this[_0x363a('0x5d')]();
         },
@@ -5627,13 +5627,13 @@ var app = new Vue({
             }
             this[_0x363a('0x13f')] = _0x2df606[_0x363a('0x59')];
             this['katsu_content_text'] = _0x243836['value'];
-            if (0x0 != this['katsu'][_0x363a('0x2c6')][_0x363a('0xaf')] && this[_0x363a('0x61')][_0x363a('0x2c6')]['length'] != this[_0x363a('0x61')][_0x363a('0x226')][_0x363a('0xaf')]) {
+            if (0x0 != this['katsu'][_0x363a('0x2c6')]['length'] && this['katsu'][_0x363a('0x2c6')]['length'] != this['katsu']['media_attachments']['length']) {
                 return ![];
             }
-            if ((0x0 == _0x243836[_0x363a('0x59')][_0x363a('0x29c')]()[_0x363a('0xaf')] || 0x0 == this[_0x363a('0x2e3')]()) && 0x0 == this[_0x363a('0x61')][_0x363a('0x2c6')][_0x363a('0xaf')]) {
+            if ((0x0 == _0x243836[_0x363a('0x59')][_0x363a('0x29c')]()['length'] || 0x0 == this[_0x363a('0x2e3')]()) && 0x0 == this['katsu'][_0x363a('0x2c6')]['length']) {
                 return ![];
             }
-            if (0x1f4 < _0x2df606[_0x363a('0x59')][_0x363a('0xaf')] + this[_0x363a('0x2e3')]()) {
+            if (0x1f4 < _0x2df606[_0x363a('0x59')]['length'] + this[_0x363a('0x2e3')]()) {
                 return ![];
             }
             return !![];
@@ -5641,12 +5641,12 @@ var app = new Vue({
         'openEmoji': function () {
             var _0x9b1cce = document[_0x363a('0x139')](_0x363a('0x174'));
             this['katsu_content_text'] = _0x9b1cce['value'];
-            var _0x4e4149 = document[_0x363a('0x139')](_0x363a('0x61'));
+            var _0x4e4149 = document[_0x363a('0x139')]('katsu');
             _0x4e4149[_0x363a('0x59')] = this['katsu_content_text'];
         },
         'closeEmoji': function () {
             var _0x315fec = document[_0x363a('0x139')]('katsu_content');
-            var _0x448ff3 = document[_0x363a('0x139')](_0x363a('0x61'));
+            var _0x448ff3 = document[_0x363a('0x139')]('katsu');
             this[_0x363a('0x5c')] = emojione[_0x363a('0x2e4')](_0x448ff3['value']);
             _0x315fec[_0x363a('0x59')] = this[_0x363a('0x5c')];
         },
@@ -5671,7 +5671,7 @@ var app = new Vue({
         },
         'jumpKatsu': function (_0x244166, _0x410568) {
             var _0x5e219a = document[_0x363a('0x139')](_0x244166 + '' + _0x410568);
-            if (_0x5e219a != null && (_0x244166 == 'home' && this['showHome'] || _0x244166 == _0x363a('0xf8') && this[_0x363a('0x14b')] || _0x244166 == 'notif' && this[_0x363a('0x148')] || _0x244166 == _0x363a('0xfd') && this['showMulti'])) {
+            if (_0x5e219a != null && (_0x244166 == 'home' && this['showHome'] || _0x244166 == _0x363a('0xf8') && this[_0x363a('0x14b')] || _0x244166 == 'notif' && this['showNotif'] || _0x244166 == 'multi' && this['showMulti'])) {
                 var _0x610350 = document[_0x363a('0x139')](_0x244166);
                 setTimeout(function () {
                     _0x610350[_0x363a('0xf6')] = _0x610350['scrollTop'] + _0x5e219a['getBoundingClientRect']()[_0x363a('0x165')] + window['pageYOffset'] - 0x58;
@@ -5714,10 +5714,10 @@ function importdrop(_0x31edc2) {
         return;
     }
     app['_data'][_0x363a('0x2ea')] = ![];
-    if (0x4 <= app['_data']['katsu'][_0x363a('0x2c6')][_0x363a('0xaf')] || app['_data'][_0x363a('0x61')]['media_previews'][_0x363a('0xaf')] != app['_data'][_0x363a('0x61')]['media_attachments'][_0x363a('0xaf')]) {
+    if (0x4 <= app['_data']['katsu'][_0x363a('0x2c6')]['length'] || app['_data']['katsu']['media_previews']['length'] != app['_data']['katsu']['media_attachments']['length']) {
         return;
     }
-    if (0x0 != _0x31edc2[_0x363a('0x2eb')][_0x363a('0x2ec')][_0x363a('0xaf')] && app['_data'][_0x363a('0x140')]) {
+    if (0x0 != _0x31edc2[_0x363a('0x2eb')][_0x363a('0x2ec')]['length'] && app['_data'][_0x363a('0x140')]) {
         app['_data'][_0x363a('0xa4')] = _0x363a('0x2ed');
         return;
     }
@@ -5727,16 +5727,16 @@ function importpaste(_0xb7cd91) {
     if (app['_data']['at'] == null) {
         return;
     }
-    if (!_0xb7cd91[_0x363a('0x2ef')][_0x363a('0x2ec')][_0x363a('0xaf')]) {
+    if (!_0xb7cd91[_0x363a('0x2ef')][_0x363a('0x2ec')]['length']) {
         return;
     }
     if (!app['_data']['showForm']) {
         app['toggleForm']();
     }
-    if (0x4 <= app['_data'][_0x363a('0x61')]['media_previews'][_0x363a('0xaf')] || app['_data'][_0x363a('0x61')][_0x363a('0x2c6')]['length'] != app['_data']['katsu'][_0x363a('0x226')][_0x363a('0xaf')]) {
+    if (0x4 <= app['_data']['katsu']['media_previews']['length'] || app['_data']['katsu'][_0x363a('0x2c6')]['length'] != app['_data']['katsu']['media_attachments']['length']) {
         return;
     }
-    if (0x0 != _0xb7cd91[_0x363a('0x2ef')][_0x363a('0x2ec')][_0x363a('0xaf')] && app['_data']['showFormVote']) {
+    if (0x0 != _0xb7cd91[_0x363a('0x2ef')][_0x363a('0x2ec')]['length'] && app['_data']['showFormVote']) {
         app['_data'][_0x363a('0xa4')] = '[Media]\x20アンケートには画像を付けられないよ。';
         return;
     }
@@ -5746,10 +5746,10 @@ function importclick(_0xd2d1ca) {
     if (app['_data']['at'] == null) {
         return;
     }
-    if (!_0xd2d1ca[_0x363a('0xaf')]) {
+    if (!_0xd2d1ca['length']) {
         return;
     }
-    if (0x4 <= app['_data'][_0x363a('0x61')][_0x363a('0x2c6')][_0x363a('0xaf')] || app['_data'][_0x363a('0x61')][_0x363a('0x2c6')][_0x363a('0xaf')] != app['_data'][_0x363a('0x61')]['media_attachments'][_0x363a('0xaf')]) {
+    if (0x4 <= app['_data']['katsu'][_0x363a('0x2c6')]['length'] || app['_data']['katsu'][_0x363a('0x2c6')]['length'] != app['_data']['katsu']['media_attachments']['length']) {
         return;
     }
     if (0x0 != _0xd2d1ca['length'] && app['_data'][_0x363a('0x140')]) {
@@ -5796,7 +5796,7 @@ function swipedetect(_0x4f8ecc, _0x52cc36) {
     }, {
         'passive': !![]
     });
-    _0x183dec['addEventListener'](_0x363a('0x2f5'), _[_0x363a('0xe1')](function (_0x14cf7e) {
+    _0x183dec['addEventListener'](_0x363a('0x2f5'), _['debounce'](function (_0x14cf7e) {
         var _0x59e683 = _0x14cf7e['changedTouches'][0x0];
         _0x267279 = 0x0;
         _0x30e866 = _0x59e683['pageX'] - _0x49dc99;
@@ -5853,8 +5853,8 @@ function getParameterByName(_0x55941c, _0x46df54) {
 }
 function base64ToBlob(_0x4bc369) {
     var _0x316891 = window.atob(_0x4bc369['split'](',')[0x1]);
-    var _0x372d33 = new Uint8Array(new ArrayBuffer(_0x316891[_0x363a('0xaf')]));
-    for (var _0x3331e5 = 0x0; _0x3331e5 < _0x316891[_0x363a('0xaf')]; _0x3331e5++) {
+    var _0x372d33 = new Uint8Array(new ArrayBuffer(_0x316891['length']));
+    for (var _0x3331e5 = 0x0; _0x3331e5 < _0x316891['length']; _0x3331e5++) {
         _0x372d33[_0x3331e5] = _0x316891[_0x363a('0x2fa')](_0x3331e5);
     }
     return new Blob([_0x372d33], {
@@ -5862,7 +5862,7 @@ function base64ToBlob(_0x4bc369) {
     });
 }
 function inputVote(_0x4f5fb6, _0x46033e) {
-    app['_data'][_0x363a('0x61')][_0x363a('0x60')][_0x363a('0x63')][_0x46033e] = _0x4f5fb6[_0x363a('0x59')];
+    app['_data']['katsu'][_0x363a('0x60')][_0x363a('0x63')][_0x46033e] = _0x4f5fb6[_0x363a('0x59')];
 }
 function inputSearch(_0x80e9f5) {
     app['_data'][_0x363a('0x1c3')] = _0x80e9f5[_0x363a('0x59')];
@@ -5917,8 +5917,8 @@ function escapeHtml(_0x50b1fb) {
 }
 function patchEmoji(_0x54d410, _0x133a9b) {
     var _0x4a5584 = _0x54d410;
-    if (_0x133a9b != null && _0x133a9b[_0x363a('0xaf')] != 0x0) {
-        _0x133a9b[_0x363a('0x121')](function (_0x4b3915, _0x2a9cd7) {
+    if (_0x133a9b != null && _0x133a9b['length'] != 0x0) {
+        _0x133a9b['filter'](function (_0x4b3915, _0x2a9cd7) {
             _0x4a5584 = _0x4a5584['split'](':' + _0x4b3915[_0x363a('0x30c')] + ':')[_0x363a('0xcb')](_0x363a('0x30d') + _0x4b3915[_0x363a('0x30c')] + ':\x22\x20src=\x22' + _0x4b3915[_0x363a('0x30e')] + '\x22>');
         });
     }
@@ -5928,7 +5928,7 @@ function encodeHtmlForm(_0x3d1718) {
     var _0xa59a65 = [];
     for (var _0x543b96 in _0x3d1718) {
         var _0x3ee273 = encodeURIComponent(_0x543b96) + '=' + encodeURIComponent(_0x3d1718[_0x543b96]);
-        _0xa59a65[_0x363a('0x1a2')](_0x3ee273);
+        _0xa59a65['push'](_0x3ee273);
     }
     return _0xa59a65['join']('&').replace(/%20/g, '+');
 }
