@@ -1739,7 +1739,7 @@ var app = new Vue({
         'refetchMulti': _['debounce'](function () {
             var _0x4b35dc = this;
             var _0x439f9f = [];
-            var directUrl = DIRECT;
+            var directUrl = GLOBAL; // ★DIRECTから変えてみたけど怪しい
             if (_0x4b35dc['multi_type'] == 'List') {
                 directUrl = LIST.replace('[LID]', _0x4b35dc['multi_target']);
             } else if (_0x4b35dc['multi_type'] == 'Hashtag') {
