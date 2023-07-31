@@ -1160,7 +1160,7 @@ var app = new Vue({
             this[_0x363a('0x14b')] = ![];
             this[_0x363a('0x14c')] = _0x363a('0x14d');
             this[_0x363a('0x14e')] = _0x363a('0x14f');
-            this.multi_type = 'Stream';
+            this.multi_type = 'Direct';
             this['multi_target'] = '';
             if (1 == this[_0x363a('0x152')]) {
                 this[_0x363a('0x153')] = !![];
