@@ -25,7 +25,7 @@ var NOIMAGE_MEDIA_PROXY = 'media_proxy';
 var IMAGE_MAXLEN = 0x500;
 var IMAGE_MAXPIXEL = 0x500 * 0x500;
 var urlParams = [], userDevice, userDeviceOp, option, userAppMode;
-var userConf = localStorage;
+const userConf = localStorage;
 var Notification = window.Notification || window.mozNotification || window.webkitNotification;
 var userAgent = window.navigator['userAgent']['toLowerCase']();
 var serviceWorker = window.navigator.serviceWorker;
@@ -50,8 +50,8 @@ var TIME_REFRESH = 0x44c;
 var REQ_TIMEOUT = 0x3a98;
 var threshold_high = 0x44c;
 var threshold_low = 0xa8c;
-var redirect_url = 'https://aikatsukamen.github.io/kktjs/';
-var redirect_sub = 'urn:ietf:wg:oauth:2.0:oob';
+const redirect_url = 'https://aikatsukamen.github.io/kktjs/';
+const redirect_sub = 'urn:ietf:wg:oauth:2.0:oob';
 // 本家
 // var client_id = '53101426dce20fef441eee023ba2dc8c0e838e3688d189b87e2e6133a70ce686';
 // var client_id_sub = 'uaO-aPO-tkFS4cSiZmvR_-q7QLeCFjt922zSL8CNDLc';
@@ -178,19 +178,19 @@ Vue[_0x363a('0x55')](_0x363a('0x57'), {
 });
 Vue[_0x363a('0x55')](_0x363a('0x58'), {
     'inserted': function (_0x2c0cac) {
-        _0x2c0cac[_0x363a('0x59')] = app['_data']['katsu_spoiler_text'];
+        _0x2c0cac['value'] = app['_data']['katsu_spoiler_text'];
         app['refreshCount']();
     }
 });
 Vue[_0x363a('0x55')](_0x363a('0x5b'), {
     'inserted': function (_0x9c3039) {
-        _0x9c3039[_0x363a('0x59')] = app['_data'][_0x363a('0x5c')];
+        _0x9c3039['value'] = app['_data'][_0x363a('0x5c')];
         app[_0x363a('0x5d')]();
     }
 });
 Vue[_0x363a('0x55')]('restore-kfr', {
     'inserted': function (_0x461e93) {
-        _0x461e93[_0x363a('0x59')] = app['_data'][_0x363a('0x5e')];
+        _0x461e93['value'] = app['_data']['optKatsuFilterRaw'];
     }
 });
 Vue['directive'](_0x363a('0x5f'), {
@@ -200,17 +200,17 @@ Vue['directive'](_0x363a('0x5f'), {
 });
 Vue[_0x363a('0x55')](_0x363a('0x62'), {
     'inserted': function (_0x48525a) {
-        _0x48525a[_0x363a('0x59')] = null != app['_data']['katsu'][_0x363a('0x60')]['texts'][1] ? app['_data']['katsu'][_0x363a('0x60')][_0x363a('0x63')][1] : '';
+        _0x48525a['value'] = null != app['_data']['katsu'][_0x363a('0x60')]['texts'][1] ? app['_data']['katsu'][_0x363a('0x60')][_0x363a('0x63')][1] : '';
     }
 });
 Vue[_0x363a('0x55')]('restore-vote2', {
     'inserted': function (_0x3e830d) {
-        _0x3e830d[_0x363a('0x59')] = null != app['_data']['katsu'][_0x363a('0x60')]['texts'][0x2] ? app['_data']['katsu']['poll_work'][_0x363a('0x63')][0x2] : '';
+        _0x3e830d['value'] = null != app['_data']['katsu'][_0x363a('0x60')]['texts'][2] ? app['_data']['katsu']['poll_work'][_0x363a('0x63')][2] : '';
     }
 });
 Vue[_0x363a('0x55')](_0x363a('0x64'), {
     'inserted': function (_0x39611e) {
-        _0x39611e[_0x363a('0x59')] = null != app['_data']['katsu'][_0x363a('0x60')][_0x363a('0x63')][0x3] ? app['_data']['katsu'][_0x363a('0x60')][_0x363a('0x63')][0x3] : '';
+        _0x39611e['value'] = null != app['_data']['katsu'][_0x363a('0x60')][_0x363a('0x63')][3] ? app['_data']['katsu'][_0x363a('0x60')][_0x363a('0x63')][3] : '';
     }
 });
 var app = new Vue({
@@ -298,14 +298,14 @@ var app = new Vue({
             'enabled': 'serviceWorker' in navigator,
             'controller': 'serviceWorker' in navigator ? null != navigator['serviceWorker'][_0x363a('0x6d')] : ![]
         },
-        'conf_ver': 0x1,
-        'error_cnt': 0x0,
+        'conf_ver': 1,
+        'error_cnt': 0,
         'at': userConf['getItem']('at'),
         'ua': 'pc',
         'uaop': '',
         'autologin': !![],
-        'user': null != userConf[_0x363a('0x6e')](_0x363a('0x6f')) ? JSON.parse(userConf[_0x363a('0x6e')](_0x363a('0x6f'))) : [],
-        'user_requesting_count': 0x0,
+        'user': null != userConf['getItem'](_0x363a('0x6f')) ? JSON.parse(userConf['getItem'](_0x363a('0x6f'))) : [],
+        'user_requesting_count': 0,
         'profile': {
             'name': '',
             'name_b': '',
@@ -315,48 +315,48 @@ var app = new Vue({
             'name': ''
         },
         'user_discord': [],
-        'at_discord': null != userConf['getItem']('at_discord') ? JSON.parse(userConf[_0x363a('0x6e')]('at_discord')) : '',
+        'at_discord': null != userConf['getItem']('at_discord') ? JSON.parse(userConf['getItem']('at_discord')) : '',
         'discord_id': '',
         'discords': [],
         'discord_type': _0x363a('0x71'),
-        'discord_unread': 0x0,
+        'discord_unread': 0,
         'home_id': '',
         'homes': [],
         'home_type': '',
-        'home_posy': 0x0,
-        'home_posy_b': 0x0,
-        'home_unread': 0x0,
+        'home_posy': 0,
+        'home_posy_b': 0,
+        'home_unread': 0,
         'local_id': '',
         'locals': [],
         'local_type': '',
-        'local_posy': 0x0,
-        'local_posy_b': 0x0,
-        'local_unread': 0x0,
-        'local_id_bookmark': null != userConf[_0x363a('0x6e')](_0x363a('0x72')) ? JSON.parse(userConf['getItem'](_0x363a('0x72'))) : '',
+        'local_posy': 0,
+        'local_posy_b': 0,
+        'local_unread': 0,
+        'local_id_bookmark': null != userConf['getItem'](_0x363a('0x72')) ? JSON.parse(userConf['getItem'](_0x363a('0x72'))) : '',
         'notif_id': '',
         'notifs': [],
         'notifs_filter': [],
         'notif_type': '',
-        'notif_posy': 0x0,
-        'notif_posy_b': 0x0,
-        'notif_unread': 0x0,
+        'notif_posy': 0,
+        'notif_posy_b': 0,
+        'notif_unread': 0,
         'notif_unread_filter': {
-            'mention': 0x0,
-            'fav': 0x0,
-            'reblog': 0x0,
-            'follow': 0x0,
-            'others': 0x0,
+            'mention': 0,
+            'fav': 0,
+            'reblog': 0,
+            'follow': 0,
+            'others': 0,
             'complete': !![]
         },
-        'notif_id_bookmark': null != userConf[_0x363a('0x6e')](_0x363a('0x73')) ? JSON.parse(userConf[_0x363a('0x6e')](_0x363a('0x73'))) : '',
+        'notif_id_bookmark': null != userConf['getItem'](_0x363a('0x73')) ? JSON.parse(userConf['getItem'](_0x363a('0x73'))) : '',
         'multi_id': '',
         'multis': [],
         'multi_type': '',
         'multi_name': '',
         'multi_target': '',
-        'multi_posy': 0x0,
-        'multi_posy_b': 0x0,
-        'multi_unread': 0x0,
+        'multi_posy': 0,
+        'multi_posy_b': 0,
+        'multi_unread': 0,
         'detail_targetid': '',
         'detail_id': '',
         'detail': [],
@@ -383,7 +383,7 @@ var app = new Vue({
         'stream_list_text': '',
         'stream_list_text_check': ![],
         'stream_list_profile_check': ![],
-        'stream_hashtags': null != userConf[_0x363a('0x6e')](_0x363a('0x74')) ? JSON.parse(userConf[_0x363a('0x6e')](_0x363a('0x74'))) : [],
+        'stream_hashtags': null != userConf['getItem'](_0x363a('0x74')) ? JSON.parse(userConf['getItem'](_0x363a('0x74'))) : [],
         'stream_hashtag_text': '',
         'stream_channels': [_0x363a('0x75'), _0x363a('0x76')],
         'katsu': {
@@ -406,12 +406,12 @@ var app = new Vue({
             'poll_work': {
                 'texts': [],
                 'expires_at': '',
-                'extime': [0x1, 0x0, 0x0]
+                'extime': [1, 0, 0x0]
             },
             'emojis': []
         },
         'media_tmp': {
-            'id': 0x0,
+            'id': 0,
             'type': _0x363a('0x77'),
             'url': IMG_DUMMY,
             'preview_url': IMG_DUMMY,
@@ -465,8 +465,8 @@ var app = new Vue({
         'katsu_spoiler_text_bu': '',
         'katsu_content_text': '',
         'katsu_poll': null,
-        'content_text_drafts': null != userConf[_0x363a('0x6e')]('work_drafts') ? JSON.parse(userConf[_0x363a('0x6e')](_0x363a('0x78'))) : [],
-        'katsu_drafts': null != userConf[_0x363a('0x6e')]('work_katsu_drafts') ? JSON.parse(userConf[_0x363a('0x6e')](_0x363a('0x79'))) : [],
+        'content_text_drafts': null != userConf['getItem']('work_drafts') ? JSON.parse(userConf['getItem'](_0x363a('0x78'))) : [],
+        'katsu_drafts': null != userConf['getItem']('work_katsu_drafts') ? JSON.parse(userConf['getItem'](_0x363a('0x79'))) : [],
         'search_text': '',
         'searchs': [],
         'search_type': '',
@@ -514,8 +514,8 @@ var app = new Vue({
         if (this['at'] == null) {
             addToHomescreen({
                 'appID': _0x363a('0x89'),
-                'lifespan': 0x0,
-                'startDelay': 0x0,
+                'lifespan': 0,
+                'startDelay': 0,
                 'displayPace': 0x0
             });
             return;
@@ -546,7 +546,7 @@ var app = new Vue({
         if (null != userConf['getItem'](_0x363a('0x9c'))) {
             this['showSetting'] = !![];
         }
-        if (null == userConf[_0x363a('0x6e')]('conf_std')) {
+        if (null == userConf['getItem']('conf_std')) {
             this['showSetting'] = !![];
         }
         this[_0x363a('0x9e')](_0x363a('0x9f'), null);
@@ -654,16 +654,16 @@ var app = new Vue({
             return _0x4057e1['getFullYear']() + '/' + ('0' + (_0x4057e1[_0x363a('0xc2')]() + 0x1))['slice'](-0x2) + '/' + ('0' + _0x4057e1['getDate']())['slice'](-0x2) + '\x20' + ('0' + _0x4057e1[_0x363a('0xc5')]())['slice'](-0x2) + ':' + ('0' + _0x4057e1[_0x363a('0xc4')]())['slice'](-0x2);
         },
         'formatContent': function (_0x2bd990, _0x543689) {
-            return _0x2bd990 != null ? emojione[_0x363a('0xc9')](patchEmoji(_0x2bd990, _0x543689)['split'](_0x363a('0xca'))[_0x363a('0xcb')](_0x363a('0xcc'))['split']('<a\x20href=\x22https://kirakiratter.com/tags/')[_0x363a('0xcb')](_0x363a('0xcd'))['split'](_0x363a('0xce'))[_0x363a('0xcb')]('<a\x20href=\x22javascript:void(0)\x22\x20onClick=\x22app._data.search_userid\x20=\x20this.getAttribute(\x27user\x27);app.runUserId();return\x20false;\x22\x20user=\x22').replace(/>kirakiratter.com\/media\/[\s\S]*?<\/span>/g, _0x363a('0xd0'))).replace(/:name_badge:/g, '📛').replace(/  /g, _0x363a('0xd1')) : '';
+            return _0x2bd990 != null ? emojione[_0x363a('0xc9')](patchEmoji(_0x2bd990, _0x543689)['split'](_0x363a('0xca'))['join'](_0x363a('0xcc'))['split']('<a\x20href=\x22https://kirakiratter.com/tags/')['join'](_0x363a('0xcd'))['split'](_0x363a('0xce'))['join']('<a\x20href=\x22javascript:void(0)\x22\x20onClick=\x22app._data.search_userid\x20=\x20this.getAttribute(\x27user\x27);app.runUserId();return\x20false;\x22\x20user=\x22').replace(/>kirakiratter.com\/media\/[\s\S]*?<\/span>/g, _0x363a('0xd0'))).replace(/:name_badge:/g, '📛').replace(/  /g, _0x363a('0xd1')) : '';
         },
         'formatSpoiler': function (_0x6e662, _0x293600) {
-            return _0x6e662 != null ? emojione[_0x363a('0xc9')](patchEmoji(escapeHtml(_0x6e662), _0x293600)['split'](_0x363a('0xca'))[_0x363a('0xcb')](_0x363a('0xcc'))['split'](_0x363a('0xd2'))['join'](_0x363a('0xcd'))['split'](_0x363a('0xce'))['join'](_0x363a('0xd3')).replace(/>kirakiratter.com\/media\/[\s\S]*?<\/span>/g, _0x363a('0xd0'))).replace(/:name_badge:/g, '📛').replace(/  /g, _0x363a('0xd1')).replace(/\r\n/g, _0x363a('0xd4')).replace(/(\n|\r)/g, _0x363a('0xd4')) : '';
+            return _0x6e662 != null ? emojione[_0x363a('0xc9')](patchEmoji(escapeHtml(_0x6e662), _0x293600)['split'](_0x363a('0xca'))['join'](_0x363a('0xcc'))['split'](_0x363a('0xd2'))['join'](_0x363a('0xcd'))['split'](_0x363a('0xce'))['join'](_0x363a('0xd3')).replace(/>kirakiratter.com\/media\/[\s\S]*?<\/span>/g, _0x363a('0xd0'))).replace(/:name_badge:/g, '📛').replace(/  /g, _0x363a('0xd1')).replace(/\r\n/g, _0x363a('0xd4')).replace(/(\n|\r)/g, _0x363a('0xd4')) : '';
         },
         'formatContentConfirm': function (_0x384b46, _0x32b2ea) {
-            return _0x384b46 != null ? emojione[_0x363a('0xc9')](patchEmoji(escapeHtml(_0x384b46), _0x32b2ea)['split'](_0x363a('0xca'))['join'](_0x363a('0xcc'))['split'](_0x363a('0xd2'))[_0x363a('0xcb')](_0x363a('0xcd'))['split'](_0x363a('0xce'))[_0x363a('0xcb')](_0x363a('0xd3')).replace(/https:\/\/kirakiratter.com\/media\/[\s\S]*? /g, _0x363a('0xd5'))).replace(/:name_badge:/g, '📛').replace(/  /g, '&nbsp;&nbsp;').replace(/(\r\n){2,}/g, _0x363a('0xd6')).replace(/(\n|\r){2,}/g, _0x363a('0xd6')).replace(/\r\n/g, _0x363a('0xd4')).replace(/(\n|\r)/g, _0x363a('0xd4')) : '';
+            return _0x384b46 != null ? emojione[_0x363a('0xc9')](patchEmoji(escapeHtml(_0x384b46), _0x32b2ea)['split'](_0x363a('0xca'))['join'](_0x363a('0xcc'))['split'](_0x363a('0xd2'))['join'](_0x363a('0xcd'))['split'](_0x363a('0xce'))['join'](_0x363a('0xd3')).replace(/https:\/\/kirakiratter.com\/media\/[\s\S]*? /g, _0x363a('0xd5'))).replace(/:name_badge:/g, '📛').replace(/  /g, '&nbsp;&nbsp;').replace(/(\r\n){2,}/g, _0x363a('0xd6')).replace(/(\n|\r){2,}/g, _0x363a('0xd6')).replace(/\r\n/g, _0x363a('0xd4')).replace(/(\n|\r)/g, _0x363a('0xd4')) : '';
         },
         'formatSpoilerConfirm': function (_0x486e64, _0xa8e05b) {
-            return _0x486e64 != null ? emojione[_0x363a('0xc9')](patchEmoji(escapeHtml(_0x486e64), _0xa8e05b)['split'](_0x363a('0xca'))[_0x363a('0xcb')](_0x363a('0xcc'))['split'](_0x363a('0xd2'))[_0x363a('0xcb')](_0x363a('0xcd'))['split'](_0x363a('0xce'))[_0x363a('0xcb')](_0x363a('0xd3')).replace(/https:\/\/kirakiratter.com\/media\/[\s\S]*? /g, _0x363a('0xd5'))).replace(/:name_badge:/g, '📛').replace(/  /g, _0x363a('0xd1')).replace(/\r\n/g, _0x363a('0xd4')).replace(/(\n|\r)/g, _0x363a('0xd4')) : '';
+            return _0x486e64 != null ? emojione[_0x363a('0xc9')](patchEmoji(escapeHtml(_0x486e64), _0xa8e05b)['split'](_0x363a('0xca'))['join'](_0x363a('0xcc'))['split'](_0x363a('0xd2'))['join'](_0x363a('0xcd'))['split'](_0x363a('0xce'))['join'](_0x363a('0xd3')).replace(/https:\/\/kirakiratter.com\/media\/[\s\S]*? /g, _0x363a('0xd5'))).replace(/:name_badge:/g, '📛').replace(/  /g, _0x363a('0xd1')).replace(/\r\n/g, _0x363a('0xd4')).replace(/(\n|\r)/g, _0x363a('0xd4')) : '';
         },
         'formatEmoji': function (_0x3d3bd4, _0xdb2ad8) {
             return _0x3d3bd4 != null ? emojione['toImage'](patchEmoji(_0x3d3bd4, _0xdb2ad8)).replace(/:name_badge:/g, '📛') : '';
@@ -746,7 +746,7 @@ var app = new Vue({
             } else if (!this['fetch_lock'][_0x363a('0xec')] && this[_0x363a('0xed')] != this[_0x363a('0xe9')] && threshold_high >= this['home_posy'] && 0x0 <= this[_0x363a('0xe9')]) {
                 if (this[_0x363a('0xee')] - LIMIT < 0x0) {
                     this['home_unread'] = 0x0;
-                    this['homes'][_0x363a('0xf0')](LIMIT);
+                    this['homes']['splice'](LIMIT);
                     this[_0x363a('0xf1')] = this[_0x363a('0xf2')] ? this['homes'][this['homes']['length'] - 0x1]['id'] : '';
                     this['fetch_comp']['home'] = ![];
                     return;
@@ -756,7 +756,7 @@ var app = new Vue({
                     this[_0x363a('0xf4')](_0x363a('0xec'), this['homes'][LIMIT + this[_0x363a('0xee')]]['id']);
                 }
             } else if (this['homes']['length'] - 0x1 - this[_0x363a('0xee')] > LIMIT * 0x2) {
-                this['homes'][_0x363a('0xf0')](this['home_unread'] + LIMIT * 0x2);
+                this['homes']['splice'](this['home_unread'] + LIMIT * 0x2);
                 this[_0x363a('0xf1')] = this[_0x363a('0xf2')] ? this['homes'][this['homes']['length'] - 0x1]['id'] : '';
                 this['fetch_comp'][_0x363a('0xec')] = ![];
             }
@@ -776,7 +776,7 @@ var app = new Vue({
             } else if (!this['fetch_lock'][_0x363a('0xf8')] && this[_0x363a('0xf5')] != this['local_posy_b'] && threshold_high >= this[_0x363a('0xf5')] && 0x0 <= this[_0x363a('0xf5')]) {
                 if (this[_0x363a('0xfa')] - LIMIT < 0x0) {
                     this[_0x363a('0xfa')] = 0x0;
-                    this['locals'][_0x363a('0xf0')](LIMIT);
+                    this['locals']['splice'](LIMIT);
                     this['local_id'] = this['hasLocal'] ? this['locals'][this['locals']['length'] - 0x1]['id'] : '';
                     this['fetch_comp'][_0x363a('0xf8')] = ![];
                     return;
@@ -801,23 +801,23 @@ var app = new Vue({
             this[_0x363a('0xfc')] = parseInt(_0x1602b7[_0x363a('0xe8')][_0x363a('0xea')] - _0x1602b7[_0x363a('0xe8')][_0x363a('0xeb')] - _0x1602b7[_0x363a('0xe8')][_0x363a('0xf6')]);
             if (!this['fetch_lock']['multi'] && this[_0x363a('0xfb')] != this[_0x363a('0xfc')] && threshold_low >= this[_0x363a('0xfc')] && 0x0 <= this[_0x363a('0xfc')]) {
                 this['fetch_lock']['multi'] = !![];
-                this[_0x363a('0xfe')] = this[_0x363a('0xff')]['length'] - LIMIT;
+                this[_0x363a('0xfe')] = this['multis']['length'] - LIMIT;
                 this[_0x363a('0x9a')]();
             } else if (!this['fetch_lock']['multi'] && this[_0x363a('0xfb')] != this[_0x363a('0xfc')] && threshold_high >= this[_0x363a('0xfb')] && 0x0 <= this[_0x363a('0xfb')]) {
                 if (this[_0x363a('0xfe')] - LIMIT < 0x0) {
                     this[_0x363a('0xfe')] = 0x0;
-                    this[_0x363a('0xff')][_0x363a('0xf0')](LIMIT);
-                    this['multi_id'] = this[_0x363a('0x101')] ? this[_0x363a('0xff')][this[_0x363a('0xff')]['length'] - 0x1]['id'] : '';
+                    this['multis']['splice'](LIMIT);
+                    this['multi_id'] = this[_0x363a('0x101')] ? this['multis'][this['multis']['length'] - 0x1]['id'] : '';
                     this['fetch_comp']['multi'] = ![];
                     return;
                 }
                 this[_0x363a('0xfe')] = this[_0x363a('0xfe')] - LIMIT;
                 if (0x0 >= this[_0x363a('0xfb')]) {
-                    this['jumpKatsu']('multi', this[_0x363a('0xff')][LIMIT + this[_0x363a('0xfe')]]['id']);
+                    this['jumpKatsu']('multi', this['multis'][LIMIT + this[_0x363a('0xfe')]]['id']);
                 }
             } else if (this['multis']['length'] - 0x1 - this['multi_unread'] > LIMIT * 0x2) {
-                this[_0x363a('0xff')][_0x363a('0xf0')](this[_0x363a('0xfe')] + LIMIT * 0x2);
-                this['multi_id'] = this[_0x363a('0x101')] ? this['multis'][this[_0x363a('0xff')]['length'] - 0x1]['id'] : '';
+                this['multis']['splice'](this[_0x363a('0xfe')] + LIMIT * 0x2);
+                this['multi_id'] = this[_0x363a('0x101')] ? this['multis'][this['multis']['length'] - 0x1]['id'] : '';
                 this['fetch_comp']['multi'] = ![];
             }
         }, TIME_SCROLL),
@@ -864,7 +864,7 @@ var app = new Vue({
                     this[_0x363a('0xf4')]('notif', this['notifs_filter'][LIMIT_NOTIF + this[_0x363a('0x105')]]['id']);
                 }
             } else if (this['notifs_filter']['length'] - 0x1 - this[_0x363a('0x105')] > LIMIT_NOTIF * 0x2) {
-                this['notifs_filter'][_0x363a('0xf0')](this[_0x363a('0x105')] + LIMIT_NOTIF * 0x2);
+                this['notifs_filter']['splice'](this[_0x363a('0x105')] + LIMIT_NOTIF * 0x2);
                 this['notif_id'] = this[_0x363a('0x112')] ? this['notifs_filter'][this['notifs_filter']['length'] - 0x1]['id'] : '';
                 this['fetch_comp']['notif_filter'] = ![];
             }
@@ -969,11 +969,11 @@ var app = new Vue({
         },
         'countNotifUnread': function () {
             var _0x1a6469 = {
-                'mention': 0x0,
-                'fav': 0x0,
-                'reblog': 0x0,
-                'follow': 0x0,
-                'others': 0x0,
+                'mention': 0,
+                'fav': 0,
+                'reblog': 0,
+                'follow': 0,
+                'others': 0,
                 'complete': !![]
             };
             var _0x56a4ba = 0x0;
@@ -1066,7 +1066,7 @@ var app = new Vue({
         'toggleStreamEdit': function () {
             this[_0x363a('0xe3')] = '';
             this[_0x363a('0xe5')][_0x363a('0xe6')] = this[_0x363a('0x137')] ? this['stream_list'][_0x363a('0x138')] : '';
-            document[_0x363a('0x139')](_0x363a('0x13a'))[_0x363a('0x59')] = this[_0x363a('0xe5')][_0x363a('0xe6')];
+            document.getElementById(_0x363a('0x13a'))['value'] = this[_0x363a('0xe5')][_0x363a('0xe6')];
             this['checkStreamListText']();
             this[_0x363a('0x13b')]();
             this[_0x363a('0x13c')] = !this['showStreamEdit'];
@@ -1085,10 +1085,10 @@ var app = new Vue({
         },
         'toggleFormSpoiler': function () {
             if (this[_0x363a('0x13d')]) {
-                this[_0x363a('0x13e')] = this[_0x363a('0x13f')];
-                this[_0x363a('0x13f')] = '';
+                this[_0x363a('0x13e')] = this['katsu_spoiler_text'];
+                this['katsu_spoiler_text'] = '';
             } else {
-                this[_0x363a('0x13f')] = this[_0x363a('0x13e')];
+                this['katsu_spoiler_text'] = this[_0x363a('0x13e')];
             }
             this[_0x363a('0x13d')] = !this['showFormSpoiler'];
         },
@@ -1283,11 +1283,11 @@ var app = new Vue({
             if (_0x363a('0x158') == _0x59ac49) {
                 this[_0x363a('0x105')] = 0x0;
                 this['notif_unread_filter'] = {
-                    'mention': 0x0,
-                    'fav': 0x0,
-                    'reblog': 0x0,
-                    'follow': 0x0,
-                    'others': 0x0,
+                    'mention': 0,
+                    'fav': 0,
+                    'reblog': 0,
+                    'follow': 0,
+                    'others': 0,
                     'complete': !![]
                 };
                 this['notif_id'] = this['hasNotif'] ? this['notifs'][this['notifs']['length'] - 0x1]['id'] : '';
@@ -1534,12 +1534,12 @@ var app = new Vue({
                     }
                 });
             }
-            this[_0x363a('0x5c')] = _0x13d3f4 + '\x20' + _0x25900a[_0x363a('0xcb')]('\x20');
-            var _0xcd18d7 = document[_0x363a('0x139')](_0x363a('0x173'));
-            var _0x122dfe = document[_0x363a('0x139')](_0x363a('0x174'));
+            this[_0x363a('0x5c')] = _0x13d3f4 + '\x20' + _0x25900a['join']('\x20');
+            var _0xcd18d7 = document.getElementById('katsu_spoiler');
+            var _0x122dfe = document.getElementById('katsu_content');
             if (_0xcd18d7 != null && _0x122dfe != null) {
-                _0xcd18d7[_0x363a('0x59')] = this[_0x363a('0x13f')];
-                _0x122dfe[_0x363a('0x59')] = this[_0x363a('0x5c')];
+                _0xcd18d7['value'] = this['katsu_spoiler_text'];
+                _0x122dfe['value'] = this[_0x363a('0x5c')];
             }
         },
         'runToast': function (_0x52e27c) {
@@ -1644,7 +1644,7 @@ var app = new Vue({
         },
         'resetMultiColumn': function () {
             this['multi_id'] = '';
-            this[_0x363a('0xff')] = [];
+            this['multis'] = [];
             this[_0x363a('0xfe')] = 0x0;
             this['fetch_comp']['multi'] = ![];
         },
@@ -1755,13 +1755,13 @@ var app = new Vue({
                 if (request['readyState'] == XMLHttpRequest['DONE'] && request['status'] == 0xc8) {
                     if (_0x9d4feb == _0x4b35dc['multi_type'] && _0x4b35dc['fetch_lock']['multi']) {
                         _0x439f9f = JSON.parse(request['responseText']);
-                        if (null != _0x4b35dc[_0x363a('0xff')] && !_0x4b35dc[_0x363a('0x19d')](_0x439f9f, _0x4b35dc[_0x363a('0xff')])) {
+                        if (null != _0x4b35dc['multis'] && !_0x4b35dc[_0x363a('0x19d')](_0x439f9f, _0x4b35dc['multis'])) {
                             _0x4b35dc['updateWrapperBM'](_0x439f9f, 'multi');
                             _0x4b35dc[_0x363a('0x197')](_0x439f9f, 'multi');
                             _0x4b35dc[_0x363a('0x194')](_0x439f9f);
-                            _0x4b35dc[_0x363a('0xff')] = _0x439f9f;
+                            _0x4b35dc['multis'] = _0x439f9f;
                             _0x4b35dc['multi_unread'] = 0x0;
-                            _0x4b35dc['multi_id'] = _0x4b35dc[_0x363a('0xff')][_0x4b35dc[_0x363a('0xff')]['length'] - 0x1] ? _0x4b35dc[_0x363a('0xff')][_0x4b35dc[_0x363a('0xff')]['length'] - 0x1]['id'] : '0';
+                            _0x4b35dc['multi_id'] = _0x4b35dc['multis'][_0x4b35dc['multis']['length'] - 0x1] ? _0x4b35dc['multis'][_0x4b35dc['multis']['length'] - 0x1]['id'] : '0';
                             _0x4b35dc['$nextTick'](function () {
                                 _0x4b35dc[_0x363a('0x19e')]();
                                 _0x4b35dc[_0x363a('0x196')](_0x439f9f);
@@ -1916,12 +1916,12 @@ var app = new Vue({
                         _0x4c3d9a = JSON.parse(request['responseText']);
                         _0x5d0dc0['updateWrapperBM'](_0x4c3d9a, 'multi');
                         _0x5d0dc0[_0x363a('0x197')](_0x4c3d9a, 'multi');
-                        if (0x0 == _0x5d0dc0[_0x363a('0xff')]['length']) {
+                        if (0x0 == _0x5d0dc0['multis']['length']) {
                             _0x5d0dc0['multis'] = _0x4c3d9a;
                         } else {
-                            Array['prototype']['push']['apply'](_0x5d0dc0[_0x363a('0xff')], _0x4c3d9a);
+                            Array['prototype']['push']['apply'](_0x5d0dc0['multis'], _0x4c3d9a);
                         }
-                        _0x5d0dc0['multi_id'] = _0x5d0dc0['multis'][_0x5d0dc0[_0x363a('0xff')]['length'] - 0x1] ? _0x5d0dc0[_0x363a('0xff')][_0x5d0dc0[_0x363a('0xff')]['length'] - 0x1]['id'] : '0';
+                        _0x5d0dc0['multi_id'] = _0x5d0dc0['multis'][_0x5d0dc0['multis']['length'] - 0x1] ? _0x5d0dc0['multis'][_0x5d0dc0['multis']['length'] - 0x1]['id'] : '0';
                         _0x5d0dc0['fetch_lock']['multi'] = ![];
                         _0x5d0dc0['fetch_comp']['multi'] = _0x4c3d9a['length'] < LIMIT;
                         _0x5d0dc0['$forceUpdate']();
@@ -3028,83 +3028,88 @@ var app = new Vue({
             window.open(DIRECTRY_URL.replace('[I]', this.repository), '_blank');
         },
         'loadConf': function () {
-            var _0x47418d = 0x2;
+            /** 
+             * 1: スマホ
+             * 2: タブレット
+             * 3: PC
+             */
+            let deviceType = 2;
             var _0x16db8f = !![];
-            if (window['innerWidth'] < 0x280) {
-                _0x47418d = 0x1;
-            } else if (window['innerWidth'] >= 0x3f0) {
-                _0x47418d = 0x3;
+            if (window.innerWidth < 0x280) {
+                deviceType = 1;
+            } else if (window.innerWidth >= 0x3f0) {
+                deviceType = 3;
                 _0x16db8f = ![];
             }
-            this[_0x363a('0x1e0')] = null != userConf[_0x363a('0x6e')](_0x363a('0x1e1')) ? JSON.parse(userConf[_0x363a('0x6e')](_0x363a('0x1e1'))) : {};
-            if (null != userConf[_0x363a('0x6e')]('conf_std')) {
-                this[_0x363a('0x1e2')] = null != this['confs'] && null != this[_0x363a('0x1e0')]['ver'] ? this[_0x363a('0x1e0')][_0x363a('0x1e3')] : 0x0;
-                this[_0x363a('0x152')] = null != this['confs'] && null != this['confs']['columns'] ? this['confs'][_0x363a('0x9c')] : _0x47418d;
-                this[_0x363a('0x153')] = null != this[_0x363a('0x1e0')] && null != this[_0x363a('0x1e0')][_0x363a('0x1e4')] ? this[_0x363a('0x1e0')][_0x363a('0x1e4')] : _0x16db8f;
-                this[_0x363a('0x154')] = null != this[_0x363a('0x1e0')] && null != this[_0x363a('0x1e0')][_0x363a('0x1e5')] ? this[_0x363a('0x1e0')][_0x363a('0x1e5')] : '1';
-                this['optSimple'] = null != this[_0x363a('0x1e0')] && null != this[_0x363a('0x1e0')]['simple'] ? this[_0x363a('0x1e0')][_0x363a('0x1e6')] : ![];
-                this[_0x363a('0x1e7')] = null != this[_0x363a('0x1e0')] && null != this[_0x363a('0x1e0')]['autoplay'] ? this[_0x363a('0x1e0')][_0x363a('0x1e8')] : '1';
-                this[_0x363a('0x1e9')] = null != this['confs'] && null != this[_0x363a('0x1e0')][_0x363a('0x1ea')] ? this[_0x363a('0x1e0')][_0x363a('0x1ea')] : '';
-                this[_0x363a('0x1eb')] = null != this[_0x363a('0x1e0')] && null != this[_0x363a('0x1e0')][_0x363a('0x1ec')] ? this[_0x363a('0x1e0')][_0x363a('0x1ec')] : '';
-                this['optKatsuTrim'] = null != this[_0x363a('0x1e0')] && null != this[_0x363a('0x1e0')][_0x363a('0x1ed')] ? this[_0x363a('0x1e0')][_0x363a('0x1ed')] : '';
-                this[_0x363a('0x1ee')] = null != this[_0x363a('0x1e0')] && null != this[_0x363a('0x1e0')]['allnsfw'] ? this['confs']['allnsfw'] : ![];
-                this[_0x363a('0x1ef')] = null != this[_0x363a('0x1e0')] && null != this[_0x363a('0x1e0')][_0x363a('0x1f0')] ? this[_0x363a('0x1e0')][_0x363a('0x1f0')] : ![];
-                this[_0x363a('0x1f1')] = null != this[_0x363a('0x1e0')] && null != this['confs']['filkatsu'] ? this[_0x363a('0x1e0')][_0x363a('0x1f2')] : '';
-                this[_0x363a('0x5e')] = null != this[_0x363a('0x1e0')] && null != this[_0x363a('0x1e0')][_0x363a('0x1f3')] ? this[_0x363a('0x1e0')][_0x363a('0x1f3')] : '';
-                this[_0x363a('0x1f4')] = null != this['confs'] && null != this[_0x363a('0x1e0')][_0x363a('0x1f5')] ? this[_0x363a('0x1e0')][_0x363a('0x1f5')] : _0x363a('0x1f6');
-                this[_0x363a('0x1f7')] = null != this[_0x363a('0x1e0')] && null != this[_0x363a('0x1e0')][_0x363a('0x1f8')] ? this[_0x363a('0x1e0')][_0x363a('0x1f8')] : ![];
-                this[_0x363a('0x1f9')] = null != this['confs'] && null != this[_0x363a('0x1e0')][_0x363a('0x1fa')] ? this['confs'][_0x363a('0x1fa')] : {
-                    'katsu': 0x1,
-                    'delete': 0x1,
-                    'fav': 0x0,
-                    'unfav': 0x0,
-                    'reblog': 0x1,
-                    'unreblog': 0x0,
-                    'follow': 0x1,
-                    'unfollow': 0x1,
-                    'mute': 0x1,
-                    'unmute': 0x0,
-                    'block': 0x1,
-                    'unblock': 0x0
+            this['confs'] = null != userConf['getItem']('conf_std') ? JSON.parse(userConf['getItem']('conf_std')) : {};
+            if (null != userConf['getItem']('conf_std')) {
+                this[_0x363a('0x1e2')] = null != this['confs'] && null != this['confs']['ver'] ? this['confs']['ver'] : 0x0;
+                this[_0x363a('0x152')] = null != this['confs'] && null != this['confs']['columns'] ? this['confs'][_0x363a('0x9c')] : deviceType;
+                this[_0x363a('0x153')] = null != this['confs'] && null != this['confs'][_0x363a('0x1e4')] ? this['confs'][_0x363a('0x1e4')] : _0x16db8f;
+                this[_0x363a('0x154')] = null != this['confs'] && null != this['confs'][_0x363a('0x1e5')] ? this['confs'][_0x363a('0x1e5')] : '1';
+                this['optSimple'] = null != this['confs'] && null != this['confs']['simple'] ? this['confs'][_0x363a('0x1e6')] : ![];
+                this[_0x363a('0x1e7')] = null != this['confs'] && null != this['confs']['autoplay'] ? this['confs'][_0x363a('0x1e8')] : '1';
+                this[_0x363a('0x1e9')] = null != this['confs'] && null != this['confs'][_0x363a('0x1ea')] ? this['confs'][_0x363a('0x1ea')] : '';
+                this[_0x363a('0x1eb')] = null != this['confs'] && null != this['confs'][_0x363a('0x1ec')] ? this['confs'][_0x363a('0x1ec')] : '';
+                this['optKatsuTrim'] = null != this['confs'] && null != this['confs'][_0x363a('0x1ed')] ? this['confs'][_0x363a('0x1ed')] : '';
+                this[_0x363a('0x1ee')] = null != this['confs'] && null != this['confs']['allnsfw'] ? this['confs']['allnsfw'] : ![];
+                this[_0x363a('0x1ef')] = null != this['confs'] && null != this['confs'][_0x363a('0x1f0')] ? this['confs'][_0x363a('0x1f0')] : ![];
+                this['optKatsuFilter'] = null != this['confs'] && null != this['confs']['filkatsu'] ? this['confs'][_0x363a('0x1f2')] : '';
+                this['optKatsuFilterRaw'] = null != this['confs'] && null != this['confs'][_0x363a('0x1f3')] ? this['confs'][_0x363a('0x1f3')] : '';
+                this['optKatsuFilterStr'] = null != this['confs'] && null != this['confs'][_0x363a('0x1f5')] ? this['confs'][_0x363a('0x1f5')] : '^s$';
+                this[_0x363a('0x1f7')] = null != this['confs'] && null != this['confs'][_0x363a('0x1f8')] ? this['confs'][_0x363a('0x1f8')] : ![];
+                this[_0x363a('0x1f9')] = null != this['confs'] && null != this['confs'][_0x363a('0x1fa')] ? this['confs'][_0x363a('0x1fa')] : {
+                    'katsu': 1,
+                    'delete': 1,
+                    'fav': 0,
+                    'unfav': 0,
+                    'reblog': 1,
+                    'unreblog': 0,
+                    'follow': 1,
+                    'unfollow': 1,
+                    'mute': 1,
+                    'unmute': 0,
+                    'block': 1,
+                    'unblock': 0
                 };
-                this[_0x363a('0x1fb')] = null != this[_0x363a('0x1e0')] && null != this[_0x363a('0x1e0')][_0x363a('0x1fc')] ? this[_0x363a('0x1e0')][_0x363a('0x1fc')] : ![];
-                this[_0x363a('0x8e')] = null != this[_0x363a('0x1e0')] && null != this[_0x363a('0x1e0')][_0x363a('0x1fd')] ? this[_0x363a('0x1e0')][_0x363a('0x1fd')] : ![];
-                this[_0x363a('0x1fe')] = null != this[_0x363a('0x1e0')] && null != this[_0x363a('0x1e0')]['keepform'] ? this[_0x363a('0x1e0')][_0x363a('0x1ff')] : !![];
-                this[_0x363a('0x200')] = null != this[_0x363a('0x1e0')] && null != this['confs'][_0x363a('0x201')] ? this[_0x363a('0x1e0')][_0x363a('0x201')] : '';
-                this[_0x363a('0x202')] = null != this[_0x363a('0x1e0')] && null != this[_0x363a('0x1e0')][_0x363a('0x203')] ? this[_0x363a('0x1e0')][_0x363a('0x203')] : '';
-                this[_0x363a('0x204')] = null != this[_0x363a('0x1e0')] && null != this['confs'][_0x363a('0x205')] ? this[_0x363a('0x1e0')][_0x363a('0x205')] : '';
-                this[_0x363a('0xa1')] = null != this[_0x363a('0x1e0')] && null != this['confs'][_0x363a('0x206')] ? this[_0x363a('0x1e0')][_0x363a('0x206')] : '';
-                this['optShortNotif'] = null != this[_0x363a('0x1e0')] && null != this[_0x363a('0x1e0')][_0x363a('0x207')] ? this[_0x363a('0x1e0')][_0x363a('0x207')] : !![];
-                this['optPushNotif'] = null != this[_0x363a('0x1e0')] && null != this[_0x363a('0x1e0')]['push'] ? this[_0x363a('0x1e0')]['push'] : !![];
+                this[_0x363a('0x1fb')] = null != this['confs'] && null != this['confs'][_0x363a('0x1fc')] ? this['confs'][_0x363a('0x1fc')] : ![];
+                this[_0x363a('0x8e')] = null != this['confs'] && null != this['confs'][_0x363a('0x1fd')] ? this['confs'][_0x363a('0x1fd')] : ![];
+                this[_0x363a('0x1fe')] = null != this['confs'] && null != this['confs']['keepform'] ? this['confs'][_0x363a('0x1ff')] : !![];
+                this[_0x363a('0x200')] = null != this['confs'] && null != this['confs'][_0x363a('0x201')] ? this['confs'][_0x363a('0x201')] : '';
+                this[_0x363a('0x202')] = null != this['confs'] && null != this['confs'][_0x363a('0x203')] ? this['confs'][_0x363a('0x203')] : '';
+                this[_0x363a('0x204')] = null != this['confs'] && null != this['confs'][_0x363a('0x205')] ? this['confs'][_0x363a('0x205')] : '';
+                this[_0x363a('0xa1')] = null != this['confs'] && null != this['confs'][_0x363a('0x206')] ? this['confs'][_0x363a('0x206')] : '';
+                this['optShortNotif'] = null != this['confs'] && null != this['confs'][_0x363a('0x207')] ? this['confs'][_0x363a('0x207')] : !![];
+                this['optPushNotif'] = null != this['confs'] && null != this['confs']['push'] ? this['confs']['push'] : !![];
             } else {
                 this[_0x363a('0x1e2')] = 0x0;
-                this[_0x363a('0x152')] = null != userConf[_0x363a('0x6e')](_0x363a('0x9c')) ? userConf[_0x363a('0x6e')](_0x363a('0x9c')) : _0x47418d;
-                this[_0x363a('0x153')] = _0x363a('0x208') == userConf[_0x363a('0x6e')](_0x363a('0x1e4')) ? !![] : _0x16db8f;
-                this[_0x363a('0x154')] = null != userConf[_0x363a('0x6e')]('ptl') ? userConf[_0x363a('0x6e')]('ptl') : '1';
-                this[_0x363a('0x209')] = null != userConf[_0x363a('0x6e')](_0x363a('0x1e6')) ? userConf[_0x363a('0x6e')](_0x363a('0x1e6')) : ![];
+                this[_0x363a('0x152')] = null != userConf['getItem'](_0x363a('0x9c')) ? userConf['getItem'](_0x363a('0x9c')) : deviceType;
+                this[_0x363a('0x153')] = _0x363a('0x208') == userConf['getItem'](_0x363a('0x1e4')) ? !![] : _0x16db8f;
+                this[_0x363a('0x154')] = null != userConf['getItem']('ptl') ? userConf['getItem']('ptl') : '1';
+                this[_0x363a('0x209')] = null != userConf['getItem'](_0x363a('0x1e6')) ? userConf['getItem'](_0x363a('0x1e6')) : ![];
                 this['optAutoPlay'] = null != userConf['getItem'](_0x363a('0x1e8')) ? userConf['getItem'](_0x363a('0x1e8')) : '1';
                 this[_0x363a('0x1e9')] = '';
                 this[_0x363a('0x1eb')] = '';
                 this[_0x363a('0x20a')] = '';
-                this['optAllNsfw'] = 'true' == userConf[_0x363a('0x6e')](_0x363a('0x20b')) ? !![] : ![];
+                this['optAllNsfw'] = 'true' == userConf['getItem'](_0x363a('0x20b')) ? !![] : ![];
                 this[_0x363a('0x1ef')] = ![];
-                this[_0x363a('0x1f1')] = '';
-                this[_0x363a('0x5e')] = '';
-                this[_0x363a('0x1f4')] = _0x363a('0x1f6');
+                this['optKatsuFilter'] = '';
+                this['optKatsuFilterRaw'] = '';
+                this['optKatsuFilterStr'] = '^s$';
                 this[_0x363a('0x1f7')] = '';
                 this[_0x363a('0x1f9')] = {
-                    'katsu': 0x1,
-                    'delete': 0x1,
-                    'fav': 0x0,
-                    'unfav': 0x0,
-                    'reblog': 0x1,
-                    'unreblog': 0x0,
-                    'follow': 0x1,
-                    'unfollow': 0x1,
-                    'mute': 0x1,
-                    'unmute': 0x0,
-                    'block': 0x1,
-                    'unblock': 0x0
+                    'katsu': 1,
+                    'delete': 1,
+                    'fav': 0,
+                    'unfav': 0,
+                    'reblog': 1,
+                    'unreblog': 0,
+                    'follow': 1,
+                    'unfollow': 1,
+                    'mute': 1,
+                    'unmute': 0,
+                    'block': 1,
+                    'unblock': 0
                 };
                 this[_0x363a('0x1fb')] = ![];
                 this[_0x363a('0x8e')] = ![];
@@ -3116,31 +3121,31 @@ var app = new Vue({
                 this[_0x363a('0x20c')] = !![];
                 this[_0x363a('0x20d')] = !![];
             }
-            this[_0x363a('0x1e0')][_0x363a('0x1e3')] = this[_0x363a('0x1e2')];
+            this['confs']['ver'] = this[_0x363a('0x1e2')];
             this['confs']['columns'] = this[_0x363a('0x152')];
             this['confs'][_0x363a('0x1e4')] = this[_0x363a('0x153')];
-            this[_0x363a('0x1e0')][_0x363a('0x1e5')] = this[_0x363a('0x154')];
-            this[_0x363a('0x1e0')][_0x363a('0x1e6')] = this[_0x363a('0x209')];
-            this[_0x363a('0x1e0')][_0x363a('0x1e8')] = this[_0x363a('0x1e7')];
-            this[_0x363a('0x1e0')][_0x363a('0x1ea')] = this[_0x363a('0x1e9')];
+            this['confs'][_0x363a('0x1e5')] = this[_0x363a('0x154')];
+            this['confs'][_0x363a('0x1e6')] = this[_0x363a('0x209')];
+            this['confs'][_0x363a('0x1e8')] = this[_0x363a('0x1e7')];
+            this['confs'][_0x363a('0x1ea')] = this[_0x363a('0x1e9')];
             this['confs']['mediafit'] = this[_0x363a('0x1eb')];
-            this[_0x363a('0x1e0')][_0x363a('0x1ed')] = this[_0x363a('0x20a')];
-            this[_0x363a('0x1e0')][_0x363a('0x20b')] = this['optAllNsfw'];
-            this[_0x363a('0x1e0')][_0x363a('0x1f0')] = this['optAllOpen'];
-            this[_0x363a('0x1e0')][_0x363a('0x1f2')] = this[_0x363a('0x1f1')];
-            this[_0x363a('0x1e0')][_0x363a('0x1f3')] = this['optKatsuFilterRaw'];
-            this[_0x363a('0x1e0')][_0x363a('0x1f5')] = this[_0x363a('0x1f4')];
-            this[_0x363a('0x1e0')][_0x363a('0x1f8')] = this[_0x363a('0x1f7')];
-            this[_0x363a('0x1e0')]['confirm'] = this[_0x363a('0x1f9')];
-            this[_0x363a('0x1e0')][_0x363a('0x1fc')] = this[_0x363a('0x1fb')];
-            this[_0x363a('0x1e0')][_0x363a('0x1fd')] = this['optAutoLayout'];
-            this[_0x363a('0x1e0')][_0x363a('0x1ff')] = this[_0x363a('0x1fe')];
+            this['confs'][_0x363a('0x1ed')] = this[_0x363a('0x20a')];
+            this['confs'][_0x363a('0x20b')] = this['optAllNsfw'];
+            this['confs'][_0x363a('0x1f0')] = this['optAllOpen'];
+            this['confs'][_0x363a('0x1f2')] = this['optKatsuFilter'];
+            this['confs'][_0x363a('0x1f3')] = this['optKatsuFilterRaw'];
+            this['confs'][_0x363a('0x1f5')] = this['optKatsuFilterStr'];
+            this['confs'][_0x363a('0x1f8')] = this[_0x363a('0x1f7')];
+            this['confs']['confirm'] = this[_0x363a('0x1f9')];
+            this['confs'][_0x363a('0x1fc')] = this[_0x363a('0x1fb')];
+            this['confs'][_0x363a('0x1fd')] = this['optAutoLayout'];
+            this['confs'][_0x363a('0x1ff')] = this[_0x363a('0x1fe')];
             this['confs'][_0x363a('0x201')] = this[_0x363a('0x200')];
-            this[_0x363a('0x1e0')][_0x363a('0x203')] = this[_0x363a('0x202')];
-            this[_0x363a('0x1e0')]['bottoms'] = this[_0x363a('0x204')];
-            this[_0x363a('0x1e0')][_0x363a('0x206')] = this[_0x363a('0xa1')];
-            this[_0x363a('0x1e0')][_0x363a('0x207')] = this[_0x363a('0x20c')];
-            this[_0x363a('0x1e0')]['push'] = this[_0x363a('0x20d')];
+            this['confs'][_0x363a('0x203')] = this[_0x363a('0x202')];
+            this['confs']['bottoms'] = this[_0x363a('0x204')];
+            this['confs'][_0x363a('0x206')] = this[_0x363a('0xa1')];
+            this['confs'][_0x363a('0x207')] = this[_0x363a('0x20c')];
+            this['confs']['push'] = this[_0x363a('0x20d')];
         },
         'saveConf': function () {
             userConf[_0x363a('0x18f')]('columns');
@@ -3150,41 +3155,41 @@ var app = new Vue({
             userConf[_0x363a('0x18f')]('allnsfw');
             this[_0x363a('0x20e')]();
             this[_0x363a('0x1e2')] = this[_0x363a('0x20f')];
-            this[_0x363a('0x1e0')][_0x363a('0x1e3')] = this[_0x363a('0x1e2')];
-            this[_0x363a('0x1e0')][_0x363a('0x9c')] = this[_0x363a('0x152')];
-            this[_0x363a('0x1e0')][_0x363a('0x1e4')] = this[_0x363a('0x153')];
-            this[_0x363a('0x1e0')][_0x363a('0x1e5')] = this[_0x363a('0x154')];
-            this[_0x363a('0x1e0')][_0x363a('0x1e6')] = this[_0x363a('0x209')];
-            this[_0x363a('0x1e0')][_0x363a('0x1e8')] = this[_0x363a('0x1e7')];
-            this[_0x363a('0x1e0')][_0x363a('0x1ea')] = this[_0x363a('0x1e9')];
-            this[_0x363a('0x1e0')]['mediafit'] = this[_0x363a('0x1eb')];
-            this[_0x363a('0x1e0')][_0x363a('0x1ed')] = this['optKatsuTrim'];
+            this['confs']['ver'] = this[_0x363a('0x1e2')];
+            this['confs'][_0x363a('0x9c')] = this[_0x363a('0x152')];
+            this['confs'][_0x363a('0x1e4')] = this[_0x363a('0x153')];
+            this['confs'][_0x363a('0x1e5')] = this[_0x363a('0x154')];
+            this['confs'][_0x363a('0x1e6')] = this[_0x363a('0x209')];
+            this['confs'][_0x363a('0x1e8')] = this[_0x363a('0x1e7')];
+            this['confs'][_0x363a('0x1ea')] = this[_0x363a('0x1e9')];
+            this['confs']['mediafit'] = this[_0x363a('0x1eb')];
+            this['confs'][_0x363a('0x1ed')] = this['optKatsuTrim'];
             this['confs'][_0x363a('0x20b')] = this[_0x363a('0x1ee')];
-            this[_0x363a('0x1e0')][_0x363a('0x1f0')] = this[_0x363a('0x1ef')];
-            this[_0x363a('0x1e0')][_0x363a('0x1f2')] = this[_0x363a('0x1f1')];
-            this[_0x363a('0x1e0')]['filkatsustr'] = this['optKatsuFilterStr'];
-            this[_0x363a('0x1e0')]['filkatsuraw'] = this[_0x363a('0x5e')];
-            this[_0x363a('0x1e0')][_0x363a('0x1f8')] = this[_0x363a('0x1f7')];
-            this[_0x363a('0x1e0')][_0x363a('0x1fa')] = this[_0x363a('0x1f9')];
+            this['confs'][_0x363a('0x1f0')] = this[_0x363a('0x1ef')];
+            this['confs'][_0x363a('0x1f2')] = this['optKatsuFilter'];
+            this['confs']['filkatsustr'] = this['optKatsuFilterStr'];
+            this['confs']['filkatsuraw'] = this['optKatsuFilterRaw'];
+            this['confs'][_0x363a('0x1f8')] = this[_0x363a('0x1f7')];
+            this['confs'][_0x363a('0x1fa')] = this[_0x363a('0x1f9')];
             this['confs'][_0x363a('0x1fc')] = this[_0x363a('0x1fb')];
-            this[_0x363a('0x1e0')][_0x363a('0x1fd')] = this[_0x363a('0x8e')];
-            this[_0x363a('0x1e0')][_0x363a('0x1ff')] = this[_0x363a('0x1fe')];
-            this[_0x363a('0x1e0')][_0x363a('0x201')] = this['optConvMedia'];
+            this['confs'][_0x363a('0x1fd')] = this[_0x363a('0x8e')];
+            this['confs'][_0x363a('0x1ff')] = this[_0x363a('0x1fe')];
+            this['confs'][_0x363a('0x201')] = this['optConvMedia'];
             this['confs'][_0x363a('0x203')] = this[_0x363a('0x202')];
-            this[_0x363a('0x1e0')][_0x363a('0x205')] = this['optThemeBottoms'];
-            this[_0x363a('0x1e0')][_0x363a('0x206')] = this[_0x363a('0xa1')];
-            this[_0x363a('0x1e0')][_0x363a('0x207')] = this['optShortNotif'];
-            this[_0x363a('0x1e0')]['push'] = this[_0x363a('0x20d')];
-            userConf[_0x363a('0x185')](_0x363a('0x1e1'), JSON[_0x363a('0x210')](this['confs']));
+            this['confs'][_0x363a('0x205')] = this['optThemeBottoms'];
+            this['confs'][_0x363a('0x206')] = this[_0x363a('0xa1')];
+            this['confs'][_0x363a('0x207')] = this['optShortNotif'];
+            this['confs']['push'] = this[_0x363a('0x20d')];
+            userConf[_0x363a('0x185')]('conf_std', JSON[_0x363a('0x210')](this['confs']));
             this[_0x363a('0x8d')]();
             this['showSetting'] = ![];
         },
         'resetConf': function () {
             var _0x2a2fa8 = 0x2;
             var _0x2125a1 = !![];
-            if (window['innerWidth'] < 0x280) {
+            if (window.innerWidth < 0x280) {
                 _0x2a2fa8 = 0x1;
-            } else if (window['innerWidth'] >= 0x3f0) {
+            } else if (window.innerWidth >= 0x3f0) {
                 _0x2a2fa8 = 0x3;
                 _0x2125a1 = ![];
             }
@@ -3199,22 +3204,22 @@ var app = new Vue({
             this['optKatsuTrim'] = '';
             this[_0x363a('0x1ee')] = ![];
             this[_0x363a('0x1ef')] = ![];
-            this[_0x363a('0x1f1')] = '';
-            this[_0x363a('0x5e')] = '';
-            this['optKatsuFilterStr'] = _0x363a('0x1f6');
+            this['optKatsuFilter'] = '';
+            this['optKatsuFilterRaw'] = '';
+            this['optKatsuFilterStr'] = '^s$';
             this[_0x363a('0x1f7')] = '';
             this[_0x363a('0x1f9')] = {
-                'katsu': 0x1,
-                'delete': 0x1,
-                'fav': 0x0,
-                'unfav': 0x0,
-                'reblog': 0x1,
-                'unreblog': 0x0,
-                'follow': 0x1,
-                'unfollow': 0x1,
-                'mute': 0x1,
-                'unmute': 0x0,
-                'block': 0x1,
+                'katsu': 1,
+                'delete': 1,
+                'fav': 0,
+                'unfav': 0,
+                'reblog': 1,
+                'unreblog': 0,
+                'follow': 1,
+                'unfollow': 1,
+                'mute': 1,
+                'unmute': 0,
+                'block': 1,
                 'unblock': 0x0
             };
             this[_0x363a('0x1fb')] = ![];
@@ -3226,32 +3231,32 @@ var app = new Vue({
             this[_0x363a('0xa1')] = '';
             this['optShortNotif'] = !![];
             this[_0x363a('0x20d')] = !![];
-            this['confs'][_0x363a('0x1e3')] = this[_0x363a('0x1e2')];
-            this[_0x363a('0x1e0')]['columns'] = this[_0x363a('0x152')];
-            this[_0x363a('0x1e0')][_0x363a('0x1e4')] = this[_0x363a('0x153')];
-            this[_0x363a('0x1e0')][_0x363a('0x1e5')] = this[_0x363a('0x154')];
-            this[_0x363a('0x1e0')][_0x363a('0x1e6')] = this['optSimple'];
-            this[_0x363a('0x1e0')][_0x363a('0x1e8')] = this[_0x363a('0x1e7')];
-            this[_0x363a('0x1e0')]['mediaheight'] = this[_0x363a('0x1e9')];
-            this[_0x363a('0x1e0')][_0x363a('0x1ec')] = this[_0x363a('0x1eb')];
-            this[_0x363a('0x1e0')]['katsutrim'] = this['optKatsuTrim'];
-            this[_0x363a('0x1e0')][_0x363a('0x20b')] = this['optAllNsfw'];
-            this[_0x363a('0x1e0')][_0x363a('0x1f0')] = this['optAllOpen'];
-            this[_0x363a('0x1e0')][_0x363a('0x1f2')] = this[_0x363a('0x1f1')];
-            this[_0x363a('0x1e0')]['filkatsuraw'] = this[_0x363a('0x5e')];
-            this[_0x363a('0x1e0')][_0x363a('0x1f5')] = this['optKatsuFilterStr'];
-            this[_0x363a('0x1e0')][_0x363a('0x1f8')] = this[_0x363a('0x1f7')];
+            this['confs']['ver'] = this[_0x363a('0x1e2')];
+            this['confs']['columns'] = this[_0x363a('0x152')];
+            this['confs'][_0x363a('0x1e4')] = this[_0x363a('0x153')];
+            this['confs'][_0x363a('0x1e5')] = this[_0x363a('0x154')];
+            this['confs'][_0x363a('0x1e6')] = this['optSimple'];
+            this['confs'][_0x363a('0x1e8')] = this[_0x363a('0x1e7')];
+            this['confs']['mediaheight'] = this[_0x363a('0x1e9')];
+            this['confs'][_0x363a('0x1ec')] = this[_0x363a('0x1eb')];
+            this['confs']['katsutrim'] = this['optKatsuTrim'];
+            this['confs'][_0x363a('0x20b')] = this['optAllNsfw'];
+            this['confs'][_0x363a('0x1f0')] = this['optAllOpen'];
+            this['confs'][_0x363a('0x1f2')] = this['optKatsuFilter'];
+            this['confs']['filkatsuraw'] = this['optKatsuFilterRaw'];
+            this['confs'][_0x363a('0x1f5')] = this['optKatsuFilterStr'];
+            this['confs'][_0x363a('0x1f8')] = this[_0x363a('0x1f7')];
             this['confs'][_0x363a('0x1fa')] = this['optConfirm'];
             this['confs'][_0x363a('0x1fc')] = this[_0x363a('0x1fb')];
-            this[_0x363a('0x1e0')][_0x363a('0x1fd')] = this[_0x363a('0x8e')];
-            this[_0x363a('0x1e0')][_0x363a('0x1ff')] = this[_0x363a('0x1fe')];
-            this[_0x363a('0x1e0')]['convmedia'] = this[_0x363a('0x200')];
+            this['confs'][_0x363a('0x1fd')] = this[_0x363a('0x8e')];
+            this['confs'][_0x363a('0x1ff')] = this[_0x363a('0x1fe')];
+            this['confs']['convmedia'] = this[_0x363a('0x200')];
             this['confs'][_0x363a('0x203')] = this['optThemeTops'];
-            this[_0x363a('0x1e0')]['bottoms'] = this[_0x363a('0x204')];
-            this[_0x363a('0x1e0')][_0x363a('0x206')] = this[_0x363a('0xa1')];
+            this['confs']['bottoms'] = this[_0x363a('0x204')];
+            this['confs'][_0x363a('0x206')] = this[_0x363a('0xa1')];
             this['confs'][_0x363a('0x207')] = this[_0x363a('0x20c')];
-            this[_0x363a('0x1e0')]['push'] = this[_0x363a('0x20d')];
-            userConf[_0x363a('0x185')](_0x363a('0x1e1'), JSON[_0x363a('0x210')](this[_0x363a('0x1e0')]));
+            this['confs']['push'] = this[_0x363a('0x20d')];
+            userConf[_0x363a('0x185')]('conf_std', JSON[_0x363a('0x210')](this['confs']));
             this['runCustom']();
         },
         'deleteConf': function () {
@@ -3260,7 +3265,7 @@ var app = new Vue({
             userConf[_0x363a('0x18f')]('ptl');
             userConf['removeItem'](_0x363a('0x1e8'));
             userConf[_0x363a('0x18f')](_0x363a('0x20b'));
-            userConf[_0x363a('0x18f')](_0x363a('0x1e1'));
+            userConf[_0x363a('0x18f')]('conf_std');
             location[_0x363a('0x211')]();
         },
         'deleteToken': function () {
@@ -3298,7 +3303,7 @@ var app = new Vue({
             userConf[_0x363a('0x185')](_0x363a('0x73'), JSON[_0x363a('0x210')](this['notif_id_bookmark']));
         },
         'playSound': function (_0x5f022b) {
-            var _0x8bf28a = document[_0x363a('0x139')](_0x5f022b);
+            var _0x8bf28a = document.getElementById(_0x5f022b);
             _0x8bf28a[_0x363a('0x216')]();
         },
         'openImage': function (_0x78638c) {
@@ -3359,7 +3364,7 @@ var app = new Vue({
                             return;
                         }
                         if (0x0 == _0x44ce94[_0x363a('0xed')] && 0x0 == _0x44ce94[_0x363a('0xee')]) {
-                            _0x44ce94['homes'][_0x363a('0xf0')](LIMIT - 0x1);
+                            _0x44ce94['homes']['splice'](LIMIT - 0x1);
                             _0x44ce94['home_id'] = _0x44ce94['hasHome'] ? _0x44ce94['homes'][_0x44ce94['homes']['length'] - 0x1]['id'] : '';
                             _0x44ce94['fetch_comp'][_0x363a('0xec')] = ![];
                         } else {
@@ -3381,7 +3386,7 @@ var app = new Vue({
                             return;
                         }
                         if (_0x44ce94['showNotif'] && 0x0 == _0x44ce94[_0x363a('0x102')] && 0x0 == _0x44ce94[_0x363a('0x105')] && _0x44ce94[_0x363a('0x22a')](_0x1c8865)) {
-                            _0x44ce94['notifs_filter'][_0x363a('0xf0')](LIMIT_NOTIF - 0x1);
+                            _0x44ce94['notifs_filter']['splice'](LIMIT_NOTIF - 0x1);
                             _0x44ce94['notif_id'] = _0x44ce94[_0x363a('0x15a')] ? _0x44ce94['notifs_filter'][_0x44ce94['notifs_filter']['length'] - 0x1]['id'] : '';
                             _0x44ce94['notif_id_bookmark'] = _0x1c8865['id'];
                             _0x44ce94['countNotifUnread']();
@@ -3416,7 +3421,7 @@ var app = new Vue({
                         var _0x172d00 = _0x1c8865[_0x363a('0x124')] == _0x363a('0x10e') ? 'you' : _0x363a('0x22d');
                         var _0x5551c0 = _0x2ff618 + '‭\x20' + _0x1c8865['type'] + '\x20' + _0x172d00;
                         var _0x3a5570 = {
-                            'body': _0x1c8865['status'] ? _0x1c8865['status']['spoiler_text'].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '') + _0x1c8865['status'][_0x363a('0x22e')].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '') : '',
+                            'body': _0x1c8865['status'] ? _0x1c8865['status']['spoiler_text'].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '') + _0x1c8865['status']['content'].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '') : '',
                             'icon': _0x1c8865[_0x363a('0x16d')][_0x363a('0x22f')]
                         };
                         if (_0x363a('0xa2') != _0x44ce94[_0x363a('0xa1')]) {
@@ -3454,30 +3459,30 @@ var app = new Vue({
             }
         },
         'upHome': function () {
-            var _0x27ef62 = document[_0x363a('0x139')](_0x363a('0xec'));
+            var _0x27ef62 = document.getElementById(_0x363a('0xec'));
             if (null != _0x27ef62) {
                 _0x27ef62[_0x363a('0xf6')] = 0x0;
                 this[_0x363a('0xee')] = 0x0;
-                this['homes'][_0x363a('0xf0')](LIMIT);
+                this['homes']['splice'](LIMIT);
                 this[_0x363a('0xf1')] = this[_0x363a('0xf2')] ? this['homes'][this['homes']['length'] - 0x1]['id'] : '';
                 this['fetch_comp'][_0x363a('0xec')] = ![];
             }
         },
         'backHome': function () {
-            var _0x3540a7 = document[_0x363a('0x139')](_0x363a('0xec'));
+            var _0x3540a7 = document.getElementById(_0x363a('0xec'));
             if (null != _0x3540a7) {
                 _0x3540a7[_0x363a('0xf6')] = 0x0;
                 this['fetch_lock'][_0x363a('0xec')] = ![];
             }
         },
         'nextHome': function () {
-            var _0x5732d4 = document[_0x363a('0x139')](_0x363a('0xec'));
+            var _0x5732d4 = document.getElementById(_0x363a('0xec'));
             if (null != _0x5732d4) {
                 _0x5732d4['scrollTop'] = _0x5732d4[_0x363a('0xea')];
             }
         },
         'upNotif': function () {
-            var _0x171725 = document[_0x363a('0x139')]('notif');
+            var _0x171725 = document.getElementById('notif');
             if (null != _0x171725) {
                 _0x171725['scrollTop'] = 0x0;
             }
@@ -3530,7 +3535,7 @@ var app = new Vue({
                             return;
                         }
                         if (0x0 == _0x4b646e[_0x363a('0xf5')] && 0x0 == _0x4b646e[_0x363a('0xfa')]) {
-                            _0x4b646e['locals'][_0x363a('0xf0')](LIMIT - 0x1);
+                            _0x4b646e['locals']['splice'](LIMIT - 0x1);
                             _0x4b646e[_0x363a('0x190')] = _0x4b646e[_0x363a('0x23a')] ? _0x4b646e['locals'][_0x4b646e['locals']['length'] - 0x1]['id'] : '';
                             _0x4b646e['fetch_comp']['local'] = ![];
                         } else {
@@ -3568,7 +3573,7 @@ var app = new Vue({
             }
         },
         'upLocal': function () {
-            var _0x348592 = document['getElementById'](_0x363a('0xf8'));
+            var _0x348592 = document.getElementById(_0x363a('0xf8'));
             if (null != _0x348592) {
                 _0x348592[_0x363a('0xf6')] = 0x0;
                 this[_0x363a('0xfa')] = 0x0;
@@ -3578,14 +3583,14 @@ var app = new Vue({
             }
         },
         'backLocal': function () {
-            var _0x36cada = document[_0x363a('0x139')](_0x363a('0xf8'));
+            var _0x36cada = document.getElementById(_0x363a('0xf8'));
             if (null != _0x36cada) {
                 _0x36cada[_0x363a('0xf6')] = 0x0;
                 this['fetch_lock'][_0x363a('0xf8')] = ![];
             }
         },
         'nextLocal': function () {
-            var _0x3b0555 = document[_0x363a('0x139')](_0x363a('0xf8'));
+            var _0x3b0555 = document.getElementById(_0x363a('0xf8'));
             if (null != _0x3b0555) {
                 _0x3b0555[_0x363a('0xf6')] = _0x3b0555[_0x363a('0xea')];
             }
@@ -3639,12 +3644,12 @@ var app = new Vue({
                     var _0x3e1dc6 = JSON.parse(_0x2b6070['payload']);
                     var _0x5798ad, _0xd10c45;
                     if (_0x363a('0x212') == _0x2b6070[_0x363a('0x225')]) {
-                        if (null == _0x295005[_0x363a('0xff')][0] || null != _0x295005[_0x363a('0xff')][0] && _0x295005['multi_id'] > KKT1_LASTID && _0x295005['multi_id'] > _0x3e1dc6['id']) {
+                        if (null == _0x295005['multis'][0] || null != _0x295005['multis'][0] && _0x295005['multi_id'] > KKT1_LASTID && _0x295005['multi_id'] > _0x3e1dc6['id']) {
                             return;
                         }
                         if (0x0 == _0x295005[_0x363a('0xfb')] && 0x0 == _0x295005[_0x363a('0xfe')]) {
-                            _0x295005[_0x363a('0xff')][_0x363a('0xf0')](LIMIT - 0x1);
-                            _0x295005['multi_id'] = _0x295005[_0x363a('0x101')] ? _0x295005[_0x363a('0xff')][_0x295005[_0x363a('0xff')]['length'] - 0x1]['id'] : '';
+                            _0x295005['multis']['splice'](LIMIT - 0x1);
+                            _0x295005['multi_id'] = _0x295005[_0x363a('0x101')] ? _0x295005['multis'][_0x295005['multis']['length'] - 0x1]['id'] : '';
                             _0x295005['fetch_comp']['multi'] = ![];
                         } else {
                             _0x295005[_0x363a('0xfe')] = _0x295005[_0x363a('0xfe')] + 0x1;
@@ -3691,24 +3696,24 @@ var app = new Vue({
             }
         },
         'upMulti': function () {
-            var _0x31ed05 = document[_0x363a('0x139')]('multi');
+            var _0x31ed05 = document.getElementById('multi');
             if (null != _0x31ed05) {
                 _0x31ed05[_0x363a('0xf6')] = 0x0;
                 this[_0x363a('0xfe')] = 0x0;
-                this[_0x363a('0xff')][_0x363a('0xf0')](LIMIT);
-                this['multi_id'] = this[_0x363a('0x101')] ? this['multis'][this[_0x363a('0xff')]['length'] - 0x1]['id'] : '';
+                this['multis']['splice'](LIMIT);
+                this['multi_id'] = this[_0x363a('0x101')] ? this['multis'][this['multis']['length'] - 0x1]['id'] : '';
                 this['fetch_comp']['multi'] = ![];
             }
         },
         'backMulti': function () {
-            var _0x23c6cb = document[_0x363a('0x139')]('multi');
+            var _0x23c6cb = document.getElementById('multi');
             if (null != _0x23c6cb) {
                 _0x23c6cb[_0x363a('0xf6')] = 0x0;
                 this['fetch_lock']['multi'] = ![];
             }
         },
         'nextMulti': function () {
-            var _0x511fba = document[_0x363a('0x139')]('multi');
+            var _0x511fba = document.getElementById('multi');
             if (null != _0x511fba) {
                 _0x511fba['scrollTop'] = _0x511fba[_0x363a('0xea')];
             }
@@ -3809,13 +3814,13 @@ var app = new Vue({
                             'large_threshold': 0x64,
                             'presence': {
                                 'status': _0x363a('0x249'),
-                                'since': 0x0,
+                                'since': 0,
                                 'afk': ![],
                                 'game': 'kktjs'
                             },
                             'afk': ![],
                             'game': null,
-                            'since': 0x0,
+                            'since': 0,
                             'status': _0x363a('0x249'),
                             'properties': {
                                 'os': _0x363a('0x24a'),
@@ -3867,7 +3872,7 @@ var app = new Vue({
                 wsDiscord[_0x363a('0x24f')] = function (_0x5d9051) {
                     setInterval(function () {
                         var _0x34ec8e = {
-                            'op': 0x1,
+                            'op': 1,
                             'd': _0x3f6294
                         };
                         wsDiscord['send'](JSON[_0x363a('0x210')](_0x34ec8e));
@@ -3986,7 +3991,7 @@ var app = new Vue({
                     }
                 });
                 if (_0x22e5b8 != -0x1) {
-                    this[_0x363a('0x122')][_0x363a('0xf0')](_0x22e5b8, 0x1);
+                    this[_0x363a('0x122')]['splice'](_0x22e5b8, 0x1);
                 }
             }
             this['$forceUpdate']();
@@ -4013,7 +4018,7 @@ var app = new Vue({
                 } else if (request['readyState'] == XMLHttpRequest['DONE']) {
                     _0x28ffab['popError'](request['responseText'], request['status'], 'List');
                 }
-                document[_0x363a('0x139')](_0x363a('0x25f'))[_0x363a('0x59')] = '';
+                document.getElementById(_0x363a('0x25f'))['value'] = '';
                 _0x28ffab['fetch_lock'][_0x363a('0x135')] = ![];
                 _0x28ffab['$forceUpdate']();
             }
@@ -4049,14 +4054,14 @@ var app = new Vue({
             if (this['stream_hashtag_text'] != null && this[_0x363a('0x1cc')] != '' && this[_0x363a('0xbc')][_0x363a('0x7c')](this[_0x363a('0x1cc')]) == -0x1) {
                 this[_0x363a('0xbc')]['push'](this[_0x363a('0x1cc')]);
             }
-            document[_0x363a('0x139')](_0x363a('0x261'))['value'] = '';
+            document.getElementById(_0x363a('0x261'))['value'] = '';
             this[_0x363a('0x1c3')] = '';
             this[_0x363a('0x1cc')] = '';
         },
         'removeStreamHashtag': function (_0x52b0b3) {
             var _0x192949 = this['stream_hashtags'][_0x363a('0x7c')](_0x52b0b3);
             if (_0x192949 != -0x1) {
-                this[_0x363a('0xbc')][_0x363a('0xf0')](_0x192949, 0x1);
+                this[_0x363a('0xbc')]['splice'](_0x192949, 0x1);
             }
         },
         'actVote': function (_0x43463d, _0x531f62) {
@@ -4161,7 +4166,7 @@ var app = new Vue({
                     }
                 });
             }
-            _0x3dec96[_0x363a('0xff')]['filter'](function (_0x4418ed, _0x566b9e) {
+            _0x3dec96['multis']['filter'](function (_0x4418ed, _0x566b9e) {
                 if (_0x4418ed['id'] == _0x20fb65) {
                     _0x4418ed['poll'] = _0x582ab7;
                     return !![];
@@ -4177,13 +4182,13 @@ var app = new Vue({
             this['$forceUpdate']();
         },
         'runExtime': function () {
-            var _0x49c9f7 = app['_data']['katsu'][_0x363a('0x60')][_0x363a('0x269')][0] * 0x15180 + app['_data']['katsu'][_0x363a('0x60')][_0x363a('0x269')][1] * 0xe10 + app['_data']['katsu'][_0x363a('0x60')]['extime'][0x2] * 0x3c;
+            var _0x49c9f7 = app['_data']['katsu'][_0x363a('0x60')][_0x363a('0x269')][0] * 0x15180 + app['_data']['katsu'][_0x363a('0x60')][_0x363a('0x269')][1] * 0xe10 + app['_data']['katsu'][_0x363a('0x60')]['extime'][2] * 0x3c;
             if (_0x49c9f7 < 0x12c) {
                 _0x49c9f7 = 0x12c;
-                app['_data']['katsu'][_0x363a('0x60')]['extime'] = [0x0, 0x0, 0x5];
+                app['_data']['katsu'][_0x363a('0x60')]['extime'] = [0, 0, 0x5];
             } else if (_0x49c9f7 > LIMIT_POLLEXPIRE) {
                 _0x49c9f7 = LIMIT_POLLEXPIRE;
-                app['_data']['katsu']['poll_work'][_0x363a('0x269')] = [0x1c, 0x0, 0x0];
+                app['_data']['katsu']['poll_work'][_0x363a('0x269')] = [0x1c, 0, 0x0];
             }
             app['_data']['katsu']['poll'][_0x363a('0x26a')] = _0x49c9f7;
         },
@@ -4306,7 +4311,7 @@ var app = new Vue({
                     }
                 });
             }
-            _0x150a12[_0x363a('0xff')]['filter'](function (_0xee3a6b, _0x5d8be2) {
+            _0x150a12['multis']['filter'](function (_0xee3a6b, _0x5d8be2) {
                 if (_0xee3a6b['id'] == _0x640610) {
                     _0xee3a6b['favourited'] = _0x57be38;
                     return !![];
@@ -4848,7 +4853,7 @@ var app = new Vue({
                     return !![];
                 }
             });
-            _0x30c526[_0x363a('0xff')]['filter'](function (_0x46c3bc, _0x4ddcc5) {
+            _0x30c526['multis']['filter'](function (_0x46c3bc, _0x4ddcc5) {
                 if (_0x46c3bc['id'] == _0x14eeb4) {
                     _0x46c3bc['visibility'] = _0x363a('0x28b');
                     return !![];
@@ -4869,7 +4874,7 @@ var app = new Vue({
             var _0x5c7d23 = {
                 'account_id': _0x5460c4['account']['id'],
                 'status_ids': _0x5460c4['id'],
-                'comment': null == document['getElementById'](_0x363a('0x28d')) ? '' : document['getElementById'](_0x363a('0x28d'))[_0x363a('0x59')]
+                'comment': null == document.getElementById(_0x363a('0x28d')) ? '' : document.getElementById(_0x363a('0x28d'))['value']
             };
             var request = new XMLHttpRequest();
             request['open']('POST', REPORT.replace('[I]', _0x27e7e7['repository']).replace(_0x363a('0x1b8'), _0x5460c4['id']), !![]);
@@ -5078,87 +5083,87 @@ var app = new Vue({
                     _0x2f8102[_0x363a('0x296')] = _0x1d416c;
                 });
             }
-            _0x2c3978[_0x363a('0xff')]['filter'](function (_0x42d835, _0x16b29f) {
+            _0x2c3978['multis']['filter'](function (_0x42d835, _0x16b29f) {
                 _0x42d835[_0x363a('0x298')] = _0x5c6aee;
                 _0x42d835[_0x363a('0x296')] = _0x1d416c;
             });
             _0x2c3978['$forceUpdate']();
         },
         'updateWrapper': function (_0x44a4cc, _0x401cf8) {
-            _0x44a4cc[_0x363a('0x299')] = _0x401cf8;
+            _0x44a4cc['caught_katsufilter'] = _0x401cf8;
             this['$forceUpdate']();
         },
         'updateFilterBM': function (_0x3e4291, _0x5a3621) {
-            if ('' == this[_0x363a('0x1f1')]) {
+            if ('' == this['optKatsuFilter']) {
                 return;
             }
             var _0x160b73 = this;
-            var _0x455ded = new RegExp(this[_0x363a('0x1f4')]);
+            var _0x455ded = new RegExp(this['optKatsuFilterStr']);
             if (_0x363a('0x227') == _0x5a3621) {
                 if (_0x3e4291['reblog']) {
-                    _0x3e4291['reblog'][_0x363a('0x299')] = _0x455ded[_0x363a('0x29a')](_0x3e4291['reblog'][_0x363a('0x29b')] + _0x3e4291['reblog']['content'].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
+                    _0x3e4291['reblog']['caught_katsufilter'] = _0x455ded['test'](_0x3e4291['reblog']['spoiler_text'] + _0x3e4291['reblog']['content'].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
                 } else if (_0x3e4291['status']) {
-                    _0x3e4291['status'][_0x363a('0x299')] = _0x455ded[_0x363a('0x29a')](_0x3e4291['status'][_0x363a('0x29b')] + _0x3e4291['status'][_0x363a('0x22e')].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
+                    _0x3e4291['status']['caught_katsufilter'] = _0x455ded['test'](_0x3e4291['status']['spoiler_text'] + _0x3e4291['status']['content'].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
                 } else {
-                    _0x3e4291[_0x363a('0x299')] = _0x455ded[_0x363a('0x29a')](_0x3e4291[_0x363a('0x29b')] + _0x3e4291['content'].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
+                    _0x3e4291['caught_katsufilter'] = _0x455ded['test'](_0x3e4291['spoiler_text'] + _0x3e4291['content'].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
                 }
                 _0x160b73['$forceUpdate']();
                 return;
             }
             _0x3e4291['filter'](function (_0x42fcdc, _0x58320c) {
                 if (_0x42fcdc['reblog']) {
-                    _0x42fcdc['reblog'][_0x363a('0x299')] = _0x455ded[_0x363a('0x29a')](_0x42fcdc['reblog'][_0x363a('0x29b')] + _0x42fcdc['reblog'][_0x363a('0x22e')].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
+                    _0x42fcdc['reblog']['caught_katsufilter'] = _0x455ded['test'](_0x42fcdc['reblog']['spoiler_text'] + _0x42fcdc['reblog']['content'].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
                 } else if (_0x42fcdc['status']) {
-                    _0x42fcdc['status'][_0x363a('0x299')] = _0x455ded[_0x363a('0x29a')](_0x42fcdc['status'][_0x363a('0x29b')] + _0x42fcdc['status'][_0x363a('0x22e')].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
+                    _0x42fcdc['status']['caught_katsufilter'] = _0x455ded['test'](_0x42fcdc['status']['spoiler_text'] + _0x42fcdc['status']['content'].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
                 } else {
-                    _0x42fcdc[_0x363a('0x299')] = _0x455ded[_0x363a('0x29a')](_0x42fcdc[_0x363a('0x29b')] + _0x42fcdc[_0x363a('0x22e')].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
+                    _0x42fcdc['caught_katsufilter'] = _0x455ded['test'](_0x42fcdc['spoiler_text'] + _0x42fcdc['content'].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
                 }
             });
             _0x160b73['$forceUpdate']();
         },
         'updateFilterAll': function () {
-            if ('word' == this[_0x363a('0x1f1')]) {
-                var _0x4d138f = this[_0x363a('0x5e')][_0x363a('0x29c')]()['split'](',')['filter'](function (_0x2e3b42, _0x20e0b5) {
-                    _0x2e3b42 = _0x2e3b42.replace(/[\\^$.*+?()[\]{}|]/g, _0x363a('0x29d'));
-                    return _0x2e3b42 !== '';
+            if ('word' == this['optKatsuFilter']) {
+                var _0x4d138f = this['optKatsuFilterRaw'].trim().split(',').filter(function (item, i) {
+                    item = item.replace(/[\\^$.*+?()[\]{}|]/g, '\\$&');
+                    return item !== '';
                 });
-                _0x4d138f[_0x363a('0xf0')](0xa);
-                this['optKatsuFilterRaw'] = _0x4d138f[_0x363a('0xcb')](',');
-                this[_0x363a('0x29e')] = _0x4d138f['length'] >= 0xa ? _0x4d138f['length'] + _0x363a('0x29f') : _0x4d138f['length'] + _0x363a('0x2a0');
-                this[_0x363a('0x1f4')] = '(' + _0x4d138f[_0x363a('0xcb')]('|') + ')';
-            } else if (_0x363a('0x2a1') == this[_0x363a('0x1f1')]) {
-                this[_0x363a('0x29e')] = _0x363a('0x2a2');
-                this[_0x363a('0x1f4')] = this[_0x363a('0x5e')];
+                _0x4d138f['splice'](0xa);
+                this['optKatsuFilterRaw'] = _0x4d138f.join(',');
+                this['result_text_tmp'] = _0x4d138f.length >= 0xa ? _0x4d138f.length + ' (Max)' : _0x4d138f.length + ' word(s)';
+                this['optKatsuFilterStr'] = '(' + _0x4d138f['join']('|') + ')';
+            } else if ('regex' == this['optKatsuFilter']) {
+                this['result_text_tmp'] = 'ok.';
+                this['optKatsuFilterStr'] = this['optKatsuFilterRaw'];
             } else {
-                this[_0x363a('0x29e')] = '';
-                this['optKatsuFilterStr'] = _0x363a('0x1f6');
+                this['result_text_tmp'] = '';
+                this['optKatsuFilterStr'] = '^s$';
             }
-            var _0x50c824 = this;
-            var _0x163515 = new RegExp(this[_0x363a('0x1f4')]);
-            _0x50c824['homes']['filter'](function (_0x319827, _0x235cdf) {
-                if (_0x319827['reblog']) {
-                    _0x319827['reblog'][_0x363a('0x299')] = _0x163515[_0x363a('0x29a')](_0x319827['reblog'][_0x363a('0x29b')] + _0x319827['reblog'][_0x363a('0x22e')].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
+            var thisObj = this;
+            const katsuFileterRegex = new RegExp(this['optKatsuFilterStr']);
+            thisObj.homes.filter(function (item, i) {
+                if (item.reblog) {
+                    item.reblog.caught_katsufilter = katsuFileterRegex.test(item.reblog.spoiler_text + item.reblog.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
                 } else {
-                    _0x319827[_0x363a('0x299')] = _0x163515[_0x363a('0x29a')](_0x319827[_0x363a('0x29b')] + _0x319827[_0x363a('0x22e')].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
+                    item.caught_katsufilter = katsuFileterRegex.test(item.spoiler_text + item.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
                 }
             });
-            _0x50c824['locals']['filter'](function (_0x21446b, _0x5bfe56) {
-                _0x21446b[_0x363a('0x299')] = _0x163515[_0x363a('0x29a')](_0x21446b[_0x363a('0x29b')] + _0x21446b[_0x363a('0x22e')].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
+            thisObj.locals.filter(function (item, i) {
+                item.caught_katsufilter = katsuFileterRegex.test(item.spoiler_text + item.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
             });
-            _0x50c824[_0x363a('0xff')]['filter'](function (_0x3609d8, _0x207aaa) {
-                _0x3609d8[_0x363a('0x299')] = _0x163515[_0x363a('0x29a')](_0x3609d8[_0x363a('0x29b')] + _0x3609d8[_0x363a('0x22e')].replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
+            thisObj.multis.filter(function (item, i) {
+                item.caught_katsufilter = katsuFileterRegex.test(item.spoiler_text + item.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
             });
-            _0x50c824['$forceUpdate']();
+            thisObj['$forceUpdate']();
         },
         'setResizer': function () {
             var _0x22c968 = this;
-            window[_0x363a('0x2a3')] = _['debounce'](function () {
-                _0x22c968[_0x363a('0x2a4')](window['innerWidth']);
+            window['onresize'] = _['debounce'](function () {
+                _0x22c968['resetColumn'](window.innerWidth);
             }, 0x258);
-            window['onorientationchange'] = _['debounce'](function () {
-                _0x22c968[_0x363a('0x2a4')](window['innerWidth']);
+            window.onorientationchange = _['debounce'](function () {
+                _0x22c968['resetColumn'](window.innerWidth);
             }, 0xc8);
-            this[_0x363a('0x2a4')](window['innerWidth']);
+            this['resetColumn'](window.innerWidth);
         },
         'setHistory': function () {
             var _0x852f2a = this;
@@ -5207,7 +5212,7 @@ var app = new Vue({
             request['onreadystatechange'] = function () {
                 if (request['readyState'] == XMLHttpRequest['DONE'] && (request['status'] == 0x0 || request['status'] == 0xc8)) {
                     context[_0x363a('0x2ad')](request[_0x363a('0x2ae')], function (_0x44907e) {
-                        var _0x243bc7 = document[_0x363a('0x139')](_0x3c71f6);
+                        var _0x243bc7 = document.getElementById(_0x3c71f6);
                         _0x243bc7['addEventListener'](_0x363a('0x216'), function () {
                             var _0x1331f6 = context[_0x363a('0x2af')]();
                             _0x1331f6[_0x363a('0x2b0')] = _0x44907e;
@@ -5239,13 +5244,13 @@ var app = new Vue({
         'checkActMedia': function (_0x27136a) {
             var _0x1ae4ff = this;
             mediaFile = _0x27136a[0];
-            document[_0x363a('0x139')](_0x363a('0x2b4'))[_0x363a('0x59')] = null;
-            if (!/^(image\/(png|jpeg|gif|bmp|webp)|video\/(mp4|webm|quicktime))$/[_0x363a('0x29a')](mediaFile[_0x363a('0x124')])) {
+            document.getElementById(_0x363a('0x2b4'))['value'] = null;
+            if (!/^(image\/(png|jpeg|gif|bmp|webp)|video\/(mp4|webm|quicktime))$/['test'](mediaFile[_0x363a('0x124')])) {
                 _0x1ae4ff[_0x363a('0xa4')] = _0x363a('0x2b5') + mediaFile[_0x363a('0x124')] + ')';
                 return;
             } else if (/^(image\/(png|jpeg))$/['test'](mediaFile[_0x363a('0x124')])) {
                 fileType = 'img';
-            } else if (/^(image\/(bmp|webp))$/[_0x363a('0x29a')](mediaFile[_0x363a('0x124')])) {
+            } else if (/^(image\/(bmp|webp))$/['test'](mediaFile[_0x363a('0x124')])) {
                 fileType = _0x363a('0x2b6');
             } else if (/^(image\/(gif))$/['test'](mediaFile[_0x363a('0x124')])) {
                 fileType = _0x363a('0x2b7');
@@ -5279,7 +5284,7 @@ var app = new Vue({
                         } else {
                             canvasElement['width'] = image[_0x363a('0x2bf')] * resizeScale;
                             canvasElement[_0x363a('0x2c0')] = image[_0x363a('0x2c0')] * resizeScale;
-                            ctx[_0x363a('0x2c3')](image, 0x0, 0x0, image[_0x363a('0x2bf')], image[_0x363a('0x2c0')], 0x0, 0x0, image['width'] * resizeScale, image[_0x363a('0x2c0')] * resizeScale);
+                            ctx[_0x363a('0x2c3')](image, 0, 0, image[_0x363a('0x2bf')], image[_0x363a('0x2c0')], 0, 0, image['width'] * resizeScale, image[_0x363a('0x2c0')] * resizeScale);
                             MediaBinary = canvasElement['toDataURL']('image/jpeg');
                             MediaBlob = base64ToBlob(MediaBinary);
                             _0x1ae4ff[_0x363a('0x2c2')](MediaBinary, MediaBlob, !![]);
@@ -5296,11 +5301,11 @@ var app = new Vue({
             if ('' != this['action_lock']) {
                 return ![];
             }
-            this[_0x363a('0x2c5')] = 'media';
-            this['katsu'][_0x363a('0x2c6')]['push']({
+            this['action_lock'] = 'media';
+            this['katsu']['media_previews']['push']({
                 'url': _0x4b79b6,
                 'preview_url': IMG_DUMMY,
-                'type': _0x1a700a[_0x363a('0x124')]['slice'](0x0, 0x5),
+                'type': _0x1a700a[_0x363a('0x124')]['slice'](0, 0x5),
                 'converted': _0x27c093
             });
             var _0x38d96c = this;
@@ -5315,10 +5320,10 @@ var app = new Vue({
                 if (request['readyState'] == XMLHttpRequest['DONE'] && request['status'] == 0xc8) {
                     _0x38d96c['katsu']['media_attachments']['push'](JSON['parse'](request['responseText']));
                 } else if (request['readyState'] == XMLHttpRequest['DONE']) {
-                    _0x38d96c['katsu'][_0x363a('0x2c6')][_0x363a('0x2c9')]();
+                    _0x38d96c['katsu']['media_previews'][_0x363a('0x2c9')]();
                     _0x38d96c['popError'](request['responseText'], request['status'], _0x363a('0x2ca'));
                 }
-                _0x38d96c[_0x363a('0x2c5')] = '';
+                _0x38d96c['action_lock'] = '';
                 _0x38d96c[_0x363a('0x2cb')] = '0';
             }
                 ;
@@ -5328,21 +5333,21 @@ var app = new Vue({
             if (null == this['katsu']['media_attachments'][_0x5f4a2a]) {
                 return;
             }
-            this['katsu']['media_previews'][_0x363a('0xf0')](_0x5f4a2a, 0x1);
-            this['katsu']['media_attachments'][_0x363a('0xf0')](_0x5f4a2a, 0x1);
+            this['katsu']['media_previews']['splice'](_0x5f4a2a, 0x1);
+            this['katsu']['media_attachments']['splice'](_0x5f4a2a, 0x1);
         },
         'saveKatsu': function () {
             if (!this[_0x363a('0x1fe')]) {
                 this[_0x363a('0x8c')]();
                 return;
             }
-            var _0x29a3b7 = document['getElementById'](_0x363a('0x173'));
-            var _0xdc7dac = document[_0x363a('0x139')](_0x363a('0x174'));
+            var _0x29a3b7 = document.getElementById('katsu_spoiler');
+            var _0xdc7dac = document.getElementById('katsu_content');
             if (null == _0x29a3b7 || null == _0xdc7dac) {
                 return ![];
             }
-            this['katsu_spoiler_text'] = _0x29a3b7[_0x363a('0x59')];
-            this[_0x363a('0x5c')] = _0xdc7dac[_0x363a('0x59')];
+            this['katsu_spoiler_text'] = _0x29a3b7['value'];
+            this[_0x363a('0x5c')] = _0xdc7dac['value'];
         },
         'actKatsuShortCut': function () {
             if ((event[_0x363a('0x2cc')] && !event[_0x363a('0x2cd')] || !event[_0x363a('0x2cc')] && event[_0x363a('0x2cd')]) && event[_0x363a('0x2ce')] == 0xd) {
@@ -5350,10 +5355,10 @@ var app = new Vue({
             }
         },
         'actKatsu': function (_0x2ca602, _0x969d50) {
-            var _0x91807d = document[_0x363a('0x139')]('katsu_spoiler');
-            var _0x510760 = document[_0x363a('0x139')](_0x363a('0x174'));
-            this[_0x363a('0x13f')] = _0x91807d[_0x363a('0x59')];
-            this[_0x363a('0x5c')] = _0x510760[_0x363a('0x59')];
+            var _0x91807d = document.getElementById('katsu_spoiler');
+            var _0x510760 = document.getElementById('katsu_content');
+            this['katsu_spoiler_text'] = _0x91807d['value'];
+            this[_0x363a('0x5c')] = _0x510760['value'];
             if (!this[_0x363a('0x2cf')]()) {
                 return;
             }
@@ -5370,7 +5375,7 @@ var app = new Vue({
                 this[_0x363a('0xa4')] = _0x363a('0x2d2');
                 return;
             }
-            this[_0x363a('0x2c5')] = 'katsu';
+            this['action_lock'] = 'katsu';
             var _0x1e214f = new Array();
             this['katsu']['media_attachments'][_0x363a('0x171')](function (_0x4621ae, _0x54f06e) {
                 if (_0x54f06e >= 0x4) {
@@ -5379,10 +5384,10 @@ var app = new Vue({
                 _0x1e214f['push'](_0x4621ae['id']);
             });
             this['katsu'][_0x363a('0x2d3')] = _0x1e214f;
-            this['katsu'][_0x363a('0x29b')] = this[_0x363a('0x13f')];
+            this['katsu']['spoiler_text'] = this['katsu_spoiler_text'];
             this['katsu']['status'] = this[_0x363a('0x5c')];
             this['katsu']['status'] = this['katsu']['status'].replace(/^#/g, '\x20#');
-            this['katsu'][_0x363a('0x22e')] = this[_0x363a('0x5c')];
+            this['katsu']['content'] = this[_0x363a('0x5c')];
             if (this[_0x363a('0x140')] && 0x0 != this['katsu'][_0x363a('0x22b')]['options']['length']) {
                 this[_0x363a('0x2d4')] = this['katsu']['poll'];
                 this['katsu'][_0x363a('0x22b')]['choices'] = [![], ![], ![], ![]];
@@ -5393,7 +5398,7 @@ var app = new Vue({
             if (0x0 == this['katsu'][_0x363a('0x2d3')]['length']) {
                 this['katsu'][_0x363a('0x2d6')] = ![];
             }
-            this['katsu'][_0x363a('0x2d7')] = this['katsu'][_0x363a('0x2d6')] || 0x0 < this[_0x363a('0x13f')]['length'] ? !![] : ![];
+            this['katsu'][_0x363a('0x2d7')] = this['katsu'][_0x363a('0x2d6')] || 0x0 < this['katsu_spoiler_text']['length'] ? !![] : ![];
             if (0x1 == this['optConfirm']['katsu'] && !![] !== _0x969d50) {
                 this[_0x363a('0x1fa')](_0x2ca602, 'katsu');
                 this['action_lock'] = '';
@@ -5408,7 +5413,7 @@ var app = new Vue({
                 'in_reply_to_id': this['katsu']['in_reply_to_id'],
                 'media_ids': this['katsu'][_0x363a('0x2d3')],
                 'sensitive': this['katsu'][_0x363a('0x2d7')],
-                'spoiler_text': this[_0x363a('0x13f')],
+                'spoiler_text': this['katsu_spoiler_text'],
                 'poll': this[_0x363a('0x2d4')],
                 'visibility': this['katsu']['visibility']
             };
@@ -5426,7 +5431,7 @@ var app = new Vue({
                     }
                 } else if (request['readyState'] == XMLHttpRequest['DONE']) {
                     _0x5e35cf['popError'](request['responseText'], request['status'], 'Katsu');
-                    _0x5e35cf[_0x363a('0x2c5')] = '';
+                    _0x5e35cf['action_lock'] = '';
                 }
                 _0x2ca602[_0x363a('0x2d8')] = ![];
                 _0x5e35cf['$forceUpdate']();
@@ -5435,8 +5440,8 @@ var app = new Vue({
             request['send'](JSON[_0x363a('0x210')](_0x33bd48));
         },
         'refreshKatsu': function (_0x3fff1a, _0x15b187) {
-            var _0x3fff1a = document[_0x363a('0x139')]('katsu_spoiler');
-            var _0x15b187 = document[_0x363a('0x139')](_0x363a('0x174'));
+            var _0x3fff1a = document.getElementById('katsu_spoiler');
+            var _0x15b187 = document.getElementById('katsu_content');
             this['katsu'] = {
                 'status': '',
                 'in_reply_to_id': null,
@@ -5457,18 +5462,18 @@ var app = new Vue({
                 'poll_work': {
                     'texts': [],
                     'expires_at': '',
-                    'extime': [0x1, 0x0, 0x0]
+                    'extime': [1, 0, 0x0]
                 },
                 'emojis': []
             },
-                this[_0x363a('0x13f')] = '';
+                this['katsu_spoiler_text'] = '';
             this[_0x363a('0x13e')] = '';
             this[_0x363a('0x5c')] = '';
             this[_0x363a('0x2d4')] = null;
             this['katsu'][_0x363a('0x16e')] = this[_0x363a('0xad')][_0x363a('0x2d9')] ? _0x363a('0x2da') : _0x363a('0x2db');
             if (null != _0x3fff1a && null != _0x15b187) {
-                _0x3fff1a[_0x363a('0x59')] = this[_0x363a('0x13f')];
-                _0x15b187[_0x363a('0x59')] = this[_0x363a('0x5c')];
+                _0x3fff1a['value'] = this['katsu_spoiler_text'];
+                _0x15b187['value'] = this[_0x363a('0x5c')];
             }
             this[_0x363a('0x13d')] = ![];
             this[_0x363a('0x140')] = ![];
@@ -5477,14 +5482,14 @@ var app = new Vue({
             this['action_lock'] = '';
         },
         'spoilerLength': function () {
-            var _0x461ddc = document['getElementById']('katsu_spoiler');
+            var _0x461ddc = document.getElementById('katsu_spoiler');
             if (null == _0x461ddc) {
                 return 0x0;
             }
-            return _0x461ddc[_0x363a('0x59')]['length'] - (_0x461ddc['value']['match'](/[\uD800-\uDBFF][\uDC00-\uDFFF]/g) || [])['length'];
+            return _0x461ddc['value']['length'] - (_0x461ddc['value']['match'](/[\uD800-\uDBFF][\uDC00-\uDFFF]/g) || [])['length'];
         },
         'contentLength': function () {
-            var _0x3c848c = document['getElementById'](_0x363a('0x174'));
+            var _0x3c848c = document.getElementById('katsu_content');
             var _0x29b0a2 = 0x0;
             if (null == _0x3c848c) {
                 return 0x0;
@@ -5492,61 +5497,61 @@ var app = new Vue({
             if (_0x3c848c['value']['match'](/^#/)) {
                 _0x29b0a2 = 0x1;
             }
-            return _0x3c848c[_0x363a('0x59')]['length'] - (_0x3c848c[_0x363a('0x59')]['match'](/[\uD800-\uDBFF][\uDC00-\uDFFF]/g) || [])['length'] + _0x29b0a2;
+            return _0x3c848c['value']['length'] - (_0x3c848c['value']['match'](/[\uD800-\uDBFF][\uDC00-\uDFFF]/g) || [])['length'] + _0x29b0a2;
         },
         'refreshCount': _['debounce'](function () {
             app['$forceUpdate']();
         }, TIME_REFRESH),
         'addSpoiler': function (_0x1e58d2) {
-            var _0x4b6644 = document[_0x363a('0x139')](_0x363a('0x173'));
-            var _0x342c76 = _0x4b6644['value'][_0x363a('0x2dd')](0x0, _0x4b6644[_0x363a('0x2de')]);
-            var _0x5d8af7 = _0x4b6644[_0x363a('0x59')][_0x363a('0x2dd')](_0x4b6644[_0x363a('0x2de')], _0x4b6644[_0x363a('0x59')]['length']);
+            var _0x4b6644 = document.getElementById('katsu_spoiler');
+            var _0x342c76 = _0x4b6644['value'][_0x363a('0x2dd')](0, _0x4b6644[_0x363a('0x2de')]);
+            var _0x5d8af7 = _0x4b6644['value'][_0x363a('0x2dd')](_0x4b6644[_0x363a('0x2de')], _0x4b6644['value']['length']);
             this['katsu_spoiler_text'] = _0x342c76 + _0x1e58d2 + _0x5d8af7;
-            _0x4b6644[_0x363a('0x59')] = this[_0x363a('0x13f')];
+            _0x4b6644['value'] = this['katsu_spoiler_text'];
         },
         'restoreSpoiler': function () {
-            var _0x35276a = document[_0x363a('0x139')](_0x363a('0x173'));
-            this[_0x363a('0x13f')] = this[_0x363a('0x13e')];
-            _0x35276a[_0x363a('0x59')] = this[_0x363a('0x13f')];
+            var _0x35276a = document.getElementById('katsu_spoiler');
+            this['katsu_spoiler_text'] = this[_0x363a('0x13e')];
+            _0x35276a['value'] = this['katsu_spoiler_text'];
         },
         'disableSpoiler': function () {
-            var _0x26a7c0 = document['getElementById'](_0x363a('0x173'));
+            var _0x26a7c0 = document.getElementById('katsu_spoiler');
             this[_0x363a('0x13e')] = _0x26a7c0['value'];
-            this[_0x363a('0x13f')] = '';
-            _0x26a7c0[_0x363a('0x59')] = '';
+            this['katsu_spoiler_text'] = '';
+            _0x26a7c0['value'] = '';
         },
         'addContent': function (_0x51d0d4) {
-            var _0x4d3706 = document[_0x363a('0x139')]('katsu_content');
-            var _0x42f402 = _0x4d3706[_0x363a('0x59')][_0x363a('0x2dd')](0x0, _0x4d3706[_0x363a('0x2de')]);
-            var _0xbcc4d3 = _0x4d3706[_0x363a('0x59')]['substr'](_0x4d3706[_0x363a('0x2de')], _0x4d3706[_0x363a('0x59')]['length']);
+            var _0x4d3706 = document.getElementById('katsu_content');
+            var _0x42f402 = _0x4d3706['value'][_0x363a('0x2dd')](0, _0x4d3706[_0x363a('0x2de')]);
+            var _0xbcc4d3 = _0x4d3706['value']['substr'](_0x4d3706[_0x363a('0x2de')], _0x4d3706['value']['length']);
             this[_0x363a('0x5c')] = _0x42f402 + _0x51d0d4 + _0xbcc4d3;
-            _0x4d3706[_0x363a('0x59')] = this[_0x363a('0x5c')];
+            _0x4d3706['value'] = this[_0x363a('0x5c')];
         },
         'contentExchange': function () {
-            var _0x2fdc93 = document[_0x363a('0x139')](_0x363a('0x173'));
-            var _0x3966c2 = document[_0x363a('0x139')](_0x363a('0x174'));
-            this[_0x363a('0x13e')] = _0x2fdc93[_0x363a('0x59')];
-            this[_0x363a('0x13f')] = _0x3966c2[_0x363a('0x59')];
+            var _0x2fdc93 = document.getElementById('katsu_spoiler');
+            var _0x3966c2 = document.getElementById('katsu_content');
+            this[_0x363a('0x13e')] = _0x2fdc93['value'];
+            this['katsu_spoiler_text'] = _0x3966c2['value'];
             this[_0x363a('0x5c')] = this[_0x363a('0x13e')];
-            _0x2fdc93[_0x363a('0x59')] = this[_0x363a('0x13f')];
-            _0x3966c2[_0x363a('0x59')] = this[_0x363a('0x5c')];
+            _0x2fdc93['value'] = this['katsu_spoiler_text'];
+            _0x3966c2['value'] = this[_0x363a('0x5c')];
         },
         'contentToDraft': function () {
-            var _0x1491ec = document[_0x363a('0x139')]('katsu_content');
-            this['content_text_drafts'][_0x363a('0x172')](_0x1491ec[_0x363a('0x59')]);
+            var _0x1491ec = document.getElementById('katsu_content');
+            this['content_text_drafts'][_0x363a('0x172')](_0x1491ec['value']);
             this[_0x363a('0x5c')] = '';
-            _0x1491ec[_0x363a('0x59')] = this['katsu_content_text'];
+            _0x1491ec['value'] = this['katsu_content_text'];
         },
         'draftToContent': function (_0x41b094, _0x778fd2) {
-            var _0x3eae02 = document[_0x363a('0x139')](_0x363a('0x174'));
+            var _0x3eae02 = document.getElementById('katsu_content');
             if (_0x778fd2) {
                 this['katsu_content_text'] = this['content_text_drafts'][_0x41b094];
-                _0x3eae02[_0x363a('0x59')] = this[_0x363a('0x5c')];
+                _0x3eae02['value'] = this[_0x363a('0x5c')];
                 this[_0x363a('0x2dc')]['splice'](_0x41b094, 0x1);
                 return;
             }
-            var _0x255a2b = _0x3eae02[_0x363a('0x59')]['substr'](0x0, _0x3eae02[_0x363a('0x2de')]);
-            var _0x15e2d6 = _0x3eae02['value']['substr'](_0x3eae02['selectionStart'], _0x3eae02[_0x363a('0x59')]['length']);
+            var _0x255a2b = _0x3eae02['value']['substr'](0, _0x3eae02[_0x363a('0x2de')]);
+            var _0x15e2d6 = _0x3eae02['value']['substr'](_0x3eae02['selectionStart'], _0x3eae02['value']['length']);
             this[_0x363a('0x5c')] = _0x255a2b + this[_0x363a('0x2dc')][_0x41b094] + _0x15e2d6;
             _0x3eae02['value'] = this['katsu_content_text'];
             this[_0x363a('0x5d')]();
@@ -5555,11 +5560,11 @@ var app = new Vue({
             if (!this[_0x363a('0x2cf')]()) {
                 return;
             }
-            var _0x37bee6 = document[_0x363a('0x139')](_0x363a('0x173'));
-            var _0x62d4ab = document[_0x363a('0x139')]('katsu_content');
-            this['katsu_spoiler_text'] = null != _0x37bee6 ? _0x37bee6[_0x363a('0x59')] : this[_0x363a('0x13f')];
-            this[_0x363a('0x5c')] = null != _0x62d4ab ? _0x62d4ab[_0x363a('0x59')] : this[_0x363a('0x5c')];
-            this['katsu'][_0x363a('0x29b')] = this[_0x363a('0x13f')];
+            var _0x37bee6 = document.getElementById('katsu_spoiler');
+            var _0x62d4ab = document.getElementById('katsu_content');
+            this['katsu_spoiler_text'] = null != _0x37bee6 ? _0x37bee6['value'] : this['katsu_spoiler_text'];
+            this[_0x363a('0x5c')] = null != _0x62d4ab ? _0x62d4ab['value'] : this[_0x363a('0x5c')];
+            this['katsu']['spoiler_text'] = this['katsu_spoiler_text'];
             this['katsu']['status'] = this[_0x363a('0x5c')];
             if (!this['showFormVote']) {
                 this['katsu'][_0x363a('0x22b')] = {
@@ -5570,93 +5575,93 @@ var app = new Vue({
                 this['katsu'][_0x363a('0x60')] = {
                     'texts': [],
                     'expires_at': '',
-                    'extime': [0x1, 0x0, 0x0]
+                    'extime': [1, 0, 0x0]
                 };
             }
             this[_0x363a('0xbb')][_0x363a('0x172')](this['katsu']);
-            var _0x3d5ee8 = document[_0x363a('0x139')](_0x363a('0x2df'));
-            var _0x5be2c5 = document[_0x363a('0x139')](_0x363a('0x2e0'));
-            var _0x4a6db7 = document['getElementById'](_0x363a('0x2e1'));
-            var _0x13fa5b = document[_0x363a('0x139')](_0x363a('0x2e2'));
+            var _0x3d5ee8 = document.getElementById(_0x363a('0x2df'));
+            var _0x5be2c5 = document.getElementById(_0x363a('0x2e0'));
+            var _0x4a6db7 = document.getElementById(_0x363a('0x2e1'));
+            var _0x13fa5b = document.getElementById(_0x363a('0x2e2'));
             if (null != _0x3d5ee8) {
-                _0x3d5ee8[_0x363a('0x59')] = '';
+                _0x3d5ee8['value'] = '';
             }
             if (null != _0x5be2c5) {
                 _0x5be2c5['value'] = '';
             }
             if (null != _0x4a6db7) {
-                _0x4a6db7[_0x363a('0x59')] = '';
+                _0x4a6db7['value'] = '';
             }
             if (null != _0x13fa5b) {
-                _0x13fa5b[_0x363a('0x59')] = '';
+                _0x13fa5b['value'] = '';
             }
             this[_0x363a('0x8c')]();
         },
         'draftToKatsu': function (_0x1960a2, _0xe130dc) {
-            var _0x51c6b1 = document[_0x363a('0x139')](_0x363a('0x173'));
-            var _0x59649d = document['getElementById']('katsu_content');
+            var _0x51c6b1 = document.getElementById('katsu_spoiler');
+            var _0x59649d = document.getElementById('katsu_content');
             this['katsu'] = this[_0x363a('0xbb')][_0x1960a2];
             if (_0xe130dc) {
-                this[_0x363a('0xbb')][_0x363a('0xf0')](_0x1960a2, 0x1);
+                this[_0x363a('0xbb')]['splice'](_0x1960a2, 0x1);
             }
-            this[_0x363a('0x13f')] = this['katsu']['spoiler_text'];
+            this['katsu_spoiler_text'] = this['katsu']['spoiler_text'];
             this[_0x363a('0x5c')] = this['katsu']['status'];
-            _0x51c6b1['value'] = this[_0x363a('0x13f')];
-            _0x59649d[_0x363a('0x59')] = this[_0x363a('0x5c')];
-            this[_0x363a('0x13d')] = this[_0x363a('0x13f')]['length'] > 0x0 ? !![] : ![];
+            _0x51c6b1['value'] = this['katsu_spoiler_text'];
+            _0x59649d['value'] = this[_0x363a('0x5c')];
+            this[_0x363a('0x13d')] = this['katsu_spoiler_text']['length'] > 0x0 ? !![] : ![];
             this['showFormVote'] = this['katsu'][_0x363a('0x60')][_0x363a('0x63')]['length'] > 0x0 ? !![] : ![];
             this[_0x363a('0x142')] = this['katsu'][_0x363a('0x16e')] != _0x363a('0x2db') ? !![] : ![];
-            var _0x1574a5 = document[_0x363a('0x139')](_0x363a('0x2df'));
-            var _0x267354 = document[_0x363a('0x139')]('vote_title_1');
-            var _0x3b2dc1 = document[_0x363a('0x139')](_0x363a('0x2e1'));
-            var _0x3b2757 = document[_0x363a('0x139')]('vote_title_3');
+            var _0x1574a5 = document.getElementById(_0x363a('0x2df'));
+            var _0x267354 = document.getElementById('vote_title_1');
+            var _0x3b2dc1 = document.getElementById(_0x363a('0x2e1'));
+            var _0x3b2757 = document.getElementById('vote_title_3');
             if (null != _0x1574a5) {
-                _0x1574a5[_0x363a('0x59')] = null != this['katsu'][_0x363a('0x60')]['texts'][0] ? this['katsu'][_0x363a('0x60')]['texts'][0] : '';
+                _0x1574a5['value'] = null != this['katsu'][_0x363a('0x60')]['texts'][0] ? this['katsu'][_0x363a('0x60')]['texts'][0] : '';
             }
             if (null != _0x267354) {
-                _0x267354[_0x363a('0x59')] = null != this['katsu'][_0x363a('0x60')][_0x363a('0x63')][1] ? this['katsu'][_0x363a('0x60')][_0x363a('0x63')][1] : '';
+                _0x267354['value'] = null != this['katsu'][_0x363a('0x60')][_0x363a('0x63')][1] ? this['katsu'][_0x363a('0x60')][_0x363a('0x63')][1] : '';
             }
             if (null != _0x3b2dc1) {
-                _0x3b2dc1[_0x363a('0x59')] = null != this['katsu'][_0x363a('0x60')][_0x363a('0x63')][0x2] ? this['katsu'][_0x363a('0x60')]['texts'][0x2] : '';
+                _0x3b2dc1['value'] = null != this['katsu'][_0x363a('0x60')][_0x363a('0x63')][2] ? this['katsu'][_0x363a('0x60')]['texts'][2] : '';
             }
             if (null != _0x3b2757) {
-                _0x3b2757[_0x363a('0x59')] = null != this['katsu'][_0x363a('0x60')][_0x363a('0x63')][0x3] ? this['katsu']['poll_work'][_0x363a('0x63')][0x3] : '';
+                _0x3b2757['value'] = null != this['katsu'][_0x363a('0x60')][_0x363a('0x63')][3] ? this['katsu']['poll_work'][_0x363a('0x63')][3] : '';
             }
             this[_0x363a('0x5d')]();
         },
         'checkKatsu': function () {
-            if ('' != this[_0x363a('0x2c5')]) {
+            if ('' != this['action_lock']) {
                 return ![];
             }
-            var _0x2df606 = document['getElementById'](_0x363a('0x173'));
-            var _0x243836 = document[_0x363a('0x139')]('katsu_content');
-            if (null == _0x2df606 || null == _0x243836) {
+            var spoilerDom = document.getElementById('katsu_spoiler');
+            var contentDom = document.getElementById('katsu_content');
+            if (null == spoilerDom || null == contentDom) {
                 return ![];
             }
-            this[_0x363a('0x13f')] = _0x2df606[_0x363a('0x59')];
-            this['katsu_content_text'] = _0x243836['value'];
-            if (0x0 != this['katsu'][_0x363a('0x2c6')]['length'] && this['katsu'][_0x363a('0x2c6')]['length'] != this['katsu']['media_attachments']['length']) {
+            this['katsu_spoiler_text'] = spoilerDom.value;
+            this['katsu_content_text'] = contentDom.value;
+            if (0x0 != this['katsu']['media_previews']['length'] && this['katsu']['media_previews']['length'] != this['katsu']['media_attachments']['length']) {
                 return ![];
             }
-            if ((0x0 == _0x243836[_0x363a('0x59')][_0x363a('0x29c')]()['length'] || 0x0 == this[_0x363a('0x2e3')]()) && 0x0 == this['katsu'][_0x363a('0x2c6')]['length']) {
+            if ((0x0 == contentDom['value']['trim']()['length'] || 0x0 == this[_0x363a('0x2e3')]()) && 0x0 == this['katsu']['media_previews']['length']) {
                 return ![];
             }
-            if (0x1f4 < _0x2df606[_0x363a('0x59')]['length'] + this[_0x363a('0x2e3')]()) {
+            if (0x1f4 < spoilerDom['value']['length'] + this[_0x363a('0x2e3')]()) {
                 return ![];
             }
             return !![];
         },
         'openEmoji': function () {
-            var _0x9b1cce = document[_0x363a('0x139')](_0x363a('0x174'));
+            var _0x9b1cce = document.getElementById('katsu_content');
             this['katsu_content_text'] = _0x9b1cce['value'];
-            var _0x4e4149 = document[_0x363a('0x139')]('katsu');
-            _0x4e4149[_0x363a('0x59')] = this['katsu_content_text'];
+            var _0x4e4149 = document.getElementById('katsu');
+            _0x4e4149['value'] = this['katsu_content_text'];
         },
         'closeEmoji': function () {
-            var _0x315fec = document[_0x363a('0x139')]('katsu_content');
-            var _0x448ff3 = document[_0x363a('0x139')]('katsu');
+            var _0x315fec = document.getElementById('katsu_content');
+            var _0x448ff3 = document.getElementById('katsu');
             this[_0x363a('0x5c')] = emojione[_0x363a('0x2e4')](_0x448ff3['value']);
-            _0x315fec[_0x363a('0x59')] = this[_0x363a('0x5c')];
+            _0x315fec['value'] = this[_0x363a('0x5c')];
         },
         'popError': function (_0x53bcc6, _0x178660, _0x300eb8) {
             var _0x20330f = '';
@@ -5672,15 +5677,15 @@ var app = new Vue({
                 _0x20330f = '(' + this[_0x363a('0xa6')] + ')\x20' + _0x20330f;
             }
             if (_0x363a('0x187') == _0x300eb8) {
-                this[_0x363a('0x29e')] = _0x20330f;
+                this['result_text_tmp'] = _0x20330f;
             } else {
                 this[_0x363a('0xa4')] = _0x20330f;
             }
         },
         'jumpKatsu': function (_0x244166, _0x410568) {
-            var _0x5e219a = document[_0x363a('0x139')](_0x244166 + '' + _0x410568);
+            var _0x5e219a = document.getElementById(_0x244166 + '' + _0x410568);
             if (_0x5e219a != null && (_0x244166 == 'home' && this['showHome'] || _0x244166 == _0x363a('0xf8') && this[_0x363a('0x14b')] || _0x244166 == 'notif' && this['showNotif'] || _0x244166 == 'multi' && this['showMulti'])) {
-                var _0x610350 = document[_0x363a('0x139')](_0x244166);
+                var _0x610350 = document.getElementById(_0x244166);
                 setTimeout(function () {
                     _0x610350[_0x363a('0xf6')] = _0x610350['scrollTop'] + _0x5e219a['getBoundingClientRect']()[_0x363a('0x165')] + window['pageYOffset'] - 0x58;
                 }, 0x0);
@@ -5722,7 +5727,7 @@ function importdrop(_0x31edc2) {
         return;
     }
     app['_data'][_0x363a('0x2ea')] = ![];
-    if (0x4 <= app['_data']['katsu'][_0x363a('0x2c6')]['length'] || app['_data']['katsu']['media_previews']['length'] != app['_data']['katsu']['media_attachments']['length']) {
+    if (0x4 <= app['_data']['katsu']['media_previews']['length'] || app['_data']['katsu']['media_previews']['length'] != app['_data']['katsu']['media_attachments']['length']) {
         return;
     }
     if (0x0 != _0x31edc2[_0x363a('0x2eb')][_0x363a('0x2ec')]['length'] && app['_data'][_0x363a('0x140')]) {
@@ -5741,7 +5746,7 @@ function importpaste(_0xb7cd91) {
     if (!app['_data']['showForm']) {
         app['toggleForm']();
     }
-    if (0x4 <= app['_data']['katsu']['media_previews']['length'] || app['_data']['katsu'][_0x363a('0x2c6')]['length'] != app['_data']['katsu']['media_attachments']['length']) {
+    if (0x4 <= app['_data']['katsu']['media_previews']['length'] || app['_data']['katsu']['media_previews']['length'] != app['_data']['katsu']['media_attachments']['length']) {
         return;
     }
     if (0x0 != _0xb7cd91[_0x363a('0x2ef')][_0x363a('0x2ec')]['length'] && app['_data']['showFormVote']) {
@@ -5757,7 +5762,7 @@ function importclick(_0xd2d1ca) {
     if (!_0xd2d1ca['length']) {
         return;
     }
-    if (0x4 <= app['_data']['katsu'][_0x363a('0x2c6')]['length'] || app['_data']['katsu'][_0x363a('0x2c6')]['length'] != app['_data']['katsu']['media_attachments']['length']) {
+    if (0x4 <= app['_data']['katsu']['media_previews']['length'] || app['_data']['katsu']['media_previews']['length'] != app['_data']['katsu']['media_attachments']['length']) {
         return;
     }
     if (0x0 != _0xd2d1ca['length'] && app['_data'][_0x363a('0x140')]) {
@@ -5787,7 +5792,7 @@ function touchController(_0x58e9c0, _0x4380ab) {
     }
 }
 function swipedetect(_0x4f8ecc, _0x52cc36) {
-    var _0x183dec = _0x4f8ecc, _0x267279, _0x49dc99, _0x30e866, _0x1a8dcd, _0x5bea66, _0x4d84c4 = window['innerWidth'] / 0x4 >= 0x78 ? window['innerWidth'] / 0x10 + 0x5a : window['innerWidth'] / 0x4 + 0x8, _0x448d26, _0x2f750a, _0x380dfd, _0x25676c = _0x52cc36 || function (_0x267279) { }
+    var _0x183dec = _0x4f8ecc, _0x267279, _0x49dc99, _0x30e866, _0x1a8dcd, _0x5bea66, _0x4d84c4 = window.innerWidth / 0x4 >= 0x78 ? window.innerWidth / 0x10 + 0x5a : window.innerWidth / 0x4 + 0x8, _0x448d26, _0x2f750a, _0x380dfd, _0x25676c = _0x52cc36 || function (_0x267279) { }
         ;
     _0x183dec['addEventListener']('touchstart', function (_0x5cdf8f) {
         if (app['_data']['showLink']) {
@@ -5850,14 +5855,14 @@ function getParameterByName(_0x55941c, _0x46df54) {
     if (!_0x46df54) {
         _0x46df54 = window.location.href;
     }
-    var _0x2b40e4 = new RegExp('[?&]' + _0x55941c.replace(/[\[\]]/g, _0x363a('0x29d')) + _0x363a('0x2f7'))[_0x363a('0x2f8')](_0x46df54);
+    var _0x2b40e4 = new RegExp('[?&]' + _0x55941c.replace(/[\[\]]/g, '\\$&') + _0x363a('0x2f7'))[_0x363a('0x2f8')](_0x46df54);
     if (!_0x2b40e4) {
         return null;
     }
-    if (!_0x2b40e4[0x2]) {
+    if (!_0x2b40e4[2]) {
         return '';
     }
-    return decodeURIComponent(_0x2b40e4[0x2].replace(/\+/g, '\x20'));
+    return decodeURIComponent(_0x2b40e4[2].replace(/\+/g, '\x20'));
 }
 function base64ToBlob(_0x4bc369) {
     var _0x316891 = window.atob(_0x4bc369['split'](',')[1]);
@@ -5870,10 +5875,10 @@ function base64ToBlob(_0x4bc369) {
     });
 }
 function inputVote(_0x4f5fb6, _0x46033e) {
-    app['_data']['katsu'][_0x363a('0x60')][_0x363a('0x63')][_0x46033e] = _0x4f5fb6[_0x363a('0x59')];
+    app['_data']['katsu'][_0x363a('0x60')][_0x363a('0x63')][_0x46033e] = _0x4f5fb6['value'];
 }
 function inputSearch(_0x80e9f5) {
-    app['_data'][_0x363a('0x1c3')] = _0x80e9f5[_0x363a('0x59')];
+    app['_data'][_0x363a('0x1c3')] = _0x80e9f5['value'];
 }
 function inputList(_0x3fe06d) {
     app['_data'][_0x363a('0xe3')] = _0x3fe06d['value'];
@@ -5884,11 +5889,11 @@ function inputListProfile(_0xce104a) {
     app[_0x363a('0x13b')]();
 }
 function inputKatsuFilterRaw(_0x731379) {
-    if (app['_data'][_0x363a('0x29e')] != '') {
-        app['_data'][_0x363a('0x29e')] = '';
+    if (app['_data']['result_text_tmp'] != '') {
+        app['_data']['result_text_tmp'] = '';
         app['_data'][_0x363a('0xa6')] = 0x0;
     }
-    app['_data']['optKatsuFilterRaw'] = _0x731379[_0x363a('0x59')];
+    app['_data']['optKatsuFilterRaw'] = _0x731379['value'];
 }
 function autogrow(_0x1d49e5) {
     _0x1d49e5[_0x363a('0x2fd')][_0x363a('0x2c0')] = _0x363a('0x2fe');
@@ -5927,7 +5932,7 @@ function patchEmoji(_0x54d410, _0x133a9b) {
     var _0x4a5584 = _0x54d410;
     if (_0x133a9b != null && _0x133a9b['length'] != 0x0) {
         _0x133a9b['filter'](function (_0x4b3915, _0x2a9cd7) {
-            _0x4a5584 = _0x4a5584['split'](':' + _0x4b3915[_0x363a('0x30c')] + ':')[_0x363a('0xcb')](_0x363a('0x30d') + _0x4b3915[_0x363a('0x30c')] + ':\x22\x20src=\x22' + _0x4b3915[_0x363a('0x30e')] + '\x22>');
+            _0x4a5584 = _0x4a5584['split'](':' + _0x4b3915[_0x363a('0x30c')] + ':')['join'](_0x363a('0x30d') + _0x4b3915[_0x363a('0x30c')] + ':\x22\x20src=\x22' + _0x4b3915[_0x363a('0x30e')] + '\x22>');
         });
     }
     return _0x4a5584;
