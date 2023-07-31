@@ -1924,6 +1924,13 @@ var app = new Vue({
                 if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
                     if (multi_type == thisObj.multi_type && thisObj['fetch_lock'].multi) {
                         list = JSON.parse(request.responseText);
+                        // Directならcoversationを整形
+                        if (multi_type === "Direct") {
+                            list = list.map(item => {
+                                return item.last_status
+                            });
+                        }
+
                         thisObj.updateWrapperBM(list, 'multi');
                         thisObj.updateFilterBM(list, 'multi');
                         if (0 == thisObj.multis.length) {
