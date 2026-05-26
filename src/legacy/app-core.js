@@ -27,6 +27,18 @@ const __kktjsBase = (function () {
   return location.pathname.replace(/[^/]*$/, '') || '/';
 })();
 const IMG_DUMMY = __kktjsBase + 'img/missing_header.png';
+
+// ストリーミング受信投稿の重複挿入ガード。
+// 復帰時の再接続と refetch が競合すると、同一IDの投稿が onmessage の unshift と
+// refetch の置き換えで二重に入ることがある。挿入前に既存配列へ同一IDが無いか確認する。
+function kktjsAlreadyInTimeline(list, status) {
+  if (!list || !status) return false;
+  var id = status['id'];
+  for (var i = 0; i < list.length; i++) {
+    if (list[i] && list[i]['id'] === id) return true;
+  }
+  return false;
+}
 const NOIMAGE_AVATAR = '/avatars/original/missing.png';
 const NOIMAGE_HEADER = '/headers/original/missing.png';
 const NOIMAGE_MEDIA = '/files/small/missing.png';
@@ -2495,6 +2507,10 @@ var app = new Vue({
                         if (null == thisObj.homes[0] || null != thisObj.homes[0] && thisObj['home_id'] > KKT1_LASTID && thisObj['home_id'] > _0x1c8865['id']) {
                             return;
                         }
+                        // 重複ガード: 既に同一IDが home に存在するなら挿入しない（復帰再接続との競合対策）
+                        if (kktjsAlreadyInTimeline(thisObj.homes, _0x1c8865)) {
+                            return;
+                        }
                         if (0 == thisObj['home_posy'] && 0 == thisObj.home_unread) {
                             thisObj.homes['splice'](LIMIT - 0x1);
                             thisObj['home_id'] = thisObj['hasHome'] ? thisObj.homes[thisObj.homes.length - 1]['id'] : '';
@@ -2515,6 +2531,10 @@ var app = new Vue({
                         });
                     } else if ("notification" == _0x109fd1['event']) {
                         if (null == thisObj['notifs'][0] || null != thisObj['notifs'][0] && thisObj['notif_id'] > KKT1_LASTID && thisObj['notif_id'] > _0x1c8865['id']) {
+                            return;
+                        }
+                        // 重複ガード: 既に同一IDの通知が存在するなら挿入しない（二重接続対策）
+                        if (kktjsAlreadyInTimeline(thisObj['notifs'], _0x1c8865)) {
                             return;
                         }
                         if (thisObj['showNotif'] && 0 == thisObj["notif_posy"] && 0 == thisObj["notif_unread"] && thisObj["notifJudge"](_0x1c8865)) {
@@ -2666,6 +2686,10 @@ var app = new Vue({
                         if (null == thisObj['locals'][0] || null != thisObj['locals'][0] && thisObj['local_id'] > KKT1_LASTID && thisObj['local_id'] > _0x4c2dc9['id']) {
                             return;
                         }
+                        // 重複ガード: 既に同一IDが local に存在するなら挿入しない
+                        if (kktjsAlreadyInTimeline(thisObj['locals'], _0x4c2dc9)) {
+                            return;
+                        }
                         if (0 == thisObj['local_posy'] && 0 == thisObj['local_unread']) {
                             thisObj['locals']['splice'](LIMIT - 0x1);
                             thisObj["local_id"] = thisObj["hasLocal"] ? thisObj['locals'][thisObj['locals'].length - 1]['id'] : '';
@@ -2777,6 +2801,10 @@ var app = new Vue({
                     var _0x5798ad, _0xd10c45;
                     if ("update" == _0x2b6070['event']) {
                         if (null == thisObj.multis[0] || null != thisObj.multis[0] && thisObj.multi_id > KKT1_LASTID && thisObj.multi_id > _0x3e1dc6['id']) {
+                            return;
+                        }
+                        // 重複ガード: 既に同一IDが multi に存在するなら挿入しない
+                        if (kktjsAlreadyInTimeline(thisObj.multis, _0x3e1dc6)) {
                             return;
                         }
                         if (0 == thisObj['multi_posy'] && 0 == thisObj['multi_unread']) {
@@ -4388,7 +4416,29 @@ window.importpaste = importpaste;
 
 // --- 復帰時の強制再接続ヘルパー（resume-reconnect から呼ばれる） ---
 // ソケット変数(wsHome等)は本モジュール内で閉じているため、死活判定と張り直しも
-// ここで行い、単一の真実点を保つ。OPEN(1)以外は死んでいるとみなす。
+// ここで行い、単一の真実点を保つ。
+//
+// 重要: 二重接続を防ぐため、「本当に死んだ」ソケット(CLOSING=2 / CLOSED=3 / null)
+// のときだけ張り直す。OPEN(1) は当然そのまま、CONNECTING(0) も「生きようとしている
+// 最中」なので潰さない（潰して開き直すと、閉じきる前の旧ソケットと新ソケットの双方が
+// 同じ投稿を配信し、タイムラインに重複表示される）。
+// また、閉じる旧ソケットの onmessage を事前に無効化し、close 後にイベントが届いても
+// タイムラインへ反映されないようにする。
+function kktjsIsDead(ws) {
+  // null / CLOSING(2) / CLOSED(3) を死とみなす。OPEN(1) と CONNECTING(0) は生存扱い。
+  return !ws || ws.readyState === 2 || ws.readyState === 3;
+}
+function kktjsSilenceAndClose(ws) {
+  try {
+    if (ws) {
+      ws.onmessage = null;
+      ws.onopen = null;
+      ws.onclose = null;
+      ws.onerror = null;
+      if (ws.readyState !== 3) ws.close();
+    }
+  } catch (e) {}
+}
 function kktjsForceReconnectAll() {
   try {
     if (typeof app === 'undefined' || !app['_data']) return;
@@ -4396,9 +4446,9 @@ function kktjsForceReconnectAll() {
     d['app_active'] = true;
     d['app_network'] = true;
 
-    // Home
-    if (!wsHome || wsHome.readyState !== 1) {
-      try { if (wsHome && wsHome.readyState !== 3) wsHome.close(); } catch (e) {}
+    // Home: 死んでいるときだけ張り直す。
+    if (kktjsIsDead(wsHome)) {
+      kktjsSilenceAndClose(wsHome);
       wsHome = null;
       d['fetch_lock']['homews'] = false;
       d['connHome'] = 'ready';
@@ -4407,8 +4457,8 @@ function kktjsForceReconnectAll() {
       try { app['refetchNotifAll'](); } catch (e) {}
     }
     // Local
-    if (!wsLocal || wsLocal.readyState !== 1) {
-      try { if (wsLocal && wsLocal.readyState !== 3) wsLocal.close(); } catch (e) {}
+    if (kktjsIsDead(wsLocal)) {
+      kktjsSilenceAndClose(wsLocal);
       wsLocal = null;
       d['fetch_lock']['localws'] = false;
       d['connLocal'] = 'ready';
@@ -4417,8 +4467,8 @@ function kktjsForceReconnectAll() {
     }
     // Multi（表示中カラムがあるときのみ再接続）
     var multiActive = !!d['multi_target'] && d['multi_target'] !== '';
-    if (!wsMulti || wsMulti.readyState !== 1) {
-      try { if (wsMulti && wsMulti.readyState !== 3) wsMulti.close(); } catch (e) {}
+    if (kktjsIsDead(wsMulti)) {
+      kktjsSilenceAndClose(wsMulti);
       wsMulti = null;
       d['fetch_lock']['multiws'] = false;
       d['connMulti'] = 'ready';
