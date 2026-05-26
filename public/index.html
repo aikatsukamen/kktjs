@@ -157,11 +157,13 @@
     </div>
     <media v-if="showMedia">
       <div class="modalbutton flex center" v-on:click="showMedia = false; modal_media = '';" slot="header">
-        <img v-if="null != modal_media.remote_url && ('image' == modal_media.type || 'unknown' == modal_media.type)" :src="modal_media.remote_url" alt="" class="fullimage">
-        <img v-else-if="'image' == modal_media.type" :src="modal_media.url" alt="" class="fullimage">
-        <video v-else-if="null != modal_media.remote_url" :src="modal_media.remote_url" class="fullimage" v-play="true" autoplay loop></video>
-        <video v-else :src="modal_media.url" class="fullimage" v-play="true" autoplay loop></video>
-        <i class="fa fa-fw fa-download media-save-btn" v-on:click.stop="saveMedia(modal_media);" title="Save"></i>
+        <span class="fullimage-wrap" v-on:click.stop="">
+          <img v-if="null != modal_media.remote_url && ('image' == modal_media.type || 'unknown' == modal_media.type)" :src="modal_media.remote_url" alt="" class="fullimage" v-on:click="showMedia = false; modal_media = '';">
+          <img v-else-if="'image' == modal_media.type" :src="modal_media.url" alt="" class="fullimage" v-on:click="showMedia = false; modal_media = '';">
+          <video v-else-if="null != modal_media.remote_url" :src="modal_media.remote_url" class="fullimage" v-play="true" autoplay loop></video>
+          <video v-else :src="modal_media.url" class="fullimage" v-play="true" autoplay loop></video>
+          <i class="fa fa-fw fa-download media-save-btn" v-on:click.stop="saveMedia(modal_media);" title="Save"></i>
+        </span>
       </div>
     </media>
     <emojipicker v-show="showEmojiPicker">
