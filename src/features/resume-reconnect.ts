@@ -10,16 +10,21 @@
 // 閉じているため、単一の真実点を保つにはそこで操作するのが安全なため。
 
 let resumeScheduled = false;
+let lastResumeAt = 0;
 
 function scheduleResume(): void {
   if (resumeScheduled) return;
+  // 直近に再接続したばかりなら抑制（focus/visibilitychange/pageshow が連続発火しても
+  // まとめて1回だけにし、元の changeAppActive と二重に走るのを避ける）。
+  if (Date.now() - lastResumeAt < 3000) return;
   resumeScheduled = true;
   // 復帰直後はネットワークが不安定なことがあるため少し待ってから実行。
   setTimeout(() => {
     resumeScheduled = false;
+    lastResumeAt = Date.now();
     const fn = (window as unknown as { kktjsForceReconnectAll?: () => void }).kktjsForceReconnectAll;
     if (typeof fn === 'function') fn();
-  }, 400);
+  }, 500);
 }
 
 export function initResumeReconnect(): void {
