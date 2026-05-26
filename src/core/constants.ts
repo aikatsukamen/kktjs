@@ -3,7 +3,10 @@
 
 export const BOOP = 'sounds/boop.mp3';
 export const BOOP_EX = 'sounds/boop.mp3';
-export const IMG_DUMMY = '/kktjs/img/missing_header.png';
+// 画像のダミー/未設定パス。配信場所に依存しないようベースからの相対パスで保持し、
+// 実際のURL化は core/base-path.ts の asset() を通す（独自ドメイン/ルート配信でも動く）。
+export const IMG_DUMMY_REL = 'img/missing_header.png';
+export const IMG_MISSING_ICON_REL = 'img/missing_icon.png';
 export const NOIMAGE_AVATAR = '/avatars/original/missing.png';
 export const NOIMAGE_HEADER = '/headers/original/missing.png';
 export const NOIMAGE_MEDIA = '/files/small/missing.png';
@@ -38,6 +41,9 @@ export const THRESHOLD_LOW = 2700;
 export const KKT1_LASTID = 4919581;
 
 // リダイレクト / OAuth
+// OAuth リダイレクト URL。Mastodon アプリ登録時の値と一致する必要があるため
+// デプロイ依存。既定は実行時に getAppOrigin() で導出する想定だが、登録値を変えられない
+// 場合に備え固定値も残す（legacy 側は当面この固定値を使用）。
 export const REDIRECT_URL = 'https://aikatsukamen.github.io/kktjs/';
 export const REDIRECT_SUB = 'urn:ietf:wg:oauth:2.0:oob';
 export const CLIENT_ID = 'Zl8G71GsqB4E-Ze89rA5Gly99wOiU5g6eymHGeaDMQ0';

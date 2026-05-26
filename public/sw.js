@@ -1,8 +1,9 @@
 
 
-// const url = 'http://localhost:8080';
-// const url = 'https://aikatsukamen.github.io';
-const url = location.origin;
+// 配信場所に依存しないよう、Service Worker のスコープ（登録時の './' により
+// このファイルのあるディレクトリ = アプリのベース）を基準にキャッシュ対象を組み立てる。
+// 例: https://example.com/kktjs/ でも https://example.com/ でも自動追従する。
+const base = self.registration ? self.registration.scope : (location.origin + location.pathname.replace(/[^/]*$/, ''));
 
 const key = "v1.4.8_30";
 const subkey = "?v=0926";
@@ -11,37 +12,38 @@ console.log("sw: new cache! " + key);
 const cache_keys = [
   key
 ];
+// base は末尾スラッシュ付き。各エントリは base からの相対パスで指定する。
 const file = [
-  url + '/kktjs/',
-  // url + '/kktjs/index.html',
-  url + '/kktjs/sw.js',
-  url + '/kktjs/css/style.css' + subkey,
-  url + '/kktjs/js/main.js' + subkey,
-  url + '/kktjs/css/font-awesome.min.css',
-  url + '/kktjs/sounds/boop.mp3',
-  url + '/kktjs/fonts/roboto.ttf',
-  url + '/kktjs/fonts/fontawesome-webfont.woff',
-  url + '/kktjs/fonts/fontawesome-webfont.woff2',
-  url + '/kktjs/img/sheet_64_indexed_128.png',
-  url + '/kktjs/img/missing_header.png',
-  url + '/kktjs/img/missing_icon.png',
-  url + '/kktjs/img/favicon.ico',
-  url + '/kktjs/img/touch/apple-touch-icon.png',
-  url + '/kktjs/img/touch/chrome-touch-icon-192x192.png',
-  url + '/kktjs/img/touch/icon-128x128.png',
-  url + '/kktjs/img/touch/ms-touch-icon-144x144-precomposed.png',
-  url + '/kktjs/img/touch/splashscreen-icon-512x512.png',
-  url + '/kktjs/css/addtohomescreen.css',
-  url + '/kktjs/css/emojipicker.css',
-  url + '/kktjs/css/font-awesome.min.css',
-  url + '/kktjs/js/addtohomescreen.min.js',
-  url + '/kktjs/js/emojione.js',
-  url + '/kktjs/js/inobounce.min.js',
-  url + '/kktjs/js/lodash.min.js',
-  url + '/kktjs/js/addtohomescreen.min.js',
-  url + '/kktjs/js/vue.min.js',
-  url + '/kktjs/js/picker.js',
-  url + '/kktjs/js/manifest.json'
+  base,
+  // base + 'index.html',
+  base + 'sw.js',
+  base + 'css/style.css' + subkey,
+  base + 'js/main.js' + subkey,
+  base + 'css/font-awesome.min.css',
+  base + 'sounds/boop.mp3',
+  base + 'fonts/roboto.ttf',
+  base + 'fonts/fontawesome-webfont.woff',
+  base + 'fonts/fontawesome-webfont.woff2',
+  base + 'img/sheet_64_indexed_128.png',
+  base + 'img/missing_header.png',
+  base + 'img/missing_icon.png',
+  base + 'img/favicon.ico',
+  base + 'img/touch/apple-touch-icon.png',
+  base + 'img/touch/chrome-touch-icon-192x192.png',
+  base + 'img/touch/icon-128x128.png',
+  base + 'img/touch/ms-touch-icon-144x144-precomposed.png',
+  base + 'img/touch/splashscreen-icon-512x512.png',
+  base + 'css/addtohomescreen.css',
+  base + 'css/emojipicker.css',
+  base + 'css/font-awesome.min.css',
+  base + 'js/addtohomescreen.min.js',
+  base + 'js/emojione.js',
+  base + 'js/inobounce.min.js',
+  base + 'js/lodash.min.js',
+  base + 'js/addtohomescreen.min.js',
+  base + 'js/vue.min.js',
+  base + 'js/picker.js',
+  base + 'js/manifest.json'
 ];
 
 self.addEventListener('install', event => {

@@ -11,7 +11,22 @@
 
 const BOOP = 'sounds/boop.mp3';
 const BOOP_EX = 'sounds/boop.mp3';
-const IMG_DUMMY = '/kktjs/img/missing_header.png';
+// 配信場所に依存しないよう、main.js の位置からベースパスを導出して画像パスを組む。
+// （独自ドメインのルート配信やサブパス配信でも壊れないようにするための変更）
+const __kktjsBase = (function () {
+  try {
+    const b = document.querySelector('base[href]');
+    if (b) return new URL(b.href).pathname.replace(/[^/]*$/, '');
+    const s = document.querySelector('script[src*="js/main.js"]');
+    if (s && s.src) {
+      const p = new URL(s.src).pathname;
+      const i = p.lastIndexOf('/js/');
+      if (i !== -1) return p.slice(0, i) + '/';
+    }
+  } catch (e) {}
+  return location.pathname.replace(/[^/]*$/, '') || '/';
+})();
+const IMG_DUMMY = __kktjsBase + 'img/missing_header.png';
 const NOIMAGE_AVATAR = '/avatars/original/missing.png';
 const NOIMAGE_HEADER = '/headers/original/missing.png';
 const NOIMAGE_MEDIA = '/files/small/missing.png';

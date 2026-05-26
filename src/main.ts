@@ -34,6 +34,7 @@ import {
   inputListProfile,
   inputKatsuFilterRaw,
 } from './core/utils';
+import { asset, getBasePath, getAppOrigin } from './core/base-path';
 
 // 移行済みメソッドは core/register-methods.ts で登録済み（legacy のスタブが委譲）。
 
@@ -57,4 +58,11 @@ Object.assign(window, {
   inputList,
   inputListProfile,
   inputKatsuFilterRaw,
+});
+
+// 配信場所に依存しない資産URL解決ヘルパー（legacy や将来コードからも使える）。
+Object.assign(window, {
+  kktjsAsset: asset,
+  kktjsBasePath: getBasePath,
+  kktjsAppOrigin: getAppOrigin,
 });

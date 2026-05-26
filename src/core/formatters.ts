@@ -3,7 +3,8 @@
 // formatContent / formatSpoiler 系（巨大な埋め込みHTML文字列を持つ）は誤りやすく
 // 型安全の恩恵も薄いため、現時点では legacy に残す。
 
-import { NOIMAGE_HEADER, NOIMAGE_AVATAR, NOIMAGE_MEDIA, NOIMAGE_MEDIA_PROXY, IMG_DUMMY } from './constants';
+import { NOIMAGE_HEADER, NOIMAGE_AVATAR, NOIMAGE_MEDIA, NOIMAGE_MEDIA_PROXY, IMG_DUMMY_REL, IMG_MISSING_ICON_REL } from './constants';
+import { asset } from './base-path';
 import type { Status, MediaAttachment, Account, Poll } from '../types/mastodon';
 
 /** 2桁ゼロ埋め */
@@ -79,14 +80,14 @@ export function checkHeader(repository: string, headerUrl: string): boolean {
 /** アバターがデフォルトならローカルのダミーへ差し替え。元 checkAvatar */
 export function checkAvatar(repository: string, avatarUrl: string): string {
   return 'https://' + repository + NOIMAGE_AVATAR === avatarUrl
-    ? '/kktjs/img/missing_icon.png'
+    ? asset(IMG_MISSING_ICON_REL)
     : avatarUrl;
 }
 
 /** メディアの表示URLを選ぶ（プロキシ/ダミー考慮）。元 checkMedia */
 export function checkMedia(preview: string | null, remote: string | null): string | null {
   if (NOIMAGE_MEDIA === preview) {
-    return IMG_DUMMY;
+    return asset(IMG_DUMMY_REL);
   } else if (preview != null && preview.indexOf(NOIMAGE_MEDIA_PROXY) === -1) {
     return preview;
   } else {

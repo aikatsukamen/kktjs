@@ -102,6 +102,9 @@ const MIME = {
   '.jpeg': 'image/jpeg', '.gif': 'image/gif', '.svg': 'image/svg+xml', '.ico': 'image/x-icon',
   '.woff': 'font/woff', '.woff2': 'font/woff2', '.ttf': 'font/ttf', '.mp3': 'audio/mpeg',
 };
+// 資産パスは配信場所非依存（core/base-path.ts が実行時に解決）になったため、
+// プレビューはルート配信でよい。サブパス配信を再現したい場合は任意のパスでも
+// 同様に動く（main.js の位置からベースを導出するため）。
 function startServer() {
   createServer((req, res) => {
     let urlPath = decodeURIComponent((req.url || '/').split('?')[0]);
