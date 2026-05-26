@@ -157,7 +157,7 @@
     </div>
     <media v-if="showMedia">
       <div class="modalbutton flex center" v-on:click="showMedia = false; modal_media = '';" slot="header">
-        <i class="fa fa-fw fa-times media-close-btn" v-on:click.stop="showMedia = false; modal_media = '';" title="Close"></i>
+        <i class="fa fa-times media-close-btn" v-on:click.stop="showMedia = false; modal_media = '';" title="Close"></i>
         <span class="fullimage-wrap" v-on:click.stop="">
           <img v-if="null != modal_media.remote_url && ('image' == modal_media.type || 'unknown' == modal_media.type)" :src="modal_media.remote_url" alt="" class="fullimage">
           <img v-else-if="'image' == modal_media.type" :src="modal_media.url" alt="" class="fullimage">
