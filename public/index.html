@@ -162,7 +162,9 @@
           <img v-else-if="'image' == modal_media.type" :src="modal_media.url" alt="" class="fullimage" v-on:click="showMedia = false; modal_media = '';">
           <video v-else-if="null != modal_media.remote_url" :src="modal_media.remote_url" class="fullimage" v-play="true" autoplay loop></video>
           <video v-else :src="modal_media.url" class="fullimage" v-play="true" autoplay loop></video>
-          <i class="fa fa-fw fa-download media-save-btn" v-on:click.stop="saveMedia(modal_media);" title="Save"></i>
+          <span class="media-save-bar">
+            <i class="fa fa-fw fa-download media-save-btn" v-on:click.stop="saveMedia(modal_media);" title="Save"></i>
+          </span>
         </span>
       </div>
     </media>
