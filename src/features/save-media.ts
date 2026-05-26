@@ -48,6 +48,24 @@ function openInNewTab(url: string): void {
   try { window.open(url, '_blank', 'noopener'); } catch { /* noop */ }
 }
 
+// URL を直接 <a download> でダウンロード試行（同一オリジンや download 許可時に有効）。
+// クロスオリジンで download 属性が無視される場合に備え、最終手段の前に試す。
+function downloadByAnchor(url: string, filename: string): boolean {
+  try {
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.rel = 'noopener';
+    a.target = '_self';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 function downloadBlob(blob: Blob, filename: string): void {
   const objUrl = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -65,11 +83,27 @@ export function saveMedia(media: Partial<MediaAttachment> | null): void {
   if (!url) return;
   const filename = fileNameFromUrl(url, media?.type);
 
+  const nav = navigator as Navigator & {
+    canShare?: (data?: ShareData) => boolean;
+    share?: (data?: ShareData) => Promise<void>;
+  };
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
   let fellBack = false;
+  // CORS 等で画像バイトを読めない場合の最終手段。
+  //  モバイル: share({url}) は blob 不要のため CORS 非依存で動く（OS の共有シート→
+  //           「画像を保存」や他アプリ送りが可能）。非対応なら別タブで開いて長押し保存。
+  //  PC      : 別タブ（同タブ）で画像を開けば右クリックで保存できる。
   const fallback = () => {
     if (fellBack) return;
     fellBack = true;
-    openInNewTab(url);
+    if (isMobile && typeof nav.share === 'function') {
+      nav.share({ url }).catch(() => {
+        if (!downloadByAnchor(url, filename)) openInNewTab(url);
+      });
+      return;
+    }
+    if (!downloadByAnchor(url, filename)) openInNewTab(url);
   };
 
   fetch(url, { mode: 'cors', credentials: 'omit' })
@@ -79,13 +113,11 @@ export function saveMedia(media: Partial<MediaAttachment> | null): void {
     })
     .then((blob) => {
       const mime = guessMimeType(blob.type, filename, media?.type);
-      // 1) Web Share API（iOS Safari 等）
-      try {
-        const nav = navigator as Navigator & {
-          canShare?: (data?: ShareData) => boolean;
-          share?: (data?: ShareData) => Promise<void>;
-        };
-        if (nav.canShare && typeof File !== 'undefined') {
+
+      // 1) モバイルで files 共有可能なら Web Share API（ネイティブ保存シート）。
+      //    ※ ここに来るのは CORS が通って blob を読めた場合のみ。
+      if (isMobile && nav.canShare && typeof File !== 'undefined') {
+        try {
           const file = new File([blob], filename, { type: mime });
           if (nav.canShare({ files: [file] })) {
             nav.share!({ files: [file] }).catch(() => {
@@ -93,12 +125,17 @@ export function saveMedia(media: Partial<MediaAttachment> | null): void {
             });
             return;
           }
+        } catch {
+          /* 次の手段へ */
         }
-      } catch {
-        /* 次の手段へ */
       }
-      // 2) 通常ダウンロード
-      try { downloadBlob(blob, filename); } catch { fallback(); }
+
+      // 2) 保存ダイアログ（blob を <a download> で保存。PC で確実）
+      try {
+        downloadBlob(blob, filename);
+      } catch {
+        fallback();
+      }
     })
-    .catch(fallback); // 3) 取得失敗（CORS等）
+    .catch(fallback); // 3) 取得失敗（CORS等）→ モバイルは share(url)、PCは別タブ
 }
