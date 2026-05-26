@@ -1,0 +1,10 @@
+# 依存
+node_modules/
+
+# ビルド成果物（GitHub Actions が生成・デプロイするため git 管理しない）
+docs/
+
+# その他
+*.log
+.DS_Store
+.npmrc

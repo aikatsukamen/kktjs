@@ -1,0 +1,20 @@
+{
+  "name": "kktjs",
+  "version": "1.5.0",
+  "description": "キラキラッター向けカスタム Web クライアント（TypeScript 版）",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs --minify --clean",
+    "build:dev": "node build.mjs",
+    "watch": "node build.mjs --watch",
+    "dev": "node build.mjs --watch --serve",
+    "preview": "node build.mjs --minify --serve",
+    "typecheck": "tsc --noEmit"
+  },
+  "//vue3-migration": "Vue 3 + Vite へ移行する際は、devDependencies に vite / @vitejs/plugin-vue を追加し、scripts の build/dev を vite に差し替える。設定は docs-dev/vite.config.example.ts と build.config.mjs を参照。",
+  "devDependencies": {
+    "esbuild": "^0.28.0",
+    "typescript": "^6.0.3"
+  },
+  "license": "MIT"
+}
