@@ -23,7 +23,6 @@ import './legacy/app-core.js';
 // (2) 型付きで切り出した機能
 import { initViewportHeight } from './features/viewport-height';
 import { initResumeReconnect } from './features/resume-reconnect';
-import { saveMedia } from './features/save-media';
 
 // (3) inline ハンドラ用ユーティリティ
 import {
@@ -43,13 +42,6 @@ initViewportHeight();
 initResumeReconnect();
 
 // --- window への公開 ---
-// 拡大表示の保存（テンプレートの v-on:click="saveMedia(modal_media)" と
-// Vue インスタンスメソッドの両方から使えるようにする）
-window.saveMedia = saveMedia;
-if (window.app) {
-  window.app.saveMedia = saveMedia;
-}
-
 // inline ハンドラ（onkeyup/oninput 等）から呼ばれる関数群
 Object.assign(window, {
   autogrow,

@@ -9,8 +9,7 @@ declare global {
     _: any;
     emojione: any;
     app: any;
-    // 拡大表示メディア保存（features/save-media.ts が公開）
-    saveMedia?: (media: unknown) => void;
+    // 拡大表示メディア保存は廃止（長押し/右クリックの標準保存に一本化）。
     // ストリーミング用 WebSocket（core/streaming.ts が管理）
     wsHome: WebSocket | null;
     wsLocal: WebSocket | null;
