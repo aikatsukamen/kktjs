@@ -756,7 +756,7 @@
         </div>
         <div class="scrollable" id="home" v-if="showHome" v-on:scroll="handleScrollHome">
           <div v-if="hasHome" class="status-list">
-            <template v-for="(issue, index) in homes" :key="index"><div v-if="home_unread <= index" class="status-wrapper" :class="issue.visibility">
+            <template v-for="(issue, index) in homes" :key="issue.id"><div v-if="home_unread <= index" class="status-wrapper" :class="issue.visibility">
               <a :id="'home'+issue.id"></a>
               <div v-if="null != issue.reblog" class="status-header flex start">
                 <i class="fa fa-fw fa-retweet color-on"></i>
@@ -1028,7 +1028,7 @@
         </div>
         <div class="scrollable" id="local" v-on:scroll="handleScrollLocal">
           <div v-if="hasLocal" class="status-list">
-            <template v-for="(issue, index) in locals" :key="index"><div v-if="local_unread <= index" class="status-wrapper" :class="issue.visibility">
+            <template v-for="(issue, index) in locals" :key="issue.id"><div v-if="local_unread <= index" class="status-wrapper" :class="issue.visibility">
               <a :id="'local'+issue.id"></a>
               <div v-if="local_id_bookmark == issue.id" class="status-header flex start bgcolor-bookmark bookmark">
                 <i v-on:click="local_id_bookmark = '';" class="fa fa-fw fa-paperclip big"></i>
@@ -1189,7 +1189,7 @@
         </div>
         <div class="scrollable" id="notif" v-if="showNotif" v-on:scroll="handleScrollNotif">
           <div v-if="hasNotifFilter" class="status-list">
-            <template v-for="(issue, index) in notifs_filter" :key="index"><div v-if="notif_unread <= index && !(('favourite' == issue.type || 'reblog' == issue.type) && null == issue.status) && notifJudge(issue)" class="status-wrapper" :class="issue.visibility">
+            <template v-for="(issue, index) in notifs_filter" :key="issue.id"><div v-if="notif_unread <= index && !(('favourite' == issue.type || 'reblog' == issue.type) && null == issue.status) && notifJudge(issue)" class="status-wrapper" :class="issue.visibility">
               <a :id="'notif'+issue.id"></a>
               <div class="status-header flex start">
                 <i v-if="'mention' == issue.type" class="fa fa-fw fa-reply"></i>
@@ -1409,7 +1409,7 @@
         <div class="scrollable" id="multi" v-on:scroll="handleScrollMulti">
 
           <div v-if="'Hashtag' == multi_type && hasMulti" class="status-list">
-            <template v-for="(issue, index) in multis" :key="index"><div v-if="multi_unread <= index" class="status-wrapper" :class="issue.visibility">
+            <template v-for="(issue, index) in multis" :key="issue.id"><div v-if="multi_unread <= index" class="status-wrapper" :class="issue.visibility">
               <a :id="'multi'+issue.id"></a>
               <div v-if="local_id_bookmark == issue.id" class="status-header flex start bgcolor-bookmark bookmark">
                 <i v-on:click="local_id_bookmark = '';" class="fa fa-fw fa-paperclip big"></i>
@@ -1529,11 +1529,11 @@
           </div>
 
           <div v-else-if="'List' == multi_type && hasMulti" class="status-list">
-            <template v-for="(issue, index) in multis" :key="index"><div v-if="multi_unread <= index" class="status-wrapper" :class="issue.visibility">
+            <template v-for="(issue, index) in multis" :key="issue.id"><div v-if="multi_unread <= index" class="status-wrapper" :class="issue.visibility">
               <div v-if="null != issue.reblog" class="status-header flex start">
                 <i class="fa fa-fw fa-retweet color-on"></i>
                 <span v-if="issue.loading_avatar" class="avatar border notif" v-on:click="runAcct(issue.account.id);"></span>
-                <img v-lese :src="checkAvatar(issue.account.avatar_static)" class="avatar border notif" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
+                <img v-else :src="checkAvatar(issue.account.avatar_static)" class="avatar border notif" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
                 <div class="hidden full">
                   <div>
                     <span v-if="checkDisplayName(issue.account.display_name)" class="color-pk" v-html="formatEmoji(issue.account.display_name, issue.account.emojis)"></span>
@@ -1746,7 +1746,7 @@
           </div>
 
           <div v-else-if="'Discord' == multi_type && hasMulti" class="status-list">
-            <template v-for="(issue, index) in discords" :key="index"><div v-if="discord_unread <= index" class="status-wrapper" :class="issue.visibility">
+            <template v-for="(issue, index) in discords" :key="issue.id"><div v-if="discord_unread <= index" class="status-wrapper" :class="issue.visibility">
               <div class="status flex">
                 <span v-if="issue.loading_avatar" class="avatar border"></span>
                 <img v-else :src="checkAvatarDiscord(issue.author)" class="avatar border" onerror="this.src=IMG_DUMMY">
@@ -2924,7 +2924,7 @@
                 </div>
               </div>
             </div></template>
-            <template v-for="(issue, index) in searchs.statuses" :key="index"><div v-if="hasSearch && search_type == 'katsu'" class="status flex">
+            <template v-for="(issue, index) in searchs.statuses" :key="issue.id"><div v-if="hasSearch && search_type == 'katsu'" class="status flex">
               <img :src="checkAvatar(issue.account.avatar_static)" class="avatar border" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
               <div class="content-before"><svg width="12" height="14">
                   <use xlink:href="#cb"></use>
