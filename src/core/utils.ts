@@ -87,25 +87,25 @@ export function autogrow(el: HTMLTextAreaElement): void {
 // --- 以下、inline ハンドラから app の data を更新する小関数（元 inputXxx） ---
 
 export function inputVote(el: HTMLInputElement, index: number): void {
-  window.app._data.katsu.poll_work.texts[index] = el.value;
+  window.app.$data.katsu.poll_work.texts[index] = el.value;
 }
 
 export function inputSearch(el: HTMLInputElement): void {
-  window.app._data.search_text = el.value;
+  window.app.$data.search_text = el.value;
 }
 
 export function inputList(el: HTMLInputElement): void {
-  window.app._data.stream_list_text = el.value;
+  window.app.$data.stream_list_text = el.value;
   window.app.checkStreamListText();
 }
 
 export function inputListProfile(el: HTMLInputElement): void {
-  window.app._data.listprofile.name = el.value;
+  window.app.$data.listprofile.name = el.value;
   window.app.checkListProfile();
 }
 
 export function inputKatsuFilterRaw(el: HTMLInputElement): void {
-  const d = window.app._data;
+  const d = window.app.$data;
   if (d.result_text_tmp !== '') {
     d.result_text_tmp = '';
     d.error_cnt = 0;

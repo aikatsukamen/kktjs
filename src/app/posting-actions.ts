@@ -1,0 +1,566 @@
+// 投稿・メディア・投票・プロフィール系（legacy から機械変換で移行）。
+import type { KktjsApp } from '../types/kktjs-app';
+import { encodeHtmlForm, base64ToBlob } from '../core/utils';
+import { KATSU_MEDIA, KATSU, MEDIA, VOTE, REPORT, PROFILE, SEARCH, HOME, LIST_OBJ } from '../api/endpoints';
+import { asset } from '../core/base-path';
+import { IMG_DUMMY_REL, REQ_TIMEOUT, LIMIT } from '../core/constants';
+declare const app: any;
+// メディア関連の静的定数（legacy と同値）。
+const LIMIT_IMGFILE = 0x800000;
+const LIMIT_MOVFILE = 0x2800000;
+const LIMIT_ACCTNAME = 0x1e;
+const LIMIT_LISTNAME = 0x12c;
+const LIMIT_POLLOPTION = 0x19;
+const IMAGE_MAXLEN = 0x500;
+const IMAGE_MAXPIXEL = 0x500 * 0x500;
+type A = any;
+
+export function checkStreamHashtag(app: KktjsApp): void {
+  const a = app as A;
+            a.stream_hashtag_text = '';
+            var _0x190cc4 = a;
+            var _0x121dfd: any = [];
+            var _0x68ba5e: any = [];
+            _0x190cc4.fetch_lock.search_hashtag = true;
+            _0x190cc4['$forceUpdate']();
+            var request = new XMLHttpRequest();
+            request.open('GET', SEARCH.replace('[I]', _0x190cc4.repository).replace("[STR]", _0x190cc4.search_text));
+            request.timeout = REQ_TIMEOUT;
+            request.setRequestHeader('Authorization', 'Bearer ' + _0x190cc4.at);
+            request.onreadystatechange = function () {
+                if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
+                    if (_0x190cc4.fetch_lock.search_hashtag) {
+                        _0x68ba5e = JSON.parse(request.responseText);
+                        if (null != _0x68ba5e.hashtags[0] && _0x68ba5e.hashtags[0].name.toLowerCase() == _0x190cc4.search_text.toLowerCase()) {
+                            _0x190cc4.stream_hashtag_text = _0x190cc4.search_text;
+                        }
+                    }
+                    _0x190cc4.fetch_lock.search_hashtag = false;
+                    _0x190cc4['$forceUpdate']();
+                } else if (request.readyState == XMLHttpRequest.DONE) {
+                    _0x190cc4.fetch_lock.search_hashtag = false;
+                    _0x190cc4.popError(request.responseText, request.status, "Search");
+                    _0x190cc4['$forceUpdate']();
+                }
+            }
+                ;
+            request.send();
+}
+
+export function actVote(app: KktjsApp, arg0: any, arg1: any): void {
+  const a = app as A;
+            if (true !== arg1) {
+                a.confirm(arg0, "vote");
+                return;
+            }
+            if (null == arg0.poll.choices) {
+                arg0.poll.choices = [false, false, false, false];
+            }
+            var _0x4d82dd = new Array();
+            arg0.poll.choices.forEach(function (arg1, _0x3534fb) {
+                if (arg1) {
+                    _0x4d82dd.push(_0x3534fb + '');
+                }
+            });
+            arg0.req_vote = true;
+            a.$forceUpdate();
+            var _0xbfd9d2 = a;
+            var _0x5c7866: any = [];
+            var _0xf0ed26 = {
+                'choices': _0x4d82dd
+            };
+            var request = new XMLHttpRequest();
+            request.open('POST', VOTE.replace('[I]', _0xbfd9d2.repository).replace("[VID]", arg0.poll.id), true);
+            request.timeout = REQ_TIMEOUT;
+            request.setRequestHeader('Authorization', 'Bearer ' + _0xbfd9d2.at);
+            request.setRequestHeader("Content-type", "application/json");
+            request.onreadystatechange = function () {
+                if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
+                    _0xbfd9d2.poll = JSON.parse(request.responseText);
+                    _0xbfd9d2.updateVote(arg0.id, _0xbfd9d2.poll);
+                } else if (request.readyState == XMLHttpRequest.DONE) {
+                    _0xbfd9d2.popError(request.responseText, request.status, "Vote");
+                }
+                arg0.req_vote = false;
+                _0xbfd9d2['$forceUpdate']();
+            }
+                ;
+            request.send(JSON.stringify(_0xf0ed26));
+}
+
+export function setVote(app: KktjsApp, arg0: any, arg1: any): void {
+  const a = app as A;
+            if (null == arg0.poll.choices || !arg0.poll.multiple) {
+                arg0.poll.choices = [false, false, false, false];
+            }
+            arg0.poll.choices[arg1] = !arg0.poll.choices[arg1];
+            a.$forceUpdate();
+}
+
+export function actReport(app: KktjsApp, arg0: any, arg1: any): void {
+  const a = app as A;
+            if (true !== arg1) {
+                a.confirm(arg0, "report");
+                return;
+            }
+            arg0.req_report = true;
+            a.showConfirm = false;
+            a.$forceUpdate();
+            var _0x27e7e7 = a;
+            var _0x518e9f: any = [];
+            var _0x5c7d23 = {
+                'account_id': arg0.account.id,
+                'status_ids': arg0.id,
+                'comment': null == document.getElementById("report_text") ? '' : (document.getElementById("report_text") as HTMLInputElement).value
+            };
+            var request = new XMLHttpRequest();
+            request.open('POST', REPORT.replace('[I]', _0x27e7e7.repository).replace("[SID]", arg0.id), true);
+            request.timeout = REQ_TIMEOUT;
+            request.setRequestHeader('Authorization', 'Bearer ' + _0x27e7e7.at);
+            request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            request.onreadystatechange = function () {
+                if (request.readyState == XMLHttpRequest.DONE && request.status == 200) { } else if (request.readyState == XMLHttpRequest.DONE) {
+                    _0x27e7e7.popError(request.responseText, request.status, "Report");
+                }
+                arg0.req_report = false;
+                _0x27e7e7['$forceUpdate']();
+            }
+                ;
+            request.send(encodeHtmlForm(_0x5c7d23));
+}
+
+export function actProfile(app: KktjsApp): void {
+  const a = app as A;
+            var _0x1d79b3 = a.profile.name;
+            if (a.profile.name_b != null && a.profile.name_b.length > 0) {
+                _0x1d79b3 = _0x1d79b3 + '‮' + a.profile.name_b + '‭';
+            }
+            if (_0x1d79b3.length > LIMIT_ACCTNAME) {
+                a.result_text = "[Profile] 名前は30文字以内に設定してね。";
+                return;
+            }
+            var _0x5b02aa = a;
+            var _0x4b295e: any = [];
+            var _0xc2b230 = {
+                'display_name': _0x1d79b3
+            };
+            _0x5b02aa.acct.req_profile = true;
+            _0x5b02aa['$forceUpdate']();
+            var request = new XMLHttpRequest();
+            request.open("PATCH", PROFILE.replace('[I]', _0x5b02aa.repository), true);
+            request.timeout = REQ_TIMEOUT;
+            request.setRequestHeader('Authorization', 'Bearer\x20' + _0x5b02aa.at);
+            request.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
+            request.onreadystatechange = function () {
+                if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
+                    _0x5b02aa.runAcct(_0x5b02aa.user.id);
+                    _0x5b02aa.fetchUser();
+                } else if (request.readyState == XMLHttpRequest.DONE) {
+                    _0x5b02aa.popError(request.responseText, request.status, "Profile");
+                }
+                _0x5b02aa.acct.req_profile = false;
+                _0x5b02aa.profile = [];
+                _0x5b02aa.showAcctEdit = false;
+                _0x5b02aa['$forceUpdate']();
+            }
+                ;
+            request.send(encodeHtmlForm(_0xc2b230));
+}
+
+export function actListProfile(app: KktjsApp): void {
+  const a = app as A;
+            var _0x482c96 = a.listprofile.name;
+            if (_0x482c96.length > LIMIT_LISTNAME) {
+                a.result_text = "[Profile] リストの名前は300文字以内に設定してね。";
+                return;
+            }
+            var _0x5445e0 = a;
+            var _0x293d27: any = [];
+            var _0x13f7a7 = {
+                'title': _0x482c96
+            };
+            _0x5445e0.stream_list.req_profile = true;
+            _0x5445e0['$forceUpdate']();
+            var request = new XMLHttpRequest();
+            request.open('PUT', LIST_OBJ.replace('[I]', _0x5445e0.repository).replace('[LID]', _0x5445e0.stream_list.id), true);
+            request.timeout = REQ_TIMEOUT;
+            request.setRequestHeader('Authorization', 'Bearer ' + _0x5445e0.at);
+            request.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
+            request.onreadystatechange = function () {
+                if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
+                    _0x5445e0.stream_list = JSON.parse(request.responseText);
+                } else if (request.readyState == XMLHttpRequest.DONE) {
+                    _0x5445e0.popError(request.responseText, request.status, "Profile");
+                }
+                _0x5445e0.stream_list.req_profile = false;
+                _0x5445e0.showStreamEdit = false;
+                _0x5445e0.listprofile.name = _0x5445e0.stream_list.title;
+                _0x5445e0['$forceUpdate']();
+            }
+                ;
+            request.send(encodeHtmlForm(_0x13f7a7));
+}
+
+export function checkActMedia(app: KktjsApp, arg0: any): void {
+  const a = app as A;
+  const m = (window as any).__kktjsMedia;
+            m.mediaFile = arg0[0];
+            (document.getElementById("uploader") as HTMLInputElement).value = null as any;
+            if (!/^(image\/(png|jpeg|gif|bmp|webp)|video\/(mp4|webm|quicktime))$/.test(m.mediaFile.type)) {
+                a.result_text = "UnSupport Media (" + m.mediaFile.type + ')';
+                return;
+            } else if (/^(image\/(png|jpeg))$/.test(m.mediaFile.type)) {
+                m.fileType = 'img';
+            } else if (/^(image\/(bmp|webp))$/.test(m.mediaFile.type)) {
+                m.fileType = "img_ex";
+            } else if (/^(image\/(gif))$/.test(m.mediaFile.type)) {
+                m.fileType = "gif";
+            } else {
+                m.fileType = "mov";
+            }
+            if (('off' == a.optConvMedia && m.fileType != "mov" || m.fileType == "gif") && m.mediaFile.size > LIMIT_IMGFILE) {
+                a.result_text = "Images must be less than 8 MB";
+                return;
+            }
+            if (m.fileType == "mov" && m.mediaFile.size > LIMIT_MOVFILE) {
+                a.result_text = "Videos must be less than 40 MB";
+                return;
+            }
+            m.fileReader.onload = function () {
+                if (m.fileType == 'mov' || m.fileType == 'gif') {
+                    a.actMedia(m.fileReader.result, m.mediaFile, false);
+                } else {
+                    m.imgElement.src = m.fileReader.result;
+                    m.image.onload = function () {
+                        if ('hd' == a.optConvMedia) {
+                            const longSide = m.image.width > m.image.height ? m.image.width : m.image.height;
+                            m.resizeScale = IMAGE_MAXLEN / longSide < 1 ? IMAGE_MAXLEN / longSide : 1;
+                        } else if ('off' != a.optConvMedia) {
+                            m.resizeScale = IMAGE_MAXPIXEL / (m.image.width * m.image.height) < 1 ? Math.pow(IMAGE_MAXPIXEL / (m.image.width * m.image.height), 1 / 2) : 1;
+                        } else {
+                            m.resizeScale = 1;
+                        }
+                        if (m.fileType != "img_ex" && ('off' == a.optConvMedia || m.resizeScale == 1)) {
+                            a.actMedia(m.fileReader.result, m.mediaFile, false);
+                        } else {
+                            m.canvasElement.width = m.image.width * m.resizeScale;
+                            m.canvasElement.height = m.image.height * m.resizeScale;
+                            m.ctx.drawImage(m.image, 0, 0, m.image.width, m.image.height, 0, 0, m.image.width * m.resizeScale, m.image.height * m.resizeScale);
+                            m.MediaBinary = m.canvasElement.toDataURL('image/jpeg');
+                            m.MediaBlob = base64ToBlob(m.MediaBinary);
+                            a.actMedia(m.MediaBinary, m.MediaBlob, true);
+                        }
+                    };
+                    m.image.src = m.imgElement.src;
+                }
+            };
+            m.fileReader.readAsDataURL(m.mediaFile);
+}
+
+export function actMedia(app: KktjsApp, arg0: any, arg1: any, arg2: any): void {
+  const a = app as A;
+            if ('' != a.action_lock) {
+                return;
+            }
+            a.action_lock = 'media';
+            a.katsu.media_previews.push({
+                'url': arg0,
+                'preview_url': asset(IMG_DUMMY_REL),
+                'type': arg1.type.slice(0, 0x5),
+                'converted': arg2
+            });
+            var _0x38d96c = a;
+            var _0x521de8;
+            var _0x773119 = new FormData();
+            _0x773119.append("file", arg1);
+            var request = new XMLHttpRequest();
+            request.open('POST', KATSU_MEDIA.replace('[I]', _0x38d96c.repository), true);
+            request.timeout = REQ_TIMEOUT * 0xf0;
+            request.setRequestHeader('Authorization', 'Bearer ' + _0x38d96c.at);
+            request.onreadystatechange = function () {
+                if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
+                    _0x38d96c.katsu.media_attachments.push(JSON.parse(request.responseText));
+                } else if (request.readyState == XMLHttpRequest.DONE) {
+                    _0x38d96c.katsu.media_previews.pop();
+                    _0x38d96c.popError(request.responseText, request.status, "Media");
+                }
+                _0x38d96c.action_lock = '';
+                _0x38d96c.media_uploaded = '0';
+            }
+                ;
+            request.send(_0x773119);
+}
+
+export function removeMedia(app: KktjsApp, arg0: any): void {
+  const a = app as A;
+            if (null == a.katsu.media_attachments[arg0]) {
+                return;
+            }
+            a.katsu.media_previews.splice(arg0, 0x1);
+            a.katsu.media_attachments.splice(arg0, 0x1);
+}
+
+export function saveKatsu(app: KktjsApp): void {
+  const a = app as A;
+            if (!a.optKeepForm) {
+                a.refreshKatsu();
+                return;
+            }
+            var _0x29a3b7 = document.getElementById('katsu_spoiler') as HTMLInputElement;
+            var _0xdc7dac = document.getElementById('katsu_content') as HTMLInputElement;
+            if (null == _0x29a3b7 || null == _0xdc7dac) {
+                return;
+            }
+            a.katsu_spoiler_text = _0x29a3b7.value;
+            a.katsu_content_text = _0xdc7dac.value;
+}
+
+export function actKatsuShortCut(app: KktjsApp): void {
+  const a = app as A;
+            if (((event as KeyboardEvent).ctrlKey && !(event as KeyboardEvent).metaKey || !(event as KeyboardEvent).ctrlKey && (event as KeyboardEvent).metaKey) && (event as KeyboardEvent).keyCode == 0xd) {
+                a.actKatsu(a.katsu);
+            }
+}
+
+export function actKatsu(app: KktjsApp, arg0: any, arg1: any): void {
+  const a = app as A;
+            var _0x91807d = document.getElementById('katsu_spoiler') as HTMLInputElement;
+            var _0x510760 = document.getElementById('katsu_content') as HTMLInputElement;
+            a.katsu_spoiler_text = _0x91807d.value;
+            a.katsu_content_text = _0x510760.value;
+            if (!a.checkKatsu()) {
+                return;
+            }
+            a.katsu.poll.options = a.katsu.poll_work.texts.filter(function (_0x40ecd1, _0x41a6b6, _0x24e249) {
+                return _0x40ecd1.length > 0 && _0x40ecd1.replace(/^[\s|　]+|[\s|　]+$/g, '').length > 0 && _0x24e249.indexOf(_0x40ecd1) === _0x41a6b6;
+            });
+            for (var _0x9ba4dc of a.katsu.poll.options) {
+                if (_0x9ba4dc.length > LIMIT_POLLOPTION) {
+                    a.result_text = "[Poll] アンケートの答えは25文字以内に設定してね。";
+                    return;
+                }
+            }
+            ; if (a.showFormVote && 1 == a.katsu.poll.options.length) {
+                a.result_text = "[Poll] アンケートには2つ以上の答えを用意してね。";
+                return;
+            }
+            a.action_lock = 'katsu';
+            var _0x1e214f = new Array();
+            a.katsu.media_attachments.forEach(function (_0x4621ae, _0x54f06e) {
+                if (_0x54f06e >= 0x4) {
+                    return;
+                }
+                _0x1e214f.push(_0x4621ae.id);
+            });
+            a.katsu.media_ids = _0x1e214f;
+            a.katsu.spoiler_text = a.katsu_spoiler_text;
+            a.katsu.status = a.katsu_content_text;
+            a.katsu.status = a.katsu.status.replace(/^#/g, '\x20#');
+            a.katsu.content = a.katsu_content_text;
+            if (a.showFormVote && 0 != a.katsu.poll.options.length) {
+                a.katsu_poll = a.katsu.poll;
+                a.katsu.poll.choices = [false, false, false, false];
+                a.katsu.poll_work.expires_at = a.formatDateVote(a.katsu.poll.expires_in);
+            } else {
+                a.katsu_poll = null;
+            }
+            if (0 == a.katsu.media_ids.length) {
+                a.katsu.nsfw = false;
+            }
+            a.katsu.sensitive = a.katsu.nsfw || 0 < a.katsu_spoiler_text.length ? true : false;
+            if (1 == a.optConfirm.katsu && true !== arg1) {
+                a.confirm(arg0, 'katsu');
+                a.action_lock = '';
+                return;
+            }
+            arg0.req_katsu = true;
+            a.$forceUpdate();
+            var _0x5e35cf = a;
+            var _0x284c21: any = [];
+            var _0x33bd48 = {
+                'status': a.katsu.status,
+                'in_reply_to_id': a.katsu.in_reply_to_id,
+                'media_ids': a.katsu.media_ids,
+                'sensitive': a.katsu.sensitive,
+                'spoiler_text': a.katsu_spoiler_text,
+                'poll': a.katsu_poll,
+                'visibility': a.katsu.visibility
+            };
+            var request = new XMLHttpRequest();
+            request.open('POST', KATSU.replace('[I]', _0x5e35cf.repository), true);
+            request.timeout = REQ_TIMEOUT;
+            request.setRequestHeader('Authorization', 'Bearer\x20' + _0x5e35cf.at);
+            request.setRequestHeader("Content-type", 'application/json');
+            request.onreadystatechange = function () {
+                if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
+                    _0x5e35cf.refreshKatsu();
+                    if (_0x5e35cf.showForm) {
+                        _0x5e35cf.saveKatsu();
+                        _0x5e35cf.showForm = false;
+                    }
+                } else if (request.readyState == XMLHttpRequest.DONE) {
+                    _0x5e35cf.popError(request.responseText, request.status, 'Katsu');
+                    _0x5e35cf.action_lock = '';
+                }
+                arg0.req_katsu = false;
+                _0x5e35cf['$forceUpdate']();
+            }
+                ;
+            request.send(JSON.stringify(_0x33bd48));
+}
+
+export function refreshKatsu(app: KktjsApp): void {
+  const a = app as A;
+            var domSpoiler = document.getElementById('katsu_spoiler') as HTMLInputElement;
+            var domContent = document.getElementById('katsu_content') as HTMLInputElement;
+            a.katsu = {
+                'status': '',
+                'in_reply_to_id': null,
+                'reply': [],
+                'media_ids': [],
+                'sensitive': false,
+                'nsfw': false,
+                'spoiler_text': '',
+                'visibility': '',
+                'content': '',
+                'media_attachments': [],
+                'media_previews': [],
+                'poll': {
+                    'options': [],
+                    'multiple': false,
+                    'expires_in': 0x15180
+                },
+                'poll_work': {
+                    'texts': [],
+                    'expires_at': '',
+                    'extime': [1, 0, 0x0]
+                },
+                'emojis': []
+            },
+                a.katsu_spoiler_text = '';
+            a.katsu_spoiler_text_bu = '';
+            a.katsu_content_text = '';
+            a.katsu_poll = null;
+            a.katsu.visibility = a.user.locked ? "private" : "public";
+            if (null != domSpoiler && null != domContent) {
+                domSpoiler.value = a.katsu_spoiler_text;
+                domContent.value = a.katsu_content_text;
+            }
+            a.showFormSpoiler = false;
+            a.showFormVote = false;
+            a.showFormDraft = a.content_text_drafts.length > 0 ? true : false;
+            a.showFormVisible = a.katsu.visibility != 'public' ? true : false;
+            a.action_lock = '';
+}
+
+export function katsuToDraft(app: KktjsApp): void {
+  const a = app as A;
+            if (!a.checkKatsu()) {
+                return;
+            }
+            var _0x37bee6 = document.getElementById('katsu_spoiler') as HTMLInputElement;
+            var _0x62d4ab = document.getElementById('katsu_content') as HTMLInputElement;
+            a.katsu_spoiler_text = null != _0x37bee6 ? _0x37bee6.value : a.katsu_spoiler_text;
+            a.katsu_content_text = null != _0x62d4ab ? _0x62d4ab.value : a.katsu_content_text;
+            a.katsu.spoiler_text = a.katsu_spoiler_text;
+            a.katsu.status = a.katsu_content_text;
+            if (!a.showFormVote) {
+                a.katsu.poll = {
+                    'options': [],
+                    'multiple': false,
+                    'expires_in': 0x15180
+                };
+                a.katsu.poll_work = {
+                    'texts': [],
+                    'expires_at': '',
+                    'extime': [1, 0, 0x0]
+                };
+            }
+            a.katsu_drafts.unshift(a.katsu);
+            var _0x3d5ee8 = document.getElementById("vote_title_0") as HTMLInputElement;
+            var _0x5be2c5 = document.getElementById("vote_title_1") as HTMLInputElement;
+            var _0x4a6db7 = document.getElementById("vote_title_2") as HTMLInputElement;
+            var _0x13fa5b = document.getElementById("vote_title_3") as HTMLInputElement;
+            if (null != _0x3d5ee8) {
+                _0x3d5ee8.value = '';
+            }
+            if (null != _0x5be2c5) {
+                _0x5be2c5.value = '';
+            }
+            if (null != _0x4a6db7) {
+                _0x4a6db7.value = '';
+            }
+            if (null != _0x13fa5b) {
+                _0x13fa5b.value = '';
+            }
+            a.refreshKatsu();
+}
+
+export function draftToKatsu(app: KktjsApp, arg0: any, arg1: any): void {
+  const a = app as A;
+            var _0x51c6b1 = document.getElementById('katsu_spoiler') as HTMLInputElement;
+            var _0x59649d = document.getElementById('katsu_content') as HTMLInputElement;
+            a.katsu = a.katsu_drafts[arg0];
+            if (arg1) {
+                a.katsu_drafts.splice(arg0, 0x1);
+            }
+            a.katsu_spoiler_text = a.katsu.spoiler_text;
+            a.katsu_content_text = a.katsu.status;
+            _0x51c6b1.value = a.katsu_spoiler_text;
+            _0x59649d.value = a.katsu_content_text;
+            a.showFormSpoiler = a.katsu_spoiler_text.length > 0 ? true : false;
+            a.showFormVote = a.katsu.poll_work.texts.length > 0 ? true : false;
+            a.showFormVisible = a.katsu.visibility != "public" ? true : false;
+            var _0x1574a5 = document.getElementById("vote_title_0") as HTMLInputElement;
+            var _0x267354 = document.getElementById('vote_title_1') as HTMLInputElement;
+            var _0x3b2dc1 = document.getElementById("vote_title_2") as HTMLInputElement;
+            var _0x3b2757 = document.getElementById('vote_title_3') as HTMLInputElement;
+            if (null != _0x1574a5) {
+                _0x1574a5.value = null != a.katsu.poll_work.texts[0] ? a.katsu.poll_work.texts[0] : '';
+            }
+            if (null != _0x267354) {
+                _0x267354.value = null != a.katsu.poll_work.texts[1] ? a.katsu.poll_work.texts[1] : '';
+            }
+            if (null != _0x3b2dc1) {
+                _0x3b2dc1.value = null != a.katsu.poll_work.texts[2] ? a.katsu.poll_work.texts[2] : '';
+            }
+            if (null != _0x3b2757) {
+                _0x3b2757.value = null != a.katsu.poll_work.texts[3] ? a.katsu.poll_work.texts[3] : '';
+            }
+            a.refreshCount();
+}
+
+export function checkKatsu(app: KktjsApp): boolean {
+  const a = app as A;
+            if ('' != a.action_lock) {
+                return false;
+            }
+            var spoilerDom = document.getElementById('katsu_spoiler') as HTMLInputElement;
+            var contentDom = document.getElementById('katsu_content') as HTMLInputElement;
+            if (null == spoilerDom || null == contentDom) {
+                return false;
+            }
+            a.katsu_spoiler_text = spoilerDom.value;
+            a.katsu_content_text = contentDom.value;
+            if (0 != a.katsu.media_previews.length && a.katsu.media_previews.length != a.katsu.media_attachments.length) {
+                return false;
+            }
+            if ((0 == contentDom.value.trim().length || 0 == a.contentLength()) && 0 == a.katsu.media_previews.length) {
+                return false;
+            }
+            if (0x1f4 < spoilerDom.value.length + a.contentLength()) {
+                return false;
+            }
+            return true;
+}
+
+export function jumpKatsu(app: KktjsApp, arg0: any, arg1: any): void {
+  const a = app as A;
+            var _0x5e219a = document.getElementById(arg0 + '' + arg1) as HTMLInputElement;
+            if (_0x5e219a != null && (arg0 == 'home' && a.showHome || arg0 == 'local' && a.showLocal || arg0 == 'notif' && a.showNotif || arg0 == 'multi' && a.showMulti)) {
+                var _0x610350 = document.getElementById(arg0) as HTMLInputElement;
+                setTimeout(function () {
+                    _0x610350.scrollTop = _0x610350.scrollTop + _0x5e219a.getBoundingClientRect().top + window.pageYOffset - 0x58;
+                }, 0);
+            }
+}

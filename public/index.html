@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="css/style.css?v=0926">
   <link rel="stylesheet" href="css/font-awesome.min.css">
   <link rel="stylesheet" href="css/addtohomescreen.css">
+  <!-- Vite ビルドが SFC(.vue) の <style scoped> を抽出して出力する CSS（lib モードは style.css 固定名）。
+       SFC を使わない構成では空/未生成のことがあるため、存在しなくても無害（404 は表示に影響しない）。 -->
+  <link rel="stylesheet" href="style.css">
   <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta name="Description" content="キラキラッターをもっと素敵にするWebクライアント">
   <meta content="#000" name="theme-color">
@@ -80,7 +83,11 @@
 
       </transition>
     </script>
-  <div id="app" class="color" :class="[optThemeTops, optThemeBottoms, optMediaHeight, optMediaFit, optKatsuTrim]" onDragover="importdragover(event)" onDrop="importdrop(event)" onPaste="importpaste(event)" onDragenter="importdragenter(event)" onFocus="changeAppActive(true);" onBlur="changeAppActive(false);">
+  <div id="app" onDragover="importdragover(event)" onDrop="importdrop(event)" onPaste="importpaste(event)" onDragenter="importdragenter(event)" onFocus="changeAppActive(true);" onBlur="changeAppActive(false);">
+    <!-- Vue 3: mount('#app') はコンテナ内側に描画し #app 自身の属性はコンパイルしない。
+         テーマの :class バインドは単一ルートのこのラッパ div に持たせる（旧 #app の class 相当）。
+         #app の native な on* ハンドラ（drag/drop/paste/focus/blur）はコンテナに残り従来通り動く。 -->
+    <div class="color" :class="[optThemeTops, optThemeBottoms, optMediaHeight, optMediaFit, optKatsuTrim]">
     <svg width="0" height="0" class="invisible" xmlns="http://www.w3.org/2000/svg">
       <g id="cb" :class="[optThemeTops, optThemeBottoms, optMediaHeight, optKatsuTrim]">
         <line class="cbl" y2="12.412" x2="10.03575" y1="0.833" x1="10.03575" stroke-miterlimit="10" stroke-width="2" />
@@ -124,7 +131,7 @@
           <div class="flex login-container bgsvg-pk">
             <div class="column text center color-wh login">
               <div>
-                <h2>{{app_name}} v{{app_ver}}</h2>
+                <h2>{{app_name}} v{{app_ver}} <version-badge :version="app_ver_top"></version-badge></h2>
                 Custom Themes for <a href="https://kirakiratter.com/">kirakiratter.com</a>
               </div>
               <div class="flex login-option">
@@ -156,7 +163,8 @@
       <div class="modal-bg"></div>
     </div>
     <media v-if="showMedia">
-      <div class="modalbutton flex center" v-on:click="showMedia = false; modal_media = '';" slot="header">
+      <template #header>
+      <div class="modalbutton flex center" v-on:click="showMedia = false; modal_media = '';">
         <span class="media-close-btn" v-on:click.stop="showMedia = false; modal_media = '';" title="Close">×</span>
         <span class="fullimage-wrap" v-on:click.stop="">
           <img v-if="null != modal_media.remote_url && ('image' == modal_media.type || 'unknown' == modal_media.type)" :src="modal_media.remote_url" alt="" class="fullimage">
@@ -165,9 +173,11 @@
           <video v-else :src="modal_media.url" class="fullimage" v-play="true" autoplay loop></video>
         </span>
       </div>
+      </template>
     </media>
     <emojipicker v-show="showEmojiPicker">
-      <span slot="header">
+      <template #header>
+      <span>
         <div id="container" class="form-option full">
           <div class="wrapper full">
             <h3>Emoji Picker</h3>
@@ -184,9 +194,11 @@
           </div>
         </div>
       </span>
+      </template>
     </emojipicker>
     <confirm v-if="showConfirm">
-      <div slot="header">
+      <template #header>
+      <div>
         <div class="status flex" v-if="['delete','report','fav','unfav','reblog','unreblog','pin','unpin','vote','bookmark'].indexOf(modal_issue.confirmtype) != -1">
           <img :src="checkAvatar(modal_issue.account.avatar_static)" class="avatar border" v-on:click="runAcct(modal_issue.account.id);" onerror="this.src=IMG_DUMMY">
           <div class="content-before"><svg width="12" height="14">
@@ -298,10 +310,10 @@
                 <small v-if="modal_issue.poll.voted || modal_issue.poll.expired">0票</small>
               </div>
               <div class="flex center">
-                <div v-for="(option, index) in modal_issue.poll.options" v-if="!modal_issue.poll.expired" class="full">
+                <template v-for="(option, index) in modal_issue.poll.options" :key="index"><div v-if="!modal_issue.poll.expired" class="full">
                   <small v-if="isSetVote(modal_issue.poll, index)" class="color-wh bgcolor-pk button flex wrap" v-on:click="setVote(modal_issue, index);">{{index+1}}</small>
                   <small v-else class="color-wh bgcolor button flex wrap" v-on:click="setVote(modal_issue, index);">{{index+1}}</small>
-                </div>
+                </div></template>
                 <div class="full">
                   <small class="color-wh bgcolor-disable button flex wrap">Vote</small>
                 </div>
@@ -503,9 +515,11 @@
           </div>
         </div>
       </div>
+      </template>
     </confirm>
     <info v-if="hasInfo">
-      <span slot="header">
+      <template #header>
+      <span>
         <div v-if="app_wait_update" class="flex info-wrapper color-wh bgcolor">
           <div v-on:click="location.reload();" class="flex full">
             <span class="hidden full"><i class="fa fa-fw fa-refresh"></i> {{result_text}}</span>
@@ -523,6 +537,7 @@
           </div>
         </div>
       </span>
+      </template>
     </info>
     <div id="base" :class="{ 'extra': 'native' == app_mode }" class="flex column-list">
 
@@ -653,9 +668,9 @@
               <div class="hidden full"><i class="fa fa-fw fa-gamepad"></i>Discord Channels</div>
               <small>未</small>
             </span>
-            <span v-if="showLinkStream == 'channels'" v-for="issue in stream_channels" v-on:click="return;runMulti('Discord', issue);reopenWsMulti('Discord', issue);showMultiOption = false;" class="list-link slim border-lite full bgcolor-wh flex end">
+            <template v-for="(issue, __kk_i) in stream_channels" :key="__kk_i"><span v-if="showLinkStream == 'channels'" v-on:click="return;runMulti('Discord', issue);reopenWsMulti('Discord', issue);showMultiOption = false;" class="list-link slim border-lite full bgcolor-wh flex end">
               <div class="hidden full"><small>{{issue}}</small></div>
-            </span>
+            </span></template>
 
           </div>
 
@@ -743,7 +758,7 @@
         </div>
         <div class="scrollable" id="home" v-if="showHome" v-on:scroll="handleScrollHome">
           <div v-if="hasHome" class="status-list">
-            <div v-for="(issue, index) in homes" v-if="home_unread <= index" class="status-wrapper" :class="issue.visibility">
+            <template v-for="(issue, index) in homes" :key="index"><div v-if="home_unread <= index" class="status-wrapper" :class="issue.visibility">
               <a :id="'home'+issue.id"></a>
               <div v-if="null != issue.reblog" class="status-header flex start">
                 <i class="fa fa-fw fa-retweet color-on"></i>
@@ -806,10 +821,10 @@
                         </div>
                       </div>
                       <div v-else class="flex center">
-                        <div v-for="(option, index) in issue.reblog.poll.options" v-if="!issue.reblog.poll.expired" class="full">
+                        <template v-for="(option, index) in issue.reblog.poll.options" :key="index"><div v-if="!issue.reblog.poll.expired" class="full">
                           <small v-if="isSetVote(issue.reblog.poll, index)" class="color-wh bgcolor-pk button flex wrap" v-on:click="setVote(issue.reblog, index);">{{index+1}}</small>
                           <small v-else class="color-wh bgcolor button flex wrap" v-on:click="setVote(issue.reblog, index);">{{index+1}}</small>
-                        </div>
+                        </div></template>
                         <div class="full">
                           <small v-if="issue.reblog.req_vote" class="color-wh bgcolor-disable button flex wrap"><i class="fa fa-fw fa-spinner fa-pulse"></i></small>
                           <small v-else-if="!checkVote(issue.reblog.poll)" class="color-wh bgcolor-disable button flex wrap">Vote</small>
@@ -908,10 +923,10 @@
                         </div>
                       </div>
                       <div v-else class="flex center">
-                        <div v-for="(option, index) in issue.poll.options" v-if="!issue.poll.expired" class="full">
+                        <template v-for="(option, index) in issue.poll.options" :key="index"><div v-if="!issue.poll.expired" class="full">
                           <small v-if="isSetVote(issue.poll, index)" class="color-wh bgcolor-pk button flex wrap" v-on:click="setVote(issue, index);">{{index+1}}</small>
                           <small v-else class="color-wh bgcolor button flex wrap" v-on:click="setVote(issue, index);">{{index+1}}</small>
-                        </div>
+                        </div></template>
                         <div class="full">
                           <small v-if="issue.req_vote" class="color-wh bgcolor-disable button flex wrap"><i class="fa fa-fw fa-spinner fa-pulse"></i></small>
                           <small v-else-if="!checkVote(issue.poll)" class="color-wh bgcolor-disable button flex wrap">Vote</small>
@@ -971,7 +986,7 @@
                   via <a :href="issue.application.website" target="_blank" rel="noopener noreferrer">{{issue.application.name}} </a>
                 </small>
               </div>
-            </div>
+            </div></template>
             <div class="flex info-wrapper">
               <span v-if="fetch_lock.home"><i class="fa fa-fw fa-spinner fa-pulse"></i>Katsu Loading...</span>
               <span v-else-if="fetch_comp.home">All Loaded</span>
@@ -1015,7 +1030,7 @@
         </div>
         <div class="scrollable" id="local" v-on:scroll="handleScrollLocal">
           <div v-if="hasLocal" class="status-list">
-            <div v-for="(issue, index) in locals" v-if="local_unread <= index" class="status-wrapper" :class="issue.visibility">
+            <template v-for="(issue, index) in locals" :key="index"><div v-if="local_unread <= index" class="status-wrapper" :class="issue.visibility">
               <a :id="'local'+issue.id"></a>
               <div v-if="local_id_bookmark == issue.id" class="status-header flex start bgcolor-bookmark bookmark">
                 <i v-on:click="local_id_bookmark = '';" class="fa fa-fw fa-paperclip big"></i>
@@ -1063,10 +1078,10 @@
                         </div>
                       </div>
                       <div v-else class="flex center">
-                        <div v-for="(option, index) in issue.poll.options" v-if="!issue.poll.expired" class="full">
+                        <template v-for="(option, index) in issue.poll.options" :key="index"><div v-if="!issue.poll.expired" class="full">
                           <small v-if="isSetVote(issue.poll, index)" class="color-wh bgcolor-pk button flex wrap" v-on:click="setVote(issue, index);">{{index+1}}</small>
                           <small v-else class="color-wh bgcolor button flex wrap" v-on:click="setVote(issue, index);">{{index+1}}</small>
-                        </div>
+                        </div></template>
                         <div class="full">
                           <small v-if="issue.req_vote" class="color-wh bgcolor-disable button flex wrap"><i class="fa fa-fw fa-spinner fa-pulse"></i></small>
                           <small v-else-if="!checkVote(issue.poll)" class="color-wh bgcolor-disable button flex wrap">Vote</small>
@@ -1131,7 +1146,7 @@
                   from <a :href="'//'+issue.account.domain" target="_blank" rel="noopener noreferrer">{{formatDomain(issue.account)}}</a>
                 </small>
               </div>
-            </div>
+            </div></template>
             <div class="flex info-wrapper">
               <span v-if="fetch_lock.local"><i class="fa fa-fw fa-spinner fa-pulse"></i>Katsu Loading...</span>
               <span v-else-if="fetch_comp.local">All Loaded</span>
@@ -1176,7 +1191,7 @@
         </div>
         <div class="scrollable" id="notif" v-if="showNotif" v-on:scroll="handleScrollNotif">
           <div v-if="hasNotifFilter" class="status-list">
-            <div v-for="(issue, index) in notifs_filter" v-if="notif_unread <= index && !(('favourite' == issue.type || 'reblog' == issue.type) && null == issue.status) && notifJudge(issue)" class="status-wrapper" :class="issue.visibility">
+            <template v-for="(issue, index) in notifs_filter" :key="index"><div v-if="notif_unread <= index && !(('favourite' == issue.type || 'reblog' == issue.type) && null == issue.status) && notifJudge(issue)" class="status-wrapper" :class="issue.visibility">
               <a :id="'notif'+issue.id"></a>
               <div class="status-header flex start">
                 <i v-if="'mention' == issue.type" class="fa fa-fw fa-reply"></i>
@@ -1236,10 +1251,10 @@
                       </div>
                     </div>
                     <div v-else class="flex center">
-                      <div v-for="(option, index) in issue.status.poll.options" v-if="!issue.status.poll.expired" class="full">
+                      <template v-for="(option, index) in issue.status.poll.options" :key="index"><div v-if="!issue.status.poll.expired" class="full">
                         <small v-if="isSetVote(issue.status.poll, index)" class="color-wh bgcolor-pk button flex wrap" v-on:click="setVote(issue.status, index);">{{index+1}}</small>
                         <small v-else class="color-wh bgcolor button flex wrap" v-on:click="setVote(issue.status, index);">{{index+1}}</small>
-                      </div>
+                      </div></template>
                       <div class="full">
                         <small v-if="issue.status.req_vote" class="color-wh bgcolor-disable button flex wrap"><i class="fa fa-fw fa-spinner fa-pulse"></i></small>
                         <small v-else-if="!checkVote(issue.status.poll)" class="color-wh bgcolor-disable button flex wrap">Vote</small>
@@ -1360,7 +1375,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div></template>
             <div class="flex info-wrapper">
               <span v-if="fetch_lock.notif"><i class="fa fa-fw fa-spinner fa-pulse"></i>Notif Loading...</span>
               <span v-else-if="fetch_comp.notif_filter">All Loaded</span>
@@ -1396,7 +1411,7 @@
         <div class="scrollable" id="multi" v-on:scroll="handleScrollMulti">
 
           <div v-if="'Hashtag' == multi_type && hasMulti" class="status-list">
-            <div v-for="(issue, index) in multis" v-if="multi_unread <= index" class="status-wrapper" :class="issue.visibility">
+            <template v-for="(issue, index) in multis" :key="index"><div v-if="multi_unread <= index" class="status-wrapper" :class="issue.visibility">
               <a :id="'multi'+issue.id"></a>
               <div v-if="local_id_bookmark == issue.id" class="status-header flex start bgcolor-bookmark bookmark">
                 <i v-on:click="local_id_bookmark = '';" class="fa fa-fw fa-paperclip big"></i>
@@ -1444,10 +1459,10 @@
                         </div>
                       </div>
                       <div v-else class="flex center">
-                        <div v-for="(option, index) in issue.poll.options" v-if="!issue.poll.expired" class="full">
+                        <template v-for="(option, index) in issue.poll.options" :key="index"><div v-if="!issue.poll.expired" class="full">
                           <small v-if="isSetVote(issue.poll, index)" class="color-wh bgcolor-pk button flex wrap" v-on:click="setVote(issue, index);">{{index+1}}</small>
                           <small v-else class="color-wh bgcolor button flex wrap" v-on:click="setVote(issue, index);">{{index+1}}</small>
-                        </div>
+                        </div></template>
                         <div class="full">
                           <small v-if="issue.req_vote" class="color-wh bgcolor-disable button flex wrap"><i class="fa fa-fw fa-spinner fa-pulse"></i></small>
                           <small v-else-if="!checkVote(issue.poll)" class="color-wh bgcolor-disable button flex wrap">Vote</small>
@@ -1512,11 +1527,11 @@
                   from <a :href="'//'+issue.account.domain" target="_blank" rel="noopener noreferrer">{{formatDomain(issue.account)}}</a>
                 </small>
               </div>
-            </div>
+            </div></template>
           </div>
 
           <div v-else-if="'List' == multi_type && hasMulti" class="status-list">
-            <div v-for="(issue, index) in multis" v-if="multi_unread <= index" class="status-wrapper" :class="issue.visibility">
+            <template v-for="(issue, index) in multis" :key="index"><div v-if="multi_unread <= index" class="status-wrapper" :class="issue.visibility">
               <div v-if="null != issue.reblog" class="status-header flex start">
                 <i class="fa fa-fw fa-retweet color-on"></i>
                 <span v-if="issue.loading_avatar" class="avatar border notif" v-on:click="runAcct(issue.account.id);"></span>
@@ -1575,10 +1590,10 @@
                       </div>
                     </div>
                     <div v-else class="flex center">
-                      <div v-for="(option, index) in issue.reblog.poll.options" v-if="!issue.reblog.poll.expired" class="full">
+                      <template v-for="(option, index) in issue.reblog.poll.options" :key="index"><div v-if="!issue.reblog.poll.expired" class="full">
                         <small v-if="isSetVote(issue.reblog.poll, index)" class="color-wh bgcolor-pk button flex wrap" v-on:click="setVote(issue.reblog, index);">{{index+1}}</small>
                         <small v-else class="color-wh bgcolor button flex wrap" v-on:click="setVote(issue.reblog, index);">{{index+1}}</small>
-                      </div>
+                      </div></template>
                       <div class="full">
                         <small v-if="issue.reblog.req_vote" class="color-wh bgcolor-disable button flex wrap"><i class="fa fa-fw fa-spinner fa-pulse"></i></small>
                         <small v-else-if="!checkVote(issue.reblog.poll)" class="color-wh bgcolor-disable button flex wrap">Vote</small>
@@ -1672,10 +1687,10 @@
                       </div>
                     </div>
                     <div v-else class="flex center">
-                      <div v-for="(option, index) in issue.poll.options" v-if="!issue.poll.expired" class="full">
+                      <template v-for="(option, index) in issue.poll.options" :key="index"><div v-if="!issue.poll.expired" class="full">
                         <small v-if="isSetVote(issue.poll, index)" class="color-wh bgcolor-pk button flex wrap" v-on:click="setVote(issue, index);">{{index+1}}</small>
                         <small v-else class="color-wh bgcolor button flex wrap" v-on:click="setVote(issue, index);">{{index+1}}</small>
-                      </div>
+                      </div></template>
                       <div class="full">
                         <small v-if="issue.req_vote" class="color-wh bgcolor-disable button flex wrap"><i class="fa fa-fw fa-spinner fa-pulse"></i></small>
                         <small v-else-if="!checkVote(issue.poll)" class="color-wh bgcolor-disable button flex wrap">Vote</small>
@@ -1729,11 +1744,11 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div></template>
           </div>
 
           <div v-else-if="'Discord' == multi_type && hasMulti" class="status-list">
-            <div v-for="(issue, index) in discords" v-if="discord_unread <= index" class="status-wrapper" :class="issue.visibility">
+            <template v-for="(issue, index) in discords" :key="index"><div v-if="discord_unread <= index" class="status-wrapper" :class="issue.visibility">
               <div class="status flex">
                 <span v-if="issue.loading_avatar" class="avatar border"></span>
                 <img v-else :src="checkAvatarDiscord(issue.author)" class="avatar border" onerror="this.src=IMG_DUMMY">
@@ -1755,7 +1770,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div></template>
           </div>
           <div v-else-if="'Hashtag' == multi_type || 'List' == multi_type || 'Discord' == multi_type">
             <div v-if="'open' != connMulti || fetch_lock.multi" class="flex info-wrapper">Initializing...</div>
@@ -1831,10 +1846,10 @@
                     </div>
                   </div>
                   <div v-else class="flex center">
-                    <div v-for="(option, index) in issue.poll.options" v-if="!issue.poll.expired" class="full">
+                    <template v-for="(option, index) in issue.poll.options" :key="index"><div v-if="!issue.poll.expired" class="full">
                       <small v-if="isSetVote(issue.poll, index)" class="color-wh bgcolor-pk button flex wrap" v-on:click="setVote(issue, index);">{{index+1}}</small>
                       <small v-else class="color-wh bgcolor button flex wrap" v-on:click="setVote(issue, index);">{{index+1}}</small>
-                    </div>
+                    </div></template>
                     <div class="full">
                       <small v-if="issue.req_vote" class="color-wh bgcolor-disable button flex wrap"><i class="fa fa-fw fa-spinner fa-pulse"></i></small>
                       <small v-else-if="!checkVote(issue.poll)" class="color-wh bgcolor-disable button flex wrap">Vote</small>
@@ -1935,10 +1950,10 @@
                     </div>
                   </div>
                   <div v-else class="flex center">
-                    <div v-for="(option, index) in detail.poll.options" v-if="!detail.poll.expired" class="full">
+                    <template v-for="(option, index) in detail.poll.options" :key="index"><div v-if="!detail.poll.expired" class="full">
                       <small v-if="isSetVote(detail.poll, index)" class="color-wh bgcolor-pk button flex wrap" v-on:click="setVote(detail, index);">{{index+1}}</small>
                       <small v-else class="color-wh bgcolor button flex wrap" v-on:click="setVote(detail, index);">{{index+1}}</small>
-                    </div>
+                    </div></template>
                     <div class="full">
                       <small v-if="detail.req_vote" class="color-wh bgcolor-disable button flex wrap"><i class="fa fa-fw fa-spinner fa-pulse"></i></small>
                       <small v-else-if="!checkVote(detail.poll)" class="color-wh bgcolor-disable button flex wrap">Vote</small>
@@ -2076,10 +2091,10 @@
                     </div>
                   </div>
                   <div v-else class="flex center">
-                    <div v-for="(option, index) in issue.poll.options" v-if="!issue.poll.expired" class="full">
+                    <template v-for="(option, index) in issue.poll.options" :key="index"><div v-if="!issue.poll.expired" class="full">
                       <small v-if="isSetVote(issue.poll, index)" class="color-wh bgcolor-pk button flex wrap" v-on:click="setVote(issue, index);">{{index+1}}</small>
                       <small v-else class="color-wh bgcolor button flex wrap" v-on:click="setVote(issue, index);">{{index+1}}</small>
-                    </div>
+                    </div></template>
                     <div class="full">
                       <small v-if="issue.req_vote" class="color-wh bgcolor-disable button flex wrap"><i class="fa fa-fw fa-spinner fa-pulse"></i></small>
                       <small v-else-if="!checkVote(issue.poll)" class="color-wh bgcolor-disable button flex wrap">Vote</small>
@@ -2269,10 +2284,10 @@
                       </div>
                     </div>
                     <div v-else class="flex center">
-                      <div v-for="(option, index) in issue.poll.options" v-if="!issue.poll.expired" class="full">
+                      <template v-for="(option, index) in issue.poll.options" :key="index"><div v-if="!issue.poll.expired" class="full">
                         <small v-if="isSetVote(issue.poll, index)" class="color-wh bgcolor-pk button flex wrap" v-on:click="setVote(issue, index);">{{index+1}}</small>
                         <small v-else class="color-wh bgcolor button flex wrap" v-on:click="setVote(issue, index);">{{index+1}}</small>
-                      </div>
+                      </div></template>
                       <div class="full">
                         <small v-if="issue.req_vote" class="color-wh bgcolor-disable button flex wrap"><i class="fa fa-fw fa-spinner fa-pulse"></i></small>
                         <small v-else-if="!checkVote(issue.poll)" class="color-wh bgcolor-disable button flex wrap">Vote</small>
@@ -2403,10 +2418,10 @@
                       </div>
                     </div>
                     <div v-else class="flex center">
-                      <div v-for="(option, index) in issue.reblog.poll.options" v-if="!issue.reblog.poll.expired" class="full">
+                      <template v-for="(option, index) in issue.reblog.poll.options" :key="index"><div v-if="!issue.reblog.poll.expired" class="full">
                         <small v-if="isSetVote(issue.reblog.poll, index)" class="color-wh bgcolor-pk button flex wrap" v-on:click="setVote(issue.reblog, index);">{{index+1}}</small>
                         <small v-else class="color-wh bgcolor button flex wrap" v-on:click="setVote(issue.reblog, index);">{{index+1}}</small>
-                      </div>
+                      </div></template>
                       <div class="full">
                         <small v-if="issue.reblog.req_vote" class="color-wh bgcolor-disable button flex wrap"><i class="fa fa-fw fa-spinner fa-pulse"></i></small>
                         <small v-else-if="!checkVote(issue.reblog.poll)" class="color-wh bgcolor-disable button flex wrap">Vote</small>
@@ -2498,10 +2513,10 @@
                       </div>
                     </div>
                     <div v-else class="flex center">
-                      <div v-for="(option, index) in issue.poll.options" v-if="!issue.poll.expired" class="full">
+                      <template v-for="(option, index) in issue.poll.options" :key="index"><div v-if="!issue.poll.expired" class="full">
                         <small v-if="isSetVote(issue.poll, index)" class="color-wh bgcolor-pk button flex wrap" v-on:click="setVote(issue, index);">{{index+1}}</small>
                         <small v-else class="color-wh bgcolor button flex wrap" v-on:click="setVote(issue, index);">{{index+1}}</small>
-                      </div>
+                      </div></template>
                       <div class="full">
                         <small v-if="issue.req_vote" class="color-wh bgcolor-disable button flex wrap"><i class="fa fa-fw fa-spinner fa-pulse"></i></small>
                         <small v-else-if="!checkVote(issue.poll)" class="color-wh bgcolor-disable button flex wrap">Vote</small>
@@ -2674,9 +2689,9 @@
               <div class="hidden full"><i class="fa fa-fw fa-gamepad"></i>Discord Channels</div>
               <small>未</small>
             </span>
-            <span v-if="showLinkStream == 'channels'" v-for="issue in stream_channels" v-on:click="return;runMulti('Discord', issue);reopenWsMulti('Discord', issue);showMultiOption = false;" class="list-link slim border-lite full bgcolor-wh flex end">
+            <template v-for="(issue, __kk_i) in stream_channels" :key="__kk_i"><span v-if="showLinkStream == 'channels'" v-on:click="return;runMulti('Discord', issue);reopenWsMulti('Discord', issue);showMultiOption = false;" class="list-link slim border-lite full bgcolor-wh flex end">
               <div class="hidden full"><small>{{issue}}</small></div>
-            </span>
+            </span></template>
 
           </div>
 
@@ -2852,10 +2867,10 @@
             </div>
             <!-- -->
             <div v-if="'web' == app_mode" class="link-header"><i class="fa fa-fw fa-gamepad"></i> Discord Channels</div>
-            <div v-if="'web' == app_mode" v-for="issue in stream_channels" class="flex">
+            <template v-for="(issue, __kk_i) in stream_channels" :key="__kk_i"><div v-if="'web' == app_mode" class="flex">
               <div v-if="fetch_lock.multiws || fetch_lock.multi" class="list-link full color-wh bgcolor-disable hidden">{{issue}}</div>
               <div v-else v-on:click="return;showStream=false;runMulti('Discord', issue);reopenWsMulti('Discord', issue);showMultiOption=false;showStreamEdit=false;" class="list-link full color-wh bgcolor-disable hidden">{{issue}}</div>
-            </div>
+            </div></template>
           </div>
           <div v-show="hasStreamList" class="flex info-wrapper">
             <span v-if="fetch_lock.lists"><i class="fa fa-fw fa-spinner fa-pulse"></i>Account Loading...</span>
@@ -2885,7 +2900,7 @@
             <div v-if="hasSearch && search_type == 'hashtag'" class="flex wrap">
               <span v-for="issue in searchs.hashtags" v-on:click="runMulti('Hashtag', issue.name);reopenWsMulti('Hashtag', issue.name);" class="list-link border-lite full color-pk bgcolor-wh">#{{issue.name}}</span>
             </div>
-            <div v-if="hasSearchAcctEx && search_type == 'acct'" v-for="issue in searchs.accounts_ex" class="status flex">
+            <template v-for="(issue, __kk_i) in searchs.accounts_ex" :key="__kk_i"><div v-if="hasSearchAcctEx && search_type == 'acct'" class="status flex">
               <img :src="checkAvatar(issue.avatar_static)" class="avatar border" v-on:click="showSearch = false; runAcct(issue.id);" onerror="this.src=IMG_DUMMY">
               <div class="content-before"><svg width="12" height="14">
                   <use xlink:href="#cb"></use>
@@ -2910,8 +2925,8 @@
                   <i v-on:click="showSearch = false; runAcct(issue.id);" class="fa fa-fw fa-user-circle-o"></i>
                 </div>
               </div>
-            </div>
-            <div v-if="hasSearch && search_type == 'katsu'" v-for="(issue, index) in searchs.statuses" class="status flex">
+            </div></template>
+            <template v-for="(issue, index) in searchs.statuses" :key="index"><div v-if="hasSearch && search_type == 'katsu'" class="status flex">
               <img :src="checkAvatar(issue.account.avatar_static)" class="avatar border" v-on:click="runAcct(issue.account.id);" onerror="this.src=IMG_DUMMY">
               <div class="content-before"><svg width="12" height="14">
                   <use xlink:href="#cb"></use>
@@ -2949,10 +2964,10 @@
                     </div>
                   </div>
                   <div v-else class="flex center">
-                    <div v-for="(option, index) in issue.poll.options" v-if="!issue.poll.expired" class="full">
+                    <template v-for="(option, index) in issue.poll.options" :key="index"><div v-if="!issue.poll.expired" class="full">
                       <small v-if="isSetVote(issue.poll, index)" class="color-wh bgcolor-pk button flex wrap" v-on:click="setVote(issue, index);">{{index+1}}</small>
                       <small v-else class="color-wh bgcolor button flex wrap" v-on:click="setVote(issue, index);">{{index+1}}</small>
-                    </div>
+                    </div></template>
                     <div class="full">
                       <small v-if="issue.req_vote" class="color-wh bgcolor-disable button flex wrap"><i class="fa fa-fw fa-spinner fa-pulse"></i></small>
                       <small v-else-if="!checkVote(issue.poll)" class="color-wh bgcolor-disable button flex wrap">Vote</small>
@@ -3004,7 +3019,7 @@
                   <i v-on:click="runAcct(issue.account.id);" class="fa fa-fw fa-user-circle-o"></i>
                 </div>
               </div>
-            </div>
+            </div></template>
             <div class="flex info-wrapper">
               <span v-if="fetch_lock.search"><i class="fa fa-fw fa-spinner fa-pulse"></i>Searching...</span>
               <span v-else-if="hasSearch">All Loaded</span>
@@ -3091,10 +3106,10 @@
                   </div>
                 </div>
                 <div v-else class="flex center">
-                  <div v-for="(option, index) in katsu.reply.poll.options" v-if="!katsu.reply.poll.expired" class="full">
+                  <template v-for="(option, index) in katsu.reply.poll.options" :key="index"><div v-if="!katsu.reply.poll.expired" class="full">
                     <small v-if="isSetVote(katsu.reply.poll, index)" class="color-wh bgcolor-pk button flex wrap" v-on:click="setVote(katsu.reply, index);">{{index+1}}</small>
                     <small v-else class="color-wh bgcolor button flex wrap" v-on:click="setVote(katsu.reply, index);">{{index+1}}</small>
-                  </div>
+                  </div></template>
                   <div class="full">
                     <small v-if="katsu.reply.req_vote" class="color-wh bgcolor-disable button flex wrap"><i class="fa fa-fw fa-spinner fa-pulse"></i></small>
                     <small v-else-if="!checkVote(katsu.reply.poll)" class="color-wh bgcolor-disable button flex wrap">Vote</small>
@@ -3699,6 +3714,7 @@
       <button id="soundex" class="invisible"></button>
       <img src="img/missing_header.png" alt="">
     </div>
+    </div><!-- /.color theme wrapper -->
   </div>
 
   <script src="js/vue.min.js"></script>
@@ -3718,10 +3734,10 @@
         if (kktjsUpdateNotified) return;
         kktjsUpdateNotified = true;
         console.log("sw reg: updated.");
-        if (typeof app !== 'undefined' && app._data) {
-          app._data.fetch_lock.update = false;
-          app._data.result_text = "kktjs new version released.";
-          app._data.app_wait_update = true;
+        if (typeof app !== 'undefined' && app.$data) {
+          app.$data.fetch_lock.update = false;
+          app.$data.result_text = "kktjs new version released.";
+          app.$data.app_wait_update = true;
         }
         // location.reload();
       }

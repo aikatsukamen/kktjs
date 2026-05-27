@@ -1,6 +1,7 @@
 // タイムライン取得（Home / Local / Multi）。legacy から移行。
-// Vue インスタンスへの依存は引数 `app` で受け取り、未移行のメソッド
-// （updateWrapperBM / updateFilterBM / popError 等）は app 経由で呼ぶ。
+// Vue インスタンスへの依存は引数 `app` で受け取り、他メソッド
+// （updateWrapperBM / updateFilterBM / popError 等。いずれも TS 化済み）は
+// app 経由で呼ぶ（実体は register-methods 経由で解決される）。
 // register-methods.ts で登録し、legacy 側の薄いスタブから委譲される。
 
 import { HOME, LOCAL, GLOBAL, DIRECT, LIST, HASHTAG } from '../api/endpoints';

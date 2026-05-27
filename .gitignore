@@ -4,6 +4,10 @@ node_modules/
 # ビルド成果物（GitHub Actions が生成・デプロイするため git 管理しない）
 docs/
 
+# Vite キャッシュ
+node_modules/.vite/
+.vite/
+
 # その他
 *.log
 .DS_Store

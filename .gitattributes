@@ -1,0 +1,14 @@
+# 改行コードは LF に統一（Dev Container の files.eol=lf / tsconfig forceConsistentCasing と整合）。
+* text=auto eol=lf
+
+# バイナリは変換しない。
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.mp3 binary
+*.zip binary

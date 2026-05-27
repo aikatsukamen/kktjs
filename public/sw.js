@@ -5,7 +5,7 @@
 // 例: https://example.com/kktjs/ でも https://example.com/ でも自動追従する。
 const base = self.registration ? self.registration.scope : (location.origin + location.pathname.replace(/[^/]*$/, ''));
 
-const key = "v1.4.8_35";
+const key = "v1.7.1_node24_1";
 const subkey = "?v=0926";
 console.log("sw: new cache! " + key);
 
@@ -18,6 +18,7 @@ const file = [
   // base + 'index.html',
   base + 'sw.js',
   base + 'css/style.css' + subkey,
+  base + 'style.css',
   base + 'js/main.js' + subkey,
   base + 'css/font-awesome.min.css',
   base + 'sounds/boop.mp3',

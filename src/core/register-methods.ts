@@ -1,8 +1,8 @@
 // 移行済みメソッドのレジストリ。
 //
-// legacy/app-core.js は import 時に new Vue(...) を実行し、created() フック内で
-// this.fetchHome() などを呼ぶ。そのため「移行済みメソッドの実体」は legacy が
-// 読み込まれる前に window.__kktjsMethods へ登録しておく必要がある。
+// legacy/app-core.ts は import 時に Vue.createApp(...).mount('#app') を実行し、
+// created() フック内で this.fetchHome() などを呼ぶ。そのため「移行済みメソッドの実体」は
+// legacy が読み込まれる前に window.__kktjsMethods へ登録しておく必要がある。
 // main.ts はこのモジュールを legacy より前に import すること。
 
 import { fetchHome, fetchLocal, fetchMulti } from '../app/timeline';
@@ -13,7 +13,6 @@ import {
   fetchNotifFollow,
   fetchNotifReblog,
 } from '../app/notifications';
-import { registerVueComponentsAndDirectives } from '../app/vue-setup';
 import {
   fetchAcctAll,
   fetchAcctMedia,
@@ -50,6 +49,95 @@ import {
 } from '../app/status-actions';
 import { actList, actUnList, updateList } from '../app/list-actions';
 import * as predicates from './predicates';
+import {
+  formatContent,
+  formatSpoiler,
+  formatContentConfirm,
+  formatSpoilerConfirm,
+  formatEmoji,
+  formatEmojiDraft,
+} from './content-format';
+import {
+  updateWrapperBM,
+  updateWrapperAll,
+  updateWrapper,
+  updateFilterBM,
+  updateFilterAll,
+  updateImgLoading,
+  updateVote,
+} from '../app/display-wrappers';
+import {
+  notifJudge,
+  countNotifUnread,
+  addSpoiler,
+  restoreSpoiler,
+  disableSpoiler,
+  addContent,
+} from '../app/notif-helpers';
+import {
+  contentExchange,
+  contentToDraft,
+  draftToContent,
+} from '../app/editor-helpers';
+import {
+  fetchStreamList,
+  fetchListListed,
+  fetchListListedBackup,
+  fetchListSearch,
+  fetchListFollow,
+  fetchListFollower,
+  fetchListAcctRelation,
+} from '../app/list-stream';
+import { deleteConf, deleteToken } from '../app/config';
+import {
+  toggleHomeOption, toggleLocalOption, toggleNotifOption, toggleAcctEdit, toggleAcctOption,
+  toggleSetting, toggleSearch, toggleStream, toggleStreamEdit, toggleForm,
+  toggleFormSpoiler, toggleFormVote, toggleFormDraft, toggleFormVisible,
+  toggleSideLink, toggleLink, toggleLinkSearch, toggleLinkStream,
+} from '../app/ui-toggles';
+import {
+  upHome, backHome, nextHome, upLocal, backLocal, nextLocal,
+  upMulti, backMulti, nextMulti, upNotif,
+  updateMediaWrapper, updateContentWrapper,
+} from '../app/column-scroll';
+import {
+  openThisPage, openAuth, openProfile, openMastodon, openAbout,
+  openPolicy, openWiki, openDirectry, openEmoji, closeEmoji,
+} from '../app/external-links';
+import {
+  setResizer, setHistory, setNotifSound, resetColumn,
+  addStreamHashtag, removeStreamHashtag, serviceWorkerUpdateCheck,
+  reloadForce, reopenForce, confirm as confirmModal, countFollowRequest,
+} from '../app/system';
+import {
+  runInit, runCustom, runHome, runLocal, runNotif, runUser, runMulti,
+  runDetail, runAcct, runReply, runToast, runAuthClient, runUserId, runListSearch,
+  runSettingUser, runSettingDrafts, runSettingKatsuDrafts, runSettingStreamHashtags,
+  runSettingBookmark, runSettingBookmarkNotif, runBookmark, runAddList, runRemoveList, runExtime,
+} from '../app/run-actions';
+import {
+  handleWheel, handleScrollHome, handleScrollLocal,
+  handleScrollMulti, handleScrollNotif, handleScrollAcct,
+} from '../app/scroll-handlers';
+import {
+  refetchHome, refetchLocal, refetchMulti, refetchNotifAll,
+  refreshCount, checkStreamListText, checkListProfile,
+} from '../app/refetch-actions';
+import {
+  checkStreamHashtag, actVote, setVote, actReport, actProfile, actListProfile,
+  checkActMedia, actMedia, removeMedia, saveKatsu, actKatsuShortCut, actKatsu,
+  refreshKatsu, katsuToDraft, draftToKatsu, checkKatsu, jumpKatsu,
+} from '../app/posting-actions';
+import {
+  fetchToken, fetchUser, loadConf, saveConf, resetConf,
+} from '../app/auth-config';
+import {
+  openWsHome, reopenWsHome, openWsLocal, reopenWsLocal, openWsMulti, reopenWsMulti,
+} from '../app/streaming';
+import {
+  handleScrollDiscord, fetchTokenDiscord, refetchTokenDiscord, actKatsuDiscord,
+  fetchUserDiscord, fetchSocketDiscord, fetchDiscord, openWsDiscord, reopenWsDiscord,
+} from '../app/discord';
 import {
   resetHomeColumn,
   resetLocalColumn,
@@ -184,6 +272,196 @@ export function registerMigratedMethods(): void {
     isList: (app: any, id: string) => predicates.isList(app, id),
     isListFollow: (app: any, id: string) => predicates.isListFollow(app, id),
 
+    // 本文・スポイラー・絵文字の整形。
+    formatContent: (_app: any, text: any, emojis: any) => formatContent(text, emojis),
+    formatSpoiler: (_app: any, text: any, emojis: any) => formatSpoiler(text, emojis),
+    formatContentConfirm: (_app: any, text: any, emojis: any) => formatContentConfirm(text, emojis),
+    formatSpoilerConfirm: (_app: any, text: any, emojis: any) => formatSpoilerConfirm(text, emojis),
+    formatEmoji: (_app: any, text: any, emojis: any) => formatEmoji(text, emojis),
+    formatEmojiDraft: (_app: any, text: any, emojis: any) => formatEmojiDraft(text, emojis),
+
+    // 表示整形（開閉フラグ / フィルタ / ローディング / 投票反映）。
+    updateWrapperBM: (app: any, data: any, mode: any) => updateWrapperBM(app, data, mode),
+    updateWrapperAll: (app: any) => updateWrapperAll(app),
+    updateWrapper: (app: any, status: any, caught: any) => updateWrapper(app, status, caught),
+    updateFilterBM: (app: any, data: any, mode: any) => updateFilterBM(app, data, mode),
+    updateFilterAll: (app: any) => updateFilterAll(app),
+    updateImgLoading: (app: any, list: any) => updateImgLoading(app, list),
+    updateVote: (app: any, id: string, poll: any) => updateVote(app, id, poll),
+
+    // 通知判定/カウント・エディタ補助。
+    notifJudge: (app: any, notif: any) => notifJudge(app, notif),
+    countNotifUnread: (app: any) => countNotifUnread(app),
+    addSpoiler: (app: any, text: any) => addSpoiler(app, text),
+    restoreSpoiler: (app: any) => restoreSpoiler(app),
+    disableSpoiler: (app: any) => disableSpoiler(app),
+    addContent: (app: any, text: any) => addContent(app, text),
+
+    // 本文⇄下書き変換。
+    contentExchange: (app: any) => contentExchange(app),
+    contentToDraft: (app: any) => contentToDraft(app),
+    draftToContent: (app: any, index: any, replace: any) => draftToContent(app, index, replace),
+
+    // ストリームリスト（リスト管理パネル）の取得系。
+    fetchStreamList: (app: any) => fetchStreamList(app),
+    fetchListListed: (app: any) => fetchListListed(app),
+    fetchListListedBackup: (app: any) => fetchListListedBackup(app),
+    fetchListSearch: (app: any) => fetchListSearch(app),
+    fetchListFollow: (app: any) => fetchListFollow(app),
+    fetchListFollower: (app: any) => fetchListFollower(app),
+    fetchListAcctRelation: (app: any) => fetchListAcctRelation(app),
+
+    // 設定/トークンの削除。
+    deleteConf: (app: any) => deleteConf(app),
+    deleteToken: (app: any) => deleteToken(app),
+
+    // 表示トグル。
+    toggleHomeOption: (app: any) => toggleHomeOption(app),
+    toggleLocalOption: (app: any) => toggleLocalOption(app),
+    toggleNotifOption: (app: any) => toggleNotifOption(app),
+    toggleAcctEdit: (app: any) => toggleAcctEdit(app),
+    toggleAcctOption: (app: any) => toggleAcctOption(app),
+    toggleSetting: (app: any) => toggleSetting(app),
+    toggleSearch: (app: any) => toggleSearch(app),
+    toggleStream: (app: any) => toggleStream(app),
+    toggleStreamEdit: (app: any) => toggleStreamEdit(app),
+    toggleForm: (app: any) => toggleForm(app),
+    toggleFormSpoiler: (app: any) => toggleFormSpoiler(app),
+    toggleFormVote: (app: any) => toggleFormVote(app),
+    toggleFormDraft: (app: any) => toggleFormDraft(app),
+    toggleFormVisible: (app: any) => toggleFormVisible(app),
+    toggleSideLink: (app: any) => toggleSideLink(app),
+    toggleLink: (app: any) => toggleLink(app),
+    toggleLinkSearch: (app: any) => toggleLinkSearch(app),
+    toggleLinkStream: (app: any, target: any) => toggleLinkStream(app, target),
+
+    // カラムスクロール（up/back/next）＋メディア/本文開閉。
+    upHome: (app: any) => upHome(app),
+    backHome: (app: any) => backHome(app),
+    nextHome: (app: any) => nextHome(app),
+    upLocal: (app: any) => upLocal(app),
+    backLocal: (app: any) => backLocal(app),
+    nextLocal: (app: any) => nextLocal(app),
+    upMulti: (app: any) => upMulti(app),
+    backMulti: (app: any) => backMulti(app),
+    nextMulti: (app: any) => nextMulti(app),
+    upNotif: (app: any) => upNotif(app),
+    updateMediaWrapper: (app: any, status: any, opened: any) => updateMediaWrapper(app, status, opened),
+    updateContentWrapper: (app: any, status: any, opened: any) => updateContentWrapper(app, status, opened),
+
+    // 外部リンク・絵文字開閉。
+    openThisPage: (app: any) => openThisPage(app),
+    openAuth: (app: any) => openAuth(app),
+    openProfile: (app: any) => openProfile(app),
+    openMastodon: (app: any) => openMastodon(app),
+    openAbout: (app: any) => openAbout(app),
+    openPolicy: (app: any) => openPolicy(app),
+    openWiki: (app: any) => openWiki(app),
+    openDirectry: (app: any) => openDirectry(app),
+    openEmoji: (app: any) => openEmoji(app),
+    closeEmoji: (app: any) => closeEmoji(app),
+
+    // システム/セットアップ系。
+    setResizer: (app: any) => setResizer(app),
+    setHistory: (app: any) => setHistory(app),
+    setNotifSound: (app: any, id: any, url: any) => setNotifSound(app, id, url),
+    resetColumn: (app: any, width: any) => resetColumn(app, width),
+    addStreamHashtag: (app: any) => addStreamHashtag(app),
+    removeStreamHashtag: (app: any, tag: any) => removeStreamHashtag(app, tag),
+    serviceWorkerUpdateCheck: (app: any) => serviceWorkerUpdateCheck(app),
+    reloadForce: (app: any) => reloadForce(app),
+    reopenForce: (app: any) => reopenForce(app),
+    confirm: (app: any, issue: any, type: any) => confirmModal(app, issue, type),
+    countFollowRequest: (app: any) => countFollowRequest(app),
+
+    // run* オーケストレーション系。
+    runInit: (app: any) => runInit(app),
+    runCustom: (app: any) => runCustom(app),
+    runHome: (app: any) => runHome(app),
+    runLocal: (app: any, arg0: any) => runLocal(app, arg0),
+    runNotif: (app: any, arg0: any) => runNotif(app, arg0),
+    runUser: (app: any, arg0: any) => runUser(app, arg0),
+    runMulti: (app: any, arg0: any, arg1: any) => runMulti(app, arg0, arg1),
+    runDetail: (app: any, arg0: any) => runDetail(app, arg0),
+    runAcct: (app: any, arg0: any) => runAcct(app, arg0),
+    runReply: (app: any, arg0: any) => runReply(app, arg0),
+    runToast: (app: any, arg0: any) => runToast(app, arg0),
+    runAuthClient: (app: any) => runAuthClient(app),
+    runUserId: (app: any) => runUserId(app),
+    runListSearch: (app: any) => runListSearch(app),
+    runSettingUser: (app: any) => runSettingUser(app),
+    runSettingDrafts: (app: any) => runSettingDrafts(app),
+    runSettingKatsuDrafts: (app: any) => runSettingKatsuDrafts(app),
+    runSettingStreamHashtags: (app: any) => runSettingStreamHashtags(app),
+    runSettingBookmark: (app: any) => runSettingBookmark(app),
+    runSettingBookmarkNotif: (app: any) => runSettingBookmarkNotif(app),
+    runBookmark: (app: any, arg0: any, arg1: any) => runBookmark(app, arg0, arg1),
+    runAddList: (app: any) => runAddList(app),
+    runRemoveList: (app: any, arg0: any, arg1: any) => runRemoveList(app, arg0, arg1),
+    runExtime: (app: any) => runExtime(app),
+
+    // スクロール/ホイール（debounce ラッパは legacy 残置、本体のみ委譲）。
+    handleWheel: (app: any, e: any) => handleWheel(app, e),
+    handleScrollHome: (app: any, e: any) => handleScrollHome(app, e),
+    handleScrollLocal: (app: any, e: any) => handleScrollLocal(app, e),
+    handleScrollMulti: (app: any, e: any) => handleScrollMulti(app, e),
+    handleScrollNotif: (app: any, e: any) => handleScrollNotif(app, e),
+    handleScrollAcct: (app: any, e: any) => handleScrollAcct(app, e),
+
+    // debounce 対象（ラッパ legacy 残置、本体委譲）。
+    refetchHome: (app: any) => refetchHome(app),
+    refetchLocal: (app: any) => refetchLocal(app),
+    refetchMulti: (app: any) => refetchMulti(app),
+    refetchNotifAll: (app: any) => refetchNotifAll(app),
+    refreshCount: (app: any) => refreshCount(app),
+    checkStreamListText: (app: any) => checkStreamListText(app),
+    checkListProfile: (app: any) => checkListProfile(app),
+
+    // 投稿・メディア・投票・プロフィール系。
+    checkStreamHashtag: (app: any) => checkStreamHashtag(app),
+    actVote: (app: any, a0: any, a1: any) => actVote(app, a0, a1),
+    setVote: (app: any, a0: any, a1: any) => setVote(app, a0, a1),
+    actReport: (app: any, a0: any, a1: any) => actReport(app, a0, a1),
+    actProfile: (app: any) => actProfile(app),
+    actListProfile: (app: any) => actListProfile(app),
+    checkActMedia: (app: any, a0: any) => checkActMedia(app, a0),
+    actMedia: (app: any, a0: any, a1: any, a2: any) => actMedia(app, a0, a1, a2),
+    removeMedia: (app: any, a0: any) => removeMedia(app, a0),
+    saveKatsu: (app: any) => saveKatsu(app),
+    actKatsuShortCut: (app: any) => actKatsuShortCut(app),
+    actKatsu: (app: any, a0: any, a1: any) => actKatsu(app, a0, a1),
+    refreshKatsu: (app: any) => refreshKatsu(app),
+    katsuToDraft: (app: any) => katsuToDraft(app),
+    draftToKatsu: (app: any, a0: any, a1: any) => draftToKatsu(app, a0, a1),
+    checkKatsu: (app: any) => checkKatsu(app),
+    jumpKatsu: (app: any, a0: any, a1: any) => jumpKatsu(app, a0, a1),
+
+    // 認証・設定。
+    fetchToken: (app: any) => fetchToken(app),
+    fetchUser: (app: any) => fetchUser(app),
+    loadConf: (app: any) => loadConf(app),
+    saveConf: (app: any) => saveConf(app),
+    resetConf: (app: any) => resetConf(app),
+
+    // ストリーミング（WebSocket 接続/再接続。dedup/再接続の本番修正を維持）。
+    openWsHome: (app: any) => openWsHome(app),
+    reopenWsHome: (app: any, a0: any) => reopenWsHome(app, a0),
+    openWsLocal: (app: any) => openWsLocal(app),
+    reopenWsLocal: (app: any, a0: any) => reopenWsLocal(app, a0),
+    openWsMulti: (app: any) => openWsMulti(app),
+    reopenWsMulti: (app: any, a0: any, a1: any) => reopenWsMulti(app, a0, a1),
+
+    // Discord 連携。
+    handleScrollDiscord: (app: any, e: any) => handleScrollDiscord(app, e),
+    fetchTokenDiscord: (app: any) => fetchTokenDiscord(app),
+    refetchTokenDiscord: (app: any) => refetchTokenDiscord(app),
+    actKatsuDiscord: (app: any) => actKatsuDiscord(app),
+    fetchUserDiscord: (app: any) => fetchUserDiscord(app),
+    fetchSocketDiscord: (app: any) => fetchSocketDiscord(app),
+    fetchDiscord: (app: any) => fetchDiscord(app),
+    openWsDiscord: (app: any) => openWsDiscord(app),
+    reopenWsDiscord: (app: any, a0: any) => reopenWsDiscord(app, a0),
+
     // カラムリセット。
     resetHomeColumn: (app: any) => resetHomeColumn(app),
     resetLocalColumn: (app: any) => resetLocalColumn(app),
@@ -235,7 +513,8 @@ export function registerMigratedMethods(): void {
   window.__kktjsMethods = Object.assign(window.__kktjsMethods || {}, methods);
 }
 
-// import された時点で即実行（legacy が new Vue する前に行う必要がある）。
-// Vue 2 ではコンポーネント/ディレクティブのグローバル登録を new Vue より前に行う。
-registerVueComponentsAndDirectives();
+// import された時点で即実行（legacy が createApp する前に行う必要がある）。
+// Vue 3: コンポーネント/ディレクティブ登録は app-core が createApp 後・mount 前に
+// app インスタンスへ行う（registerVueComponentsAndDirectives(app)）。ここではメソッド
+// レジストリのみ登録する（legacy の created() が初期化中にこれらを参照するため）。
 registerMigratedMethods();

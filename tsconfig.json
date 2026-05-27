@@ -16,5 +16,5 @@
     "isolatedModules": true,
     "useDefineForClassFields": false
   },
-  "include": ["src/**/*.ts"]
+  "include": ["src/**/*.ts", "src/**/*.vue"]
 }

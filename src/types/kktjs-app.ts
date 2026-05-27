@@ -98,7 +98,7 @@ export interface KktjsApp {
   showMedia: boolean;
   modal_media: MediaAttachment | string;
 
-  // ---- メソッド（移行済み/未移行を問わず呼び出せるよう緩く宣言） ----
+  // ---- メソッド（app 経由で相互に呼び出せるよう緩く宣言） ----
   updateWrapperBM(list: Status[], kind: string): void;
   updateFilterBM(list: Status[], kind: string): void;
   popError(body: string, status: number, label: string): void;

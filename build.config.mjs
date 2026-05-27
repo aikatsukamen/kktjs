@@ -15,6 +15,7 @@ export const OUT_JS = `${OUT_DIR}/js/main.js`;
 // バンドルに含めず、import 文を window.<Global> に解決する（external 扱い）。
 //   キー   = import 指定子（例: import Vue from 'vue'）
 //   値     = 実行時のグローバル名（window.Vue など）
+// vue は Vue 3 のグローバルビルド（vue.global.prod.js）を window.Vue として読み込む。
 export const GLOBAL_EXTERNALS = {
   vue: 'Vue',
   lodash: '_',

@@ -9,6 +9,24 @@ declare global {
     _: any;
     emojione: any;
     app: any;
+    // 画像 onerror フォールバック用（inline HTML 属性から参照）。
+    IMG_DUMMY?: string;
+    // 移行した TS メソッドが legacy のモジュールスコープを跨いで参照するブリッジ群。
+    // （legacy が createApp/mount より前に設定する。詳細は legacy/app-core.ts を参照）
+    __kktjsMethods?: Record<string, (...args: any[]) => any>;
+    __kktjsConf?: any;          // open*/auth が参照するデプロイ依存定数・OAuth情報
+    __kktjsAudioContext?: any;  // setNotifSound 用 AudioContext
+    __kktjsMedia?: any;         // checkActMedia/actMedia 共有のメディア処理状態
+    __kktjsStream?: any;        // streaming/discord 用ソケット変数・ST_*・dedupヘルパ
+    kktjsForceReconnectAll?: () => void;
+    // index.html の inline HTML 属性ハンドラ（onDragover/onDrop/onPaste 等）から
+    // 呼ばれる関数群。app-core.ts が window へ公開する（バンドル後もグローバル参照可能）。
+    changeAppActive?: (active: boolean) => void;
+    importclick?: (...args: any[]) => any;
+    importdragenter?: (e: any) => any;
+    importdragover?: (e: any) => any;
+    importdrop?: (e: any) => any;
+    importpaste?: (e: any) => any;
     // 拡大表示メディア保存は廃止（長押し/右クリックの標準保存に一本化）。
     // ストリーミング用 WebSocket（core/streaming.ts が管理）
     wsHome: WebSocket | null;

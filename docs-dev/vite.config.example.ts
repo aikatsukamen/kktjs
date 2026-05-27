@@ -1,19 +1,12 @@
-// vite.config.example.ts — Vue 3 移行時に使う Vite 設定の雛形（現状は未使用の参考ファイル）。
+// vite.config.example.ts — 旧・参考用の雛形（**現在は実装済みの ../vite.config.ts が本番**）。
 //
-// 使い方（Vue 3 移行時）:
-//   1. 依存を追加:  npm i -D vite @vitejs/plugin-vue
-//   2. このファイルをリポジトリ直下へ `vite.config.ts` としてコピー。
-//   3. package.json の scripts を Vite へ差し替え（下部コメント参照）。
-//   4. esbuild の build.mjs / build.config.mjs は不要になったら削除。
+// 注意: Vue 3 + Vite + SFC は導入済み。実際に使われているのはリポジトリ直下の
+// `vite.config.ts`（CDN グローバル external 維持・lib モードで docs/js/main.js 出力・
+// SFC の named import を window.Vue から再 export する仮想モジュールを実装）。本ファイルは
+// 当初の設計メモとして残してあるだけで、ビルドには使われない（tsconfig include 対象外）。
+// 実装の詳細は ../vite.config.ts と docs-dev/VUE3_MIGRATION.md「Vite + SFC 導入」を参照。
 //
-// 方針:
-//   - 出力先は従来どおり docs/（GitHub Pages 公開元、CI でデプロイ）。
-//   - 静的ファイルは public/ をそのまま配信・コピー（Vite 標準の publicDir）。
-//   - Vue / lodash / emojione を CDN グローバルのまま使い続けるなら external 指定。
-//     （SFC 化と同時に Vue を npm 依存へ取り込む場合は external から外し、import に統一する）
-//
-// 注意: 下記は型注釈付きの参考実装。拡張子は .example.ts としてあり、tsconfig の
-//        include（src/**/*.ts）対象外なので型チェック・ビルドには影響しない。
+// 以下は当初の雛形（lib モードの globals 指定など、実装では仮想モジュール方式に変更した）。
 
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';

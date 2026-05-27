@@ -1,0 +1,50 @@
+{
+  // kktjs 開発用 Dev Container（VSCode / GitHub Codespaces）。
+  // Node 24 LTS（CI の .github/workflows/deploy.yml と一致）で TypeScript + Vue 3 + Vite を扱う。
+  // 詳しい使い方は ../docs-dev/DEVCONTAINER.md を参照。
+  "name": "kktjs (Node 24 LTS / Vite + Vue 3)",
+
+  // 公式 devcontainer イメージ（Node 24 LTS + npm + 一般的な開発ツール込み）。
+  // OS を bookworm（Debian 12）に固定して再現性を確保。素の :24 でも可。
+  // 追加の Dockerfile は不要。カスタマイズが必要になったら build.dockerfile へ切替可能。
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:24-bookworm",
+
+  // コンテナ作成後に依存をインストール（package-lock.json に忠実な ci を使う）。
+  // lock とズレている環境向けに、ci が失敗したら install にフォールバックする。
+  "postCreateCommand": "npm ci || npm install",
+
+  // 開発サーバ（npm run dev → http://localhost:5180/）のポートを自動フォワード。
+  "forwardPorts": [5180],
+  "portsAttributes": {
+    "5180": {
+      "label": "kktjs dev (Vite watch + preview)",
+      "onAutoForward": "notify"
+    }
+  },
+
+  "customizations": {
+    "vscode": {
+      // 推奨拡張（Vue 3 SFC / Lint / 整形 / .editorconfig）。
+      "extensions": [
+        "Vue.volar",                 // Vue 公式（SFC の言語サポート・型）
+        "dbaeumer.vscode-eslint",    // ESLint
+        "EditorConfig.EditorConfig", // .editorconfig 準拠
+        "esbenp.prettier-vscode"     // Prettier（任意。設定があれば使う）
+      ],
+      "settings": {
+        // ワークスペースの TypeScript を使う（vue-tsc と整合）。
+        "typescript.tsdk": "node_modules/typescript/lib",
+        "typescript.enablePromptUseWorkspaceTsdk": true,
+        // 改行コードを LF に統一（.gitattributes / forceConsistentCasing と整合）。
+        "files.eol": "\n",
+        // .vue を Vue 言語として扱う。
+        "files.associations": {
+          "*.vue": "vue"
+        }
+      }
+    }
+  },
+
+  // 既定の作業ユーザ（公式イメージの非 root ユーザ）。
+  "remoteUser": "node"
+}

@@ -3,13 +3,14 @@
 //
 // 役割:
 //  1. legacy/app-core を読み込んでアプリ本体（Vueインスタンス app）を起動する。
-//     ※ app-core はトップレベルで `new Vue(...)` を実行し、window へ公開する。
+//     ※ app-core はトップレベルで `Vue.createApp(...).mount('#app')` を実行し、
+//        mount の戻り値（公開インスタンス）を window.app へ公開する。
 //  2. 型付きで切り出し済みの機能を初期化・公開する。
 //  3. index.html の inline ハンドラ/テンプレートから参照される関数を window へ。
 //
-// 段階移行の指針: legacy/app-core.js のメソッドを 1 つずつ src/ 配下の型付き
-// モジュールへ移し、ここで読み込む形に置き換えていく。移行が完了したら
-// app-core.js は縮小・削除できる。
+// メソッドの TS 移行は完了済み（全 257 件）。legacy/app-core.ts には Vue ハーネス
+// （data/created/watch/computed）、共有 kktjs* 関数、モジュールグローバル、window
+// ブリッジのみが残る。各メソッドは window.__kktjsMethods へ委譲する薄いスタブ。
 // =============================================================================
 
 // (0) 移行済みメソッドを登録する。legacy の created() が初期化中に呼ぶため、
@@ -18,7 +19,7 @@ import './core/register-methods';
 
 // (1) アプリ本体（副作用で window.app を生成）。レジストリ登録の後に読み込む。
 // 型定義 types/globals.d.ts は tsconfig の include で自動的に拾われる。
-import './legacy/app-core.js';
+import './legacy/app-core';
 
 // (2) 型付きで切り出した機能
 import { initViewportHeight } from './features/viewport-height';
