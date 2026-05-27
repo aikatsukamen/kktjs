@@ -60,5 +60,5 @@ npm run preview    # docs/ を vite preview で配信
   フォールバック付き。手動なら `npm install` で `package-lock.json` を更新し直す。
 - **ポート 5180 が開かない**: VSCode の「ポート」パネルで 5180 が転送されているか確認。
   Vite dev サーバ起動直後はまだ準備中のことがあるので数秒待つ。
-- **`.vue` の型/補完が効かない**: 拡張 `Vue.volar` が有効か、`typescript.tsdk` が
+- **`.vue` の型/補完が効かない**: 拡張 `Vue.volar` が有効か、`js/ts.tsdk.path` が
   `node_modules/typescript/lib` を指しているか確認（`devcontainer.json` で設定済み）。

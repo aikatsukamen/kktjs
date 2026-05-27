@@ -13,11 +13,11 @@
   // lock とズレている環境向けに、ci が失敗したら install にフォールバックする。
   "postCreateCommand": "npm ci || npm install",
 
-  // 開発サーバ（npm run dev → http://localhost:5180/）のポートを自動フォワード。
+  // 開発サーバ（npm run dev → Vite HMR、http://localhost:5180/）のポートを自動フォワード。
   "forwardPorts": [5180],
   "portsAttributes": {
     "5180": {
-      "label": "kktjs dev (Vite watch + preview)",
+      "label": "kktjs dev (Vite HMR)",
       "onAutoForward": "notify"
     }
   },
@@ -33,8 +33,9 @@
       ],
       "settings": {
         // ワークスペースの TypeScript を使う（vue-tsc と整合）。
-        "typescript.tsdk": "node_modules/typescript/lib",
-        "typescript.enablePromptUseWorkspaceTsdk": true,
+        // 新しいキー名（旧 typescript.tsdk / typescript.enablePromptUseWorkspaceTsdk は非推奨）。
+        "js/ts.tsdk.path": "node_modules/typescript/lib",
+        "js/ts.tsdk.promptToUseWorkspaceVersion": true,
         // 改行コードを LF に統一（.gitattributes / forceConsistentCasing と整合）。
         "files.eol": "\n",
         // .vue を Vue 言語として扱う。
