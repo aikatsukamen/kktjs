@@ -1,6 +1,6 @@
 {
   "name": "kktjs",
-  "version": "1.7.1",
+  "version": "1.8.0",
   "description": "キラキラッター向けカスタム Web クライアント（TypeScript / Vue 3 版）",
   "type": "module",
   "engines": {
@@ -9,19 +9,19 @@
   "//engines": "Node 20 は 2026年4月で EOL。開発・CI とも Node 24 LTS（Krypton、〜2028/4）を使う。CI（.github/workflows/deploy.yml）と Dev Container（.devcontainer/devcontainer.json）も Node 24 に合わせてある。",
   "scripts": {
     "build": "vite build",
-    "dev": "node dev.mjs",
-    "preview": "vite preview --outDir docs",
-    "typecheck": "vue-tsc --noEmit",
-    "build:esbuild": "node build.mjs --minify --clean"
+    "dev": "vite",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit"
   },
-  "//build-notes": "本番ビルドは Vite（vite.config.ts）。SFC(.vue) は @vitejs/plugin-vue がコンパイルする。esbuild 系（build:esbuild / build.mjs）は SFC 非対応のフォールバックとして残置（.vue を使うと失敗する）。共有設定は build.config.mjs（Vite/esbuild 双方が参照）。dev は Vite watch ビルド + 軽量プレビュー（dev.mjs）。",
+  "//build-notes": "Vite 標準のエントリ方式。index.html（プロジェクトルート）が <script type=module src=/src/main.ts> を読み、Vue と SFC(.vue) をバンドルする。npm run dev は HMR 付き Vite dev サーバ（http://localhost:5180/）。設定は vite.config.ts のみ（旧 build.mjs / build.config.mjs / dev.mjs は廃止）。lodash / emojione は CDN グローバルのまま external。",
   "//vue3-migration": "Vue 3 + Vite + SFC 導入は完了済み（vendor は vue.global.prod.js を CDN グローバルとして external 維持、createApp/mount 方式、SFC は src/components/*.vue）。完全な HMR が必要なら index.html を Vite エントリ方式へ作り替える（CDN をやめ vue を import に統一）。詳細は docs-dev/VUE3_MIGRATION.md。",
+  "dependencies": {
+    "vue": "^3.5.34"
+  },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.4",
-    "esbuild": "^0.28.0",
     "typescript": "^6.0.3",
     "vite": "^5.4.21",
-    "vue": "^3.5.34",
     "vue-tsc": "^2.2.12"
   },
   "license": "MIT"

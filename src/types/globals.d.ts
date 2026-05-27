@@ -1,11 +1,11 @@
 // 外部 <script> で読み込まれるライブラリ・グローバル変数の型宣言。
-// Vue / lodash(_) / emojione は index.html で個別読み込みされる。
+// lodash(_) / emojione は index.html で個別 <script> 読み込みされる CDN グローバル。
+// Vue は npm 依存から import（Vite がバンドル）するため、もはや window グローバルではない。
 
-// Vue 2 は型パッケージを入れず、最小限の any 互換で扱う（段階移行のため）。
-// 厳密化したい場合は @types/vue (v2) を devDependencies に追加して差し替え可能。
 declare global {
   interface Window {
-    Vue: any;
+    // Vue は CDN グローバルではなくなった（import 'vue' でバンドル）。後方互換のため optional 宣言のみ残す。
+    Vue?: any;
     _: any;
     emojione: any;
     app: any;

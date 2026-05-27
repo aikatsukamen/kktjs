@@ -17,8 +17,14 @@
 // Vue 3: コンポーネント/ディレクティブ登録は app インスタンスへ行う（末尾の mount 前）。
 import { registerVueComponentsAndDirectives } from '../app/vue-setup';
 
+// Vue は npm 依存から import（Vite が SFC とともにバンドル）。createApp 等を名前空間で使う。
+import * as Vue from 'vue';
+
+// 配信場所非依存のベースパス導出（単一実装）。
+import { getBasePath } from '../core/base-path';
+
 // 外部 <script> 由来のグローバル（index.html 読み込み）。型は globals.d.ts も参照。
-declare const Vue: any;
+// lodash(_) / emojione は引き続き CDN グローバル（external）。
 declare const _: any;
 declare function addToHomescreen(opts: any): void;
 // 元コードが swipedetect 内で代入する暗黙のグローバル（読み出しは無いが挙動維持のため宣言）。
@@ -26,21 +32,9 @@ declare var dist: any;
 
 const BOOP = 'sounds/boop.mp3';
 const BOOP_EX = 'sounds/boop.mp3';
-// 配信場所に依存しないよう、main.js の位置からベースパスを導出して画像パスを組む。
-// （独自ドメインのルート配信やサブパス配信でも壊れないようにするための変更）
-const __kktjsBase = (function () {
-  try {
-    const b = document.querySelector('base[href]') as HTMLBaseElement | null;
-    if (b) return new URL(b.href).pathname.replace(/[^/]*$/, '');
-    const s = document.querySelector('script[src*="js/main.js"]') as HTMLScriptElement | null;
-    if (s && s.src) {
-      const p = new URL(s.src).pathname;
-      const i = p.lastIndexOf('/js/');
-      if (i !== -1) return p.slice(0, i) + '/';
-    }
-  } catch (e) {}
-  return location.pathname.replace(/[^/]*$/, '') || '/';
-})();
+// 配信場所に依存しないベースパス導出は core/base-path.ts に一本化（import.meta.url ベース。
+// Vite の assets/index-[hash].js の位置や <base href> から検出。旧 js/main.js 検出も後方互換で残置）。
+const __kktjsBase = getBasePath();
 const IMG_DUMMY = __kktjsBase + 'img/missing_header.png';
 
 // ストリーミング受信投稿の重複挿入ガード。

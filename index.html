@@ -9,9 +9,7 @@
   <link rel="stylesheet" href="css/style.css?v=0926">
   <link rel="stylesheet" href="css/font-awesome.min.css">
   <link rel="stylesheet" href="css/addtohomescreen.css">
-  <!-- Vite ビルドが SFC(.vue) の <style scoped> を抽出して出力する CSS（lib モードは style.css 固定名）。
-       SFC を使わない構成では空/未生成のことがあるため、存在しなくても無害（404 は表示に影響しない）。 -->
-  <link rel="stylesheet" href="style.css">
+  <!-- SFC(.vue) の <style scoped> は Vite が自動でバンドル・注入する（手動 link 不要）。 -->
   <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta name="Description" content="キラキラッターをもっと素敵にするWebクライアント">
   <meta content="#000" name="theme-color">
@@ -3717,12 +3715,13 @@
     </div><!-- /.color theme wrapper -->
   </div>
 
-  <script src="js/vue.min.js"></script>
+  <!-- CDN グローバル（Vue 以外）。Vue は src/main.ts → import 'vue' で Vite がバンドルする。 -->
   <script src="js/addtohomescreen.min.js"></script>
   <script src="js/inobounce.min.js"></script>
   <script src="js/emojione.js"></script>
   <script src="js/lodash.min.js"></script>
-  <script src="js/main.js?v=0926"></script>
+  <!-- アプリ本体（Vite エントリ。Vue と SFC を含めてバンドル / dev では HMR）。 -->
+  <script type="module" src="/src/main.ts"></script>
   <script src="js/picker.js" async></script>
   <script>
     if ('serviceWorker' in navigator) {

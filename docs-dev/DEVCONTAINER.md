@@ -23,7 +23,7 @@ Codespaces の場合は GitHub 上で「Code → Codespaces → Create codespace
 ## 開発コマンド（コンテナ内ターミナル）
 
 ```bash
-npm run dev        # Vite watch ビルド + プレビュー（http://localhost:5180/）
+npm run dev        # HMR 付き Vite dev サーバ（http://localhost:5180/）
 npm run build      # 本番ビルド（docs/ を生成）
 npm run typecheck  # vue-tsc 型チェック（.ts + .vue）
 npm run preview    # docs/ を vite preview で配信
@@ -31,14 +31,13 @@ npm run preview    # docs/ を vite preview で配信
 
 `npm run dev` を起動するとポート **5180** が自動フォワードされ、VSCode が通知する。
 ブラウザで `http://localhost:5180/` を開くと動作確認できる。SFC（`.vue`）や `src/` を
-編集すると `docs/` が再ビルドされるので、**ブラウザを手動リロード**すると反映される
-（完全な HMR ではない理由は [`VUE3_MIGRATION.md`](VUE3_MIGRATION.md)「dev サーバの制限」参照）。
+編集すると **HMR で即座に反映**される（手動リロード不要）。
 
 ## 構成の要点
 
 - **ベースイメージ**: `mcr.microsoft.com/devcontainers/typescript-node:24-bookworm`
   （Node 24 LTS「Krypton」。CI の `.github/workflows/deploy.yml` と一致させてある）。追加 Dockerfile は不要。
-- **ポート**: 5180（dev サーバ）を `forwardPorts` で自動公開。`dev.mjs` は `0.0.0.0` で
+- **ポート**: 5180（dev サーバ）を `forwardPorts` で自動公開。Vite dev サーバは `vite.config.ts` の `server.host: 0.0.0.0` で
   待ち受けるため、コンテナ外（ホスト/Codespaces）からアクセスできる。
 - **推奨拡張**（自動インストール）: Vue 公式 `Vue.volar`（SFC 言語サポート）、`ESLint`、
   `EditorConfig`、`Prettier`。
@@ -60,6 +59,6 @@ npm run preview    # docs/ を vite preview で配信
 - **`npm ci` が lock 不整合で失敗**: `postCreateCommand` は `npm ci || npm install` の
   フォールバック付き。手動なら `npm install` で `package-lock.json` を更新し直す。
 - **ポート 5180 が開かない**: VSCode の「ポート」パネルで 5180 が転送されているか確認。
-  `dev.mjs` が起動しきる前（初回ビルド中）はまだ配信されないので数秒待つ。
+  Vite dev サーバ起動直後はまだ準備中のことがあるので数秒待つ。
 - **`.vue` の型/補完が効かない**: 拡張 `Vue.volar` が有効か、`typescript.tsdk` が
   `node_modules/typescript/lib` を指しているか確認（`devcontainer.json` で設定済み）。

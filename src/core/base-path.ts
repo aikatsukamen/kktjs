@@ -11,9 +11,10 @@ let cachedBase: string | null = null;
  * アプリのベースパス（末尾スラッシュ付き、例 "/kktjs/" や "/"）を返す。
  * 優先順位:
  *   1. <base href> があればそのパス部分
- *   2. 読み込まれている main.js の <script src> の URL からディレクトリを2階層遡る
- *      （…/js/main.js → アプリルート）
- *   3. 取得できなければ location.pathname のディレクトリ部
+ *   2. このモジュール自身の URL（import.meta.url）から導出
+ *      （Vite 生成の …/<base>/assets/index-[hash].js → /assets/ の手前がアプリルート）
+ *   3. 読み込まれている script の src からの導出（…/assets/ または …/js/main.js）
+ *   4. 取得できなければ location.pathname のディレクトリ部
  */
 export function getBasePath(): string {
   if (cachedBase != null) return cachedBase;
@@ -29,27 +30,52 @@ export function getBasePath(): string {
     }
   }
 
-  // 2) main.js の場所から導出（…/<base>/js/main.js）
+  // 2) このモジュール自身の URL から導出（Vite: …/<base>/assets/index-[hash].js）。
+  //    最も確実な方法。バンドルされた本モジュールの位置からアプリルートを割り出す。
+  try {
+    const meta = import.meta as unknown as { url?: string };
+    if (meta && meta.url) {
+      const fromMeta = baseFromAssetUrl(meta.url);
+      if (fromMeta) {
+        cachedBase = fromMeta;
+        return cachedBase;
+      }
+    }
+  } catch {
+    /* import.meta 非対応環境などはフォールバックへ */
+  }
+
+  // 3) script の src から導出（…/assets/index-*.js または 後方互換の …/js/main.js）。
   const script =
+    (document.querySelector('script[src*="/assets/"]') as HTMLScriptElement | null) ||
     (document.querySelector('script[src*="js/main.js"]') as HTMLScriptElement | null) ||
     (document.currentScript as HTMLScriptElement | null);
   if (script && script.src) {
-    try {
-      const p = new URL(script.src).pathname; // 例: /kktjs/js/main.js
-      const idx = p.lastIndexOf('/js/');
-      if (idx !== -1) {
-        cachedBase = ensureTrailingSlash(p.slice(0, idx));
-        return cachedBase;
-      }
-    } catch {
-      /* fallthrough */
+    const fromScript = baseFromAssetUrl(script.src);
+    if (fromScript) {
+      cachedBase = fromScript;
+      return cachedBase;
     }
   }
 
-  // 3) 最後の手段: 現在のパスのディレクトリ部
+  // 4) 最後の手段: 現在のパスのディレクトリ部
   const dir = location.pathname.replace(/[^/]*$/, '');
   cachedBase = ensureTrailingSlash(dir || '/');
   return cachedBase;
+}
+
+/** アセット URL（…/<base>/assets/... または …/<base>/js/main.js）からアプリルートを切り出す。 */
+function baseFromAssetUrl(url: string): string | null {
+  try {
+    const p = new URL(url).pathname;
+    const ai = p.lastIndexOf('/assets/');
+    if (ai !== -1) return ensureTrailingSlash(p.slice(0, ai));
+    const ji = p.lastIndexOf('/js/');
+    if (ji !== -1) return ensureTrailingSlash(p.slice(0, ji));
+  } catch {
+    /* noop */
+  }
+  return null;
 }
 
 /** ベースパスからの相対資産パスを絶対URLパスに解決する。 */
