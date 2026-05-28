@@ -78,7 +78,14 @@ export function openWsHome(app: KktjsApp): void {
                         thisObj.homes.unshift(_0x1c8865);
                         thisObj.$forceUpdate();
                         thisObj.$nextTick(function () {
-                            thisObj.openImage(_0x1c8865);
+                            // Vue 3: 生オブジェクト直接変更では reactivity が発火しないため、
+                            // 配列経由（reactive proxy）でアクセスして openImage を呼ぶ。これをしないと
+                            // 最新 1 件の loading_avatar=true が解除されず、アバター部分が空のままになる。
+                            var _r = thisObj.homes[0];
+                            if (!_r || _r.id !== _0x1c8865.id) {
+                                _r = thisObj.homes.find(function (s) { return s && s.id === _0x1c8865.id; });
+                            }
+                            if (_r) thisObj.openImage(_r);
                         });
                     } else if ("notification" == _0x109fd1.event) {
                         if (null == thisObj.notifs[0] || null != thisObj.notifs[0] && thisObj.notif_id > KKT1_LASTID && thisObj.notif_id > _0x1c8865.id) {
@@ -118,7 +125,12 @@ export function openWsHome(app: KktjsApp): void {
                         thisObj.notifs.unshift(_0x1c8865);
                         thisObj.$forceUpdate();
                         thisObj.$nextTick(function () {
-                            thisObj.openImage(_0x1c8865);
+                            // Vue 3: 生オブジェクト直接変更では reactivity が発火しないため proxy 経由で。
+                            var _r = thisObj.notifs[0];
+                            if (!_r || _r.id !== _0x1c8865.id) {
+                                _r = thisObj.notifs.find(function (s) { return s && s.id === _0x1c8865.id; });
+                            }
+                            if (_r) thisObj.openImage(_r);
                         });
                         var _0x2ff618 = 0 != _0x1c8865.account.display_name.length ? _0x1c8865.account.display_name : _0x1c8865.account.acct;
                         var _0x172d00 = _0x1c8865.type == 'follow' ? 'you' : "your katsu";
@@ -234,7 +246,12 @@ export function openWsLocal(app: KktjsApp): void {
                         thisObj.locals.unshift(_0x4c2dc9);
                         thisObj.$forceUpdate();
                         thisObj.$nextTick(function () {
-                            thisObj.openImage(_0x4c2dc9);
+                            // Vue 3: 生オブジェクト直接変更では reactivity が発火しないため proxy 経由で。
+                            var _r = thisObj.locals[0];
+                            if (!_r || _r.id !== _0x4c2dc9.id) {
+                                _r = thisObj.locals.find(function (s) { return s && s.id === _0x4c2dc9.id; });
+                            }
+                            if (_r) thisObj.openImage(_r);
                         });
                     } else if ('delete' == _0x43b0f1.event) {
                         thisObj.updateDelete(_0x43b0f1.payload);
@@ -334,7 +351,12 @@ export function openWsMulti(app: KktjsApp): void {
                         thisObj.multis.unshift(_0x3e1dc6);
                         thisObj.$forceUpdate();
                         thisObj.$nextTick(function () {
-                            thisObj.openImage(_0x3e1dc6);
+                            // Vue 3: 生オブジェクト直接変更では reactivity が発火しないため proxy 経由で。
+                            var _r = thisObj.multis[0];
+                            if (!_r || _r.id !== _0x3e1dc6.id) {
+                                _r = thisObj.multis.find(function (s) { return s && s.id === _0x3e1dc6.id; });
+                            }
+                            if (_r) thisObj.openImage(_r);
                         });
                     } else if ("delete" == _0x2b6070.event) {
                         thisObj.updateDelete(_0x2b6070.payload);
