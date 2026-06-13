@@ -78,6 +78,10 @@ export default defineConfig({
     emptyOutDir: true,
     target: 'es2017',
     sourcemap: true,
+    // heic2any（動的 import される HEIC→JPEG 変換ライブラリ、~1.35MB）の警告を抑制。
+    // メインバンドルの肥大は別途 monitor するが、heic2any は HEIC ファイル投入時のみ
+    // 取得される別チャンクで通常使用には影響しないため、警告閾値を緩和する。
+    chunkSizeWarningLimit: 1500,
     // index.html（プロジェクトルート）を起点にバンドル。Vite 標準の HTML エントリ方式。
     // rollupOptions.input を明示しなくてもルートの index.html が既定エントリになる。
   },

@@ -201,11 +201,53 @@ export function actListProfile(app: KktjsApp): void {
             request.send(encodeHtmlForm(_0x13f7a7));
 }
 
+// HEIC/HEIF を JPEG File に変換する（heic2any を動的 import）。
+// 変換に失敗した場合は元 File をそのまま返す（呼び出し側で UnSupport Media になる挙動を維持）。
+// File.type が空のことがある iOS Safari ケースに備え、拡張子でも判定する。
+async function maybeConvertHeic(file: File): Promise<File> {
+  const lowerName = (file.name || '').toLowerCase();
+  const isHeic = /^image\/hei[fc]/.test(file.type) || /\.heic$|\.heif$/.test(lowerName);
+  if (!isHeic) return file;
+  try {
+    // 動的 import: 通常ロード時はバンドルに含まれない（HEIC を選んだ瞬間に取得される）。
+    const mod: any = await import('heic2any');
+    const heic2any = mod.default || mod;
+    const out = await heic2any({ blob: file, toType: 'image/jpeg', quality: 0.9 });
+    // HEIC sequence の場合は配列で返る。先頭フレームのみ採用。
+    const blob: Blob = Array.isArray(out) ? out[0] : out;
+    // ファイル名の拡張子を .jpg に置換（FormData の filename に使われる）。
+    const newName = file.name ? file.name.replace(/\.(heic|heif)$/i, '.jpg') : 'image.jpg';
+    return new File([blob], newName, { type: 'image/jpeg', lastModified: file.lastModified });
+  } catch (e) {
+    // 変換失敗（破損 HEIC、メモリ不足等）。元 File を返して既存の UnSupport Media フローに任せる。
+    return file;
+  }
+}
+
 export function checkActMedia(app: KktjsApp, arg0: any): void {
   const a = app as A;
   const m = (window as any).__kktjsMedia;
-            m.mediaFile = arg0[0];
+            const inputFile: File = arg0[0];
             (document.getElementById("uploader") as HTMLInputElement).value = null as any;
+            // HEIC/HEIF は最初に JPEG へ変換してから既存パイプラインに乗せる（縮小ロジックも自動的に効く）。
+            const lowerName = (inputFile.name || '').toLowerCase();
+            const looksLikeHeic = /^image\/hei[fc]/.test(inputFile.type) || /\.heic$|\.heif$/.test(lowerName);
+            if (looksLikeHeic) {
+                a.result_text = '[Media] HEIC → JPEG に変換しています…';
+                maybeConvertHeic(inputFile).then(function (converted) {
+                    // 変換成功時は a.result_text を消す。失敗時（converted === inputFile）は後続の MIME チェックで弾かれる。
+                    if (converted !== inputFile) a.result_text = '';
+                    m.mediaFile = converted;
+                    continueCheckActMedia(a, m);
+                });
+                return;
+            }
+            m.mediaFile = inputFile;
+            continueCheckActMedia(a, m);
+}
+
+// checkActMedia の続き（HEIC 変換後の本処理）を分離。
+function continueCheckActMedia(a: A, m: any): void {
             if (!/^(image\/(png|jpeg|gif|bmp|webp)|video\/(mp4|webm|quicktime))$/.test(m.mediaFile.type)) {
                 a.result_text = "UnSupport Media (" + m.mediaFile.type + ')';
                 return;
@@ -231,24 +273,66 @@ export function checkActMedia(app: KktjsApp, arg0: any): void {
                     a.actMedia(m.fileReader.result, m.mediaFile, false);
                 } else {
                     m.imgElement.src = m.fileReader.result;
+                    m.image.onerror = function () {
+                        // 画像読込失敗（破損ファイル・形式不一致・iOS の Canvas/Image サイズ制限超過など）。
+                        // 縮小せず元ファイルでアップロードを試みる（サーバ側で弾かれても明示的なエラーになる）。
+                        a.result_text = '[Media] 画像の解析に失敗したため、縮小せずに送信します。';
+                        a.actMedia(m.fileReader.result, m.mediaFile, false);
+                    };
                     m.image.onload = function () {
-                        if ('hd' == a.optConvMedia) {
-                            const longSide = m.image.width > m.image.height ? m.image.width : m.image.height;
+                        // --- (3) 入力検証: width/height がゼロや異常値（Image load 失敗の残骸）なら早期離脱 ---
+                        const iw = m.image.naturalWidth || m.image.width || 0;
+                        const ih = m.image.naturalHeight || m.image.height || 0;
+                        if (iw <= 0 || ih <= 0 || !isFinite(iw) || !isFinite(ih)) {
+                            a.result_text = '[Media] 画像サイズを取得できないため、縮小せずに送信します。';
+                            a.actMedia(m.fileReader.result, m.mediaFile, false);
+                            return;
+                        }
+
+                        // --- resizeScale 計算（既存ロジック）---
+                        // 新設定 optMaxImageLen（数値、px）が有効（>0）なら、長辺がこの値を超える画像を縮小する。
+                        // GIF / 動画は対象外（呼ばれない）。これは optConvMedia より優先される。
+                        if (a.optMaxImageLen && a.optMaxImageLen > 0) {
+                            const longSide = iw > ih ? iw : ih;
+                            m.resizeScale = longSide > a.optMaxImageLen ? a.optMaxImageLen / longSide : 1;
+                        } else if ('hd' == a.optConvMedia) {
+                            const longSide = iw > ih ? iw : ih;
                             m.resizeScale = IMAGE_MAXLEN / longSide < 1 ? IMAGE_MAXLEN / longSide : 1;
                         } else if ('off' != a.optConvMedia) {
-                            m.resizeScale = IMAGE_MAXPIXEL / (m.image.width * m.image.height) < 1 ? Math.pow(IMAGE_MAXPIXEL / (m.image.width * m.image.height), 1 / 2) : 1;
+                            m.resizeScale = IMAGE_MAXPIXEL / (iw * ih) < 1 ? Math.pow(IMAGE_MAXPIXEL / (iw * ih), 1 / 2) : 1;
                         } else {
                             m.resizeScale = 1;
                         }
-                        if (m.fileType != "img_ex" && ('off' == a.optConvMedia || m.resizeScale == 1)) {
+                        // 縮小不要かつ非変換フォーマット（jpeg/png）なら元ファイルをそのままアップロード。
+                        // bmp/webp（img_ex）は受け付けるサーバが少ないため、たとえスケール 1 でも canvas 経由で JPEG 化する。
+                        if (m.fileType != "img_ex" && m.resizeScale == 1) {
                             a.actMedia(m.fileReader.result, m.mediaFile, false);
-                        } else {
-                            m.canvasElement.width = m.image.width * m.resizeScale;
-                            m.canvasElement.height = m.image.height * m.resizeScale;
-                            m.ctx.drawImage(m.image, 0, 0, m.image.width, m.image.height, 0, 0, m.image.width * m.resizeScale, m.image.height * m.resizeScale);
-                            m.MediaBinary = m.canvasElement.toDataURL('image/jpeg');
+                            return;
+                        }
+                        // --- (4) canvas 変換は try/catch で囲む（toDataURL/drawImage の例外で action_lock を残さない）---
+                        try {
+                            const tw = Math.max(1, Math.round(iw * m.resizeScale));
+                            const th = Math.max(1, Math.round(ih * m.resizeScale));
+                            m.canvasElement.width = tw;
+                            m.canvasElement.height = th;
+                            // --- (2) PNG 透過部分が JPEG 化で黒になる仕様未定義の挙動を回避するため白背景を塗る ---
+                            // （PNG/WebP の alpha チャンネルを持つ画像で、Safari/Chrome/Firefox 間の挙動差をなくす）
+                            m.ctx.fillStyle = '#ffffff';
+                            m.ctx.fillRect(0, 0, tw, th);
+                            m.ctx.drawImage(m.image, 0, 0, iw, ih, 0, 0, tw, th);
+                            // --- (1) JPEG 品質を明示（ブラウザ既定値の差 0.8〜0.92 をなくして予測可能なファイルサイズに）---
+                            m.MediaBinary = m.canvasElement.toDataURL('image/jpeg', 0.85);
+                            if (!m.MediaBinary || m.MediaBinary === 'data:,') {
+                                throw new Error('toDataURL returned empty (canvas size limit or memory issue)');
+                            }
                             m.MediaBlob = base64ToBlob(m.MediaBinary);
                             a.actMedia(m.MediaBinary, m.MediaBlob, true);
+                        } catch (e: any) {
+                            // canvas サイズ制限（iOS Safari 等）・OOM などで失敗した場合は、縮小をあきらめて
+                            // 元ファイルをそのまま送信。action_lock を残さないようにここで明示的に解除。
+                            a.action_lock = '';
+                            a.result_text = '[Media] 画像の縮小に失敗（' + (e && e.message ? e.message : 'unknown') + '）。縮小せずに送信します。';
+                            a.actMedia(m.fileReader.result, m.mediaFile, false);
                         }
                     };
                     m.image.src = m.imgElement.src;

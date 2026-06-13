@@ -3391,6 +3391,25 @@
               <label v-else for="keepform" class="button color-wh bgcolor">OFF</label>
             </div>
 
+            <h3><i class="fa fa-fw fa-picture-o"></i> Media: 添付画像の縮小について決めてね </h3>
+            <div class="action-bar">
+              <div class="flex end">
+                <span>最大長辺(px)</span>
+                <small v-on:click="optMaxImageLen = 0;" class="button full color-wh bgcolor" :class="{ 'bgcolor-pk': 0 == optMaxImageLen }">無効</small>
+                <small v-on:click="optMaxImageLen = 4096;" class="button full color-wh bgcolor" :class="{ 'bgcolor-pk': 4096 == optMaxImageLen }">4096</small>
+                <small v-on:click="optMaxImageLen = 2048;" class="button full color-wh bgcolor" :class="{ 'bgcolor-pk': 2048 == optMaxImageLen }">2048</small>
+                <small v-on:click="optMaxImageLen = 1280;" class="button full color-wh bgcolor" :class="{ 'bgcolor-pk': 1280 == optMaxImageLen }">1280</small>
+                <small v-on:click="optMaxImageLen = 1024;" class="button full color-wh bgcolor" :class="{ 'bgcolor-pk': 1024 == optMaxImageLen }">1024</small>
+              </div>
+              <div class="flex end">
+                <span>カスタム値(px、64以上で有効)</span>
+                <input type="number" min="0" step="1" v-model.number="optMaxImageLen" placeholder="0=無効" style="width:6em;text-align:right;">
+              </div>
+              <div class="flex end">
+                <small>長辺がこの値を超える画像のみ、JPEG として縮小してアップロードします（GIF/動画は対象外）。0 で無効。</small>
+              </div>
+            </div>
+
             <h3><i class="fa fa-fw fa-check-square-o"></i> Confirm: 確認が必要な動作を選択してね </h3>
             <div class="flex end">
               <small v-on:click="optConfirm['fav'] ^= 1;" class="button full color-wh bgcolor" :class="{ 'bgcolor-pk': 1 == optConfirm['fav'] }">Fav</small>

@@ -111,6 +111,8 @@ export function loadConf(app: KktjsApp): void {
                 a.optAutoLayout = null != a.confs && null != a.confs.autolayout ? a.confs.autolayout : false;
                 a.optKeepForm = null != a.confs && null != a.confs.keepform ? a.confs.keepform : true;
                 a.optConvMedia = null != a.confs && null != a.confs.convmedia ? a.confs.convmedia : '';
+                // 添付画像の最大長辺（数値、px）。未保存なら 0（縮小しない）。
+                a.optMaxImageLen = null != a.confs && null != a.confs.maximagelen ? Number(a.confs.maximagelen) || 0 : 0;
                 a.optThemeTops = null != a.confs && null != a.confs.tops ? a.confs.tops : '';
                 a.optThemeBottoms = null != a.confs && null != a.confs.bottoms ? a.confs.bottoms : '';
                 a.optThemeSound = null != a.confs && null != a.confs.boop ? a.confs.boop : '';
@@ -150,6 +152,7 @@ export function loadConf(app: KktjsApp): void {
                 a.optAutoLayout = false;
                 a.optKeepForm = true;
                 a.optConvMedia = '';
+                a.optMaxImageLen = 0;
                 a.optThemeTops = '';
                 a.optThemeBottoms = '';
                 a.optThemeSound = '';
@@ -176,6 +179,7 @@ export function loadConf(app: KktjsApp): void {
             a.confs.autolayout = a.optAutoLayout;
             a.confs.keepform = a.optKeepForm;
             a.confs.convmedia = a.optConvMedia;
+            a.confs.maximagelen = a.optMaxImageLen;
             a.confs.tops = a.optThemeTops;
             a.confs.bottoms = a.optThemeBottoms;
             a.confs.boop = a.optThemeSound;
@@ -212,6 +216,7 @@ export function saveConf(app: KktjsApp): void {
             a.confs.autolayout = a.optAutoLayout;
             a.confs.keepform = a.optKeepForm;
             a.confs.convmedia = a.optConvMedia;
+            a.confs.maximagelen = a.optMaxImageLen;
             a.confs.tops = a.optThemeTops;
             a.confs.bottoms = a.optThemeBottoms;
             a.confs.boop = a.optThemeSound;
@@ -265,6 +270,7 @@ export function resetConf(app: KktjsApp): void {
             a.optAutoLayout = false;
             a.optKeepForm = true;
             a.optConvMedia = '';
+            a.optMaxImageLen = 0;
             a.optThemeTops = '';
             a.optThemeBottoms = '';
             a.optThemeSound = '';
@@ -290,6 +296,7 @@ export function resetConf(app: KktjsApp): void {
             a.confs.autolayout = a.optAutoLayout;
             a.confs.keepform = a.optKeepForm;
             a.confs.convmedia = a.optConvMedia;
+            a.confs.maximagelen = a.optMaxImageLen;
             a.confs.tops = a.optThemeTops;
             a.confs.bottoms = a.optThemeBottoms;
             a.confs.boop = a.optThemeSound;

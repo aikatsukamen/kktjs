@@ -300,6 +300,9 @@ var __kktjsApp = Vue.createApp({
         'optAutoLayout': false,
         'optKeepForm': true,
         'optConvMedia': '',
+        // 添付画像の最大長辺（px）。0 = 縮小しない / それ以外 = 長辺がこの値を超える画像のみ縮小。
+        // 設定画面（showSetting）のプリセット/カスタム入力から変更する。
+        'optMaxImageLen': 0,
         'optThemeTops': '',
         'optThemeBottoms': '',
         'optThemeSound': '',

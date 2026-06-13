@@ -5,7 +5,7 @@
 // 例: https://example.com/kktjs/ でも https://example.com/ でも自動追従する。
 const base = self.registration ? self.registration.scope : (location.origin + location.pathname.replace(/[^/]*$/, ''));
 
-const key = "v1.8.2_loading_avatar_proxy_1";
+const key = "v1.10.0_heic_convert_1";
 const subkey = "?v=0926";
 console.log("sw: new cache! " + key);
 
