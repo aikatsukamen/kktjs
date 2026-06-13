@@ -260,7 +260,15 @@ function continueCheckActMedia(a: A, m: any): void {
             } else {
                 m.fileType = "mov";
             }
-            if (('off' == a.optConvMedia && m.fileType != "mov" || m.fileType == "gif") && m.mediaFile.size > LIMIT_IMGFILE) {
+            // 8MB 制限を適用するのは「縮小されない画像」と GIF のみ。
+            // 縮小される画像（optMaxImageLen>0 または optConvMedia!='off'）は canvas で JPEG 化されて
+            // サイズが小さくなるため、元ファイルが 8MB を超えていても通す（これが縮小機能の目的）。
+            // GIF は縮小対象外なので従来どおり 8MB 制限。動画は後段の 40MB 制限で扱う。
+            const willDownscale = (a.optMaxImageLen && a.optMaxImageLen > 0) || ('off' != a.optConvMedia);
+            const applies8mb =
+                (m.fileType == "gif") ||
+                ((m.fileType == "img" || m.fileType == "img_ex") && !willDownscale);
+            if (applies8mb && m.mediaFile.size > LIMIT_IMGFILE) {
                 a.result_text = "Images must be less than 8 MB";
                 return;
             }
@@ -309,6 +317,8 @@ function continueCheckActMedia(a: A, m: any): void {
                             a.actMedia(m.fileReader.result, m.mediaFile, false);
                             return;
                         }
+                        // 縮小処理中のフィードバック（iPhone の大きな写真では canvas 処理に時間がかかるため）。
+                        a.result_text = '[Media] 画像を縮小しています…';
                         // --- (4) canvas 変換は try/catch で囲む（toDataURL/drawImage の例外で action_lock を残さない）---
                         try {
                             const tw = Math.max(1, Math.round(iw * m.resizeScale));
@@ -338,6 +348,13 @@ function continueCheckActMedia(a: A, m: any): void {
                     m.image.src = m.imgElement.src;
                 }
             };
+            m.fileReader.onerror = function () {
+                // FileReader が失敗（巨大ファイルでのメモリ不足など）。lock を残さず通知。
+                a.action_lock = '';
+                a.result_text = '[Media] 画像の読み込みに失敗しました。';
+            };
+            // 読み込み開始のフィードバック（大きい画像は readAsDataURL 自体に時間がかかるため）。
+            a.result_text = '[Media] 画像を読み込んでいます…';
             m.fileReader.readAsDataURL(m.mediaFile);
 }
 
