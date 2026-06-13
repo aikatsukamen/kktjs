@@ -1,6 +1,6 @@
 {
   "name": "kktjs",
-  "version": "1.10.2",
+  "version": "1.10.3",
   "description": "キラキラッター向けカスタム Web クライアント（TypeScript / Vue 3 版）",
   "type": "module",
   "engines": {

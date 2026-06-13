@@ -519,7 +519,7 @@
       <template #header>
       <span>
         <div v-if="app_wait_update" class="flex info-wrapper color-wh bgcolor">
-          <div v-on:click="location.reload();" class="flex full">
+          <div v-on:click="reloadForce();" class="flex full">
             <span class="hidden full"><i class="fa fa-fw fa-refresh"></i> {{result_text}}</span>
           </div>
           <div v-on:click="runToast(false);playSound('sound'+optThemeSound);" class="flex color-wh bgcolor">
@@ -2765,7 +2765,7 @@
               <input v-focus v-show="showStreamEdit && !fetch_lock.multiws && !fetch_lock.multi && !fetch_lock.lists" type="text" v-restore-listprofile class="underline-dash" id="list_name" @keyup.enter="actListProfile();" onKeyup="inputListProfile(this)">
               <span v-if="!fetch_lock.multiws && !fetch_lock.multi && !fetch_lock.lists && showStreamEdit" class="flex">
                 <dummy v-if="stream_list.req_profile"></dummy>
-                <span v-else v-on:click="listprofile.name=stream_list.title;checkListProfile();document.getElementById('list_name').value=stream_list.title;toggleStreamEdit();" class="button mini color-wh bgcolor">Cancel</span>
+                <span v-else v-on:click="listprofile.name=stream_list.title;checkListProfile();window.document.getElementById('list_name').value=stream_list.title;toggleStreamEdit();" class="button mini color-wh bgcolor">Cancel</span>
                 <span v-if="stream_list.req_profile" class="button mini color-wh bgcolor"><i class="fa fa-fw fa-spinner fa-pulse"></i></span>
                 <span v-else-if="stream_list_profile_check" v-on:click="actListProfile();" class="color-wh bgcolor-pk button">Save</span>
                 <span v-else class="button mini color-wh bgcolor-disable">Save</span>
@@ -2833,7 +2833,7 @@
               <div v-if="fetch_lock.multiws || fetch_lock.multi || fetch_lock.lists" class="list-link full color-wh bgcolor-disable hidden">{{issue.title}}</div>
               <div v-else v-on:click="showStream=false;runMulti('List', issue.id);reopenWsMulti('List', issue);showMultiOption=false;showStreamEdit=false;" class="list-link full color-wh bgcolor hidden">{{issue.title}}</div>
               <div v-if="fetch_lock.multiws || fetch_lock.multi || fetch_lock.lists" class="list-link color-wh bgcolor-disable"><i class="fa fa-fw fa-user-o"></i></div>
-              <div v-else v-on:click="showStreamEdit=false;stream_list=issue;listprofile.name=stream_list.title;checkListProfile();document.getElementById('list_name').value=stream_list.title;fetchListListedBackup();fetchListListed();" class="list-link color-wh bgcolor"><i class="fa fa-fw fa-user-o"></i></div>
+              <div v-else v-on:click="showStreamEdit=false;stream_list=issue;listprofile.name=stream_list.title;checkListProfile();window.document.getElementById('list_name').value=stream_list.title;fetchListListedBackup();fetchListListed();" class="list-link color-wh bgcolor"><i class="fa fa-fw fa-user-o"></i></div>
             </div>
             <div v-show="showStreamEdit && !isListMax" class="select-container list bgcolor-wh flex center">
               <input type="text" v-restore-list class="underline-dash" id="list_name_new" @keyup.enter="runAddList();" onKeyup="inputList(this);"><br>
@@ -3315,10 +3315,10 @@
           </div>
           <div class="setting-wrapper">
             <div v-if="showDebugVia" class="flex end action-bar">
-              <label v-if="app_wait_update" v-on:click="saveConf();location.reload();" class="button full color-wh bgcolor-pk">Save & Update kktjs</label>
+              <label v-if="app_wait_update" v-on:click="saveConf();reloadForce();" class="button full color-wh bgcolor-pk">Save & Update kktjs</label>
               <label v-else-if="fetch_lock.update" class="button full color-wh bgcolor-disable">Update Check</label>
               <label v-else-if="sw_stat.enabled && sw_stat.controller" v-on:click="serviceWorkerUpdateCheck();" class="button full color-wh bgcolor-pk">Update Check</label>
-              <label v-else-if="sw_stat.enabled && false === sw_stat.controller" v-on:click="saveConf();location.reload();" class="button full color-wh bgcolor-pk">Save & Reload</label>
+              <label v-else-if="sw_stat.enabled && false === sw_stat.controller" v-on:click="saveConf();reloadForce();" class="button full color-wh bgcolor-pk">Save & Reload</label>
               <label v-else v-on:click="saveConf();reloadForce();" class="button full color-wh bgcolor-pk">Save & Super Reload</label>
             </div>
             <h3 class="setting-header">📛📛📛 WebApp Setting 📛📛📛</h3>
@@ -3523,10 +3523,10 @@
               <label v-on:click="saveConf();" class="button full double color-wh bgcolor-gr">Save</label>
             </div>
             <div class="flex end action-bar">
-              <label v-if="app_wait_update" v-on:click="saveConf();location.reload();" class="button full color-wh bgcolor-pk">Save & Update kktjs</label>
+              <label v-if="app_wait_update" v-on:click="saveConf();reloadForce();" class="button full color-wh bgcolor-pk">Save & Update kktjs</label>
               <label v-else-if="fetch_lock.update" class="button full color-wh bgcolor-disable">Update Check</label>
               <label v-else-if="sw_stat.enabled && sw_stat.controller" v-on:click="serviceWorkerUpdateCheck();" class="button full color-wh bgcolor-pk">Update Check</label>
-              <label v-else-if="sw_stat.enabled && false === sw_stat.controller" v-on:click="saveConf();location.reload();" class="button full color-wh bgcolor-pk">Save & Reload</label>
+              <label v-else-if="sw_stat.enabled && false === sw_stat.controller" v-on:click="saveConf();reloadForce();" class="button full color-wh bgcolor-pk">Save & Reload</label>
               <label v-else v-on:click="saveConf();reloadForce();" class="button full color-wh bgcolor-pk">Save & Super Reload</label>
             </div>
             <br>
