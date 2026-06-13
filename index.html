@@ -3393,16 +3393,16 @@
 
             <h3><i class="fa fa-fw fa-picture-o"></i> Media: 添付画像の縮小について決めてね </h3>
             <div class="action-bar">
+              <div class="full"><span>最大長辺(px)</span></div>
               <div class="flex end">
-                <span>最大長辺(px)</span>
                 <small v-on:click="optMaxImageLen = 0;" class="button full color-wh bgcolor" :class="{ 'bgcolor-pk': 0 == optMaxImageLen }">無効</small>
                 <small v-on:click="optMaxImageLen = 4096;" class="button full color-wh bgcolor" :class="{ 'bgcolor-pk': 4096 == optMaxImageLen }">4096</small>
                 <small v-on:click="optMaxImageLen = 2048;" class="button full color-wh bgcolor" :class="{ 'bgcolor-pk': 2048 == optMaxImageLen }">2048</small>
                 <small v-on:click="optMaxImageLen = 1280;" class="button full color-wh bgcolor" :class="{ 'bgcolor-pk': 1280 == optMaxImageLen }">1280</small>
                 <small v-on:click="optMaxImageLen = 1024;" class="button full color-wh bgcolor" :class="{ 'bgcolor-pk': 1024 == optMaxImageLen }">1024</small>
               </div>
+              <div class="full"><span>カスタム値(px、64以上で有効)</span></div>
               <div class="flex end">
-                <span>カスタム値(px、64以上で有効)</span>
                 <input type="number" min="0" step="1" v-model.number="optMaxImageLen" placeholder="0=無効" style="width:6em;text-align:right;">
               </div>
               <div class="flex end">
