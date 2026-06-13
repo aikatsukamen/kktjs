@@ -113,13 +113,16 @@ export function toggleFormVisible(app: KktjsApp): void {
 export function toggleSideLink(app: KktjsApp): void {
   const a = app as A;
   if (a.fetch_after['lists']) a.fetchStreamList();
+  // 他のパネル（設定/フォーム/検索/ストリーム）が開いていれば閉じる。
   if (a.showForm || a.showSearch || a.showStream || a.showSetting) {
     a.showSetting = false;
     if (a.showForm) { a.saveKatsu(); a.showForm = false; }
     a.showSearch = false;
     a.showStream = false;
-    return;
   }
+  // サイドリンク（ロゴ / フッターの三本線から開くメニュー）の表示をトグルする。
+  // ここが欠落していたため、クリックしても何も起きていなかった（toggleLink と対称）。
+  a.showSideLink = !a.showSideLink;
 }
 
 export function toggleLink(app: KktjsApp): void {
