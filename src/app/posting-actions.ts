@@ -13,6 +13,12 @@ const LIMIT_LISTNAME = 0x12c;
 const LIMIT_POLLOPTION = 0x19;
 const IMAGE_MAXLEN = 0x500;
 const IMAGE_MAXPIXEL = 0x500 * 0x500;
+// メディア処理中の進行メッセージ（処理完了時に自動で消すため定数化して判定に使う）。
+const MEDIA_PROGRESS_MSGS = [
+  '[Media] 画像を読み込んでいます…',
+  '[Media] 画像を縮小しています…',
+  '[Media] HEIC → JPEG に変換しています…',
+];
 type A = any;
 
 export function checkStreamHashtag(app: KktjsApp): void {
@@ -233,7 +239,7 @@ export function checkActMedia(app: KktjsApp, arg0: any): void {
             const lowerName = (inputFile.name || '').toLowerCase();
             const looksLikeHeic = /^image\/hei[fc]/.test(inputFile.type) || /\.heic$|\.heif$/.test(lowerName);
             if (looksLikeHeic) {
-                a.result_text = '[Media] HEIC → JPEG に変換しています…';
+                a.result_text = MEDIA_PROGRESS_MSGS[2];
                 maybeConvertHeic(inputFile).then(function (converted) {
                     // 変換成功時は a.result_text を消す。失敗時（converted === inputFile）は後続の MIME チェックで弾かれる。
                     if (converted !== inputFile) a.result_text = '';
@@ -318,7 +324,7 @@ function continueCheckActMedia(a: A, m: any): void {
                             return;
                         }
                         // 縮小処理中のフィードバック（iPhone の大きな写真では canvas 処理に時間がかかるため）。
-                        a.result_text = '[Media] 画像を縮小しています…';
+                        a.result_text = MEDIA_PROGRESS_MSGS[1];
                         // --- (4) canvas 変換は try/catch で囲む（toDataURL/drawImage の例外で action_lock を残さない）---
                         try {
                             const tw = Math.max(1, Math.round(iw * m.resizeScale));
@@ -354,7 +360,7 @@ function continueCheckActMedia(a: A, m: any): void {
                 a.result_text = '[Media] 画像の読み込みに失敗しました。';
             };
             // 読み込み開始のフィードバック（大きい画像は readAsDataURL 自体に時間がかかるため）。
-            a.result_text = '[Media] 画像を読み込んでいます…';
+            a.result_text = MEDIA_PROGRESS_MSGS[0];
             m.fileReader.readAsDataURL(m.mediaFile);
 }
 
@@ -381,6 +387,11 @@ export function actMedia(app: KktjsApp, arg0: any, arg1: any, arg2: any): void {
             request.onreadystatechange = function () {
                 if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
                     _0x38d96c.katsu.media_attachments.push(JSON.parse(request.responseText));
+                    // アップロード完了。進行メッセージ（「縮小しています…」等）が残っていれば自動で消す。
+                    // 自分が出した進行メッセージのときだけ消し、無関係な通知やエラーは温存する。
+                    if (MEDIA_PROGRESS_MSGS.indexOf(_0x38d96c.result_text) !== -1) {
+                        _0x38d96c.result_text = '';
+                    }
                 } else if (request.readyState == XMLHttpRequest.DONE) {
                     _0x38d96c.katsu.media_previews.pop();
                     _0x38d96c.popError(request.responseText, request.status, "Media");
