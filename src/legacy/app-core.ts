@@ -1433,18 +1433,36 @@ function importdrop(_0x31edc2) {
     if (0x4 <= app['$data']['katsu']['media_previews'].length || app['$data']['katsu']['media_previews'].length != app['$data']['katsu']['media_attachments'].length) {
         return;
     }
-    if (0 != _0x31edc2["dataTransfer"]["files"].length && app['$data']["showFormVote"]) {
+    // dataTransfer / files が無い環境でも落ちないように安全に取り出す。
+    var _dt = _0x31edc2 ? _0x31edc2['dataTransfer'] : null;
+    var _files = _dt && _dt['files'] ? _dt['files'] : null;
+    if (!_files || !_files.length) {
+        return;
+    }
+    if (0 != _files.length && app['$data']["showFormVote"]) {
         app['$data']['result_text'] = "[Media] アンケートには画像を付けられないよ。";
         return;
     }
-    app["checkActMedia"](_0x31edc2["dataTransfer"]["files"]);
+    app["checkActMedia"](_files);
 }
 function importpaste(_0xb7cd91) {
     if (app['$data']['at'] == null) {
         return;
     }
-    if (!_0xb7cd91["clipboardData"]["files"].length) {
+    // clipboardData / files はブラウザによって存在しない・null のことがある（特に一部 Android 系）。
+    // 安全に画像ファイルの有無を取り出す。取れなければ「画像なし」として通常のテキスト貼り付けに任せる。
+    var _cd = _0xb7cd91 ? _0xb7cd91['clipboardData'] : null;
+    var _files = _cd && _cd['files'] ? _cd['files'] : null;
+    if (!_files || !_files.length) {
+        // クリップボードに画像ファイルが無い（純粋なテキスト貼り付け、または clipboardData 非対応）。
+        // ブラウザ既定のテキスト貼り付けに任せるため preventDefault せずに離脱。
         return;
+    }
+    // ここに来た時点でクリップボードに画像ファイルがある（画像貼り付け）。
+    // ブラウザ既定動作（画像の代替テキスト/HTML が投稿欄へ同時に貼られる）を抑制する。
+    // これをしないと、画像アップロードとテキスト貼り付けが二重に起きてしまう。
+    if (_0xb7cd91 && typeof _0xb7cd91['preventDefault'] === 'function') {
+        _0xb7cd91['preventDefault']();
     }
     if (!app['$data']['showForm']) {
         app['toggleForm']();
@@ -1452,11 +1470,11 @@ function importpaste(_0xb7cd91) {
     if (0x4 <= app['$data']['katsu']['media_previews'].length || app['$data']['katsu']['media_previews'].length != app['$data']['katsu']['media_attachments'].length) {
         return;
     }
-    if (0 != _0xb7cd91["clipboardData"]["files"].length && app['$data']['showFormVote']) {
+    if (0 != _files.length && app['$data']['showFormVote']) {
         app['$data']['result_text'] = '[Media]\x20アンケートには画像を付けられないよ。';
         return;
     }
-    app["checkActMedia"](_0xb7cd91["clipboardData"]["files"]);
+    app["checkActMedia"](_files);
 }
 function importclick(_0xd2d1ca) {
     if (app['$data']['at'] == null) {
