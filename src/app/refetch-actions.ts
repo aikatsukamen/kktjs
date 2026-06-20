@@ -32,7 +32,10 @@ export function refetchHome(app: KktjsApp): void {
                             thisObj.home_id = thisObj.homes[thisObj.homes.length - 1] ? thisObj.homes[thisObj.homes.length - 1].id : '0';
                             thisObj['$nextTick'](function () {
                                 thisObj.backHome();
-                                thisObj.openImageAll(_0x174de3);
+                                // Vue 3: 生配列 _0x174de3 に loading_avatar=false をセットしても
+                                // reactive proxy（thisObj.homes）には伝わらず、アバターが空 span のまま
+                                // 固定される（全アイコンが消える事象）。reactive な thisObj.homes を渡す。
+                                thisObj.openImageAll(thisObj.homes);
                             });
                         }
                         thisObj.fetch_lock.home = false;
@@ -72,7 +75,8 @@ export function refetchLocal(app: KktjsApp): void {
                             thisObj.local_id = thisObj.locals[thisObj.locals.length - 1] ? thisObj.locals[thisObj.locals.length - 1].id : '0';
                             thisObj["$nextTick"](function () {
                                 thisObj.backLocal();
-                                thisObj.openImageAll(_0x4c597d);
+                                // Vue 3: reactive proxy（thisObj.locals）を渡す（生配列だと反映されない）。
+                                thisObj.openImageAll(thisObj.locals);
                             });
                         }
                         thisObj.fetch_lock.local = false;
@@ -124,7 +128,8 @@ export function refetchMulti(app: KktjsApp): void {
                             thisObj.multi_id = thisObj.multis[thisObj.multis.length - 1] ? thisObj.multis[thisObj.multis.length - 1].id : '0';
                             thisObj['$nextTick'](function () {
                                 thisObj.backMulti();
-                                thisObj.openImageAll(resList);
+                                // Vue 3: reactive proxy（thisObj.multis）を渡す（生配列だと反映されない）。
+                                thisObj.openImageAll(thisObj.multis);
                             });
                         }
                         thisObj.fetch_lock.multi = false;
