@@ -135,10 +135,6 @@ import {
   openWsHome, reopenWsHome, openWsLocal, reopenWsLocal, openWsMulti, reopenWsMulti,
 } from '../app/streaming';
 import {
-  handleScrollDiscord, fetchTokenDiscord, refetchTokenDiscord, actKatsuDiscord,
-  fetchUserDiscord, fetchSocketDiscord, fetchDiscord, openWsDiscord, reopenWsDiscord,
-} from '../app/discord';
-import {
   resetHomeColumn,
   resetLocalColumn,
   resetNotifColumn,
@@ -176,7 +172,6 @@ import {
   checkHeader,
   checkAvatar,
   checkMedia,
-  checkAvatarDiscord,
   checkVote,
   equalArr,
   isSetVote,
@@ -451,17 +446,6 @@ export function registerMigratedMethods(): void {
     openWsMulti: (app: any) => openWsMulti(app),
     reopenWsMulti: (app: any, a0: any, a1: any) => reopenWsMulti(app, a0, a1),
 
-    // Discord 連携。
-    handleScrollDiscord: (app: any, e: any) => handleScrollDiscord(app, e),
-    fetchTokenDiscord: (app: any) => fetchTokenDiscord(app),
-    refetchTokenDiscord: (app: any) => refetchTokenDiscord(app),
-    actKatsuDiscord: (app: any) => actKatsuDiscord(app),
-    fetchUserDiscord: (app: any) => fetchUserDiscord(app),
-    fetchSocketDiscord: (app: any) => fetchSocketDiscord(app),
-    fetchDiscord: (app: any) => fetchDiscord(app),
-    openWsDiscord: (app: any) => openWsDiscord(app),
-    reopenWsDiscord: (app: any, a0: any) => reopenWsDiscord(app, a0),
-
     // カラムリセット。
     resetHomeColumn: (app: any) => resetHomeColumn(app),
     resetLocalColumn: (app: any) => resetLocalColumn(app),
@@ -503,7 +487,6 @@ export function registerMigratedMethods(): void {
     checkHeader: (app: any, url: string) => checkHeader(app.repository, url),
     checkAvatar: (app: any, url: string) => checkAvatar(app.repository, url),
     checkMedia: (_app: any, preview: string, remote: string) => checkMedia(preview, remote),
-    checkAvatarDiscord: (_app: any, user: any) => checkAvatarDiscord(user),
     checkVote: (_app: any, poll: any) => checkVote(poll),
     equalArr: (_app: any, a: any[], b: any[]) => equalArr(a, b),
     isSetVote: (_app: any, poll: any, index: number) => isSetVote(poll, index),

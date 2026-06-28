@@ -558,7 +558,7 @@ export function runAddList(app: KktjsApp): void {
                 'title': a.stream_list_text
             };
             _0x28ffab.fetch_lock.lists = true;
-            _0x28ffab['$forceUpdate']();
+            // fetch_lock は $data のネストプロパティ。同期変更は reactivity で反映（検証済み）。
             var request = new XMLHttpRequest();
             request.open('POST', LIST_ALL.replace('[I]', _0x28ffab.repository), true);
             request.timeout = REQ_TIMEOUT;
@@ -586,7 +586,7 @@ export function runRemoveList(app: KktjsApp, arg0: any, arg1: any): void {
             var _0x45cd89 = a;
             var _0x51ac2d = [];
             _0x45cd89.fetch_lock.lists = true;
-            _0x45cd89['$forceUpdate']();
+            // fetch_lock は $data のネストプロパティ。同期変更は reactivity で反映（検証済み）。
             var request = new XMLHttpRequest();
             request.open("DELETE", LIST_OBJ.replace('[I]', _0x45cd89.repository).replace('[LID]', arg0), true);
             request.timeout = REQ_TIMEOUT;

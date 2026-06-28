@@ -56,11 +56,11 @@ export function upNotif(_app: KktjsApp): void {
 
 /** メディアの開閉フラグを単一ステータスに設定。元 updateMediaWrapper */
 export function updateMediaWrapper(app: KktjsApp, status: any, opened: unknown): void {
+  // status はテンプレートの v-for/単一バインディング由来の reactive proxy。
+  // プロパティ変更だけで DOM に反映されるため $forceUpdate は不要（検証済み）。
   status['media_opened'] = opened;
-  app.$forceUpdate();
 }
 /** 本文の開閉フラグを単一ステータスに設定。元 updateContentWrapper */
 export function updateContentWrapper(app: KktjsApp, status: any, opened: unknown): void {
   status['content_opened'] = opened;
-  app.$forceUpdate();
 }

@@ -50,12 +50,3 @@ export const CLIENT_ID = 'Zl8G71GsqB4E-Ze89rA5Gly99wOiU5g6eymHGeaDMQ0';
 export const CLIENT_ID_SUB = 'qrzMcJTeBiaPYqScFTgx77dSwfI7vM4erlXyufeSVws';
 export const CLIENT_SECRET = 'pxueumQ_Rrw35cgF_vLk1etwzT0I2l3NBnJ_RToJr5Y';
 export const CLIENT_SECRET_SUB = 'mU6GdW47CI0p_hYbZfwSufcKZZ8NA-YkfmG93ztuSrQ';
-
-// Discord 連携
-export const DIS_API = 'discordapp.com/api';
-export const DIS_API_VER = '6';
-export const DIS_CHANNEL: Record<string, string> = {
-  room0: '405706906049708034',
-  room1: '305718290016370688',
-  room2: '305717014822125568',
-};

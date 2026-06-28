@@ -97,18 +97,6 @@ const client_secret = 'pxueumQ_Rrw35cgF_vLk1etwzT0I2l3NBnJ_RToJr5Y';
 const client_secret_sub = 'mU6GdW47CI0p_hYbZfwSufcKZZ8NA-YkfmG93ztuSrQ';
 const TOKEN = 'https://[I]/oauth/token';
 const AUTH_URL = 'https://[I]/oauth/authorize?client_id=[CID]&response_type=code&redirect_uri=[URL]&scope=read%20write%20follow';
-const DIS_API = 'discordapp.com/api';
-const DIS_API_VER = '6';
-const DIS_TOKEN = 'https://[I]/oauth2/token';
-const DIS_ST = 'https://[I]/gateway';
-const DIS_USER = 'https://[I]/users/@me';
-const DIS_TH = 'https://[I]/channels/[CH]/messages?limit=[LM]';
-const DIS_CHANNEL = {
-    'room0': '405706906049708034',
-    'room1': '305718290016370688',
-    'room2': '305717014822125568'
-};
-const DIS_WTH1 = 'https://[I]/webhooks/405741747357089792/BJer_pYIrH5Cx6NZITjTRBWojqvUnemz8fkH9vBKCkH-1bVW8rQfQTL5ZFRDoT0MHx2I';
 const PROFILE_URL = 'https://[I]/settings/profile';
 const MASTODON_URL = 'https://[I]/about';
 const ABOUT_URL = 'https://[I]/about/more';
@@ -133,7 +121,6 @@ const ST_GLOBAL = 'wss://[I]/api/v1/streaming?access_token=[AT]&stream=public';
 const ST_DIRECT = 'wss://[I]/api/v1/streaming?access_token=[AT]&stream=direct';
 const ST_HASHTAG = 'wss://[I]/api/v1/streaming?access_token=[AT]&stream=hashtag&tag=[TAG]';
 const ST_LIST = 'wss://[I]/api/v1/streaming?access_token=[AT]&stream=list&list=[LID]';
-let ST_DISCORD = '';
 const KATSU = 'https://[I]/api/v1/statuses';
 const KATSU_MEDIA = 'https://[I]/api/v1/media';
 const ACCT = 'https://[I]/api/v1/accounts/[AID]/statuses?max_id=[PID]&limit=[LM]&';
@@ -175,7 +162,6 @@ const KKT1_LASTID = 4919581;
 var wsLocal = null;
 var wsHome = null;
 var wsMulti = null;
-var wsDiscord = null;
 const fileReader = new FileReader();
 const image = new Image();
 var mediaFile;
@@ -236,13 +222,10 @@ window.__kktjsStream = {
   get wsHome() { return wsHome; }, set wsHome(v) { wsHome = v; },
   get wsLocal() { return wsLocal; }, set wsLocal(v) { wsLocal = v; },
   get wsMulti() { return wsMulti; }, set wsMulti(v) { wsMulti = v; },
-  get wsDiscord() { return wsDiscord; }, set wsDiscord(v) { wsDiscord = v; },
   ST_HOME: ST_HOME, ST_LOCAL: ST_LOCAL, ST_GLOBAL: ST_GLOBAL,
   ST_DIRECT: ST_DIRECT, ST_HASHTAG: ST_HASHTAG, ST_LIST: ST_LIST,
   alreadyInTimeline: kktjsAlreadyInTimeline,
   _: _,
-  DIS_API: DIS_API,
-  get ST_DISCORD() { return ST_DISCORD; }, set ST_DISCORD(v) { ST_DISCORD = v; },
 };
 
 // Vue 3: new Vue({el,...}) を廃止し createApp(...).mount('#app') へ。
@@ -256,7 +239,6 @@ var __kktjsApp = Vue.createApp({
         'connHome': 'ready',
         'connLocal': 'ready',
         'connMulti': 'ready',
-        'connDiscord': 'ready',
         'showHome': false,
         'showHomeOption': false,
         'showLocal': false,
@@ -326,9 +308,10 @@ var __kktjsApp = Vue.createApp({
         'result_text_tmp': '',
         'media_uploaded': '0',
         'repository': 'kirakiratter.com',
-        'app_name': 'kktjs',
-        'app_ver': '1.4',
-        'app_ver_top': 'js v1.4.8a',
+        // 内部バージョン（package.json）をビルド時に注入。設定画面のバージョン表示でのみ参照される。
+        // 旧 app_name/'kktjs', app_ver/'1.4', app_ver_top/'js v1.4.8a' は固定の古い表示で、
+        // 内部バージョンと連動していなかったため削除。
+        'kktjs_version': __KKTJS_VERSION__,
         'app_mode': 'web',
         'app_active': true,
         'app_network': true,
@@ -353,12 +336,6 @@ var __kktjsApp = Vue.createApp({
         'listprofile': {
             'name': ''
         },
-        'user_discord': [],
-        'at_discord': null != userConf['getItem']('at_discord') ? JSON.parse(userConf['getItem']('at_discord')) : '',
-        'discord_id': '',
-        'discords': [],
-        'discord_type': "room0",
-        'discord_unread': 0,
         'home_id': '',
         'homes': [],
         'home_type': '',
@@ -470,7 +447,6 @@ var __kktjsApp = Vue.createApp({
             'lists': false,
             'search': false,
             'search_hashtag': false,
-            'discord': false,
             'homews': false,
             'localws': false,
             'multiws': false
@@ -722,9 +698,6 @@ var __kktjsApp = Vue.createApp({
         'checkMedia': function (a, b) {
             return window.__kktjsMethods['checkMedia'](this, a, b);
         },
-        'checkAvatarDiscord': function (v) {
-            return window.__kktjsMethods['checkAvatarDiscord'](this, v);
-        },
         'checkVote': function (v) {
             return window.__kktjsMethods['checkVote'](this, v);
         },
@@ -754,9 +727,6 @@ var __kktjsApp = Vue.createApp({
         }, TIME_SCROLL),
         'handleScrollAcct': _['debounce'](function (this: any, _0x3b2506) {
             return window.__kktjsMethods['handleScrollAcct'](this, _0x3b2506);
-        }, TIME_SCROLL),
-        'handleScrollDiscord': _['debounce'](function (this: any, _0x358f78) {
-            return window.__kktjsMethods['handleScrollDiscord'](this, _0x358f78);
         }, TIME_SCROLL),
         'isFollow': function (a) {
             return window.__kktjsMethods['isFollow'](this, a);
@@ -1022,15 +992,6 @@ var __kktjsApp = Vue.createApp({
         'fetchListAcctRelation': function () {
             return window.__kktjsMethods['fetchListAcctRelation'](this);
         },
-        'fetchTokenDiscord': function (a, b) {
-            return window.__kktjsMethods['fetchTokenDiscord'](this, a, b);
-        },
-        'refetchTokenDiscord': function (a, b) {
-            return window.__kktjsMethods['refetchTokenDiscord'](this, a, b);
-        },
-        'actKatsuDiscord': function (a, b) {
-            return window.__kktjsMethods['actKatsuDiscord'](this, a, b);
-        },
         'openThisPage': function (a, b) {
             return window.__kktjsMethods['openThisPage'](this, a, b);
         },
@@ -1153,21 +1114,6 @@ var __kktjsApp = Vue.createApp({
         },
         'reopenForce': function (a, b) {
             return window.__kktjsMethods['reopenForce'](this, a, b);
-        },
-        'fetchUserDiscord': function (a, b) {
-            return window.__kktjsMethods['fetchUserDiscord'](this, a, b);
-        },
-        'fetchSocketDiscord': function (a, b) {
-            return window.__kktjsMethods['fetchSocketDiscord'](this, a, b);
-        },
-        'fetchDiscord': function (a, b) {
-            return window.__kktjsMethods['fetchDiscord'](this, a, b);
-        },
-        'openWsDiscord': function (a, b) {
-            return window.__kktjsMethods['openWsDiscord'](this, a, b);
-        },
-        'reopenWsDiscord': function (a, b) {
-            return window.__kktjsMethods['reopenWsDiscord'](this, a, b);
         },
         'confirm': function (a, b) {
             return window.__kktjsMethods['confirm'](this, a, b);
@@ -1678,7 +1624,6 @@ window.IMG_DUMMY = IMG_DUMMY;
 window.wsHome = wsHome;
 window.wsLocal = wsLocal;
 window.wsMulti = wsMulti;
-window.wsDiscord = wsDiscord;
 window.changeAppActive = changeAppActive;
 window.importclick = importclick;
 window.importdragenter = importdragenter;

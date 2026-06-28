@@ -14,7 +14,10 @@ export function fetchDetail(app: KktjsApp): void {
 
   apiGet<Status>(url, app.at, {
     onSuccess: (status) => {
-      app.updateWrapperBM([status], 'detail');
+      // 'detail' mode は status 単体を期待する（v1.x で配列で渡していたバグを修正）。
+      // 配列で渡すと、media_opened/content_opened が配列自体のプロパティになり、
+      // status 本体に伝わらず「Open All Wrappers」設定が詳細画面で機能しなかった。
+      app.updateWrapperBM(status as any, 'detail');
       app.detail = status;
       app.fetch_watch.detail = false;
       fetchDetailChain(app);

@@ -3,6 +3,10 @@
 // Vue は npm 依存から import（Vite がバンドル）するため、もはや window グローバルではない。
 
 declare global {
+  // vite.config.ts の define で注入されるコンパイル時定数。
+  // package.json の version を埋め込む（バンドル時に文字列リテラルに置換される）。
+  const __KKTJS_VERSION__: string;
+
   interface Window {
     // Vue は CDN グローバルではなくなった（import 'vue' でバンドル）。後方互換のため optional 宣言のみ残す。
     Vue?: any;
@@ -17,7 +21,7 @@ declare global {
     __kktjsConf?: any;          // open*/auth が参照するデプロイ依存定数・OAuth情報
     __kktjsAudioContext?: any;  // setNotifSound 用 AudioContext
     __kktjsMedia?: any;         // checkActMedia/actMedia 共有のメディア処理状態
-    __kktjsStream?: any;        // streaming/discord 用ソケット変数・ST_*・dedupヘルパ
+    __kktjsStream?: any;        // streaming 用ソケット変数・ST_*・dedupヘルパ
     kktjsForceReconnectAll?: () => void;
     // index.html の inline HTML 属性ハンドラ（onDragover/onDrop/onPaste 等）から
     // 呼ばれる関数群。app-core.ts が window へ公開する（バンドル後もグローバル参照可能）。
@@ -32,7 +36,6 @@ declare global {
     wsHome: WebSocket | null;
     wsLocal: WebSocket | null;
     wsMulti: WebSocket | null;
-    wsDiscord: WebSocket | null;
     // AudioContext のベンダプレフィックス対応
     webkitAudioContext?: typeof AudioContext;
     mozNotification?: typeof Notification;
@@ -44,7 +47,6 @@ declare global {
   var wsHome: WebSocket | null;
   var wsLocal: WebSocket | null;
   var wsMulti: WebSocket | null;
-  var wsDiscord: WebSocket | null;
 }
 
 export {};

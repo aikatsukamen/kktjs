@@ -13,15 +13,8 @@
 
 type El = HTMLElement & { play?: () => void; value?: string };
 
-// SFC(.vue) 動作実証用コンポーネント（Vite + @vitejs/plugin-vue でコンパイルされる）。
-// 既存の x-template モーダル群と併存できることを示す段階導入の出発点。
-import VersionBadge from '../components/VersionBadge.vue';
-
 // app: Vue.createApp(...) の戻り値（アプリケーションインスタンス）。
 export function registerVueComponentsAndDirectives(app: any): void {
-  // --- SFC コンポーネント（.vue。Vite ビルド時に plugin-vue がコンパイル） ---
-  app.component('version-badge', VersionBadge);
-
   // --- コンポーネント（x-template を参照するモーダル類） ---
   app.component('media', { template: '#modal-media' });
   app.component('emojipicker', { template: '#modal-input' });

@@ -28,7 +28,7 @@ export function checkStreamHashtag(app: KktjsApp): void {
             var _0x121dfd: any = [];
             var _0x68ba5e: any = [];
             _0x190cc4.fetch_lock.search_hashtag = true;
-            _0x190cc4['$forceUpdate']();
+            // fetch_lock は $data のネストプロパティ。同期変更は reactivity で反映（検証済み）。
             var request = new XMLHttpRequest();
             request.open('GET', SEARCH.replace('[I]', _0x190cc4.repository).replace("[STR]", _0x190cc4.search_text));
             request.timeout = REQ_TIMEOUT;
@@ -69,7 +69,7 @@ export function actVote(app: KktjsApp, arg0: any, arg1: any): void {
                 }
             });
             arg0.req_vote = true;
-            a.$forceUpdate();
+            // arg0 は proxy。req_vote の同期変更は reactivity で反映（検証済み）。
             var _0xbfd9d2 = a;
             var _0x5c7866: any = [];
             var _0xf0ed26 = {
@@ -111,7 +111,7 @@ export function actReport(app: KktjsApp, arg0: any, arg1: any): void {
             }
             arg0.req_report = true;
             a.showConfirm = false;
-            a.$forceUpdate();
+            // arg0 は proxy、showConfirm は $data。いずれも reactive なので同期 forceUpdate 不要（検証済み）。
             var _0x27e7e7 = a;
             var _0x518e9f: any = [];
             var _0x5c7d23 = {
@@ -151,7 +151,7 @@ export function actProfile(app: KktjsApp): void {
                 'display_name': _0x1d79b3
             };
             _0x5b02aa.acct.req_profile = true;
-            _0x5b02aa['$forceUpdate']();
+            // proxy への同期変更。reactivity で反映（検証済み）。XHR コールバック内の forceUpdate は残す。
             var request = new XMLHttpRequest();
             request.open("PATCH", PROFILE.replace('[I]', _0x5b02aa.repository), true);
             request.timeout = REQ_TIMEOUT;
@@ -186,7 +186,7 @@ export function actListProfile(app: KktjsApp): void {
                 'title': _0x482c96
             };
             _0x5445e0.stream_list.req_profile = true;
-            _0x5445e0['$forceUpdate']();
+            // proxy への同期変更。reactivity で反映（検証済み）。XHR コールバック内の forceUpdate は残す。
             var request = new XMLHttpRequest();
             request.open('PUT', LIST_OBJ.replace('[I]', _0x5445e0.repository).replace('[LID]', _0x5445e0.stream_list.id), true);
             request.timeout = REQ_TIMEOUT;
@@ -336,18 +336,47 @@ function continueCheckActMedia(a: A, m: any): void {
                             m.ctx.fillStyle = '#ffffff';
                             m.ctx.fillRect(0, 0, tw, th);
                             m.ctx.drawImage(m.image, 0, 0, iw, ih, 0, 0, tw, th);
-                            // --- (1) JPEG 品質を明示（ブラウザ既定値の差 0.8〜0.92 をなくして予測可能なファイルサイズに）---
-                            m.MediaBinary = m.canvasElement.toDataURL('image/jpeg', 0.85);
-                            if (!m.MediaBinary || m.MediaBinary === 'data:,') {
-                                throw new Error('toDataURL returned empty (canvas size limit or memory issue)');
+
+                            // --- (5) iOS Safari 対策: toBlob を優先（toDataURL→base64ToBlob だと中間の
+                            // base64 文字列 + atob ループ + Uint8Array コピー + Blob 化と複数の大きな
+                            // メモリ領域を確保し、iPhone のメモリ制限で send() 直前に内部 abort されて
+                            // XHR が status=0 で返る（=「Unknown Network Error」）。toBlob なら
+                            // 直接 Blob を取得でき、ピーク使用量が大幅に減る。
+                            const canvasEl = m.canvasElement as HTMLCanvasElement;
+                            if (typeof canvasEl.toBlob === 'function') {
+                                canvasEl.toBlob(function (blob: Blob | null) {
+                                    if (!blob || blob.size === 0) {
+                                        // toBlob が null を返すケース（iOS の極限的なメモリ不足等）。
+                                        // 元ファイルでフォールバック送信。
+                                        a.action_lock = '';
+                                        a.result_text = '[Media] 画像の縮小に失敗（toBlob returned null）。縮小せずに送信します。';
+                                        a.actMedia(m.fileReader.result, m.mediaFile, false);
+                                        return;
+                                    }
+                                    m.MediaBlob = blob;
+                                    // プレビュー用に小さな data URL を作る（一覧表示用なのでこれは小さく抑える）。
+                                    // 元の挙動互換のため MediaBinary も入れておく（プレビュー画像表示用）。
+                                    m.MediaBinary = m.fileReader.result;
+                                    a.actMedia(m.MediaBinary, m.MediaBlob, true);
+                                }, 'image/jpeg', 0.85);
+                            } else {
+                                // toBlob 非対応環境の旧来パス（フォールバック）。
+                                m.MediaBinary = canvasEl.toDataURL('image/jpeg', 0.85);
+                                if (!m.MediaBinary || m.MediaBinary === 'data:,') {
+                                    throw new Error('toDataURL returned empty (canvas size limit or memory issue)');
+                                }
+                                m.MediaBlob = base64ToBlob(m.MediaBinary);
+                                a.actMedia(m.MediaBinary, m.MediaBlob, true);
                             }
-                            m.MediaBlob = base64ToBlob(m.MediaBinary);
-                            a.actMedia(m.MediaBinary, m.MediaBlob, true);
                         } catch (e: any) {
                             // canvas サイズ制限（iOS Safari 等）・OOM などで失敗した場合は、縮小をあきらめて
                             // 元ファイルをそのまま送信。action_lock を残さないようにここで明示的に解除。
+                            // エラー詳細を可能な限り出す（e.message が無い WebKit の例外オブジェクトに対処）。
                             a.action_lock = '';
-                            a.result_text = '[Media] 画像の縮小に失敗（' + (e && e.message ? e.message : 'unknown') + '）。縮小せずに送信します。';
+                            const detail = (e && e.message) ? e.message
+                                : (e && e.name) ? e.name
+                                : (e ? String(e) : 'unknown');
+                            a.result_text = '[Media] 画像の縮小に失敗（' + detail + '）。縮小せずに送信します。';
                             a.actMedia(m.fileReader.result, m.mediaFile, false);
                         }
                     };
@@ -392,14 +421,44 @@ export function actMedia(app: KktjsApp, arg0: any, arg1: any, arg2: any): void {
                     if (MEDIA_PROGRESS_MSGS.indexOf(_0x38d96c.result_text) !== -1) {
                         _0x38d96c.result_text = '';
                     }
+                    _0x38d96c.action_lock = '';
+                    _0x38d96c.media_uploaded = '0';
                 } else if (request.readyState == XMLHttpRequest.DONE) {
-                    _0x38d96c.katsu.media_previews.pop();
-                    _0x38d96c.popError(request.responseText, request.status, "Media");
+                    // status != 200 で readyState=DONE。HTTP レスポンスはあるが失敗（4xx/5xx）の場合と、
+                    // status=0（ネットワーク到達失敗・abort・タイムアウト）の場合がある。
+                    // status=0 の細かい区別は onerror/ontimeout/onabort で行うので、ここでは何もしない
+                    // （二重通知になるのを避ける。これらのハンドラが先に動く）。
+                    if (request.status !== 0) {
+                        _0x38d96c.katsu.media_previews.pop();
+                        _0x38d96c.popError(request.responseText, request.status, "Media");
+                        _0x38d96c.action_lock = '';
+                        _0x38d96c.media_uploaded = '0';
+                    }
                 }
+            };
+            // status=0 の原因を区別するためのハンドラ。これらはネットワーク層の失敗で、
+            // onreadystatechange の DONE/status=0 経路と重複しうるため、ここで具体的な原因を出して
+            // pop & lock 解除を行う（onreadystatechange の status=0 経路は何もしない）。
+            request.onerror = function () {
+                // iPhone Safari でメモリ不足で送信前に内部 abort されるケース、CORS エラー、
+                // ネットワーク到達失敗など。「Unknown Network Error」より具体的なメッセージにする。
+                _0x38d96c.katsu.media_previews.pop();
                 _0x38d96c.action_lock = '';
                 _0x38d96c.media_uploaded = '0';
-            }
-                ;
+                _0x38d96c.result_text = '[Media] アップロードに失敗（送信前のネットワーク/メモリエラー）。画像サイズを小さくして再試行してください。';
+            };
+            request.ontimeout = function () {
+                _0x38d96c.katsu.media_previews.pop();
+                _0x38d96c.action_lock = '';
+                _0x38d96c.media_uploaded = '0';
+                _0x38d96c.result_text = '[Media] アップロードがタイムアウトしました。';
+            };
+            request.onabort = function () {
+                _0x38d96c.katsu.media_previews.pop();
+                _0x38d96c.action_lock = '';
+                _0x38d96c.media_uploaded = '0';
+                _0x38d96c.result_text = '[Media] アップロードが中断されました。';
+            };
             request.send(_0x773119);
 }
 
@@ -486,7 +545,7 @@ export function actKatsu(app: KktjsApp, arg0: any, arg1: any): void {
                 return;
             }
             arg0.req_katsu = true;
-            a.$forceUpdate();
+            // arg0 は proxy。req_katsu の同期変更は reactivity で反映（検証済み）。
             var _0x5e35cf = a;
             var _0x284c21: any = [];
             var _0x33bd48 = {

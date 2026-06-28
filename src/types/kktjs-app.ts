@@ -20,7 +20,6 @@ export interface KktjsApp {
   connHome: ConnState;
   connLocal: ConnState;
   connMulti: ConnState;
-  connDiscord: ConnState;
 
   // タイムライン: Home
   homes: Status[];

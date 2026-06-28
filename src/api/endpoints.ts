@@ -1,4 +1,4 @@
-// Mastodon / Discord の API エンドポイントテンプレート。
+// Mastodon API エンドポイントテンプレート。
 // プレースホルダ: [I]=インスタンス, [PID]=max_id, [LM]=limit, [AID]/[UID]=アカウントID,
 // [SID]=ステータスID, [TAG]=ハッシュタグ, [LID]=リストID, [STR]=検索語, [FL]=following, [VID]=投票ID
 

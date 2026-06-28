@@ -77,13 +77,15 @@ export function updateWrapperAll(app: KktjsApp): void {
     chain['descendants'].forEach((s: Status) => applyOpen(s, media, content));
   }
   app.multis.forEach((s: any) => applyOpen(s, media, content));
-  app.$forceUpdate();
+  // app.homes/locals/multis 等はすべて reactive proxy。要素の prop 変更だけで
+  // DOM に反映されるため $forceUpdate は不要（検証済み）。
 }
 
 /** 単一ステータスにフィルタ判定値を設定。元 updateWrapper（caught_katsufilter）。 */
 export function updateWrapper(app: KktjsApp, status: any, caught: unknown): void {
+  // status はテンプレート（v-on:click="updateWrapper(issue, false)"）から渡る reactive proxy。
+  // 同期的な prop 変更なので reactivity で反映され $forceUpdate 不要（検証済み）。
   status['caught_katsufilter'] = caught;
-  app.$forceUpdate();
 }
 
 function filterTest(re: RegExp, s: any): boolean {
@@ -145,7 +147,7 @@ export function updateFilterAll(app: KktjsApp): void {
   });
   app.locals.forEach((item: any) => { item.caught_katsufilter = filterTest(re, item); });
   app.multis.forEach((item: any) => { item.caught_katsufilter = filterTest(re, item); });
-  app.$forceUpdate();
+  // app.homes/locals/multis は reactive proxy のため $forceUpdate 不要（検証済み）。
 }
 
 /** 画像ローディングフラグを配列の各要素へ付与。元 updateImgLoading。 */
@@ -178,5 +180,6 @@ export function updateVote(app: KktjsApp, id: string, poll: unknown): void {
     chain['descendants'].forEach((s: any) => { if (s['id'] === id) s['poll'] = poll; });
   }
   app.multis.forEach((s: any) => { if (s['id'] === id) s['poll'] = poll; });
-  app.$forceUpdate();
+  // 操作対象はすべて reactive proxy（app.homes/locals/multis/notifs/accts/detail 等）。
+  // ネストした s['poll'] の代入も proxy 経由なので追跡される。$forceUpdate 不要（検証済み）。
 }

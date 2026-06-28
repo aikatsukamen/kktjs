@@ -40,8 +40,7 @@ function runListAction(
     return;
   }
   (account as any).req_list = true;
-  app.$forceUpdate();
-
+  // proxy への同期変更。reactivity で反映（検証済み）。
   const body = { account_ids: [account.id] };
   const url = LIST_ACCT
     .replace('[I]', app.repository)

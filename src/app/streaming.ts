@@ -76,7 +76,8 @@ export function openWsHome(app: KktjsApp): void {
                         thisObj.updateWrapperBM(_0x1c8865, "socket");
                         thisObj.updateFilterBM(_0x1c8865, "socket");
                         thisObj.homes.unshift(_0x1c8865);
-                        thisObj.$forceUpdate();
+                        // Vue 3 proxy は unshift を追跡するため reactivity で新着が表示される。
+                        // openImage は $nextTick 内で proxy 経由で呼ぶことで loading_avatar も解除（検証済み）。
                         thisObj.$nextTick(function () {
                             // Vue 3: 生オブジェクト直接変更では reactivity が発火しないため、
                             // 配列経由（reactive proxy）でアクセスして openImage を呼ぶ。これをしないと
@@ -123,7 +124,7 @@ export function openWsHome(app: KktjsApp): void {
                         }
                         thisObj.notifs_filter.unshift(_0x1c8865);
                         thisObj.notifs.unshift(_0x1c8865);
-                        thisObj.$forceUpdate();
+                        // Vue 3 proxy は unshift を追跡（検証済み）。
                         thisObj.$nextTick(function () {
                             // Vue 3: 生オブジェクト直接変更では reactivity が発火しないため proxy 経由で。
                             var _r = thisObj.notifs[0];
@@ -244,7 +245,7 @@ export function openWsLocal(app: KktjsApp): void {
                         thisObj.updateWrapperBM(_0x4c2dc9, "socket");
                         thisObj.updateFilterBM(_0x4c2dc9, "socket");
                         thisObj.locals.unshift(_0x4c2dc9);
-                        thisObj.$forceUpdate();
+                        // Vue 3 proxy は unshift を追跡（検証済み）。
                         thisObj.$nextTick(function () {
                             // Vue 3: 生オブジェクト直接変更では reactivity が発火しないため proxy 経由で。
                             var _r = thisObj.locals[0];
@@ -349,7 +350,7 @@ export function openWsMulti(app: KktjsApp): void {
                         thisObj.updateWrapperBM(_0x3e1dc6, "socket");
                         thisObj.updateFilterBM(_0x3e1dc6, "socket");
                         thisObj.multis.unshift(_0x3e1dc6);
-                        thisObj.$forceUpdate();
+                        // Vue 3 proxy は unshift を追跡（検証済み）。
                         thisObj.$nextTick(function () {
                             // Vue 3: 生オブジェクト直接変更では reactivity が発火しないため proxy 経由で。
                             var _r = thisObj.multis[0];

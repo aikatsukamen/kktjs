@@ -14,7 +14,6 @@ export interface FetchLock {
   lists: boolean;
   search: boolean;
   search_hashtag: boolean;
-  discord: boolean;
   homews: boolean;
   localws: boolean;
   multiws: boolean;

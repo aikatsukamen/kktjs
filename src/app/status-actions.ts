@@ -81,8 +81,9 @@ function runStatusAction(app: KktjsApp, opts: ActionOpts): void {
     return;
   }
   if (opts.reqFlag) {
+    // status はテンプレートから渡る reactive proxy。req フラグの変更で
+    // スピナー表示（v-if="issue.req_xxx"）が反映されるため、同期処理では $forceUpdate 不要（検証済み）。
     (status as any)[opts.reqFlag] = true;
-    app.$forceUpdate();
   }
   const url = opts.endpoint.replace('[I]', app.repository).replace('[SID]', status.id);
   apiSend(
@@ -94,6 +95,9 @@ function runStatusAction(app: KktjsApp, opts: ActionOpts): void {
       onSuccess: () => opts.onDone(),
       onError: (body, st) => app.popError(body, st, opts.errorLabel),
       onSettled: () => {
+        // 非同期コールバック: API 応答までの間にタイムラインが refetch され homes が
+        // 置き換わると、ここでキャプチャした status proxy が古くなる可能性がある。
+        // スピナーを確実に消すため、このコールバック内では $forceUpdate を残す（安全側）。
         if (opts.reqFlag) (status as any)[opts.reqFlag] = false;
         app.$forceUpdate();
       },
@@ -160,7 +164,7 @@ export function actPin(app: KktjsApp, status: Status, skip?: boolean): void {
   if (alreadyPinned) return;
 
   (status as any).req_pin = true;
-  app.$forceUpdate();
+  // status は proxy。req_pin の同期変更はスピナー表示に reactivity で反映される（検証済み）。
   const url = ACT_PIN.replace('[I]', app.repository).replace('[SID]', status.id);
   apiSend('POST', url, app.at, {}, {
     onSuccess: () => updatePin(app, status.id, true),
@@ -176,7 +180,7 @@ export function actUnPin(app: KktjsApp, status: Status, skip?: boolean): void {
     return;
   }
   (status as any).req_pin = true;
-  app.$forceUpdate();
+  // proxy への同期変更。reactivity で反映（検証済み）。
   const url = ACT_UNPIN.replace('[I]', app.repository).replace('[SID]', status.id);
   apiSend('POST', url, app.at, {}, {
     onSuccess: () => updatePin(app, status.id, false),
@@ -215,7 +219,7 @@ export function actDelete(app: KktjsApp, status: Status, skip?: boolean): void {
     return;
   }
   (status as any).req_delete = true;
-  app.$forceUpdate();
+  // proxy への同期変更。reactivity で反映（検証済み）。onSettled は非同期なので残す。
   const url = DETAIL.replace('[I]', app.repository).replace('[SID]', status.id);
   apiSend('DELETE', url, app.at, {}, {
     onSuccess: () => updateDelete(app, status.id),

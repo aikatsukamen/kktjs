@@ -95,23 +95,25 @@ export function checkMedia(preview: string | null, remote: string | null): strin
   }
 }
 
-/** Discord アバターURLを組み立てる。元 checkAvatarDiscord */
-export function checkAvatarDiscord(user: { id: string; avatar: string }): string {
-  return 'https://cdn.discordapp.com/avatars/' + user.id + '/' + user.avatar + '.png';
-}
-
 /** 投票が有効（未終了）か。元 checkVote */
 export function checkVote(poll: Poll & { choices?: unknown; expired?: boolean }): boolean {
   return poll.choices != null && !poll.expired;
 }
 
-/** 2つの配列が id ベースで等しいか。元 equalArr */
+/** 2つの配列が id ベースで等しいか。元 equalArr
+ *
+ * 元実装は a.forEach で a 側のみ走査していたため、a.length < b.length のときに
+ * 「b が a の prefix と一致するなら true」と誤判定するバグがあった。
+ * 例: equalArr([1], [1,2,3]) → 本来 false だが true を返していた。
+ *
+ * 影響: refetch で「サーバ側で投稿が削除されて件数が減ったケース」に画面が更新されず、
+ * 削除済みの投稿が残り続ける。長さチェックを追加して修正。
+ *
+ * Array.every を使うことで不一致時に短絡評価できる（性能改善）。
+ */
 export function equalArr(a: Array<{ id: string }>, b: Array<{ id: string }>): boolean {
-  let eq = true;
-  a.forEach((item, i) => {
-    eq = eq && b[i] != null && item.id === b[i].id;
-  });
-  return eq;
+  if (a.length !== b.length) return false;
+  return a.every((item, i) => b[i] != null && item.id === b[i].id);
 }
 
 /** 投票の選択肢が設定済みか。元 isSetVote */

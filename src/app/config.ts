@@ -20,7 +20,6 @@ export function deleteConf(_app: KktjsApp): void {
 /** ログイン情報（トークン等）を削除してリロード。元 deleteToken */
 export function deleteToken(_app: KktjsApp): void {
   userConf.removeItem('at');
-  userConf.removeItem('at_discord');
   userConf.removeItem('work_user');
   location.reload();
 }

@@ -15,9 +15,14 @@
 
 import { defineConfig, type Plugin } from 'vite';
 import vue from '@vitejs/plugin-vue';
+import { readFileSync } from 'node:fs';
 
 const OUT_DIR = 'docs';
 const PUBLIC_DIR = 'public';
+
+// package.json の version をコンパイル時定数として埋め込む。
+// ランタイムで package.json を読むより安全（バンドルに含まれず、SW キャッシュも汚さない）。
+const PKG_VERSION = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf-8')).version as string;
 
 // 引き続き CDN グローバルとして外部化するライブラリ（Vue 以外）。
 //   キー = import 指定子 / 値 = 実行時グローバル名（window.<Name>）
@@ -58,6 +63,8 @@ export default defineConfig({
     __VUE_OPTIONS_API__: 'true',
     __VUE_PROD_DEVTOOLS__: 'false',
     __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'false',
+    // package.json の version をコンパイル時定数として注入（src 側で __KKTJS_VERSION__ を参照可能）。
+    __KKTJS_VERSION__: JSON.stringify(PKG_VERSION),
   },
   resolve: {
     alias: {

@@ -107,8 +107,10 @@
     </div>
     <div v-if="'web' == app_mode" class="app-header control flex">
       <div class="logo-wrapper color-wh">
-        <div v-if="ua != 'pc'" class="svgkkt logo" v-on:click="toggleLink();"><small v-if="!optSimple">{{app_ver_top}}</small></div>
-        <div v-else class="svgkkt logo" v-on:click="toggleSideLink();"><small v-if="!optSimple">{{app_ver_top}}</small></div>
+        <!-- 旧 'js v1.4.8a' 表示は削除（内部バージョンと連動していなかったため）。
+             内部バージョンは設定画面 > 開発ステータス > バージョン に表示。 -->
+        <div v-if="ua != 'pc'" class="svgkkt logo" v-on:click="toggleLink();"></div>
+        <div v-else class="svgkkt logo" v-on:click="toggleSideLink();"></div>
       </div>
       <div class="icon-wrapper flex">
         <i class="fa fa-fw fa-home" v-on:click="runHome();"></i>
@@ -129,7 +131,7 @@
           <div class="flex login-container bgsvg-pk">
             <div class="column text center color-wh login">
               <div>
-                <h2>{{app_name}} v{{app_ver}} <version-badge :version="app_ver_top"></version-badge></h2>
+                <!-- 旧 'kktjs v1.4 [js v1.4.8a]' の <h2> 表示は削除（内部バージョンと連動していなかったため）。 -->
                 Custom Themes for <a href="https://kirakiratter.com/">kirakiratter.com</a>
               </div>
               <div class="flex login-option">
@@ -662,13 +664,7 @@
                 <div class="hidden full"><small><i class="fa fa-fw fa-pencil"></i>Open Streams</small></div>
               </span>
             </div>
-            <span v-if="'web' == app_mode" v-on:click="toggleLinkStream('channels_d');" class="list-link border-lite full color bgcolor-disable flex end">
-              <div class="hidden full"><i class="fa fa-fw fa-gamepad"></i>Discord Channels</div>
-              <small>未</small>
-            </span>
-            <template v-for="(issue, __kk_i) in stream_channels" :key="__kk_i"><span v-if="showLinkStream == 'channels'" v-on:click="return;runMulti('Discord', issue);reopenWsMulti('Discord', issue);showMultiOption = false;" class="list-link slim border-lite full bgcolor-wh flex end">
-              <div class="hidden full"><small>{{issue}}</small></div>
-            </span></template>
+
 
           </div>
 
@@ -1396,7 +1392,6 @@
             <div class="hidden full">
               <i v-if="'Hashtag' == multi_type" class="fa fa-fw fa-hashtag"></i>
               <i v-else-if="'List' == multi_type" class="fa fa-fw fa-list"></i>
-              <i v-else-if="'Discord' == multi_type" class="fa fa-fw fa-gamepad"></i>
               <i v-else class="fa fa-fw fa-comment"></i>
               {{multi_type}}: {{multi_name}} <small v-if="!optSimple && multi_name != multi_target">(id: {{multi_target}})</small> <small v-if="!optSimple">(Stream: {{connMulti}})</small>
             </div>
@@ -1745,32 +1740,7 @@
             </div></template>
           </div>
 
-          <div v-else-if="'Discord' == multi_type && hasMulti" class="status-list">
-            <template v-for="(issue, index) in discords" :key="issue.id"><div v-if="discord_unread <= index" class="status-wrapper" :class="issue.visibility">
-              <div class="status flex">
-                <span v-if="issue.loading_avatar" class="avatar border"></span>
-                <img v-else :src="checkAvatarDiscord(issue.author)" class="avatar border" onerror="this.src=IMG_DUMMY">
-                <div class="content-before"><svg width="12" height="14">
-                    <use xlink:href="#cb"></use>
-                  </svg></div>
-                <div class="content border">
-                  <div class="status-name flex start color-gr">
-                    <div class="hidden full">
-                      <a class="color-pk">{{issue.author.username}}</a>
-                      <small>‭#{{issue.author.discriminator}}</small>
-                    </div>
-                    <span class="status-info color-gr"> {{formatDate(issue.timestamp)}}</span>
-                  </div>
-                  <div class="status-text">
-                    <div>
-                      <span v-html="formatContent(issue.content, issue.emojis)"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div></template>
-          </div>
-          <div v-else-if="'Hashtag' == multi_type || 'List' == multi_type || 'Discord' == multi_type">
+          <div v-else-if="'Hashtag' == multi_type || 'List' == multi_type">
             <div v-if="'open' != connMulti || fetch_lock.multi" class="flex info-wrapper">Initializing...</div>
           </div>
           <div v-else>
@@ -2683,13 +2653,7 @@
                 <div class="hidden full"><small><i class="fa fa-fw fa-pencil"></i>Open Streams</small></div>
               </span>
             </div>
-            <span v-if="'web' == app_mode" v-on:click="toggleLinkStream('channels_d');" class="list-link border-lite color full bgcolor-disable flex end">
-              <div class="hidden full"><i class="fa fa-fw fa-gamepad"></i>Discord Channels</div>
-              <small>未</small>
-            </span>
-            <template v-for="(issue, __kk_i) in stream_channels" :key="__kk_i"><span v-if="showLinkStream == 'channels'" v-on:click="return;runMulti('Discord', issue);reopenWsMulti('Discord', issue);showMultiOption = false;" class="list-link slim border-lite full bgcolor-wh flex end">
-              <div class="hidden full"><small>{{issue}}</small></div>
-            </span></template>
+
 
           </div>
 
@@ -2864,11 +2828,6 @@
               <div v-else v-on:click="toggleStreamEdit();" class="list-link full color-wh bgcolor hidden"><i class="fa fa-fw fa-plus"></i> New Hashtag</div>
             </div>
             <!-- -->
-            <div v-if="'web' == app_mode" class="link-header"><i class="fa fa-fw fa-gamepad"></i> Discord Channels</div>
-            <template v-for="(issue, __kk_i) in stream_channels" :key="__kk_i"><div v-if="'web' == app_mode" class="flex">
-              <div v-if="fetch_lock.multiws || fetch_lock.multi" class="list-link full color-wh bgcolor-disable hidden">{{issue}}</div>
-              <div v-else v-on:click="return;showStream=false;runMulti('Discord', issue);reopenWsMulti('Discord', issue);showMultiOption=false;showStreamEdit=false;" class="list-link full color-wh bgcolor-disable hidden">{{issue}}</div>
-            </div></template>
           </div>
           <div v-show="hasStreamList" class="flex info-wrapper">
             <span v-if="fetch_lock.lists"><i class="fa fa-fw fa-spinner fa-pulse"></i>Account Loading...</span>
@@ -3573,7 +3532,7 @@
             </small>
             <h3 class="setting-header">🍨🍨🍨 開発ステータス 🍨🍨🍨</h3>
             <h3>バージョン</h3>
-            <small>kkt{{app_ver_top}}</small>
+            <small>kktjs v{{kktjs_version}}</small>
             <h3>アプリで使える機能(v1.4)</h3>
             <small>
               ログイン/ログアウト/Webアプリ設定<br>

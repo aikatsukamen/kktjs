@@ -38,8 +38,7 @@ function runRelationAction(app: KktjsApp, opts: RelationActionOpts): void {
     return;
   }
   (account as any)[opts.reqFlag] = true;
-  app.$forceUpdate();
-
+  // account は proxy。req フラグの同期変更は reactivity で反映（検証済み）。
   const url = opts.endpoint.replace('[I]', app.repository).replace('[AID]', account.id);
   apiSend<Relationship>('POST', url, app.at, {}, {
     onSuccess: (rel) => {
@@ -96,7 +95,7 @@ function runFollowAuth(
   authorized: boolean
 ): void {
   (account as any).req_follow = true;
-  app.$forceUpdate();
+  // proxy への同期変更。reactivity で反映（検証済み）。
   const url = endpoint.replace('[I]', app.repository).replace('[AID]', account.id);
   apiSend('POST', url, app.at, {}, {
     onSuccess: () => updateFollowAuth(app, account.id, authorized),
