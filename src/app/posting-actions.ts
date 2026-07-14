@@ -319,7 +319,19 @@ function continueCheckActMedia(a: A, m: any): void {
                         }
                         // 縮小不要かつ非変換フォーマット（jpeg/png）なら元ファイルをそのままアップロード。
                         // bmp/webp（img_ex）は受け付けるサーバが少ないため、たとえスケール 1 でも canvas 経由で JPEG 化する。
-                        if (m.fileType != "img_ex" && m.resizeScale == 1) {
+                        //
+                        // ただし iOS Safari 例外: iPhone のファイル選択/コピペ経由で得た JPEG は、
+                        // EXIF や独自メタデータ構造のせいで Mastodon の画像処理（libvips 等）が
+                        // 「バリデーション失敗（422: File ...）」で弾くことがある。canvas で再エンコード
+                        // すればメタデータが除去されクリーンな JPEG になり通る。そこで iOS では縮小不要
+                        // でも canvas 正規化を通す（resizeScale=1 のまま canvas を経由）。
+                        // 実測: 最大長辺1280（=1206px 画像が縮小されないケース）で422、1048（縮小される）で成功、
+                        //       という切り分けから、canvas を通るか否かが分岐点であることを確認済み。
+                        const isIOS = /iP(hone|ad|od)/.test(navigator.platform) ||
+                            (/Macintosh/.test(navigator.userAgent) && 'ontouchend' in document) ||
+                            /iPhone|iPad|iPod/.test(navigator.userAgent);
+                        const needsCanvasNormalize = isIOS && (m.fileType == 'img' || m.fileType == 'img_ex');
+                        if (m.fileType != "img_ex" && m.resizeScale == 1 && !needsCanvasNormalize) {
                             a.actMedia(m.fileReader.result, m.mediaFile, false);
                             return;
                         }
@@ -342,6 +354,9 @@ function continueCheckActMedia(a: A, m: any): void {
                             // メモリ領域を確保し、iPhone のメモリ制限で send() 直前に内部 abort されて
                             // XHR が status=0 で返る（=「Unknown Network Error」）。toBlob なら
                             // 直接 Blob を取得でき、ピーク使用量が大幅に減る。
+                            // JPEG 品質: 実際に縮小するときは 0.85。等倍（iOS 正規化目的で canvas を
+                            // 通すだけ）のときは 0.92 にして再エンコード劣化を最小化する。
+                            const jpegQuality = (m.resizeScale == 1) ? 0.92 : 0.85;
                             const canvasEl = m.canvasElement as HTMLCanvasElement;
                             if (typeof canvasEl.toBlob === 'function') {
                                 canvasEl.toBlob(function (blob: Blob | null) {
@@ -358,10 +373,10 @@ function continueCheckActMedia(a: A, m: any): void {
                                     // 元の挙動互換のため MediaBinary も入れておく（プレビュー画像表示用）。
                                     m.MediaBinary = m.fileReader.result;
                                     a.actMedia(m.MediaBinary, m.MediaBlob, true);
-                                }, 'image/jpeg', 0.85);
+                                }, 'image/jpeg', jpegQuality);
                             } else {
                                 // toBlob 非対応環境の旧来パス（フォールバック）。
-                                m.MediaBinary = canvasEl.toDataURL('image/jpeg', 0.85);
+                                m.MediaBinary = canvasEl.toDataURL('image/jpeg', jpegQuality);
                                 if (!m.MediaBinary || m.MediaBinary === 'data:,') {
                                     throw new Error('toDataURL returned empty (canvas size limit or memory issue)');
                                 }
@@ -408,7 +423,25 @@ export function actMedia(app: KktjsApp, arg0: any, arg1: any, arg2: any): void {
             var _0x38d96c = a;
             var _0x521de8;
             var _0x773119 = new FormData();
-            _0x773119.append("file", arg1);
+            // iOS Safari 対策:
+            //   (1) Blob の .type が空文字だと FormData 送信で失敗するケースがあるため、
+            //       type が空なら 'image/jpeg' を暗黙的に付ける（canvas.toBlob 後の Blob は環境依存で
+            //       .type が空になることが確認されている）。
+            //   (2) FormData.append の第3引数（ファイル名）を渡すことで、iOS Safari の一部バージョンで
+            //       multipart boundary 生成が安定する。
+            var _blobToSend = arg1;
+            if (_blobToSend && (!_blobToSend.type || _blobToSend.type === '')) {
+                try {
+                    _blobToSend = new Blob([_blobToSend], { type: 'image/jpeg' });
+                } catch (e) { /* Blob 再生成に失敗した場合は元 Blob をそのまま使う */ }
+            }
+            var _fname = 'upload.jpg';
+            if (arg1 && (arg1 as any).name) _fname = (arg1 as any).name;
+            else if (_blobToSend && _blobToSend.type) {
+                const ext = _blobToSend.type.split('/')[1] || 'jpg';
+                _fname = 'upload.' + ext;
+            }
+            _0x773119.append("file", _blobToSend, _fname);
             var request = new XMLHttpRequest();
             request.open('POST', KATSU_MEDIA.replace('[I]', _0x38d96c.repository), true);
             request.timeout = REQ_TIMEOUT * 0xf0;
@@ -439,25 +472,56 @@ export function actMedia(app: KktjsApp, arg0: any, arg1: any, arg2: any): void {
             // status=0 の原因を区別するためのハンドラ。これらはネットワーク層の失敗で、
             // onreadystatechange の DONE/status=0 経路と重複しうるため、ここで具体的な原因を出して
             // pop & lock 解除を行う（onreadystatechange の status=0 経路は何もしない）。
-            request.onerror = function () {
-                // iPhone Safari でメモリ不足で送信前に内部 abort されるケース、CORS エラー、
-                // ネットワーク到達失敗など。「Unknown Network Error」より具体的なメッセージにする。
+            // --- 送信 Blob のサイズを保持（診断情報として表示するため）---
+            const uploadBlobSize = (_blobToSend && typeof _blobToSend.size === 'number') ? _blobToSend.size : 0;
+            const uploadBlobKB = Math.round(uploadBlobSize / 1024);
+            request.onerror = function (ev: any) {
+                // iOS Safari で送信中/送信前にネットワーク層で失敗するケース。
+                // 何が起きているか判断できるよう、可能な限り診断情報を含める。
+                // 過去に「Unknown Network Error」しか出せなかった箇所を、実装ごとに具体化する。
                 _0x38d96c.katsu.media_previews.pop();
                 _0x38d96c.action_lock = '';
                 _0x38d96c.media_uploaded = '0';
-                _0x38d96c.result_text = '[Media] アップロードに失敗（送信前のネットワーク/メモリエラー）。画像サイズを小さくして再試行してください。';
+                const parts: string[] = [];
+                parts.push('size=' + uploadBlobKB + 'KB');
+                if (_blobToSend && _blobToSend.type) parts.push('type=' + _blobToSend.type);
+                else parts.push('type=(empty)');
+                // XHR オブジェクトから読める可能性のある属性を全部集める（iOS Safari で
+                // 送信前に失敗すると readyState=0, status=0, responseText='' になることが多いが、
+                // 稀に statusText や responseType に手がかりが入ることがある）。
+                parts.push('rs=' + request.readyState);
+                parts.push('st=' + request.status);
+                if (request.statusText) parts.push('stTxt=' + request.statusText);
+                if (ev && ev.type) parts.push('ev=' + ev.type);
+                _0x38d96c.result_text = '[Media] アップロード失敗 (' + parts.join(', ') + ')。詳細はスクショで報告してください。';
             };
+            // 送信中の進捗が途切れた（受信側で拒否された等）ケースを検出できるよう、
+            // upload.onerror も設定。iOS Safari では xhr.onerror より先に発火することがある。
+            if (request.upload) {
+                request.upload.onerror = function (ev: any) {
+                    _0x38d96c.katsu.media_previews.pop();
+                    _0x38d96c.action_lock = '';
+                    _0x38d96c.media_uploaded = '0';
+                    _0x38d96c.result_text = '[Media] 送信中に接続が切断されました (upload error, size=' + uploadBlobKB + 'KB' + (ev && ev.type ? ', ev=' + ev.type : '') + ')。';
+                };
+                request.upload.ontimeout = function () {
+                    _0x38d96c.katsu.media_previews.pop();
+                    _0x38d96c.action_lock = '';
+                    _0x38d96c.media_uploaded = '0';
+                    _0x38d96c.result_text = '[Media] 送信がタイムアウトしました (upload, size=' + uploadBlobKB + 'KB)。';
+                };
+            }
             request.ontimeout = function () {
                 _0x38d96c.katsu.media_previews.pop();
                 _0x38d96c.action_lock = '';
                 _0x38d96c.media_uploaded = '0';
-                _0x38d96c.result_text = '[Media] アップロードがタイムアウトしました。';
+                _0x38d96c.result_text = '[Media] アップロードがタイムアウトしました (size=' + uploadBlobKB + 'KB)。';
             };
             request.onabort = function () {
                 _0x38d96c.katsu.media_previews.pop();
                 _0x38d96c.action_lock = '';
                 _0x38d96c.media_uploaded = '0';
-                _0x38d96c.result_text = '[Media] アップロードが中断されました。';
+                _0x38d96c.result_text = '[Media] アップロードが中断されました (size=' + uploadBlobKB + 'KB)。';
             };
             request.send(_0x773119);
 }
