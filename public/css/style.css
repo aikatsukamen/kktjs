@@ -335,6 +335,27 @@ a:link, a:visited, a:active, a:hover{text-decoration:none;}
 .hidden.nodot{
   text-overflow: clip;
 }
+/* 長い通知（主に [Media] などのエラーと診断情報）を省略せず全文表示する。
+   .hidden の nowrap/ellipsis を使わず折り返し、診断文字列（size=... rs=... 等）が
+   途中で切れないよう単語途中でも改行させる。行数は 6 行までに制限し、
+   万一極端に長い場合でも画面を占有しすぎないようにする。 */
+.info-full{
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  line-height: 1.35;
+  max-height: 8.1em;
+  overflow-y: auto;
+}
+/* 設定画面 > 開発ステータス に出す直近エラーの控え。
+   診断情報（size=... rs=... 等）が長いため、折り返して全文を読めるようにする。 */
+.last-error-box{
+  display: block;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  line-height: 1.4;
+}
 /*  Texts
 --------------------------- */
 .emojione {

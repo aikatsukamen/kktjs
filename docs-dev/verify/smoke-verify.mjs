@@ -56,14 +56,14 @@ try {
   console.log('--- smoke test (HEIC integration regression check) ---');
   console.log('  Vue version          :', r.vueVersion);
   console.log('  window.app           :', r.hasApp);
-  console.log('  __kktjsMethods count :', r.methodCount, '(expect 247)');
+  console.log('  __kktjsMethods count :', r.methodCount, '(expect 248)');
   console.log('  checkActMedia method :', r.hasCheckActMedia);
   console.log('  actMedia method      :', r.hasActMedia);
   console.log('  optMaxImageLen type  :', r.hasOptMaxImageLen, '(expect "number")');
   console.log('  #app innerHTML length:', r.appHtmlLen, '(expect > 1000 for auth screen)');
 
   if (!r.hasApp) fail.push('app not booted');
-  if (r.methodCount !== 247) fail.push('method count ' + r.methodCount + ' (expect 247)');
+  if (r.methodCount !== 248) fail.push('method count ' + r.methodCount + ' (expect 248)');
   if (!r.hasCheckActMedia) fail.push('checkActMedia missing');
   if (!r.hasActMedia) fail.push('actMedia missing');
   if (r.hasOptMaxImageLen !== 'number') fail.push('optMaxImageLen not a number');

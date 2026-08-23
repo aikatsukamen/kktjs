@@ -4,6 +4,7 @@ import { encodeHtmlForm, base64ToBlob } from '../core/utils';
 import { KATSU_MEDIA, KATSU, MEDIA, VOTE, REPORT, PROFILE, SEARCH, HOME, LIST_OBJ } from '../api/endpoints';
 import { asset } from '../core/base-path';
 import { IMG_DUMMY_REL, REQ_TIMEOUT, LIMIT } from '../core/constants';
+import { setErrorText } from './ui-helpers';
 declare const app: any;
 // メディア関連の静的定数（legacy と同値）。
 const LIMIT_IMGFILE = 0x800000;
@@ -235,6 +236,13 @@ export function checkActMedia(app: KktjsApp, arg0: any): void {
   const m = (window as any).__kktjsMedia;
             const inputFile: File = arg0[0];
             (document.getElementById("uploader") as HTMLInputElement).value = null as any;
+            // 前回の添付処理が異常終了して action_lock='media' が残っていると、actMedia の
+            // 入口ガード（'' != action_lock なら無言 return）に阻まれて以降ずっと添付できなくなる
+            // （ブラウザ再起動でしか復帰しない）。ユーザーが新たにファイルを選び直した時点で
+            // 前回の処理は終わったとみなし、残留ロックを解除して再試行を可能にする。
+            if (a.action_lock === 'media') {
+                a.action_lock = '';
+            }
             // HEIC/HEIF は最初に JPEG へ変換してから既存パイプラインに乗せる（縮小ロジックも自動的に効く）。
             const lowerName = (inputFile.name || '').toLowerCase();
             const looksLikeHeic = /^image\/hei[fc]/.test(inputFile.type) || /\.heic$|\.heif$/.test(lowerName);
@@ -286,11 +294,24 @@ function continueCheckActMedia(a: A, m: any): void {
                 if (m.fileType == 'mov' || m.fileType == 'gif') {
                     a.actMedia(m.fileReader.result, m.mediaFile, false);
                 } else {
+                    // 重要: m.image / m.imgElement はアプリ全体で使い回される単一インスタンス
+                    // （window.__kktjsMedia）。同じファイルを再選択すると src に前回と同一の
+                    // data URL を代入することになり、ブラウザは「値が変わっていない」と判断して
+                    // 再読み込みを行わず onload が発火しない。その結果 actMedia に到達せず、
+                    // 「一度失敗した画像はそれ以降ずっと失敗し、ブラウザ再起動で直る」という
+                    // 症状になる。代入前に空にして必ず読み込みイベントを起こす。
+                    try {
+                        m.imgElement.src = '';
+                        m.image.src = '';
+                        // 前回のハンドラが残っていると古いクロージャが動く可能性があるため明示的に外す。
+                        m.image.onload = null;
+                        m.image.onerror = null;
+                    } catch (e) { /* 環境によっては src='' で例外。無視して続行 */ }
                     m.imgElement.src = m.fileReader.result;
                     m.image.onerror = function () {
                         // 画像読込失敗（破損ファイル・形式不一致・iOS の Canvas/Image サイズ制限超過など）。
                         // 縮小せず元ファイルでアップロードを試みる（サーバ側で弾かれても明示的なエラーになる）。
-                        a.result_text = '[Media] 画像の解析に失敗したため、縮小せずに送信します。';
+                        setErrorText(a, '[Media] 画像の解析に失敗したため、縮小せずに送信します。');
                         a.actMedia(m.fileReader.result, m.mediaFile, false);
                     };
                     m.image.onload = function () {
@@ -298,7 +319,7 @@ function continueCheckActMedia(a: A, m: any): void {
                         const iw = m.image.naturalWidth || m.image.width || 0;
                         const ih = m.image.naturalHeight || m.image.height || 0;
                         if (iw <= 0 || ih <= 0 || !isFinite(iw) || !isFinite(ih)) {
-                            a.result_text = '[Media] 画像サイズを取得できないため、縮小せずに送信します。';
+                            setErrorText(a, '[Media] 画像サイズを取得できないため、縮小せずに送信します。');
                             a.actMedia(m.fileReader.result, m.mediaFile, false);
                             return;
                         }
@@ -364,7 +385,7 @@ function continueCheckActMedia(a: A, m: any): void {
                                         // toBlob が null を返すケース（iOS の極限的なメモリ不足等）。
                                         // 元ファイルでフォールバック送信。
                                         a.action_lock = '';
-                                        a.result_text = '[Media] 画像の縮小に失敗（toBlob returned null）。縮小せずに送信します。';
+                                        setErrorText(a, '[Media] 画像の縮小に失敗（toBlob returned null）。縮小せずに送信します。');
                                         a.actMedia(m.fileReader.result, m.mediaFile, false);
                                         return;
                                     }
@@ -391,7 +412,7 @@ function continueCheckActMedia(a: A, m: any): void {
                             const detail = (e && e.message) ? e.message
                                 : (e && e.name) ? e.name
                                 : (e ? String(e) : 'unknown');
-                            a.result_text = '[Media] 画像の縮小に失敗（' + detail + '）。縮小せずに送信します。';
+                            setErrorText(a, '[Media] 画像の縮小に失敗（' + detail + '）。縮小せずに送信します。');
                             a.actMedia(m.fileReader.result, m.mediaFile, false);
                         }
                     };
@@ -401,7 +422,7 @@ function continueCheckActMedia(a: A, m: any): void {
             m.fileReader.onerror = function () {
                 // FileReader が失敗（巨大ファイルでのメモリ不足など）。lock を残さず通知。
                 a.action_lock = '';
-                a.result_text = '[Media] 画像の読み込みに失敗しました。';
+                setErrorText(a, '[Media] 画像の読み込みに失敗しました。');
             };
             // 読み込み開始のフィードバック（大きい画像は readAsDataURL 自体に時間がかかるため）。
             a.result_text = MEDIA_PROGRESS_MSGS[0];
@@ -423,25 +444,33 @@ export function actMedia(app: KktjsApp, arg0: any, arg1: any, arg2: any): void {
             var _0x38d96c = a;
             var _0x521de8;
             var _0x773119 = new FormData();
-            // iOS Safari 対策:
-            //   (1) Blob の .type が空文字だと FormData 送信で失敗するケースがあるため、
-            //       type が空なら 'image/jpeg' を暗黙的に付ける（canvas.toBlob 後の Blob は環境依存で
-            //       .type が空になることが確認されている）。
-            //   (2) FormData.append の第3引数（ファイル名）を渡すことで、iOS Safari の一部バージョンで
-            //       multipart boundary 生成が安定する。
+            // 送信データの構築。
+            //
+            // 重要（iOS Safari の 422 の原因）:
+            // FormData.append の第3引数（ファイル名）を「本物の File」に対して指定すると、
+            // WebKit ではその part の Content-Type が失われ application/octet-stream になる。
+            // すると Mastodon(paperclip) 側で「ファイル名の拡張子から期待される型」と
+            // 「宣言された Content-Type」が食い違い、Content-Type Spoof 判定で
+            // 422「バリデーションに失敗しました: File ...」になる。
+            //   - 直接アップロード（Mastodon Web UI）は第3引数なし → 成功
+            //   - kktjs が第3引数を付けていた → 画像も動画も 422
+            //   - canvas 経由の Blob は第3引数が必要（名前を持たないため）で、型も保たれるので成功
+            // よって「本物の File はそのまま append（第3引数なし）」「Blob のときだけ名前を補う」。
             var _blobToSend = arg1;
-            if (_blobToSend && (!_blobToSend.type || _blobToSend.type === '')) {
-                try {
-                    _blobToSend = new Blob([_blobToSend], { type: 'image/jpeg' });
-                } catch (e) { /* Blob 再生成に失敗した場合は元 Blob をそのまま使う */ }
+            if (typeof File !== 'undefined' && arg1 instanceof File) {
+                // 元ファイル（画像・動画・GIF いずれも）。加工せずそのまま送る＝直接アップロードと同一。
+                _0x773119.append("file", arg1);
+            } else {
+                // canvas.toBlob 由来などの Blob。名前を持たないのでファイル名を補う。
+                // type が空だと送信が不安定になる環境があるため image/jpeg を補完する。
+                if (_blobToSend && (!_blobToSend.type || _blobToSend.type === '')) {
+                    try {
+                        _blobToSend = new Blob([_blobToSend], { type: 'image/jpeg' });
+                    } catch (e) { /* Blob 再生成に失敗した場合は元 Blob をそのまま使う */ }
+                }
+                var _ext = (_blobToSend && _blobToSend.type) ? (_blobToSend.type.split('/')[1] || 'jpg') : 'jpg';
+                _0x773119.append("file", _blobToSend, 'upload.' + _ext);
             }
-            var _fname = 'upload.jpg';
-            if (arg1 && (arg1 as any).name) _fname = (arg1 as any).name;
-            else if (_blobToSend && _blobToSend.type) {
-                const ext = _blobToSend.type.split('/')[1] || 'jpg';
-                _fname = 'upload.' + ext;
-            }
-            _0x773119.append("file", _blobToSend, _fname);
             var request = new XMLHttpRequest();
             request.open('POST', KATSU_MEDIA.replace('[I]', _0x38d96c.repository), true);
             request.timeout = REQ_TIMEOUT * 0xf0;
@@ -493,7 +522,7 @@ export function actMedia(app: KktjsApp, arg0: any, arg1: any, arg2: any): void {
                 parts.push('st=' + request.status);
                 if (request.statusText) parts.push('stTxt=' + request.statusText);
                 if (ev && ev.type) parts.push('ev=' + ev.type);
-                _0x38d96c.result_text = '[Media] アップロード失敗 (' + parts.join(', ') + ')。詳細はスクショで報告してください。';
+                setErrorText(_0x38d96c, '[Media] アップロード失敗 (' + parts.join(', ') + ')。詳細はスクショで報告してください。');
             };
             // 送信中の進捗が途切れた（受信側で拒否された等）ケースを検出できるよう、
             // upload.onerror も設定。iOS Safari では xhr.onerror より先に発火することがある。
@@ -502,26 +531,26 @@ export function actMedia(app: KktjsApp, arg0: any, arg1: any, arg2: any): void {
                     _0x38d96c.katsu.media_previews.pop();
                     _0x38d96c.action_lock = '';
                     _0x38d96c.media_uploaded = '0';
-                    _0x38d96c.result_text = '[Media] 送信中に接続が切断されました (upload error, size=' + uploadBlobKB + 'KB' + (ev && ev.type ? ', ev=' + ev.type : '') + ')。';
+                    setErrorText(_0x38d96c, '[Media] 送信中に接続が切断されました (upload error, size=' + uploadBlobKB + 'KB' + (ev && ev.type ? ', ev=' + ev.type : '') + ')。');
                 };
                 request.upload.ontimeout = function () {
                     _0x38d96c.katsu.media_previews.pop();
                     _0x38d96c.action_lock = '';
                     _0x38d96c.media_uploaded = '0';
-                    _0x38d96c.result_text = '[Media] 送信がタイムアウトしました (upload, size=' + uploadBlobKB + 'KB)。';
+                    setErrorText(_0x38d96c, '[Media] 送信がタイムアウトしました (upload, size=' + uploadBlobKB + 'KB)。');
                 };
             }
             request.ontimeout = function () {
                 _0x38d96c.katsu.media_previews.pop();
                 _0x38d96c.action_lock = '';
                 _0x38d96c.media_uploaded = '0';
-                _0x38d96c.result_text = '[Media] アップロードがタイムアウトしました (size=' + uploadBlobKB + 'KB)。';
+                setErrorText(_0x38d96c, '[Media] アップロードがタイムアウトしました (size=' + uploadBlobKB + 'KB)。');
             };
             request.onabort = function () {
                 _0x38d96c.katsu.media_previews.pop();
                 _0x38d96c.action_lock = '';
                 _0x38d96c.media_uploaded = '0';
-                _0x38d96c.result_text = '[Media] アップロードが中断されました (size=' + uploadBlobKB + 'KB)。';
+                setErrorText(_0x38d96c, '[Media] アップロードが中断されました (size=' + uploadBlobKB + 'KB)。');
             };
             request.send(_0x773119);
 }

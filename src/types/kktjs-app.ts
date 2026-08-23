@@ -89,6 +89,9 @@ export interface KktjsApp {
   fetch_after: Record<string, boolean>;
   action_lock: string;
   result_text: string;
+  // 直近エラーの控え（設定画面 > 開発ステータス で表示）
+  last_error_text: string;
+  last_error_time: string;
   result_type: string;
   result_lock: boolean;
   error_cnt: number;

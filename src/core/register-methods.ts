@@ -258,6 +258,7 @@ export function registerMigratedMethods(): void {
     hasReply: (app: any) => predicates.hasReply(app),
     hasKatsuDraft: (app: any) => predicates.hasKatsuDraft(app),
     hasInfo: (app: any) => predicates.hasInfo(app),
+    isLongInfo: (app: any) => predicates.isLongInfo(app),
     isHashtagMax: (app: any) => predicates.isHashtagMax(app),
     isListMax: (app: any) => predicates.isListMax(app),
     isListFollowMax: (app: any) => predicates.isListFollowMax(app),

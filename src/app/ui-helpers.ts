@@ -45,6 +45,14 @@ export function popError(app: KktjsApp, body: string, status: number, label: str
   } else {
     app.result_text = msg;
   }
+  // 直近エラーの控えを残す（トーストが消えた後も設定画面から全文を確認できるようにする）。
+  try {
+    const d = new Date();
+    const p2 = (n: number) => (n < 10 ? '0' + n : String(n));
+    (app as any).last_error_text = msg;
+    (app as any).last_error_time =
+      p2(d.getHours()) + ':' + p2(d.getMinutes()) + ':' + p2(d.getSeconds());
+  } catch { /* 控えの記録に失敗しても本来の通知表示は妨げない */ }
 }
 
 /** 隠し audio 要素をクリックして音を鳴らす。元 playSound */
@@ -65,4 +73,22 @@ export function openImageAll(_app: KktjsApp, list: MediaAttachment[]): void {
     m.loading_avatar = false;
     m.loading_media = false;
   });
+}
+
+/**
+ * エラーメッセージを通知として表示しつつ、直近エラーの控えにも残す。
+ *
+ * popError を通らない箇所（[Media] 系など result_text へ直接代入していたもの）から
+ * 使う。トーストは短時間で消え、かつ長文は読み切れないことがあるため、
+ * 設定画面 > 開発ステータス から後で全文を確認できるようにするのが目的。
+ */
+export function setErrorText(app: KktjsApp, msg: string): void {
+  app.result_text = msg;
+  try {
+    const d = new Date();
+    const p2 = (n: number) => (n < 10 ? '0' + n : String(n));
+    (app as any).last_error_text = msg;
+    (app as any).last_error_time =
+      p2(d.getHours()) + ':' + p2(d.getMinutes()) + ':' + p2(d.getSeconds());
+  } catch { /* 控えの記録に失敗しても本来の通知表示は妨げない */ }
 }

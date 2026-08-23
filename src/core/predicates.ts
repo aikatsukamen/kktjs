@@ -28,6 +28,18 @@ export const hasReply = (a: KktjsApp): boolean =>
 export const hasKatsuDraft = (a: KktjsApp): boolean =>
   !!((a as any).katsu_drafts && (a as any).katsu_drafts.length > 0);
 export const hasInfo = (a: KktjsApp): boolean => !!(a.result_text && a.result_text.length > 0);
+/**
+ * 通知バナーを一行省略（text-overflow: ellipsis）せず全文表示すべきか。
+ *
+ * 通常の短い通知は従来どおり一行に収めたいが、エラーメッセージ（特に [Media] の
+ * 診断情報つきエラー）は長く、末尾が切れて肝心の原因が読めないという問題があった。
+ * 「[...] で始まるエラー系」または「一行に収まらない長さ」のときだけ折り返して全文出す。
+ */
+export const isLongInfo = (a: KktjsApp): boolean => {
+  const t = a.result_text;
+  if (!t || typeof t !== 'string') return false;
+  return /^\(?\d*\)?\s*\[/.test(t) || t.length > 28;
+};
 export const isHashtagMax = (a: KktjsApp): boolean =>
   (a as any).stream_hashtags.length >= LIMIT_HASHTAGS;
 export const isListMax = (a: KktjsApp): boolean => a.stream_lists.length >= LIMIT_LISTS;

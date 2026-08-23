@@ -522,7 +522,7 @@
       <span>
         <div v-if="app_wait_update" class="flex info-wrapper color-wh bgcolor">
           <div v-on:click="reloadForce();" class="flex full">
-            <span class="hidden full"><i class="fa fa-fw fa-refresh"></i> {{result_text}}</span>
+            <span :class="isLongInfo ? 'info-full full' : 'hidden full'"><i class="fa fa-fw fa-refresh"></i> {{result_text}}</span>
           </div>
           <div v-on:click="runToast(false);playSound('sound'+optThemeSound);" class="flex color-wh bgcolor">
             <i class="fa fa-fw fa-times"></i>
@@ -530,7 +530,7 @@
         </div>
         <div v-else class="flex info-wrapper color-wh bgcolor">
           <div v-on:click="runToast(true);playSound('sound'+optThemeSound);" class="flex full">
-            <span class="hidden full" v-html="formatEmoji(result_text)"></span>
+            <span :class="isLongInfo ? 'info-full full' : 'hidden full'" v-html="formatEmoji(result_text)"></span>
           </div>
           <div v-on:click="runToast(false);playSound('sound'+optThemeSound);" class="flex color-wh bgcolor">
             <i class="fa fa-fw fa-times"></i>
@@ -3533,6 +3533,9 @@
             <h3 class="setting-header">🍨🍨🍨 開発ステータス 🍨🍨🍨</h3>
             <h3>バージョン</h3>
             <small>kktjs v{{kktjs_version}}</small>
+            <h3>直近のエラー</h3>
+            <small v-if="last_error_text" class="last-error-box">{{last_error_time}}<br>{{last_error_text}}</small>
+            <small v-else>（まだエラーは記録されていません）</small>
             <h3>アプリで使える機能(v1.4)</h3>
             <small>
               ログイン/ログアウト/Webアプリ設定<br>

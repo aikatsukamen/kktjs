@@ -312,6 +312,10 @@ var __kktjsApp = Vue.createApp({
         // 旧 app_name/'kktjs', app_ver/'1.4', app_ver_top/'js v1.4.8a' は固定の古い表示で、
         // 内部バージョンと連動していなかったため削除。
         'kktjs_version': __KKTJS_VERSION__,
+        // 直近に表示したエラー通知の控え。トーストは消えてしまうため、
+        // 後から設定画面 > 開発ステータス で全文を読み返せるようにする（不具合報告用）。
+        'last_error_text': '',
+        'last_error_time': '',
         'app_mode': 'web',
         'app_active': true,
         'app_network': true,
@@ -586,6 +590,9 @@ var __kktjsApp = Vue.createApp({
     'computed': {
         'hasAuth': function () {
             return window.__kktjsMethods['hasAuth'](this);
+        },
+        'isLongInfo': function () {
+            return window.__kktjsMethods['isLongInfo'](this);
         },
         'isMyAcct': function () {
             return window.__kktjsMethods['isMyAcct'](this);
