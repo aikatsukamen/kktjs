@@ -35,10 +35,21 @@ export const hasInfo = (a: KktjsApp): boolean => !!(a.result_text && a.result_te
  * 診断情報つきエラー）は長く、末尾が切れて肝心の原因が読めないという問題があった。
  * 「[...] で始まるエラー系」または「一行に収まらない長さ」のときだけ折り返して全文出す。
  */
+/**
+ * 通知バナーを一行省略（text-overflow: ellipsis）せず全文表示すべきか。
+ *
+ * 対象はエラー通知だけ。エラーは popError / setErrorText が必ず
+ * 「[ラベル] 本文」の形（連続時は先頭に "(N) " が付く）で生成するため、
+ * その形だけを判定する。
+ *
+ * 通常の通知（favourite / boost / follow など）は長くても一行省略のままにする。
+ * ここで文字数だけを見て折り返すと、ふつうの通知まで複数行になって
+ * タイムラインを覆ってしまうため。
+ */
 export const isLongInfo = (a: KktjsApp): boolean => {
   const t = a.result_text;
   if (!t || typeof t !== 'string') return false;
-  return /^\(?\d*\)?\s*\[/.test(t) || t.length > 28;
+  return /^(\(\d+\)\s*)?\[[^\]]{1,20}\]\s/.test(t);
 };
 export const isHashtagMax = (a: KktjsApp): boolean =>
   (a as any).stream_hashtags.length >= LIMIT_HASHTAGS;

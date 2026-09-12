@@ -471,88 +471,85 @@ export function actMedia(app: KktjsApp, arg0: any, arg1: any, arg2: any): void {
                 var _ext = (_blobToSend && _blobToSend.type) ? (_blobToSend.type.split('/')[1] || 'jpg') : 'jpg';
                 _0x773119.append("file", _blobToSend, 'upload.' + _ext);
             }
-            var request = new XMLHttpRequest();
-            request.open('POST', KATSU_MEDIA.replace('[I]', _0x38d96c.repository), true);
-            request.timeout = REQ_TIMEOUT * 0xf0;
-            request.setRequestHeader('Authorization', 'Bearer ' + _0x38d96c.at);
-            request.onreadystatechange = function () {
-                if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
-                    _0x38d96c.katsu.media_attachments.push(JSON.parse(request.responseText));
-                    // アップロード完了。進行メッセージ（「縮小しています…」等）が残っていれば自動で消す。
-                    // 自分が出した進行メッセージのときだけ消し、無関係な通知やエラーは温存する。
-                    if (MEDIA_PROGRESS_MSGS.indexOf(_0x38d96c.result_text) !== -1) {
-                        _0x38d96c.result_text = '';
-                    }
-                    _0x38d96c.action_lock = '';
-                    _0x38d96c.media_uploaded = '0';
-                } else if (request.readyState == XMLHttpRequest.DONE) {
-                    // status != 200 で readyState=DONE。HTTP レスポンスはあるが失敗（4xx/5xx）の場合と、
-                    // status=0（ネットワーク到達失敗・abort・タイムアウト）の場合がある。
-                    // status=0 の細かい区別は onerror/ontimeout/onabort で行うので、ここでは何もしない
-                    // （二重通知になるのを避ける。これらのハンドラが先に動く）。
-                    if (request.status !== 0) {
-                        _0x38d96c.katsu.media_previews.pop();
-                        _0x38d96c.popError(request.responseText, request.status, "Media");
-                        _0x38d96c.action_lock = '';
-                        _0x38d96c.media_uploaded = '0';
-                    }
-                }
-            };
-            // status=0 の原因を区別するためのハンドラ。これらはネットワーク層の失敗で、
-            // onreadystatechange の DONE/status=0 経路と重複しうるため、ここで具体的な原因を出して
-            // pop & lock 解除を行う（onreadystatechange の status=0 経路は何もしない）。
-            // --- 送信 Blob のサイズを保持（診断情報として表示するため）---
+            // --- 送信データのサイズ/型（診断表示とリトライ判定で使う）---
             const uploadBlobSize = (_blobToSend && typeof _blobToSend.size === 'number') ? _blobToSend.size : 0;
             const uploadBlobKB = Math.round(uploadBlobSize / 1024);
-            request.onerror = function (ev: any) {
-                // iOS Safari で送信中/送信前にネットワーク層で失敗するケース。
-                // 何が起きているか判断できるよう、可能な限り診断情報を含める。
-                // 過去に「Unknown Network Error」しか出せなかった箇所を、実装ごとに具体化する。
+            const uploadBlobType = (_blobToSend && _blobToSend.type) ? _blobToSend.type : '(empty)';
+
+            // モバイル回線では、大きなボディの送信中に中間装置がコネクションを切ることがあり、
+            // その場合 readyState=4 / status=0 / onerror という形で失敗する（レスポンスが1バイトも
+            // 返らない）。単発では失敗しても、張り直せば通ることが多い。さらに一度壊れた接続が
+            // コネクションプールに残ると連続で失敗し続けるため（ブラウザ再起動でしか直らない）、
+            // リトライ時は URL にキャッシュバスターを付けて別接続になるようにする。
+            const MEDIA_MAX_RETRY = 2;
+            const mediaUrl = KATSU_MEDIA.replace('[I]', _0x38d96c.repository);
+
+            function failMedia(msg: string): void {
                 _0x38d96c.katsu.media_previews.pop();
                 _0x38d96c.action_lock = '';
                 _0x38d96c.media_uploaded = '0';
-                const parts: string[] = [];
-                parts.push('size=' + uploadBlobKB + 'KB');
-                if (_blobToSend && _blobToSend.type) parts.push('type=' + _blobToSend.type);
-                else parts.push('type=(empty)');
-                // XHR オブジェクトから読める可能性のある属性を全部集める（iOS Safari で
-                // 送信前に失敗すると readyState=0, status=0, responseText='' になることが多いが、
-                // 稀に statusText や responseType に手がかりが入ることがある）。
-                parts.push('rs=' + request.readyState);
-                parts.push('st=' + request.status);
-                if (request.statusText) parts.push('stTxt=' + request.statusText);
-                if (ev && ev.type) parts.push('ev=' + ev.type);
-                setErrorText(_0x38d96c, '[Media] アップロード失敗 (' + parts.join(', ') + ')。詳細はスクショで報告してください。');
-            };
-            // 送信中の進捗が途切れた（受信側で拒否された等）ケースを検出できるよう、
-            // upload.onerror も設定。iOS Safari では xhr.onerror より先に発火することがある。
-            if (request.upload) {
-                request.upload.onerror = function (ev: any) {
-                    _0x38d96c.katsu.media_previews.pop();
-                    _0x38d96c.action_lock = '';
-                    _0x38d96c.media_uploaded = '0';
-                    setErrorText(_0x38d96c, '[Media] 送信中に接続が切断されました (upload error, size=' + uploadBlobKB + 'KB' + (ev && ev.type ? ', ev=' + ev.type : '') + ')。');
-                };
-                request.upload.ontimeout = function () {
-                    _0x38d96c.katsu.media_previews.pop();
-                    _0x38d96c.action_lock = '';
-                    _0x38d96c.media_uploaded = '0';
-                    setErrorText(_0x38d96c, '[Media] 送信がタイムアウトしました (upload, size=' + uploadBlobKB + 'KB)。');
-                };
+                setErrorText(_0x38d96c, msg);
             }
-            request.ontimeout = function () {
-                _0x38d96c.katsu.media_previews.pop();
-                _0x38d96c.action_lock = '';
-                _0x38d96c.media_uploaded = '0';
-                setErrorText(_0x38d96c, '[Media] アップロードがタイムアウトしました (size=' + uploadBlobKB + 'KB)。');
-            };
-            request.onabort = function () {
-                _0x38d96c.katsu.media_previews.pop();
-                _0x38d96c.action_lock = '';
-                _0x38d96c.media_uploaded = '0';
-                setErrorText(_0x38d96c, '[Media] アップロードが中断されました (size=' + uploadBlobKB + 'KB)。');
-            };
-            request.send(_0x773119);
+
+            function sendMedia(attempt: number): void {
+                var request = new XMLHttpRequest();
+                const url = attempt === 0 ? mediaUrl : mediaUrl + (mediaUrl.indexOf('?') >= 0 ? '&' : '?') + '_r=' + attempt + '_' + Date.now();
+                request.open('POST', url, true);
+                request.timeout = REQ_TIMEOUT * 0xf0;
+                request.setRequestHeader('Authorization', 'Bearer ' + _0x38d96c.at);
+
+                // 接続断（status=0）で、まだ試行回数が残っていればやり直す。
+                // 待ち時間を少し置くのは、瞬断直後に再送しても同じく失敗しやすいため。
+                function retryOrFail(reason: string, ev: any): void {
+                    if (attempt < MEDIA_MAX_RETRY) {
+                        const next = attempt + 1;
+                        _0x38d96c.result_text = '[Media] 接続が切れたため再送しています… (' + next + '/' + MEDIA_MAX_RETRY + ')';
+                        setTimeout(function () { sendMedia(next); }, 800 * next);
+                        return;
+                    }
+                    const parts: string[] = [];
+                    parts.push('size=' + uploadBlobKB + 'KB');
+                    parts.push('type=' + uploadBlobType);
+                    parts.push('rs=' + request.readyState);
+                    parts.push('st=' + request.status);
+                    if (request.statusText) parts.push('stTxt=' + request.statusText);
+                    if (ev && ev.type) parts.push('ev=' + ev.type);
+                    parts.push('try=' + (attempt + 1));
+                    failMedia('[Media] ' + reason + ' (' + parts.join(', ') + ')。詳細はスクショで報告してください。');
+                }
+
+                request.onreadystatechange = function () {
+                    if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
+                        _0x38d96c.katsu.media_attachments.push(JSON.parse(request.responseText));
+                        // アップロード完了。進行メッセージ（「縮小しています…」等）が残っていれば自動で消す。
+                        // 自分が出した進行メッセージのときだけ消し、無関係な通知やエラーは温存する。
+                        if (MEDIA_PROGRESS_MSGS.indexOf(_0x38d96c.result_text) !== -1 ||
+                            /^\[Media\] 接続が切れたため再送/.test(_0x38d96c.result_text)) {
+                            _0x38d96c.result_text = '';
+                        }
+                        _0x38d96c.action_lock = '';
+                        _0x38d96c.media_uploaded = '0';
+                    } else if (request.readyState == XMLHttpRequest.DONE) {
+                        // status != 200。status=0（接続断）は onerror/ontimeout 側で扱うのでここでは触らない。
+                        if (request.status !== 0) {
+                            _0x38d96c.katsu.media_previews.pop();
+                            _0x38d96c.popError(request.responseText, request.status, "Media");
+                            _0x38d96c.action_lock = '';
+                            _0x38d96c.media_uploaded = '0';
+                        }
+                    }
+                };
+                request.onerror = function (ev: any) { retryOrFail('アップロード失敗', ev); };
+                request.ontimeout = function (ev: any) { retryOrFail('アップロードがタイムアウト', ev); };
+                request.onabort = function (ev: any) { retryOrFail('アップロードが中断', ev); };
+                if (request.upload) {
+                    request.upload.onerror = function (ev: any) { retryOrFail('送信中に接続が切断', ev); };
+                    request.upload.ontimeout = function (ev: any) { retryOrFail('送信がタイムアウト', ev); };
+                }
+                request.send(_0x773119);
+            }
+
+            sendMedia(0);
 }
 
 export function removeMedia(app: KktjsApp, arg0: any): void {

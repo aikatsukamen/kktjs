@@ -59,8 +59,11 @@ try {
         const xhr = new OriginalXHR();
         xhr.send = function () {
           setTimeout(() => {
+            // リトライを使い切らせるため、毎回 接続断(rs=4, st=0) を返す
+            Object.defineProperty(xhr, 'readyState', { value: 4, configurable: true });
+            Object.defineProperty(xhr, 'status', { value: 0, configurable: true });
             xhr.onerror && xhr.onerror({ type: 'error' });
-          }, 30);
+          }, 20);
         };
         return xhr;
       };
@@ -73,7 +76,7 @@ try {
 
       // actMedia を直接呼ぶ（縮小をスキップして送信テストに集中）
       app.actMedia('data:image/jpeg;base64,...', blob, false);
-      await new Promise(r => setTimeout(r, 200));
+      await new Promise(r => setTimeout(r, 4000));
       
       out.caseA_text = app.result_text;
       out.caseA_lockReleased = app.action_lock === '';
