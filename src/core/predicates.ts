@@ -42,6 +42,9 @@ export const hasInfo = (a: KktjsApp): boolean => !!(a.result_text && a.result_te
  * 「[ラベル] 本文」の形（連続時は先頭に "(N) " が付く）で生成するため、
  * その形だけを判定する。
  *
+ * ただし進捗表示（「[Media] アップロード中… 40%」など）も同じ形になるので除外する。
+ * 短く一行に収まるうえ、頻繁に書き換わるため折り返すと画面が落ち着かない。
+ *
  * 通常の通知（favourite / boost / follow など）は長くても一行省略のままにする。
  * ここで文字数だけを見て折り返すと、ふつうの通知まで複数行になって
  * タイムラインを覆ってしまうため。
@@ -49,7 +52,10 @@ export const hasInfo = (a: KktjsApp): boolean => !!(a.result_text && a.result_te
 export const isLongInfo = (a: KktjsApp): boolean => {
   const t = a.result_text;
   if (!t || typeof t !== 'string') return false;
-  return /^(\(\d+\)\s*)?\[[^\]]{1,20}\]\s/.test(t);
+  if (!/^(\(\d+\)\s*)?\[[^\]]{1,20}\]\s/.test(t)) return false;
+  // 進捗系（末尾が「…」または「…  N%」等）はエラーではないので一行のまま。
+  if (/…/.test(t)) return false;
+  return true;
 };
 export const isHashtagMax = (a: KktjsApp): boolean =>
   (a as any).stream_hashtags.length >= LIMIT_HASHTAGS;

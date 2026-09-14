@@ -1493,3 +1493,25 @@ input.search-emojis{
   font-size: 18px;
   margin-top: 6px;
 }
+/*  テキスト選択の許可（iOS 対応）
+===========================
+上の mobile safari 向けハック
+  `:root *:not(textarea):not(input) { -webkit-user-select: none; }`
+により、textarea/input 以外のすべてで選択が無効化され、投稿本文を長押ししても
+文字列選択やコピーができなくなっていた。本文は読んで引用したい箇所なので、
+.status-text（タイムライン・詳細・モーダル共通の本文クラス）だけ選択を許可する。
+
+ハック側と詳細度で競合しないよう :root を付けて上書きする。
+本文内の操作系（SHOW MORE / SHOW LESS などのリンク）は誤選択を避けるため除外。 */
+:root .status-text,
+:root .status-text *{
+  -webkit-user-select: text;
+  user-select: text;
+  -webkit-touch-callout: default;
+}
+:root .status-text .spoller-link,
+:root .status-text .spoller-link *{
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}

@@ -19,6 +19,7 @@ const MEDIA_PROGRESS_MSGS = [
   '[Media] 画像を読み込んでいます…',
   '[Media] 画像を縮小しています…',
   '[Media] HEIC → JPEG に変換しています…',
+  '[Media] アップロードしています…',
 ];
 type A = any;
 
@@ -524,7 +525,7 @@ export function actMedia(app: KktjsApp, arg0: any, arg1: any, arg2: any): void {
                         // アップロード完了。進行メッセージ（「縮小しています…」等）が残っていれば自動で消す。
                         // 自分が出した進行メッセージのときだけ消し、無関係な通知やエラーは温存する。
                         if (MEDIA_PROGRESS_MSGS.indexOf(_0x38d96c.result_text) !== -1 ||
-                            /^\[Media\] 接続が切れたため再送/.test(_0x38d96c.result_text)) {
+                            /^\[Media\] (接続が切れたため再送|アップロード中…)/.test(_0x38d96c.result_text)) {
                             _0x38d96c.result_text = '';
                         }
                         _0x38d96c.action_lock = '';
@@ -545,6 +546,29 @@ export function actMedia(app: KktjsApp, arg0: any, arg1: any, arg2: any): void {
                 if (request.upload) {
                     request.upload.onerror = function (ev: any) { retryOrFail('送信中に接続が切断', ev); };
                     request.upload.ontimeout = function (ev: any) { retryOrFail('送信がタイムアウト', ev); };
+                    // 送信の進捗を表示する。これがないと「縮小しています…」のまま止まって見え、
+                    // どこまでがローカル処理でどこからが通信なのか判別できない。
+                    request.upload.onprogress = function (ev: any) {
+                        if (!ev || !ev.lengthComputable || !ev.total) return;
+                        const pct = Math.min(100, Math.round((ev.loaded / ev.total) * 100));
+                        // 進捗で上書きしてよいのは進捗表示のときだけ。
+                        // 再送案内や、縮小失敗などの警告が出ているときは残す。
+                        const cur = _0x38d96c.result_text;
+                        const overwritable = !cur || MEDIA_PROGRESS_MSGS.indexOf(cur) !== -1 ||
+                            /^\[Media\] アップロード中…/.test(cur);
+                        if (!overwritable) return;
+                        _0x38d96c.result_text = '[Media] アップロード中… ' + pct + '% (' + uploadBlobKB + 'KB)';
+                    };
+                }
+                // 送信開始。ここからは通信フェーズなので表示を切り替える
+                // （縮小などのローカル処理は完了している）。
+                // ただし直前に警告が出ている場合（縮小に失敗して元ファイルで送るなど）は、
+                // その内容を握りつぶさないよう上書きしない。
+                const _cur = _0x38d96c.result_text;
+                const _isProgress = !_cur || MEDIA_PROGRESS_MSGS.indexOf(_cur) !== -1 ||
+                    /^\[Media\] (接続が切れたため再送|アップロード中…)/.test(_cur);
+                if (_isProgress) {
+                    _0x38d96c.result_text = MEDIA_PROGRESS_MSGS[3];
                 }
                 request.send(_0x773119);
             }
