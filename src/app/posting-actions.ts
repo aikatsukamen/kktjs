@@ -436,6 +436,20 @@ export function actMedia(app: KktjsApp, arg0: any, arg1: any, arg2: any): void {
                 return;
             }
             a.action_lock = 'media';
+            // 保険: 何らかの想定外（ハンドラが一度も呼ばれない等）でロックが解放されないと、
+            // 投稿も追加の画像添付もできなくなり、ブラウザ再起動しか復帰手段がなくなる。
+            // リトライ込みの最長所要時間を十分に超えた時点で、まだ同じ添付処理のロックが
+            // 残っていれば強制的に解放する。
+            const _mediaLockToken = Date.now();
+            (a as any)._media_lock_token = _mediaLockToken;
+            setTimeout(function () {
+                // 別の添付処理が始まっていれば（トークンが違えば）何もしない。
+                if ((a as any)._media_lock_token !== _mediaLockToken) return;
+                if (a.action_lock === 'media') {
+                    a.action_lock = '';
+                    a.media_uploaded = '0';
+                }
+            }, 120000);
             a.katsu.media_previews.push({
                 'url': arg0,
                 'preview_url': asset(IMG_DUMMY_REL),
@@ -499,9 +513,17 @@ export function actMedia(app: KktjsApp, arg0: any, arg1: any, arg2: any): void {
                 request.timeout = REQ_TIMEOUT * 0xf0;
                 request.setRequestHeader('Authorization', 'Bearer ' + _0x38d96c.at);
 
+                // この試行がすでに決着（成功 / 再送へ移行 / 最終失敗）したかどうか。
+                // 接続断のとき upload.onerror と request.onerror の両方が発火するため、
+                // ガードしないと再送が二重に走り、一方が成功して action_lock を解放した後に
+                // もう一方が完了して整合が崩れる（投稿も追加添付もできなくなる）。
+                let settled = false;
+
                 // 接続断（status=0）で、まだ試行回数が残っていればやり直す。
                 // 待ち時間を少し置くのは、瞬断直後に再送しても同じく失敗しやすいため。
                 function retryOrFail(reason: string, ev: any): void {
+                    if (settled) return;
+                    settled = true;
                     if (attempt < MEDIA_MAX_RETRY) {
                         const next = attempt + 1;
                         _0x38d96c.result_text = '[Media] 接続が切れたため再送しています… (' + next + '/' + MEDIA_MAX_RETRY + ')';
@@ -521,6 +543,10 @@ export function actMedia(app: KktjsApp, arg0: any, arg1: any, arg2: any): void {
 
                 request.onreadystatechange = function () {
                     if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
+                        // 再送が走ったあとに古い試行のレスポンスが遅れて届くことがある。
+                        // 決着済みの試行は結果を採用しない（二重添付・ロック再取得を防ぐ）。
+                        if (settled) return;
+                        settled = true;
                         _0x38d96c.katsu.media_attachments.push(JSON.parse(request.responseText));
                         // アップロード完了。進行メッセージ（「縮小しています…」等）が残っていれば自動で消す。
                         // 自分が出した進行メッセージのときだけ消し、無関係な通知やエラーは温存する。
@@ -533,6 +559,8 @@ export function actMedia(app: KktjsApp, arg0: any, arg1: any, arg2: any): void {
                     } else if (request.readyState == XMLHttpRequest.DONE) {
                         // status != 200。status=0（接続断）は onerror/ontimeout 側で扱うのでここでは触らない。
                         if (request.status !== 0) {
+                            if (settled) return;
+                            settled = true;
                             _0x38d96c.katsu.media_previews.pop();
                             _0x38d96c.popError(request.responseText, request.status, "Media");
                             _0x38d96c.action_lock = '';
