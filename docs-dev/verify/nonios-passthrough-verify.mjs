@@ -6,7 +6,7 @@ import { createReadStream, existsSync } from 'node:fs';
 import { join, extname } from 'node:path';
 const DOCS = process.argv[2] || '/home/claude/kktjs/docs';
 const PORT = 5245;
-const EXE = '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
+const EXE = '/opt/pw-browsers/chromium-1243/chrome-linux64/chrome';
 const MIME = { '.html':'text/html','.js':'text/javascript','.css':'text/css','.png':'image/png','.json':'application/json','.woff':'font/woff','.woff2':'font/woff2','.svg':'image/svg+xml','.ico':'image/x-icon','.map':'application/json' };
 const server = createServer((req, res) => {
   let u = decodeURIComponent((req.url || '/').split('?')[0]);

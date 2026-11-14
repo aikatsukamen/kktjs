@@ -19,7 +19,7 @@ import { join, extname } from 'node:path';
 const DOCS = process.argv[2] || '/home/claude/kktjs/docs';
 const JPG = process.argv[3] || '/tmp/exif_oriented.jpg';
 const PORT = 5200;
-const EXE = '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
+const EXE = '/opt/pw-browsers/chromium-1243/chrome-linux64/chrome';
 const MIME = { '.html':'text/html','.js':'text/javascript','.css':'text/css','.png':'image/png','.json':'application/json','.woff':'font/woff','.woff2':'font/woff2','.ttf':'font/ttf','.mp3':'audio/mpeg','.ico':'image/x-icon','.map':'application/json','.wasm':'application/wasm' };
 const jpgBytes = readFileSync(JPG);
 const server = createServer((req, res) => {

@@ -1669,6 +1669,9 @@ function kktjsForceReconnectAll() {
     var d = app['$data'];
     d['app_active'] = true;
     d['app_network'] = true;
+    // 復帰はユーザー起点（resume-reconnect 側で3秒スロットル済み）なので、
+    // 切断ループで延びていた再接続待ちを捨てて即時に張り直す。
+    try { if (typeof window.kktjsResetStreamBackoff === 'function') window.kktjsResetStreamBackoff(); } catch (e) {}
 
     // Home: 死んでいるときだけ張り直す。
     if (kktjsIsDead(wsHome)) {

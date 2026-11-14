@@ -23,6 +23,7 @@ declare global {
     __kktjsMedia?: any;         // checkActMedia/actMedia 共有のメディア処理状態
     __kktjsStream?: any;        // streaming 用ソケット変数・ST_*・dedupヘルパ
     kktjsForceReconnectAll?: () => void;
+    kktjsResetStreamBackoff?: () => void;
     // index.html の inline HTML 属性ハンドラ（onDragover/onDrop/onPaste 等）から
     // 呼ばれる関数群。app-core.ts が window へ公開する（バンドル後もグローバル参照可能）。
     changeAppActive?: (active: boolean) => void;

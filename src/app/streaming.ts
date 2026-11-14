@@ -9,6 +9,64 @@ const LIMIT = 0x28;
 const LIMIT_NOTIF = 0x1e;
 type A = any;
 
+// --- 再接続バックオフ ---
+// 以前は onclose（200ms debounce）で即座に refetch + 再接続していたため、
+// ネットワーク断や接続拒否で WebSocket が即失敗すると、約200ms 間隔で
+// タイムライン取得と再接続を無限に繰り返していた。
+// ストリームごとに失敗回数を数え、連続失敗時は待ち時間を倍々に延ばす。
+const BACKOFF_BASE_MS = 1000;   // 2回目の再接続待ち
+const BACKOFF_MAX_MS = 30000;   // 待ち時間の上限
+const STABLE_MS = 10000;        // この時間以上つながっていたら失敗回数をリセット
+type StreamKey = 'home' | 'local' | 'multi';
+type Backoff = { attempt: number; timer: ReturnType<typeof setTimeout> | null; openedAt: number };
+const backoffs: Record<StreamKey, Backoff> = {
+  home: { attempt: 0, timer: null, openedAt: 0 },
+  local: { attempt: 0, timer: null, openedAt: 0 },
+  multi: { attempt: 0, timer: null, openedAt: 0 },
+};
+
+/** 接続確立を記録する（一定時間安定していれば次の切断時に失敗回数をリセットするため）。 */
+function noteStreamOpen(key: StreamKey): void {
+  backoffs[key].openedAt = Date.now();
+}
+
+/** 次の再接続までの待ち時間（ms）。1回目は即時、以降 1s,2s,4s… 最大30s、±20%の揺らぎ付き。 */
+export function streamBackoffDelay(attempt: number): number {
+  if (attempt <= 0) return 0;
+  const base = Math.min(BACKOFF_MAX_MS, BACKOFF_BASE_MS * Math.pow(2, attempt - 1));
+  const jitter = base * 0.2 * (Math.random() * 2 - 1);
+  return Math.max(0, Math.round(base + jitter));
+}
+
+/** 切断時の再接続をバックオフ付きで予約する。予約済みなら重ねて予約しない。 */
+function scheduleStreamReconnect(key: StreamKey, run: () => void): void {
+  const b = backoffs[key];
+  if (b.openedAt && Date.now() - b.openedAt >= STABLE_MS) {
+    b.attempt = 0;
+  }
+  b.openedAt = 0;
+  if (b.timer) return;
+  const delay = streamBackoffDelay(b.attempt);
+  b.attempt++;
+  b.timer = setTimeout(function () {
+    b.timer = null;
+    run();
+  }, delay);
+}
+
+/** バックオフ状態を初期化する（アプリ復帰などユーザー起点の強制再接続時に呼ぶ）。 */
+export function resetStreamBackoff(): void {
+  (Object.keys(backoffs) as StreamKey[]).forEach(function (k) {
+    const b = backoffs[k];
+    if (b.timer) clearTimeout(b.timer);
+    b.timer = null;
+    b.attempt = 0;
+    b.openedAt = 0;
+  });
+}
+(window as any).kktjsResetStreamBackoff = resetStreamBackoff;
+(window as any).__kktjsStreamBackoffs = backoffs; // 検証用
+
 export function openWsHome(app: KktjsApp): void {
   const a = app as A;
   const S: any = (window as any).__kktjsStream; // ブリッジは実行時に読む（import時は未設定のため）
@@ -21,6 +79,7 @@ export function openWsHome(app: KktjsApp): void {
                 S.wsHome.onerror = onerror;
                 S.wsHome.onmessage = onmessage;
                 function onopen() {
+                    noteStreamOpen('home');
                     setTimeout(function () {
                         try {
                             thisObj.connHome = 'open';
@@ -36,9 +95,13 @@ export function openWsHome(app: KktjsApp): void {
                     thisObj.connHome = 'ready';
                     S.wsHome = null;
                     if (thisObj.app_active) {
-                        thisObj.refetchHome();
-                        thisObj.refetchNotifAll();
-                        thisObj.openWsHome();
+                        scheduleStreamReconnect('home', function () {
+                            // 待機中に強制再接続などで既に張り直されていれば何もしない。
+                            if (S.wsHome != null || !thisObj.app_active) return;
+                            thisObj.refetchHome();
+                            thisObj.refetchNotifAll();
+                            thisObj.openWsHome();
+                        });
                     } else {
                         thisObj.app_network = false;
                     }
@@ -190,6 +253,7 @@ export function openWsLocal(app: KktjsApp): void {
                 S.wsLocal.onerror = _0x1870a7;
                 S.wsLocal.onmessage = _0x1719e1;
                 function _0x1d6410() {
+                    noteStreamOpen('local');
                     setTimeout(function () {
                         try {
                             thisObj.connLocal = 'open';
@@ -205,8 +269,11 @@ export function openWsLocal(app: KktjsApp): void {
                     thisObj.connLocal = 'ready';
                     S.wsLocal = null;
                     if (thisObj.app_active) {
-                        thisObj.refetchLocal();
-                        thisObj.openWsLocal();
+                        scheduleStreamReconnect('local', function () {
+                            if (S.wsLocal != null || !thisObj.app_active) return;
+                            thisObj.refetchLocal();
+                            thisObj.openWsLocal();
+                        });
                     } else {
                         thisObj.app_network = false;
                     }
@@ -295,6 +362,7 @@ export function openWsMulti(app: KktjsApp): void {
                 S.wsMulti.onerror = _0x5a9cd8;
                 S.wsMulti.onmessage = onmessage;
                 function _0x195c15() {
+                    noteStreamOpen('multi');
                     setTimeout(function () {
                         try {
                             thisObj.connMulti = 'open';
@@ -310,8 +378,11 @@ export function openWsMulti(app: KktjsApp): void {
                     thisObj.connMulti = 'ready';
                     S.wsMulti = null;
                     if (thisObj.app_active) {
-                        thisObj.refetchMulti();
-                        thisObj.openWsMulti();
+                        scheduleStreamReconnect('multi', function () {
+                            if (S.wsMulti != null || !thisObj.app_active) return;
+                            thisObj.refetchMulti();
+                            thisObj.openWsMulti();
+                        });
                     } else {
                         thisObj.app_network = false;
                     }
